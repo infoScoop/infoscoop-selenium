@@ -1,5 +1,6 @@
 package org.infoscoop_selenium;
 
+import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
 import org.infoscoop_selenium.portal.Tab;
 import org.openqa.selenium.By;
@@ -30,6 +31,10 @@ public class Portal {
 		this.driver.findElement(By.id("uid")).sendKeys(uid);
 		this.driver.findElement(By.id("password")).sendKeys(pass);
 		this.driver.findElement(By.id("loginform")).submit();
+
+		// ロードの完了を待つ
+		TestHelper.waitPresent(driver, By.id("divOverlay"));
+		TestHelper.waitInvisible(driver, By.id("divOverlay"));
 	}
 	public void logout(){
 		this.driver.get(url + "/logout");
