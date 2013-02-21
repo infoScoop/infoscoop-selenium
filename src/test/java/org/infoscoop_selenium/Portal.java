@@ -33,8 +33,11 @@ public class Portal {
 		this.driver.findElement(By.id("loginform")).submit();
 
 		// ロードの完了を待つ
+		/*
 		TestHelper.waitPresent(driver, By.id("divOverlay"));
 		TestHelper.waitInvisible(driver, By.id("divOverlay"));
+		*/
+		TestHelper.waitPresent(this.driver, By.id("columns0"));
 	}
 	public void logout(){
 		this.driver.get(url + "/logout");
