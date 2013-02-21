@@ -1,8 +1,14 @@
 package org.infoscoop_selenium.helper;
 
+import java.io.File;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.thoughtworks.selenium.Wait;
@@ -45,5 +51,19 @@ public class TestHelper {
 			}
 		};
 		wait.wait("Element exists", WAIT_SECOND * 1000);
+	}
+	
+	/**
+	 * スクリーンショットの撮影
+	 * @param fileName
+	 * @param driver
+	 */
+	public static void getScreenShot(final String fileName, final WebDriver driver) {
+		try{
+			File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(file, new File(driver.getClass().getName() + File.separator + fileName + ".png"));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }
