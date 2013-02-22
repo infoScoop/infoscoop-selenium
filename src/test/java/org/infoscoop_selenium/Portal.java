@@ -51,6 +51,10 @@ public class Portal {
 		return tab;
 	}
 	
+	public String getUrl(){
+		return url;
+	}
+	
 	public void close(){
 		this.driver.close();
 	}
