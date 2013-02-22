@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * タブUIのスクリーンショット
- * @author nishiumi
+ * @author mikami
  *
  */
 public class TabScreenShot extends IS_BaseItTestCase{
@@ -19,6 +19,11 @@ public class TabScreenShot extends IS_BaseItTestCase{
 	@Override
 	public void doBefore() {
 		// テストケースごとの事前処理
+		// login
+		getPortal().login("test_user2", "password");
+		
+		// 初期化
+		getPortal().getCommandBar().getPortalPreference().initializeData();
 	}
 
 	@Override
@@ -32,12 +37,6 @@ public class TabScreenShot extends IS_BaseItTestCase{
 	 */
 	public void タブメニュー_固定タブ(){
 		WebDriver driver = getDriver();
-		
-		// login
-		getPortal().login("test_user2", "password");
-		
-		// 初期化
-		getPortal().getCommandBar().getPortalPreference().initializeData();
 		
 		// タブメニューボタンの表示を待つ
 		TestHelper.waitPresent(driver, By.id("tab0_selectMenu"));
@@ -57,12 +56,6 @@ public class TabScreenShot extends IS_BaseItTestCase{
 	 */
 	public void タブメニュー_動的タブ(){
 		WebDriver driver = getDriver();
-		
-		// login
-		getPortal().login("test_user2", "password");
-		
-		// 初期化
-		getPortal().getCommandBar().getPortalPreference().initializeData();
 		
 		// タブを追加するリンクの表示を待つ
 		TestHelper.waitPresent(driver, By.id("addTab"));
