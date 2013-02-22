@@ -5,6 +5,7 @@ import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertTrue;
@@ -71,12 +72,20 @@ public class MessageConsoleScreenShot extends IS_BaseItTestCase{
         driver = TestHelper.getNewWindowDriver(driver, currentWindowId);
         TestHelper.waitPresent(driver, By.id("messageIcon"));
         
+		// confirmの抜け方がわからないので無理やり
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("msg.info('aaaa');"); 
+		js.executeScript("msg.debug('bbbb');"); 
+		js.executeScript("msg.warn('cccccccccccccccccccccccccc ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc');"); 
+		js.executeScript("msg.error('ddddddddddddddddddddddddddd dddddddddddddddddddddddddddddddddddddddddddddddddddd');"); 
+        
 		// メッセージアイコンをクリック
 		driver.findElement(By.id("messageIcon")).click();
         
 		// 別画面を開く
         driver = TestHelper.getNewWindowDriver(driver, driver.getWindowHandle());
-		
+        TestHelper.waitPresent(driver, By.id("div_message_mssage_1"));
+        
 		TestHelper.getScreenShot("メッセージコンソール（管理画面）", driver);
 
 		assertTrue(true);
