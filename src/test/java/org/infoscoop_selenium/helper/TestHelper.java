@@ -10,6 +10,8 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.thoughtworks.selenium.Wait;
 
@@ -51,6 +53,41 @@ public class TestHelper {
 			}
 		};
 		wait.wait("Element exists", WAIT_SECOND * 1000);
+	}
+	
+	/**
+	 * 別ウィンドウを開く
+	 * @return webdriver
+	 * @param fileName
+	 * @param driver
+	 */
+	public static WebDriver getNewWindowDriver(final WebDriver driver, final String currentWindowId) {
+	    // ウィンドウ表示までに時間がかかると、seleniumが先走ることがあるのでウィンドウが増えるまで待機。
+        (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.getWindowHandles().size() > 1;
+            }
+        });
+        
+        String newWindowId = null;
+        for (String id : driver.getWindowHandles()) {
+        	if (!id.equals(currentWindowId)) {
+        		newWindowId = id;
+        	}
+        }
+        
+        return driver.switchTo().window(newWindowId);
+	}	
+	
+	/**
+	 * 別ウィンドウを開く
+	 * @return webdriver
+	 * @param fileName
+	 * @param driver
+	 */
+	public static WebDriver getCurrentWindowDriver(final WebDriver driver, final String currentWindowId) {
+		driver.close();
+        return driver.switchTo().window(currentWindowId);
 	}
 	
 	/**
