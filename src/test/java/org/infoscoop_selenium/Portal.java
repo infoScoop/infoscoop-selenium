@@ -3,6 +3,7 @@ package org.infoscoop_selenium;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
 import org.infoscoop_selenium.portal.Tab;
+import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -12,12 +13,14 @@ public class Portal {
 	String url;
 	CommandBar commandBar;
 	Tab tab;
+	Gadget gadget;
 	
 	public Portal(WebDriver driver, String url) {
 		this.driver = driver;
 		this.url = url;
 		this.commandBar = new CommandBar(driver);
 		this.tab = new Tab(driver);
+		this.gadget = new Gadget(driver);
 	}
 	/*
 	public void open(){
@@ -49,6 +52,10 @@ public class Portal {
 	
 	public Tab getTab(){
 		return tab;
+	}
+	
+	public Gadget getGadget(){
+		return gadget;
 	}
 	
 	public String getUrl(){

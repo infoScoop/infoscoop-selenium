@@ -80,7 +80,7 @@ public class TestHelper {
 	}	
 	
 	/**
-	 * 別ウィンドウを開く
+	 * 別ウィンドウを閉じる
 	 * @return webdriver
 	 * @param fileName
 	 * @param driver
@@ -88,6 +88,29 @@ public class TestHelper {
 	public static WebDriver getCurrentWindowDriver(final WebDriver driver, final String currentWindowId) {
 		driver.close();
         return driver.switchTo().window(currentWindowId);
+	}
+
+	/**
+	 * フレームを移動する
+	 * @return webdriver
+	 * @param frameName
+	 * @param driver
+	 */
+	public static WebDriver switchToFrame(final WebDriver driver, final String frameName) {
+		driver.switchTo().frame(frameName);
+		TestHelper.waitPresent(driver, By.tagName("body"));
+        return driver;
+	}
+
+	/**
+	 * トップフレームを移動する
+	 * @return webdriver
+	 * @param fileName
+	 * @param driver
+	 */
+	public static WebDriver backToTopFrame(final WebDriver driver) {
+		driver.switchTo().defaultContent();
+        return driver;
 	}
 	
 	/**

@@ -49,9 +49,7 @@ public class SearchScreenShot extends IS_BaseItTestCase{
 		// 表示を待つ
 		TestHelper.waitPresent(driver, By.id("search-tabs"));
 		TestHelper.waitInvisible(driver, By.xpath("//ul[@id='search-tabs']/li[1]/a/img[@class='indicator']"));
-		
-		// スリープ
-		sleep(2000);
+		TestHelper.switchToFrame(driver, "Bing_frame");
 		
 		TestHelper.getScreenShot("検索", driver);
 
