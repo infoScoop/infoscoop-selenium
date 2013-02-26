@@ -29,7 +29,7 @@ public class TopMenu {
 	
 	/**
 	 * 指定IDのガジェットをドロップする
-	 * e.g) asahi.com = mc_news_asahi
+	 * e.g) asahi.com = news_asahi
 	 */
 	public void dropGadget(String parentId, String id, int columnNum){
 		openTopMenu(parentId);
