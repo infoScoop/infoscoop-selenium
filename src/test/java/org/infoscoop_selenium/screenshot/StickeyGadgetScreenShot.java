@@ -57,7 +57,7 @@ public class StickeyGadgetScreenShot extends IS_BaseItTestCase {
 	/**
 	 * 付箋ガジェット（ガジェットメニュー）
 	 */
-	public void 標準時時計ガジェット_ガジェットメニュー(){
+	public void 付箋ガジェット_ガジェットメニュー(){
 		WebDriver driver = getDriver();
 		
 		// ガジェットメニューを開く
