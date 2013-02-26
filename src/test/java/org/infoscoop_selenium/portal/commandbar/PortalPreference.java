@@ -47,12 +47,11 @@ public class PortalPreference {
 	 * 壁紙変更
 	 */
 	public void changeBackGroundImage(int idx){
-		WebElement modal_container = this.driver.findElement(By.id("modal_container"));
-		List<WebElement> radioList = modal_container.findElements(By.xpath("//fieldset[1]//input[@type='radio']"));
+		List<WebElement> radioList = this.driver.findElements(By.xpath("//div[@id='modal_container']//fieldset[1]//input[@type='radio']"));
 		
 		radioList.get(idx).click();
 		
-		WebElement applyButton = modal_container.findElement(By.xpath("//fieldset[1]//input[@type='button']"));
+		WebElement applyButton = this.driver.findElement(By.xpath("//div[@id='modal_container']//fieldset[1]//input[@type='button']"));
 		applyButton.click();
 	}
 	
@@ -61,8 +60,27 @@ public class PortalPreference {
 	 * @return
 	 */
 	public int getBackGroundImageNum(){
-		WebElement modal_container = this.driver.findElement(By.id("modal_container"));
-		return modal_container.findElements(By.xpath("//fieldset[1]//input[@type='radio']")).size();
+		return this.driver.findElements(By.xpath("//div[@id='modal_container']//fieldset[1]//input[@type='radio']")).size();
+	}
+
+	/**
+	 * 壁紙変更
+	 */
+	public void changeGadgetHeaderColor(int idx){
+		List<WebElement> radioList = this.driver.findElements(By.xpath("//div[@id='widgetHeaderSettingDiv']//input[@type='radio']"));
+		
+		radioList.get(idx).click();
+		
+		WebElement applyButton = this.driver.findElement(By.xpath("//div[@id='modal_container']//fieldset[2]//input[@type='button']"));
+		applyButton.click();
+	}
+	
+	/**
+	 * ガジェットヘッダ色数取得
+	 * @return
+	 */
+	public int getGadgetHeaderColorNum(){
+		return this.driver.findElements(By.xpath("//div[@id='widgetHeaderSettingDiv']//input[@type='radio']")).size();
 	}
 	
 	/**
