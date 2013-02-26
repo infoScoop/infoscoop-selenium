@@ -17,11 +17,19 @@ import org.openqa.selenium.support.ui.Select;
  *
  */
 public class StickeyGadgetScreenShot extends IS_BaseItTestCase {
-	private static String WIDGET_ID;	
+	private static String WIDGET_ID;
 	
 	@Override
 	public void doBefore() {
 		// テストケースごとの事前処理
+		// login
+		getPortal().login("test_user2", "password");
+
+		// 初期化
+		getPortal().getCommandBar().getPortalPreference().initializeData();
+		
+		// ガジェットのドロップ
+		WIDGET_ID = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_stickey", 1);
 	}
 
 	@Override
@@ -35,15 +43,6 @@ public class StickeyGadgetScreenShot extends IS_BaseItTestCase {
 	 */
 	public void 付箋ガジェット(){
 		WebDriver driver = getDriver();		
-		
-		// login
-		getPortal().login("test_user2", "password");
-
-		// 初期化
-		getPortal().getCommandBar().getPortalPreference().initializeData();
-
-		// ガジェットのドロップ
-		WIDGET_ID = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_stickey", 1);
 
 		// ガジェットの表示を待つ
 		TestHelper.switchToFrame(driver, "ifrm_"+WIDGET_ID);
