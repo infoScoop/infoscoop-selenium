@@ -16,6 +16,7 @@ public class GadgetPreference {
 	
 	/**
 	 * ガジェット設定表示
+	 * @param widgetId
 	 */
 	public void show(String widgetId){
 		gadget.openMenu(widgetId);
@@ -23,5 +24,27 @@ public class GadgetPreference {
 		WebElement elem = driver.findElement(By.xpath("//div[@id='hm_"+widgetId+"_edit']/a"));
 		if(elem.isDisplayed())
 			elem.click();
+	}
+	
+	/**
+	 * ガジェット設定OK
+	 * @param widgetId
+	 */
+	public void ok(String widgetId){
+		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
+			return;
+		
+		driver.findElement(By.xpath("//form[@id='frm_"+widgetId+"']/div[@class='widgetSave']")).click();
+	}
+	
+	/**
+	 * ガジェット設定キャンセル
+	 * @param widgetId
+	 */
+	public void cancel(String widgetId){
+		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
+			return;
+		
+		driver.findElement(By.xpath("//form[@id='frm_"+widgetId+"']/div[@class='widgetCancel']")).click();
 	}
 }

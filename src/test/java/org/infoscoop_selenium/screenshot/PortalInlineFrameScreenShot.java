@@ -45,7 +45,7 @@ public class PortalInlineFrameScreenShot extends IS_BaseItTestCase {
 		// コンテンツ表示モードをポータル内フレームに設定
 		Select select = new Select(driver.findElement(By.xpath("//td[@id='eb_p_1_w_1_itemDisplay']/select")));
 		select.selectByIndex(0);
-		driver.findElement(By.xpath("//form[@id='frm_p_1_w_1']/div[@class='widgetSave']")).click();
+		getPortal().getGadget().getGadgetPreference().ok("p_1_w_1");
 
 		// アイテムを選択
 		driver.findElement(By.xpath("//div[@id='p_1_w_1_item_0']/table/tbody/tr/td/table/tbody/tr/td/div/a")).click();
