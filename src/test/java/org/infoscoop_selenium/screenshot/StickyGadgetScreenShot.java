@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
-import org.infoscoop_selenium.portal.Gadget;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.junit.Test;
@@ -94,11 +93,11 @@ public class StickyGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// 付箋ガジェットに値を代入
-		GADGET.writeSticky(GADGET.getId(), "");
-		GADGET.writeSticky(GADGET.getId(), "hoge");
-		GADGET.writeSticky(GADGET.getId(), "huga");
-		GADGET.writeSticky(GADGET.getId(), "piyo");
-		GADGET.writeSticky(GADGET.getId(), "null");
+		GADGET.writeSticky("");
+		GADGET.writeSticky("hoge");
+		GADGET.writeSticky("huga");
+		GADGET.writeSticky("piyo");
+		GADGET.writeSticky("null");
 
 		TestHelper.getScreenShot("付箋ガジェット（dynamic_height）", driver);
 		

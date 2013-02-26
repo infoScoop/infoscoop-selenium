@@ -8,13 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class StickyGadget extends Gadget{
-	
 	public StickyGadget(WebDriver driver, String gadgetId) {
 		super(driver, gadgetId);
 	}
-
-	WebDriver driver;
-	Gadget gadget;
 	
 	public static enum BACKGROUNDCOLOR {
 		YELLOW("#ffffcc"),
@@ -50,11 +46,10 @@ public class StickyGadget extends Gadget{
 
 	/**
 	 * 付箋に値を代入
-	 * @param widgetId
 	 * @param msg
 	 */
-	public void writeSticky(String widgetId, String msg){
-		TestHelper.switchToFrame(driver, "ifrm_"+widgetId);
+	public void writeSticky(String msg){
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
 		driver.findElement(By.id("editor")).sendKeys(msg);
 		driver.findElement(By.id("editor")).sendKeys(Keys.RETURN);
 		TestHelper.backToTopFrame(driver);
@@ -62,54 +57,51 @@ public class StickyGadget extends Gadget{
 	
 	/**
 	 * フォントサイズ変更
-	 * @param widgetId
 	 * @param fontSize
 	 */
-	public void changeFontSize(String widgetId, String fontSize){
-		gadget.getGadgetPreference().show();
+	public void changeFontSize(String fontSize){
+		getGadgetPreference().show();
 
-		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
-		driver.findElement(By.xpath("//td[@id='eb_"+widgetId+"_fontSize']/input")).sendKeys(fontSize);
+		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_fontSize']/input")).sendKeys(fontSize);
 		
 		// ガジェット設定を閉じる
-		gadget.getGadgetPreference().ok(widgetId);
+		getGadgetPreference().ok(super.getId());
 	}
 	
 	/**
 	 * 背景色変更
-	 * @param widgetId
 	 * @param bgColor
 	 */
-	public void changeBackgroundColor(String widgetId, BACKGROUNDCOLOR bgColor){
-		gadget.getGadgetPreference().show();
+	public void changeBackgroundColor(BACKGROUNDCOLOR bgColor){
+		getGadgetPreference().show();
 
-		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
-		Select select = new Select(driver.findElement(By.xpath("//td[@id='eb_"+widgetId+"_bgColor']/select")));
+		Select select = new Select(driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_bgColor']/select")));
 		select.selectByValue(bgColor.getValue());
 		
 		// ガジェット設定を閉じる
-		gadget.getGadgetPreference().ok(widgetId);
+		getGadgetPreference().ok(super.getId());
 	}
 	
 	/**
 	 * 文字色変更
-	 * @param widgetId
 	 * @param color
 	 */
-	public void changeColor(String widgetId, COLOR color){
-		gadget.getGadgetPreference().show();
+	public void changeColor(COLOR color){
+		getGadgetPreference().show();
 
-		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
-		Select select = new Select(driver.findElement(By.xpath("//td[@id='eb_"+widgetId+"_fgColor']/select")));
+		Select select = new Select(driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_fgColor']/select")));
 		select.selectByValue(color.getValue());
 		
 		// ガジェット設定を閉じる
-		gadget.getGadgetPreference().ok(widgetId);		
+		getGadgetPreference().ok(super.getId());		
 	}
 }

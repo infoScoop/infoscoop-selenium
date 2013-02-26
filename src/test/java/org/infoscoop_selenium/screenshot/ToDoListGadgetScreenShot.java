@@ -18,7 +18,6 @@ import org.openqa.selenium.WebDriver;
  *
  */
 public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
-	private static String WIDGET_ID;	
 	private static ToDoListGadget GADGET;	
 	
 	@Override
@@ -47,7 +46,7 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();		
 
 		// ガジェットの表示を待つ
-		TestHelper.switchToFrame(driver, "ifrm_"+WIDGET_ID);
+		TestHelper.switchToFrame(driver, "ifrm_"+GADGET.getId());
 		TestHelper.backToTopFrame(driver);
 		
 		TestHelper.getScreenShot("ToDoリストガジェット", driver);
@@ -96,16 +95,16 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// ToDoを追加
-		GADGET.addToDo(WIDGET_ID, "優先度高");
-		GADGET.addToDo(WIDGET_ID, "優先度中");
-		GADGET.addToDo(WIDGET_ID, "優先度低");
+		GADGET.addToDo("優先度高");
+		GADGET.addToDo("優先度中");
+		GADGET.addToDo("優先度低");
 
 		// ToDoの優先度を変更
-		GADGET.changePriority(WIDGET_ID, 1, ToDoListGadget.PRIORITY.HIGH);
-		GADGET.changePriority(WIDGET_ID, 3, ToDoListGadget.PRIORITY.LOW);
+		GADGET.changePriority(1, ToDoListGadget.PRIORITY.HIGH);
+		GADGET.changePriority(3, ToDoListGadget.PRIORITY.LOW);
 
 		// ToDoをチェック
-		GADGET.checkToDo(WIDGET_ID, 2);
+		GADGET.checkToDo(2);
 
 		TestHelper.getScreenShot("ToDoリストガジェット（ToDo追加）", driver);
 	
@@ -120,12 +119,12 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// ToDoを追加
-		GADGET.addToDo(WIDGET_ID, "優先度中");
+		GADGET.addToDo("優先度中");
 
 		// ToDoの優先度セレクターを表示
-		TestHelper.switchToFrame(driver, "ifrm_"+WIDGET_ID);
-		driver.findElement(By.xpath("//tbody[@id='"+WIDGET_ID+"_list']/tr[1]/td[@class='todoPriorityTd']/div")).click();
-		driver.findElement(By.xpath("//tbody[@id='"+WIDGET_ID+"_list']/tr[1]/td[@class='todoPriorityTd']/select")).click();
+		TestHelper.switchToFrame(driver, "ifrm_"+GADGET.getId());
+		driver.findElement(By.xpath("//tbody[@id='"+GADGET.getId()+"_list']/tr[1]/td[@class='todoPriorityTd']/div")).click();
+		driver.findElement(By.xpath("//tbody[@id='"+GADGET.getId()+"_list']/tr[1]/td[@class='todoPriorityTd']/select")).click();
 		TestHelper.getScreenShot("ToDoリストガジェット（優先度セレクター）", driver);
 		
 		assertTrue(true);
@@ -139,16 +138,16 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 
 		// フォントサイズを変更
-		GADGET.changeFontSize(WIDGET_ID, ToDoListGadget.FONTSIZE.LARGE);
+		GADGET.changeFontSize(ToDoListGadget.FONTSIZE.LARGE);
 		
 		// ToDoを追加
-		GADGET.addToDo(WIDGET_ID, "優先度高");
-		GADGET.addToDo(WIDGET_ID, "優先度中");
-		GADGET.addToDo(WIDGET_ID, "優先度低");
+		GADGET.addToDo("優先度高");
+		GADGET.addToDo("優先度中");
+		GADGET.addToDo("優先度低");
 
 		// ToDoの優先度を変更
-		GADGET.changePriority(WIDGET_ID, 1, ToDoListGadget.PRIORITY.HIGH);
-		GADGET.changePriority(WIDGET_ID, 3, ToDoListGadget.PRIORITY.LOW);
+		GADGET.changePriority(1, ToDoListGadget.PRIORITY.HIGH);
+		GADGET.changePriority(3, ToDoListGadget.PRIORITY.LOW);
 
 		TestHelper.getScreenShot("ToDoリストガジェット（フォントサイズ大きい）", driver);
 		

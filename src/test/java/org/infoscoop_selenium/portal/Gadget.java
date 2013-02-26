@@ -15,11 +15,9 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.openqa.selenium.support.events.internal.EventFiringMouse;
 
 public abstract class Gadget {
-	WebDriver driver;
+	protected WebDriver driver;
 	GadgetPreference gadgetPreference;
 	String gadgetId;
-	ToDoListGadget todoListGadget;
-	StickyGadget stickyGadget;
 	
 	public static enum GADGET_TYPE {
 		STICKY(StickyGadget.class),
@@ -74,14 +72,4 @@ public abstract class Gadget {
 	public String getId(){
 		return gadgetId;
 	}
-	
-	/*
-	public ToDoListGadget getToDoListGadget() {
-		return todoListGadget;
-	}
-	
-	public StickyGadget getStickyGadget() {
-		return stickyGadget;
-	}
-	*/
 }
