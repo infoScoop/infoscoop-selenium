@@ -2,17 +2,19 @@ package org.infoscoop_selenium.portal;
 
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.gadget.GadgetPreference;
+import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class Gadget {
 	WebDriver driver;
 	GadgetPreference gadgetPreference;
+	ToDoListGadget todoListGadget;
 	
 	public Gadget(WebDriver driver) {
 		this.driver = driver;
 		this.gadgetPreference = new GadgetPreference(this, driver);
+		this.todoListGadget = new ToDoListGadget(this, driver);
 	}
 	
 	/**
@@ -31,5 +33,9 @@ public class Gadget {
 	
 	public GadgetPreference getGadgetPreference(){
 		return gadgetPreference;
+	}
+	
+	public ToDoListGadget getToDoListGadget() {
+		return todoListGadget;
 	}
 }
