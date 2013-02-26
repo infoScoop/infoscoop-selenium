@@ -1,6 +1,10 @@
 package org.infoscoop_selenium.portal;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.infoscoop_selenium.helper.TestHelper;
+import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
+import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -32,12 +36,20 @@ public class TopMenu {
 		*/
 		TestHelper.waitPresent(driver, By.xpath("//li[@id='" + menuId + "']//ul[1]"));
 	}
-	
+
 	/**
 	 * 指定IDのガジェットをドロップする
 	 * e.g) asahi.com = news_asahi
 	 */
 	public Gadget dropGadget(String parentId, String id, int columnNum){
+		return dropGadget(parentId, id, columnNum, GADGET_TYPE.GENERIC);
+	}
+
+	/**
+	 * 指定IDのガジェットをドロップする
+	 * e.g) asahi.com = news_asahi
+	 */
+	public Gadget dropGadget(String parentId, String id, int columnNum, GADGET_TYPE gadgetType){
 		openTopMenu(parentId);
 		
 		Actions action = new Actions(driver);
@@ -48,17 +60,31 @@ public class TopMenu {
 		WebElement targetElement = driver.findElement(By.id("mi_" + id));
 		
 		// Firefox (on windows) だと固まる
-//		action.dragAndDropBy(targetElement, dropPoint.x + 100, dropPoint.y).perform();
+		action.dragAndDropBy(targetElement, dropPoint.x + 50, dropPoint.y).perform();
 		
 		// IE, FFで動作するコード
+		/*
 		action.moveToElement(targetElement);
 		action.clickAndHold();
 		action.moveByOffset(dropPoint.x + 100, dropPoint.y);
 		action.release();
 		action.build().perform();
+		*/
 		
 		String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
-		return new Gadget(driver, widgetId);
+		/*
+		c.
+		*/
+//		return new Gadget(driver, widgetId);
+		Class<Gadget> c = gadgetType.getValue();
+		try {
+			return (Gadget)c.getConstructor(new Class[]{WebDriver.class, String.class})
+					.newInstance(new Object[]{driver, widgetId});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
 	}
 	
 }

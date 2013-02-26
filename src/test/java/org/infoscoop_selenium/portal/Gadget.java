@@ -2,29 +2,44 @@ package org.infoscoop_selenium.portal;
 
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.gadget.GadgetPreference;
+import org.infoscoop_selenium.portal.gadget.GenericGadget;
+import org.infoscoop_selenium.portal.gadget.RssReaderGadget;
 import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Mouse;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.events.WebDriverEventListener;
+import org.openqa.selenium.support.events.internal.EventFiringMouse;
 
-public class Gadget {
+public abstract class Gadget {
 	WebDriver driver;
 	GadgetPreference gadgetPreference;
 	String gadgetId;
 	ToDoListGadget todoListGadget;
 	StickyGadget stickyGadget;
 	
+	public static enum GADGET_TYPE {
+		STICKY(StickyGadget.class),
+		TODOLIST(ToDoListGadget.class),
+		RSSREADER(RssReaderGadget.class),
+		GENERIC(GenericGadget.class);
+		
+		private final Class gadgetClass;
+		private GADGET_TYPE(Class gadgetClass){
+			this.gadgetClass = gadgetClass;
+		}
+		public Class getValue(){
+			return gadgetClass;
+		}
+	}
+	
 	public Gadget(WebDriver driver, String gadgetId) {
 		this.driver = driver;
 		this.gadgetPreference = new GadgetPreference(this, driver);
 		this.gadgetId = gadgetId;
-	}
-
-	public Gadget(WebDriver driver) {
-		this.driver = driver;
-		this.gadgetPreference = new GadgetPreference(this, driver);
-		this.todoListGadget = new ToDoListGadget(this, driver);
-		this.stickyGadget = new StickyGadget(this, driver);
 	}
 	
 	/**
@@ -36,8 +51,10 @@ public class Gadget {
 //		
 //		if(gadgetMenu.isDisplayed())
 //			return;
-
+		
+		TestHelper.waitPresent(driver, By.id("hi_"+gadgetId+"_showTools"));
 		this.driver.findElement(By.id("hi_"+gadgetId+"_showTools")).click();
+		
 		TestHelper.waitPresent(this.driver, By.id(gadgetId+"_close_menu"));
 	}
 	
@@ -56,8 +73,9 @@ public class Gadget {
 	
 	public String getId(){
 		return gadgetId;
+	}
 	
-}
+	/*
 	public ToDoListGadget getToDoListGadget() {
 		return todoListGadget;
 	}
@@ -65,4 +83,5 @@ public class Gadget {
 	public StickyGadget getStickyGadget() {
 		return stickyGadget;
 	}
+	*/
 }

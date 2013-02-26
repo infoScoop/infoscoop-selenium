@@ -7,7 +7,12 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class StickyGadget {
+public class StickyGadget extends Gadget{
+	
+	public StickyGadget(WebDriver driver, String gadgetId) {
+		super(driver, gadgetId);
+	}
+
 	WebDriver driver;
 	Gadget gadget;
 	
@@ -42,11 +47,6 @@ public class StickyGadget {
 			return color;
 		}
 	}
-	
-	public StickyGadget(Gadget gadget, WebDriver driver) {
-		this.driver = driver;
-		this.gadget = gadget;
-	}
 
 	/**
 	 * 付箋に値を代入
@@ -66,7 +66,7 @@ public class StickyGadget {
 	 * @param fontSize
 	 */
 	public void changeFontSize(String widgetId, String fontSize){
-		gadget.getGadgetPreference().show(widgetId);
+		gadget.getGadgetPreference().show();
 
 		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
 			return;
@@ -83,7 +83,7 @@ public class StickyGadget {
 	 * @param bgColor
 	 */
 	public void changeBackgroundColor(String widgetId, BACKGROUNDCOLOR bgColor){
-		gadget.getGadgetPreference().show(widgetId);
+		gadget.getGadgetPreference().show();
 
 		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
 			return;
@@ -101,7 +101,7 @@ public class StickyGadget {
 	 * @param color
 	 */
 	public void changeColor(String widgetId, COLOR color){
-		gadget.getGadgetPreference().show(widgetId);
+		gadget.getGadgetPreference().show();
 
 		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
 			return;

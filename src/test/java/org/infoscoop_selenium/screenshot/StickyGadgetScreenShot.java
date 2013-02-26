@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
+import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
+import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -15,7 +17,7 @@ import org.openqa.selenium.WebDriver;
  *
  */
 public class StickyGadgetScreenShot extends IS_BaseItTestCase {
-	private static Gadget GADGET;
+	private static StickyGadget GADGET;
 	
 	@Override
 	public void doBefore() {
@@ -27,7 +29,7 @@ public class StickyGadgetScreenShot extends IS_BaseItTestCase {
 		getPortal().getCommandBar().getPortalPreference().initializeData();
 		
 		// ガジェットのドロップ
-		GADGET = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_stickey", 1);
+		GADGET = (StickyGadget)getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_stickey", 1, GADGET_TYPE.STICKY);
 	}
 
 	@Override
@@ -74,12 +76,12 @@ public class StickyGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// ガジェット設定を開く
-		getPortal().getGadget().getGadgetPreference().show(GADGET.getId());
+		GADGET.getGadgetPreference().show();
 		
 		TestHelper.getScreenShot("付箋ガジェット（ガジェット設定）", driver);
 		
 		// ガジェット設定を閉じる
-		getPortal().getGadget().getGadgetPreference().cancel(GADGET.getId());
+		GADGET.getGadgetPreference().cancel();
 	
 		assertTrue(true);
 	}
@@ -92,11 +94,11 @@ public class StickyGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// 付箋ガジェットに値を代入
-		getPortal().getGadget().getStickyGadget().writeSticky(GADGET.getId(), "");
-		getPortal().getGadget().getStickyGadget().writeSticky(GADGET.getId(), "hoge");
-		getPortal().getGadget().getStickyGadget().writeSticky(GADGET.getId(), "huga");
-		getPortal().getGadget().getStickyGadget().writeSticky(GADGET.getId(), "piyo");
-		getPortal().getGadget().getStickyGadget().writeSticky(GADGET.getId(), "null");
+		GADGET.writeSticky(GADGET.getId(), "");
+		GADGET.writeSticky(GADGET.getId(), "hoge");
+		GADGET.writeSticky(GADGET.getId(), "huga");
+		GADGET.writeSticky(GADGET.getId(), "piyo");
+		GADGET.writeSticky(GADGET.getId(), "null");
 
 		TestHelper.getScreenShot("付箋ガジェット（dynamic_height）", driver);
 		

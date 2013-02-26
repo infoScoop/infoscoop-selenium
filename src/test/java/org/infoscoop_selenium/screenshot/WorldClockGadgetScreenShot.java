@@ -59,7 +59,7 @@ public class WorldClockGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// ガジェットメニューを開く
-		getPortal().getGadget().openMenu();
+		GADGET.openMenu();
 		
 		TestHelper.getScreenShot("標準時時計ガジェット（ガジェットメニュー）", driver);
 	

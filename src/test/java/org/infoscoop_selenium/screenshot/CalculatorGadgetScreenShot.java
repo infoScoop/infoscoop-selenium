@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
+import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
+import org.infoscoop_selenium.portal.gadget.GenericGadget;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 
@@ -15,7 +17,7 @@ import org.openqa.selenium.WebDriver;
  *
  */
 public class CalculatorGadgetScreenShot extends IS_BaseItTestCase {
-	private static Gadget GADGET;
+	private static GenericGadget GADGET;
 	
 	@Override
 	public void doBefore() {
@@ -28,7 +30,7 @@ public class CalculatorGadgetScreenShot extends IS_BaseItTestCase {
 		getPortal().getCommandBar().getPortalPreference().initializeData();
 		
 		// ガジェットのドロップ
-		GADGET = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_calculator", 1);
+		GADGET = (GenericGadget)getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_calculator", 1);
 	}
 
 	@Override
@@ -60,7 +62,7 @@ public class CalculatorGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// ガジェットメニューを開く
-		getPortal().getGadget().openMenu();
+		GADGET.openMenu();
 		
 		TestHelper.getScreenShot("電卓ガジェット（ガジェットメニュー）", driver);
 	

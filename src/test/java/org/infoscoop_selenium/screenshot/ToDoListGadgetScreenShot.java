@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
+import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -18,7 +19,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 	private static String WIDGET_ID;	
-	private static Gadget GADGET;	
+	private static ToDoListGadget GADGET;	
 	
 	@Override
 	public void doBefore() {
@@ -30,7 +31,7 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 		getPortal().getCommandBar().getPortalPreference().initializeData();
 
 		// ガジェットのドロップ
-		GADGET = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_TodoList", 1);
+		GADGET = (ToDoListGadget)getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_TodoList", 1, GADGET_TYPE.TODOLIST);
 	}
 
 	@Override
@@ -77,12 +78,12 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// ガジェット設定を開く
-		getPortal().getGadget().getGadgetPreference().show(WIDGET_ID);
+		GADGET.getGadgetPreference().show();
 		
 		TestHelper.getScreenShot("ToDoリストガジェット（ガジェット設定）", driver);
 
 		// ガジェット設定を閉じる
-		getPortal().getGadget().getGadgetPreference().cancel(WIDGET_ID);
+		GADGET.getGadgetPreference().cancel();
 		
 		assertTrue(true);
 	}
@@ -93,19 +94,18 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 	 */
 	public void ToDoリストガジェット_ToDo追加(){
 		WebDriver driver = getDriver();
-		ToDoListGadget todoListGadget =  getPortal().getGadget().getToDoListGadget();
 		
 		// ToDoを追加
-		todoListGadget.addToDo(WIDGET_ID, "優先度高");
-		todoListGadget.addToDo(WIDGET_ID, "優先度中");
-		todoListGadget.addToDo(WIDGET_ID, "優先度低");
+		GADGET.addToDo(WIDGET_ID, "優先度高");
+		GADGET.addToDo(WIDGET_ID, "優先度中");
+		GADGET.addToDo(WIDGET_ID, "優先度低");
 
 		// ToDoの優先度を変更
-		todoListGadget.changePriority(WIDGET_ID, 1, ToDoListGadget.PRIORITY.HIGH);
-		todoListGadget.changePriority(WIDGET_ID, 3, ToDoListGadget.PRIORITY.LOW);
+		GADGET.changePriority(WIDGET_ID, 1, ToDoListGadget.PRIORITY.HIGH);
+		GADGET.changePriority(WIDGET_ID, 3, ToDoListGadget.PRIORITY.LOW);
 
 		// ToDoをチェック
-		todoListGadget.checkToDo(WIDGET_ID, 2);
+		GADGET.checkToDo(WIDGET_ID, 2);
 
 		TestHelper.getScreenShot("ToDoリストガジェット（ToDo追加）", driver);
 	
@@ -118,10 +118,9 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 	 */
 	public void ToDoリストガジェット_優先度セレクター(){
 		WebDriver driver = getDriver();
-		ToDoListGadget todoListGadget =  getPortal().getGadget().getToDoListGadget();
 		
 		// ToDoを追加
-		todoListGadget.addToDo(WIDGET_ID, "優先度中");
+		GADGET.addToDo(WIDGET_ID, "優先度中");
 
 		// ToDoの優先度セレクターを表示
 		TestHelper.switchToFrame(driver, "ifrm_"+WIDGET_ID);
@@ -138,19 +137,18 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 	 */
 	public void ToDoリストガジェット_フォントサイズ大きい(){
 		WebDriver driver = getDriver();
-		ToDoListGadget todoListGadget =  getPortal().getGadget().getToDoListGadget();
 
 		// フォントサイズを変更
-		todoListGadget.changeFontSize(WIDGET_ID, ToDoListGadget.FONTSIZE.LARGE);
+		GADGET.changeFontSize(WIDGET_ID, ToDoListGadget.FONTSIZE.LARGE);
 		
 		// ToDoを追加
-		todoListGadget.addToDo(WIDGET_ID, "優先度高");
-		todoListGadget.addToDo(WIDGET_ID, "優先度中");
-		todoListGadget.addToDo(WIDGET_ID, "優先度低");
+		GADGET.addToDo(WIDGET_ID, "優先度高");
+		GADGET.addToDo(WIDGET_ID, "優先度中");
+		GADGET.addToDo(WIDGET_ID, "優先度低");
 
 		// ToDoの優先度を変更
-		todoListGadget.changePriority(WIDGET_ID, 1, ToDoListGadget.PRIORITY.HIGH);
-		todoListGadget.changePriority(WIDGET_ID, 3, ToDoListGadget.PRIORITY.LOW);
+		GADGET.changePriority(WIDGET_ID, 1, ToDoListGadget.PRIORITY.HIGH);
+		GADGET.changePriority(WIDGET_ID, 3, ToDoListGadget.PRIORITY.LOW);
 
 		TestHelper.getScreenShot("ToDoリストガジェット（フォントサイズ大きい）", driver);
 		

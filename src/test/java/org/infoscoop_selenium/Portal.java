@@ -4,7 +4,6 @@ import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
 import org.infoscoop_selenium.portal.Tab;
 import org.infoscoop_selenium.portal.TopMenu;
-import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -57,11 +56,6 @@ public class Portal {
 	
 	public TopMenu getTopMenu(){
 		return topMenu;
-	}
-	
-	public Gadget getGadget(){
-		
-		return gadget;
 	}
 	
 	public String getUrl(){

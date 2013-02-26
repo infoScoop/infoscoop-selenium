@@ -6,7 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-public class ToDoListGadget {
+public class ToDoListGadget extends Gadget{
+	
+	public ToDoListGadget(WebDriver driver, String gadgetId) {
+		super(driver, gadgetId);
+	}
+
 	WebDriver driver;
 	Gadget gadget;
 	
@@ -34,11 +39,6 @@ public class ToDoListGadget {
 		public String getValue(){
 			return fontSize;
 		}
-	}
-	
-	public ToDoListGadget(Gadget gadget, WebDriver driver){
-		this.driver = driver;
-		this.gadget = gadget;
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class ToDoListGadget {
 	 * @param fontSize
 	 */
 	public void changeFontSize(String widgetId, FONTSIZE fontSize) {
-		gadget.getGadgetPreference().show(widgetId);
+		gadget.getGadgetPreference().show();
 
 		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
 			return;

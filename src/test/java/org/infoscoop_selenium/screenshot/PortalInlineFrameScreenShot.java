@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
+import org.infoscoop_selenium.portal.Gadget;
+import org.infoscoop_selenium.portal.gadget.GenericGadget;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -39,13 +41,15 @@ public class PortalInlineFrameScreenShot extends IS_BaseItTestCase {
 		// ガジェットの表示を待つ
 		TestHelper.waitPresent(driver, By.id("p_1_w_1"));
 		
+		Gadget gadget = new GenericGadget(driver, "p_1_w_1");
+		
 		// ガジェットメニューを開く
-		getPortal().getGadget().getGadgetPreference().show("p_1_w_1");
+		gadget.getGadgetPreference().show();
 
 		// コンテンツ表示モードをポータル内フレームに設定
 		Select select = new Select(driver.findElement(By.xpath("//td[@id='eb_p_1_w_1_itemDisplay']/select")));
 		select.selectByIndex(0);
-		getPortal().getGadget().getGadgetPreference().ok("p_1_w_1");
+		gadget.getGadgetPreference().ok("p_1_w_1");
 
 		// アイテムを選択
 		driver.findElement(By.xpath("//div[@id='p_1_w_1_item_0']/table/tbody/tr/td/table/tbody/tr/td/div/a")).click();
