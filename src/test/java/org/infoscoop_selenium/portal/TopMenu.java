@@ -23,8 +23,13 @@ public class TopMenu {
 		
 		// トップメニューにマウスオーバー
 		Actions action = new Actions(driver);
-		action.moveToElement(driver.findElement(By.id(menuId))).perform();
-		
+//		action.moveToElement(driver.findElement(By.id(menuId))).perform();
+		action.moveToElement(driver.findElement(By.id(menuId))).click().build().perform();
+		/*
+		WebElement targetElement = driver.findElement(By.id(menuId));
+		System.out.println((targetElement.getLocation().x + 30) + ", " +  (targetElement.getLocation().y + 30));
+		action.moveByOffset(targetElement.getLocation().x + 30, targetElement.getLocation().y + 30).perform();
+		*/
 		TestHelper.waitPresent(driver, By.xpath("//li[@id='" + menuId + "']//ul[1]"));
 	}
 	
@@ -32,17 +37,28 @@ public class TopMenu {
 	 * 指定IDのガジェットをドロップする
 	 * e.g) asahi.com = news_asahi
 	 */
-	public String dropGadget(String parentId, String id, int columnNum){
+	public Gadget dropGadget(String parentId, String id, int columnNum){
 		openTopMenu(parentId);
 		
 		Actions action = new Actions(driver);
 		
-		WebElement dropTarget = driver.findElement(By.xpath("//div[@class='column' and @colnum='" + columnNum + "']"));
-		Point dropPoint = dropTarget.getLocation();
+		WebElement dropElement = driver.findElement(By.xpath("//div[@class='column' and @colnum='" + columnNum + "']"));
+		Point dropPoint = dropElement.getLocation();
 		
-		action.dragAndDropBy(driver.findElement(By.id("mi_" + id)), dropPoint.x + 100, dropPoint.y).perform();
+		WebElement targetElement = driver.findElement(By.id("mi_" + id));
 		
-		String widgetId = dropTarget.findElements(By.className("widget")).get(0).getAttribute("id");
-		return widgetId;
+		// Firefox (on windows) だと固まる
+//		action.dragAndDropBy(targetElement, dropPoint.x + 100, dropPoint.y).perform();
+		
+		// IE, FFで動作するコード
+		action.moveToElement(targetElement);
+		action.clickAndHold();
+		action.moveByOffset(dropPoint.x + 100, dropPoint.y);
+		action.release();
+		action.build().perform();
+		
+		String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
+		return new Gadget(driver, widgetId);
 	}
+	
 }

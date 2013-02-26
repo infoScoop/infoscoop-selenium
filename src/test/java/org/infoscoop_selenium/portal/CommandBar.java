@@ -2,6 +2,7 @@ package org.infoscoop_selenium.portal;
 
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.commandbar.PortalPreference;
+import org.infoscoop_selenium.portal.commandbar.TrashBox;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,10 +11,12 @@ import org.openqa.selenium.WebElement;
 public class CommandBar {
 	WebDriver driver;
 	PortalPreference portalPreference;
+	TrashBox trashBox;
 	
 	public CommandBar(WebDriver driver) {
 		this.driver = driver;
 		this.portalPreference = new PortalPreference(this, driver);
+		this.trashBox = new TrashBox(this, driver);
 	}
 	
 	/**
@@ -31,5 +34,9 @@ public class CommandBar {
 	
 	public PortalPreference getPortalPreference(){
 		return portalPreference;
+	}
+	
+	public TrashBox getTrashBox(){
+		return trashBox;
 	}
 }

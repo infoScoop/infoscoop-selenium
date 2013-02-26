@@ -64,7 +64,7 @@ public class PortalPreference {
 	}
 
 	/**
-	 * 壁紙変更
+	 * ガジェットヘッダ色変更
 	 */
 	public void changeGadgetHeaderColor(int idx){
 		List<WebElement> radioList = this.driver.findElements(By.xpath("//div[@id='widgetHeaderSettingDiv']//input[@type='radio']"));
@@ -84,6 +84,67 @@ public class PortalPreference {
 	}
 	
 	/**
+	 * ガジェットサブヘッダ色変更
+	 */
+	public void changeGadgetSubHeaderColor(int idx){
+		List<WebElement> radioList = this.driver.findElements(By.xpath("//div[@id='subWidgetHeaderSettingDiv']//input[@type='radio']"));
+		
+		radioList.get(idx).click();
+		
+		WebElement applyButton = this.driver.findElement(By.xpath("//div[@id='modal_container']//fieldset[2]//input[@type='button']"));
+		applyButton.click();
+	}
+
+	/**
+	 * ガジェットサブヘッダ色数取得
+	 * @return
+	 */
+	public int getGadgetSubHeaderColorNum(){
+		return this.driver.findElements(By.xpath("//div[@id='subWidgetHeaderSettingDiv']//input[@type='radio']")).size();
+	}
+	
+	/**
+	 * ガジェット枠線表示の切り替え
+	 */
+	public void changeGadgetBorder(boolean check){
+		WebElement checkBox = this.driver.findElement(By.id("is_preference_setting_with_border"));
+		if(checkBox.isSelected() && !check){
+			checkBox.click();
+		}
+		else if(!checkBox.isSelected() && check){
+			checkBox.click();
+		}
+
+		WebElement applyButton = this.driver.findElement(By.xpath("//div[@id='modal_container']//fieldset[2]//input[@type='button']"));
+		applyButton.click();
+	}
+	
+	/**
+	 * ガジェット角丸表示の切り替え
+	 */
+	public void changeGadgetBorderRadius(boolean check){
+		WebElement checkBox = this.driver.findElement(By.id("is_preference_setting_border_radius"));
+		
+		if(checkBox.isSelected() && !check){
+			checkBox.click();
+		}
+		else if(!checkBox.isSelected() && check){
+			checkBox.click();
+		}
+
+		WebElement applyButton = this.driver.findElement(By.xpath("//div[@id='modal_container']//fieldset[2]//input[@type='button']"));
+		applyButton.click();
+	}
+	
+	/**
+	 * ガジェット角丸切り替えのチェックボックスが表示されているか
+	 */
+	public boolean checkChangeGadgetBorderRadius(){
+		WebElement checkBox = this.driver.findElement(By.id("is_preference_setting_border_radius"));
+		return checkBox.isDisplayed();
+	}
+	
+	/**
 	 * カスタマイズ情報の初期化
 	 */
 	public void initializeData(){
@@ -98,8 +159,16 @@ public class PortalPreference {
 		js.executeScript("window.alert = function(msg){ document.last_alert=msg; return true;};");
 
 		modal_container.findElement(By.xpath("//fieldSet[5]//input[@type='button']")).click();
+		
+		/*
+		TestHelper.waitPresent(this.driver, By.id("divOverlay"));
 		TestHelper.waitInvisible(this.driver, By.id("divOverlay"));
-
+		*/
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+		}
+		
 		js.executeScript("window.confirm = window.orig_confirm;");
 		js.executeScript("window.alert = window.orig_alert;");
 	}

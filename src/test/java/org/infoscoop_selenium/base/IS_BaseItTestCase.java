@@ -14,13 +14,15 @@ public abstract class IS_BaseItTestCase {
 	private static WebDriver driver;
 	private static Portal portal;
 	
-	static{
+	protected static final String TEST_USER_1 = "test_user1";
+	protected static final String TEST_USER_2 = "test_user2";
+	protected static final String TEST_USER_3 = "test_user3";
+	protected static final String TEST_PASSWORD = "password";
+	
+	public IS_BaseItTestCase() {
 		File file = new File("drivers/IEDriverServer.exe");
 		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-		init();
-	}
-	
-	private static void init(){
+		
 		if(driver == null){
 			// TODO: 実行時の引数でドライバを変える
 //			WebDriver driver = new RemoteWebDriver(new URL("http://shd092v:4444/wd/hub"), DesiredCapabilities.firefox());
