@@ -4,10 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
+import org.infoscoop_selenium.portal.Gadget;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 
 
 /**
@@ -16,11 +15,20 @@ import org.openqa.selenium.support.ui.Select;
  *
  */
 public class CalculatorGadgetScreenShot extends IS_BaseItTestCase {
-	private static String WIDGET_ID;
+	private static Gadget GADGET;
 	
 	@Override
 	public void doBefore() {
 		// テストケースごとの事前処理
+		
+		// login
+		getPortal().login("test_user2", "password");
+
+		// 初期化
+		getPortal().getCommandBar().getPortalPreference().initializeData();
+		
+		// ガジェットのドロップ
+		GADGET = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_calculator", 1);
 	}
 
 	@Override
@@ -35,17 +43,8 @@ public class CalculatorGadgetScreenShot extends IS_BaseItTestCase {
 	public void 電卓ガジェット(){
 		WebDriver driver = getDriver();
 		
-		// login
-		getPortal().login("test_user2", "password");
-
-		// 初期化
-		getPortal().getCommandBar().getPortalPreference().initializeData();
-		
-		// ガジェットのドロップ
-		WIDGET_ID = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_calculator", 1);
-
 		// ガジェットの表示を待つ
-		TestHelper.switchToFrame(driver, "ifrm_"+WIDGET_ID);
+		TestHelper.switchToFrame(driver, "ifrm_"+GADGET.getId());
 		TestHelper.backToTopFrame(driver);
 		
 		TestHelper.getScreenShot("電卓ガジェット", driver);
@@ -61,7 +60,7 @@ public class CalculatorGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// ガジェットメニューを開く
-		getPortal().getGadget().openMenu(WIDGET_ID);
+		getPortal().getGadget().openMenu();
 		
 		TestHelper.getScreenShot("電卓ガジェット（ガジェットメニュー）", driver);
 	

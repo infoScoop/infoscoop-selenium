@@ -19,11 +19,28 @@ public class GadgetPreference {
 	 * @param widgetId
 	 */
 	public void show(String widgetId){
-		gadget.openMenu(widgetId);
+		gadget.openMenu();
 		
 		WebElement elem = driver.findElement(By.xpath("//div[@id='hm_"+widgetId+"_edit']/a"));
 		if(elem.isDisplayed())
 			elem.click();
+	}
+	
+	/**
+	 * ガジェットのタイトル変更
+	 * @param widgetId
+	 * @param title
+	 */
+	public void changeTitle(String widgetId, String title) {
+		show(widgetId);
+
+		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
+			return;
+		
+		driver.findElement(By.xpath("//td[@id='eb_"+widgetId+"_widget_title']/input")).sendKeys(title);
+		
+		// ガジェット設定を閉じる
+		ok(widgetId);
 	}
 	
 	/**

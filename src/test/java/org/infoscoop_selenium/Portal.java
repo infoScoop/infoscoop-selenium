@@ -15,7 +15,6 @@ public class Portal {
 	CommandBar commandBar;
 	Tab tab;
 	TopMenu topMenu;
-	Gadget gadget;
 	
 	public Portal(WebDriver driver, String url) {
 		this.driver = driver;
@@ -23,7 +22,6 @@ public class Portal {
 		this.commandBar = new CommandBar(driver);
 		this.tab = new Tab(driver);
 		this.topMenu = new TopMenu(driver);
-		this.gadget = new Gadget(driver);
 	}
 	/*
 	public void open(){
@@ -62,6 +60,7 @@ public class Portal {
 	}
 	
 	public Gadget getGadget(){
+		
 		return gadget;
 	}
 	
