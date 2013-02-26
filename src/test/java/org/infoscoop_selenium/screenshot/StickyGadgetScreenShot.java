@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 
 
 /**
@@ -16,7 +15,7 @@ import org.openqa.selenium.support.ui.Select;
  * @author mikami
  *
  */
-public class StickeyGadgetScreenShot extends IS_BaseItTestCase {
+public class StickyGadgetScreenShot extends IS_BaseItTestCase {
 	private static String WIDGET_ID;
 	
 	@Override
@@ -94,16 +93,12 @@ public class StickeyGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// 付箋ガジェットに値を代入
-		TestHelper.switchToFrame(driver, "ifrm_"+WIDGET_ID);
-		driver.findElement(By.id("editor")).sendKeys(Keys.RETURN);
-		driver.findElement(By.id("editor")).sendKeys("hoge");
-		driver.findElement(By.id("editor")).sendKeys(Keys.RETURN);
-		driver.findElement(By.id("editor")).sendKeys("huga");
-		driver.findElement(By.id("editor")).sendKeys(Keys.RETURN);
-		driver.findElement(By.id("editor")).sendKeys("piyo");
-		driver.findElement(By.id("editor")).sendKeys(Keys.RETURN);
-		driver.findElement(By.id("editor")).sendKeys("null");
-		driver.findElement(By.id("editor")).sendKeys(Keys.RETURN);
+		getPortal().getGadget().getStickyGadget().writeSticky(WIDGET_ID, "");
+		getPortal().getGadget().getStickyGadget().writeSticky(WIDGET_ID, "hoge");
+		getPortal().getGadget().getStickyGadget().writeSticky(WIDGET_ID, "huga");
+		getPortal().getGadget().getStickyGadget().writeSticky(WIDGET_ID, "piyo");
+		getPortal().getGadget().getStickyGadget().writeSticky(WIDGET_ID, "null");
+
 		TestHelper.getScreenShot("付箋ガジェット（dynamic_height）", driver);
 		
 		assertTrue(true);

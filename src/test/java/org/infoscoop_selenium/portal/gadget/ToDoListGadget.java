@@ -1,7 +1,5 @@
 package org.infoscoop_selenium.portal.gadget;
 
-import java.util.EnumMap;
-
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;

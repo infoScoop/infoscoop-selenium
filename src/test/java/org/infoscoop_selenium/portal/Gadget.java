@@ -2,6 +2,7 @@ package org.infoscoop_selenium.portal;
 
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.gadget.GadgetPreference;
+import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,11 +11,13 @@ public class Gadget {
 	WebDriver driver;
 	GadgetPreference gadgetPreference;
 	ToDoListGadget todoListGadget;
+	StickyGadget stickyGadget;
 	
 	public Gadget(WebDriver driver) {
 		this.driver = driver;
 		this.gadgetPreference = new GadgetPreference(this, driver);
 		this.todoListGadget = new ToDoListGadget(this, driver);
+		this.stickyGadget = new StickyGadget(this, driver);
 	}
 	
 	/**
@@ -37,5 +40,9 @@ public class Gadget {
 	
 	public ToDoListGadget getToDoListGadget() {
 		return todoListGadget;
+	}
+	
+	public StickyGadget getStickyGadget() {
+		return stickyGadget;
 	}
 }

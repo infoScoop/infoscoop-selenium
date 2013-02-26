@@ -27,6 +27,23 @@ public class GadgetPreference {
 	}
 	
 	/**
+	 * ガジェットのタイトル変更
+	 * @param widgetId
+	 * @param title
+	 */
+	public void changeTitle(String widgetId, String title) {
+		show(widgetId);
+
+		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
+			return;
+		
+		driver.findElement(By.xpath("//td[@id='eb_"+widgetId+"_widget_title']/input")).sendKeys(title);
+		
+		// ガジェット設定を閉じる
+		ok(widgetId);
+	}
+	
+	/**
 	 * ガジェット設定OK
 	 * @param widgetId
 	 */
