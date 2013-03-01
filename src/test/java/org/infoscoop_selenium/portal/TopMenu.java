@@ -60,21 +60,17 @@ public class TopMenu {
 		WebElement targetElement = driver.findElement(By.id("mi_" + id));
 		
 		// Firefox (on windows) だと固まる
-		action.dragAndDropBy(targetElement, dropPoint.x + 50, dropPoint.y).perform();
+//		action.dragAndDropBy(targetElement, dropPoint.x + 50, dropPoint.y).perform();
 		
 		// IE, FFで動作するコード
-		/*
 		action.moveToElement(targetElement);
 		action.clickAndHold();
-		action.moveByOffset(dropPoint.x + 100, dropPoint.y);
+		action.moveByOffset(dropPoint.x + 50, dropPoint.y);
 		action.release();
 		action.build().perform();
-		*/
 		
 		String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
-		/*
-		c.
-		*/
+		
 //		return new Gadget(driver, widgetId);
 		Class<Gadget> c = gadgetType.getValue();
 		try {
