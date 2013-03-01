@@ -7,6 +7,7 @@ import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -148,28 +149,46 @@ public class PortalPreference {
 	 * カスタマイズ情報の初期化
 	 */
 	public void initializeData(){
+		// ウィンドウの位置を（0,0）に戻す
+		driver.manage().window().setPosition(new Point(0, 0));
+		
 		show();
 		WebElement modal_container = this.driver.findElement(By.id("modal_container"));
 		
-		// confirmの抜け方がわからないので無理やり
-		JavascriptExecutor js = (JavascriptExecutor)this.driver;
-		js.executeScript("window.orig_confirm = window.confirm;"); 
-		js.executeScript("window.orig_alert = window.alert;");
-		js.executeScript("window.confirm = function(msg){ document.last_confirm=msg; return true;};");
-		js.executeScript("window.alert = function(msg){ document.last_alert=msg; return true;};");
-
+		// 初期化ボタンをクリック
 		modal_container.findElement(By.xpath("//fieldSet[5]//input[@type='button']")).click();
+		
+		// confirmを閉じる
+		driver.switchTo().alert().accept();
+		TestHelper.backToTopFrame(driver);
+		sleep(500);
+
+		// confirmを閉じる
+		driver.switchTo().alert().accept();
+		TestHelper.backToTopFrame(driver);
+		
+		// confirmの抜け方がわからないので無理やり		
+//		JavascriptExecutor js = (JavascriptExecutor)this.driver;
+//		js.executeScript("window.orig_confirm = window.confirm;"); 
+//		js.executeScript("window.orig_alert = window.alert;");
+//		js.executeScript("window.confirm = function(msg){ document.last_confirm=msg; return true;};");
+//		js.executeScript("window.alert = function(msg){ document.last_alert=msg; return true;};");
+
+		
 		
 		/*
 		TestHelper.waitPresent(this.driver, By.id("divOverlay"));
 		TestHelper.waitInvisible(this.driver, By.id("divOverlay"));
-		*/
+		*/		
+//		js.executeScript("window.confirm = window.orig_confirm;");
+//		js.executeScript("window.alert = window.orig_alert;");
+	}
+	
+	private static void sleep(long sleep){
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(sleep);
 		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		
-		js.executeScript("window.confirm = window.orig_confirm;");
-		js.executeScript("window.alert = window.orig_alert;");
 	}
 }
