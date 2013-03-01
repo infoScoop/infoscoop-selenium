@@ -37,9 +37,6 @@ public class GadgetPreference {
 			return;
 		
 		driver.findElement(By.xpath("//td[@id='eb_"+gadget.getId()+"_widget_title']/input")).sendKeys(title);
-		
-		// ガジェット設定を閉じる
-		ok();
 	}
 	
 	/**

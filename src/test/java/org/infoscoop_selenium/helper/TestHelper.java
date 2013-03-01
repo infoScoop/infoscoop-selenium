@@ -1,6 +1,13 @@
 package org.infoscoop_selenium.helper;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.image.BufferedImage;
 import java.io.File;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -125,5 +132,28 @@ public class TestHelper {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Confirmのスクリーンショット
+	 * @param fileName
+	 * @param driver
+	 */
+	public static void getScreenShotConfirm(final String fileName, final WebDriver driver, int width, int height) {
+		try{
+			Robot robot = new Robot();
+			Image img = robot.createScreenCapture(new Rectangle(0, 0, width, height));
+			
+			BufferedImage bimg = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_4BYTE_ABGR);
+			Graphics g = bimg.getGraphics();
+			g.drawImage(img, 0, 0, null);
+			g.dispose();
+			if (!ImageIO.write(bimg, "png", new File(driver.getClass().getName() + File.separator + fileName + ".png"))) {
+				throw new Exception("フォーマットが対象外");
+			}
+		}catch(Exception e){
+			throw new RuntimeException(e);
+		}
+
 	}
 }

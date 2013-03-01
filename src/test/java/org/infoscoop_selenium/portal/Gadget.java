@@ -1,6 +1,7 @@
 package org.infoscoop_selenium.portal;
 
 import org.infoscoop_selenium.helper.TestHelper;
+import org.infoscoop_selenium.portal.gadget.AlarmGadget;
 import org.infoscoop_selenium.portal.gadget.GadgetPreference;
 import org.infoscoop_selenium.portal.gadget.GenericGadget;
 import org.infoscoop_selenium.portal.gadget.RssReaderGadget;
@@ -23,6 +24,7 @@ public abstract class Gadget {
 		STICKY(StickyGadget.class),
 		TODOLIST(ToDoListGadget.class),
 		RSSREADER(RssReaderGadget.class),
+		ALARM(AlarmGadget.class),
 		GENERIC(GenericGadget.class);
 		
 		private final Class gadgetClass;
