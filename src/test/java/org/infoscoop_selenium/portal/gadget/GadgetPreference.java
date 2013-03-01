@@ -28,30 +28,28 @@ public class GadgetPreference {
 	
 	/**
 	 * ガジェットのタイトル変更
-	 * @param widgetId
 	 * @param title
 	 */
-	public void changeTitle(String widgetId, String title) {
+	public void changeTitle(String title) {
 		show();
 
-		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
+		if(!driver.findElement(By.id("frm_"+gadget.getId())).isDisplayed())
 			return;
 		
-		driver.findElement(By.xpath("//td[@id='eb_"+widgetId+"_widget_title']/input")).sendKeys(title);
+		driver.findElement(By.xpath("//td[@id='eb_"+gadget.getId()+"_widget_title']/input")).sendKeys(title);
 		
 		// ガジェット設定を閉じる
-		ok(widgetId);
+		ok();
 	}
 	
 	/**
 	 * ガジェット設定OK
-	 * @param widgetId
 	 */
-	public void ok(String widgetId){
-		if(!driver.findElement(By.id("frm_"+widgetId)).isDisplayed())
+	public void ok(){
+		if(!driver.findElement(By.id("frm_"+gadget.getId())).isDisplayed())
 			return;
 		
-		driver.findElement(By.xpath("//form[@id='frm_"+widgetId+"']/div[@class='widgetSave']")).click();
+		driver.findElement(By.xpath("//form[@id='frm_"+gadget.getId()+"']/div[@class='widgetSave']")).click();
 	}
 	
 	/**

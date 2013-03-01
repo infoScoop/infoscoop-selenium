@@ -68,7 +68,7 @@ public class StickyGadget extends Gadget{
 		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_fontSize']/input")).sendKeys(fontSize);
 		
 		// ガジェット設定を閉じる
-		getGadgetPreference().ok(super.getId());
+		getGadgetPreference().ok();
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class StickyGadget extends Gadget{
 		select.selectByValue(bgColor.getValue());
 		
 		// ガジェット設定を閉じる
-		getGadgetPreference().ok(super.getId());
+		getGadgetPreference().ok();
 	}
 	
 	/**
@@ -102,6 +102,6 @@ public class StickyGadget extends Gadget{
 		select.selectByValue(color.getValue());
 		
 		// ガジェット設定を閉じる
-		getGadgetPreference().ok(super.getId());		
+		getGadgetPreference().ok();		
 	}
 }

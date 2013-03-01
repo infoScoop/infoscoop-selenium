@@ -85,6 +85,6 @@ public class ToDoListGadget extends Gadget{
 		font.selectByValue(fontSize.getValue());
 		
 		// ガジェット設定を閉じる
-		getGadgetPreference().ok(super.getId());
+		getGadgetPreference().ok();
 	}
 }
