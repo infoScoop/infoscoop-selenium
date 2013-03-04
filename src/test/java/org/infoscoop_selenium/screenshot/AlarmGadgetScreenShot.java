@@ -8,7 +8,6 @@ import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.AlarmGadget;
 import org.infoscoop_selenium.portal.gadget.AlarmGadget.NOTIFY;
 import org.junit.Test;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
