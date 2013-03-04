@@ -6,6 +6,7 @@ import org.infoscoop_selenium.portal.gadget.GadgetPreference;
 import org.infoscoop_selenium.portal.gadget.GenericGadget;
 import org.infoscoop_selenium.portal.gadget.MessageGadget;
 import org.infoscoop_selenium.portal.gadget.RssReaderGadget;
+import org.infoscoop_selenium.portal.gadget.ScheduleGadget;
 import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.openqa.selenium.By;
@@ -22,6 +23,7 @@ public abstract class Gadget {
 		RSSREADER(RssReaderGadget.class),
 		ALARM(AlarmGadget.class),
 		MESSAGE(MessageGadget.class),
+		SCHEDULE(ScheduleGadget.class),
 		GENERIC(GenericGadget.class);
 		
 		private final Class gadgetClass;
