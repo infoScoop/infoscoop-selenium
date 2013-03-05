@@ -2,6 +2,7 @@ package org.infoscoop_selenium;
 
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
+import org.infoscoop_selenium.portal.SideBar;
 import org.infoscoop_selenium.portal.Tab;
 import org.infoscoop_selenium.portal.TopMenu;
 import org.openqa.selenium.By;
@@ -14,6 +15,7 @@ public class Portal {
 	CommandBar commandBar;
 	Tab tab;
 	TopMenu topMenu;
+	SideBar sideBar;
 	
 	public Portal(WebDriver driver, String url) {
 		this.driver = driver;
@@ -21,6 +23,7 @@ public class Portal {
 		this.commandBar = new CommandBar(driver);
 		this.tab = new Tab(driver);
 		this.topMenu = new TopMenu(driver);
+		this.sideBar = new SideBar(driver);
 	}
 	/*
 	public void open(){
@@ -56,6 +59,10 @@ public class Portal {
 	
 	public TopMenu getTopMenu(){
 		return topMenu;
+	}
+	
+	public SideBar getSideBar(){
+		return sideBar;
 	}
 	
 	public String getUrl(){
