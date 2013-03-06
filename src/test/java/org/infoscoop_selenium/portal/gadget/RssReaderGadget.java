@@ -42,6 +42,20 @@ public class RssReaderGadget extends Gadget{
 	}
 	
 	/**
+	 * スクロール
+	 * 最大化時
+	 */
+	public void scrollForMaximize() {
+		String xpath = "//div[@id=\"MaximizeItemList___Maximize__"+super.getId()+"\"]/div[2]";
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript(
+				"var result = document.evaluate('"+xpath+"', document.body, null, 7, null);"
+				+"var height = result.snapshotItem(0).scrollHeight;"
+				+"result.snapshotItem(0).scrollTop = height;"
+		);
+	}
+
+	/**
 	 * 詳細を開く
 	 * @param order(>=0)
 	 */
@@ -131,6 +145,42 @@ public class RssReaderGadget extends Gadget{
 		WebElement hoverTarget = driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_categoryFilter']/a"));
 		Actions action = new Actions(driver);
 		action.moveToElement(hoverTarget).clickAndHold().build().perform();
+	}
+	
+	/**
+	 * 時間順表示設定
+	 * マルチRSS限定
+	 */
+	public void sortDate(){
+		// ガジェットメニューを開く
+		openMenu();
+		
+		if(!driver.findElement(By.id("hm_"+super.getId()+"_sort")).isDisplayed())
+			return;
+		
+		// 時間順表示をクリックhm_tab0_p_sports_sort
+		driver.findElement(By.xpath("//div[@id='hm_"+super.getId()+"_sort']/a")).click();
+		
+		// 表示を待つ
+		TestHelper.waitInvisible(driver, By.id(super.getId()+"_widgetIndicator"));
+	}
+	
+	/**
+	 * カテゴリ別表示設定
+	 * マルチRSS限定
+	 */
+	public void sortCategory(){
+		// ガジェットメニューを開く
+		openMenu();
+		
+		if(!driver.findElement(By.id("hm_"+super.getId()+"_category")).isDisplayed())
+			return;
+		
+		// 時間順表示をクリックhm_tab0_p_sports_sort
+		driver.findElement(By.xpath("//div[@id='hm_"+super.getId()+"_category']/a")).click();
+		
+		// 表示を待つ
+		TestHelper.waitInvisible(driver, By.id(super.getId()+"_widgetIndicator"));
 	}
 	
 	/**
