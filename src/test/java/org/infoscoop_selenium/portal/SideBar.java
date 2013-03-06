@@ -5,6 +5,7 @@ import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class SideBar {
 	WebDriver driver;
@@ -31,7 +32,8 @@ public class SideBar {
 	 */
 	public void openAddContents() {
 		// サイトメニューボタンの表示を待つ
-		TestHelper.waitPresent(driver, By.id("siteMenuOpen"));
+		TestHelper.waitPresent(driver, By.id("openRssSearch"));
+		
 		driver.findElement(By.id("openRssSearch")).click();
 		
 		// サイトメニューの表示を待つ

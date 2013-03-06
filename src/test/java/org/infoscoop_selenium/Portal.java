@@ -43,7 +43,7 @@ public class Portal {
 		TestHelper.waitPresent(driver, By.id("divOverlay"));
 		TestHelper.waitInvisible(driver, By.id("divOverlay"));
 		*/
-		TestHelper.waitPresent(this.driver, By.id("columns0"));
+		waitPortalLoadComplete(driver);
 	}
 	public void logout(){
 		this.driver.get(url + "/logout");
@@ -71,5 +71,9 @@ public class Portal {
 	
 	public void close(){
 		this.driver.close();
+	}
+	
+	public static void waitPortalLoadComplete(WebDriver driver){
+		TestHelper.waitPresent(driver, By.id("columns0"));
 	}
 }

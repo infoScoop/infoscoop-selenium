@@ -2,12 +2,17 @@ package org.infoscoop_selenium.portal.commandbar;
 
 import java.util.List;
 
+import org.infoscoop_selenium.Portal;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PortalPreference {
 	WebDriver driver;
@@ -154,10 +159,20 @@ public class PortalPreference {
 		WebElement modal_container = this.driver.findElement(By.id("modal_container"));
 		
 		// 初期化ボタンをクリック
-		modal_container.findElement(By.xpath("//fieldSet[5]//input[@type='button']")).click();
+		WebElement targetElement = modal_container.findElement(By.xpath("//fieldSet[5]//input[@type='button']"));
+		targetElement.click();
 		
 		// confirmを閉じる
-		driver.switchTo().alert().accept();
+		Alert alert;
+		try{
+			alert = new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
+		}catch(TimeoutException e){
+			// たまに押せない時があるので、アラームが出現しなければ再度クリック
+			targetElement.click();
+			alert = driver.switchTo().alert();
+		}
+		alert.accept();
+//		driver.switchTo().alert().accept();
 		TestHelper.backToTopFrame(driver);
 		sleep(500);
 
@@ -165,6 +180,7 @@ public class PortalPreference {
 		driver.switchTo().alert().accept();
 		TestHelper.backToTopFrame(driver);
 		
+		Portal.waitPortalLoadComplete(driver);
 		// confirmの抜け方がわからないので無理やり		
 //		JavascriptExecutor js = (JavascriptExecutor)this.driver;
 //		js.executeScript("window.orig_confirm = window.confirm;"); 

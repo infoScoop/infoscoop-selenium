@@ -195,12 +195,15 @@ public class CommandbarScreenShot extends IS_BaseItTestCase{
 		// ガジェット削除をゴミ箱へ
 		gadget.close();
 		
-		tb.show();
+		// ゴミ箱の1番目のアイテムを右クリック
+		tb.showContextMenu(1);
+		
 		TestHelper.getScreenShot("ゴミ箱_コンテキストメニュー", getDriver());
 		
 		// ゴミ箱を空に
 		tb.clear();
 	}
+	
 	private static void sleep(long sleep){
 		try {
 			Thread.sleep(sleep);

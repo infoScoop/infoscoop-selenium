@@ -98,7 +98,6 @@ public abstract class Gadget {
 		Actions action = new Actions(driver);
 		WebElement headerDiv = driver.findElement(By.xpath("//div[@id='" + gadgetId + "']//div[@class='widgetHeader']/div[1]"));
 		action.moveToElement(headerDiv);
-		action.clickAndHold().release();
 		action.build().perform();
 	}
 }

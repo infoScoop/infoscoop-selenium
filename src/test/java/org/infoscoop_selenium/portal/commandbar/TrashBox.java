@@ -1,14 +1,13 @@
 package org.infoscoop_selenium.portal.commandbar;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class TrashBox {
 	WebDriver driver;
@@ -38,6 +37,18 @@ public class TrashBox {
 	 */
 	public void hide(){
 		this.driver.findElement(By.className("alphacube_close")).click();
+	}
+	
+	/**
+	 * ゴミ箱内アイテムのコンテキストメニューを開く
+	 */
+	public void showContextMenu(int idx){
+		show();
+		Actions actions = new Actions(this.driver);
+		WebElement trashTable = this.driver.findElement(By.className("trashTable"));
+		WebElement targetElement = trashTable.findElement(By.xpath("//div[@class='menuItemIcon'][" + idx + "]"));
+		actions.contextClick(targetElement);
+		actions.perform();
 	}
 	
 	/**
