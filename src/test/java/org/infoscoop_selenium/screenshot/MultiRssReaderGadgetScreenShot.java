@@ -257,7 +257,7 @@ public class MultiRssReaderGadgetScreenShot extends IS_BaseItTestCase {
 		WebElement element2 = element.findElement(By.id("maximizeCategoryCombobox"));
 		element2.findElement(By.className("pulldown_icon")).click();
 		
-		sleep(5000);
+		sleep(100);
 		
 		TestHelper.getScreenShot("マルチRSSリーダーガジェット（最大化／カテゴリ選択）", driver);
 	
