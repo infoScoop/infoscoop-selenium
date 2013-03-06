@@ -10,6 +10,8 @@ import org.infoscoop_selenium.portal.TopMenu;
 import org.infoscoop_selenium.portal.commandbar.PortalPreference;
 import org.infoscoop_selenium.portal.commandbar.TrashBox;
 import org.junit.Test;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 
 /**
  * タブUIのスクリーンショット
@@ -164,7 +166,8 @@ public class CommandbarScreenShot extends IS_BaseItTestCase{
 
 		// カラム１へガジェット（MultiRssReader）をドロップ
 		TopMenu topMenu = getPortal().getTopMenu();
-		Gadget gadget = topMenu.dropGadget("news", "news_asahi" , 1);
+//		Gadget gadget = topMenu.dropGadget("news", "news_asahi" , 1);
+		Gadget gadget = topMenu.dropGadget("etcWidgets", "etcWidgets_alarm" , 1);
 		
 		// ガジェット削除をゴミ箱へ
 		gadget.close();
@@ -172,13 +175,32 @@ public class CommandbarScreenShot extends IS_BaseItTestCase{
 		tb.show();
 		TestHelper.getScreenShot("ゴミ箱", getDriver());
 		
-		// 
-		
-		
 		// ゴミ箱を空に
 		tb.clear();
 	}
 	
+	@Test
+	/**
+	 * ゴミ箱（コンテキストメニュー）
+	 */
+	public void ゴミ箱_コンテキストメニュー(){
+		TrashBox tb = getPortal().getCommandBar().getTrashBox();
+		
+
+		// カラム１へガジェット（MultiRssReader）をドロップ
+		TopMenu topMenu = getPortal().getTopMenu();
+//		Gadget gadget = topMenu.dropGadget("news", "news_asahi" , 1);
+		Gadget gadget = topMenu.dropGadget("etcWidgets", "etcWidgets_alarm" , 1);
+		
+		// ガジェット削除をゴミ箱へ
+		gadget.close();
+		
+		tb.show();
+		TestHelper.getScreenShot("ゴミ箱_コンテキストメニュー", getDriver());
+		
+		// ゴミ箱を空に
+		tb.clear();
+	}
 	private static void sleep(long sleep){
 		try {
 			Thread.sleep(sleep);
