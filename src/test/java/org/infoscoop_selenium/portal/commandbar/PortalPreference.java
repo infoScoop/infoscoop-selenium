@@ -1,12 +1,10 @@
 package org.infoscoop_selenium.portal.commandbar;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
