@@ -83,5 +83,52 @@ public class TopMenu {
 			throw new RuntimeException();
 		}
 	}
-	
+
+	/**
+	 * まとめてドロップ
+	 */
+	public Gadget dropFolder(String parentId, int columnNum){
+		return dropFolder(parentId, columnNum, GADGET_TYPE.GENERIC);
+	}
+
+	/**
+	 * まとめてドロップ
+	 */
+	public Gadget dropFolder(String parentId, int columnNum, GADGET_TYPE gadgetType){
+		openTopMenu(parentId);
+		
+		WebElement dropElement = driver.findElement(By.xpath("//div[@class='column' and @colnum='" + columnNum + "']"));
+		Point dropPoint = dropElement.getLocation();
+		
+		WebElement parentElement = driver.findElement(By.id("mg_" + parentId + "_0"));
+		WebElement targetElement = parentElement.findElement(By.className("menufolderfeedTitle"));
+		
+		Actions actions = new Actions(driver);
+
+		// Firefox (on windows) だと固まる
+//		actions.dragAndDropBy(targetElement, dropPoint.x, dropPoint.y).perform();
+		
+		// IE, FFで動作するコード
+		actions.moveToElement(targetElement);
+		actions.clickAndHold();
+		actions.moveByOffset(dropPoint.x, dropPoint.y);
+		actions.release();
+		actions.perform();
+		
+		// FIXME: IEだとオーバーレイが残ってしまい、操作不能になる。できればWebDriverでなんとかしたい
+		((JavascriptExecutor)driver).executeScript("IS_Portal.hideDragOverlay();");
+		
+		String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
+		
+//		return new Gadget(driver, widgetId);
+		Class<Gadget> c = gadgetType.getValue();
+		try {
+			return (Gadget)c.getConstructor(new Class[]{WebDriver.class, String.class})
+					.newInstance(new Object[]{driver, widgetId});
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+	}
 }
