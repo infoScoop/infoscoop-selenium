@@ -1,11 +1,9 @@
 package org.infoscoop_selenium.portal;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
-import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,22 +50,25 @@ public class TopMenu {
 	public Gadget dropGadget(String parentId, String id, int columnNum, GADGET_TYPE gadgetType){
 		openTopMenu(parentId);
 		
-		Actions action = new Actions(driver);
-		
 		WebElement dropElement = driver.findElement(By.xpath("//div[@class='column' and @colnum='" + columnNum + "']"));
 		Point dropPoint = dropElement.getLocation();
 		
 		WebElement targetElement = driver.findElement(By.id("mi_" + id));
 		
+		Actions actions = new Actions(driver);
+
 		// Firefox (on windows) だと固まる
-//		action.dragAndDropBy(targetElement, dropPoint.x + 50, dropPoint.y).perform();
+//		actions.dragAndDropBy(targetElement, dropPoint.x, dropPoint.y).perform();
 		
 		// IE, FFで動作するコード
-		action.moveToElement(targetElement);
-		action.clickAndHold();
-		action.moveByOffset(dropPoint.x + 50, dropPoint.y);
-		action.release();
-		action.build().perform();
+		actions.moveToElement(targetElement);
+		actions.clickAndHold();
+		actions.moveByOffset(dropPoint.x, dropPoint.y);
+		actions.release();
+		actions.perform();
+		
+		// FIXME: IEだとオーバーレイが残ってしまい、操作不能になる。できればWebDriverでなんとかしたい
+		((JavascriptExecutor)driver).executeScript("IS_Portal.hideDragOverlay();");
 		
 		String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
 		

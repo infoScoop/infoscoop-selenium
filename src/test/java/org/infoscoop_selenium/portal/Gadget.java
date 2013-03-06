@@ -54,6 +54,7 @@ public abstract class Gadget {
 		observeEvents();
 		
 		this.driver.findElement(By.id("hi_"+gadgetId+"_showTools")).click();
+		System.out.println(this.driver.findElement(By.id("hi_"+gadgetId+"_showTools")));
 		
 		TestHelper.waitPresent(this.driver, By.id(gadgetId+"_close_menu"));
 	}
@@ -81,9 +82,8 @@ public abstract class Gadget {
 	public void observeEvents(){
 		Actions action = new Actions(driver);
 		WebElement headerDiv = driver.findElement(By.xpath("//div[@id='" + gadgetId + "']//div[@class='widgetHeader']/div[1]"));
-		
 		action.moveToElement(headerDiv);
-		action.click();
+		action.clickAndHold().release();
 		action.build().perform();
 	}
 }
