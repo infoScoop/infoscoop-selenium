@@ -38,14 +38,10 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 		// 初期化
 		getPortal().getCommandBar().getPortalPreference().initializeData();
 		
-		// サイトメニューボタンの表示を待つ
-		TestHelper.waitPresent(driver, By.id("siteMenuOpen"));
-		driver.findElement(By.id("openImage")).click();
+		//サイトメニューを開く
+		getPortal().getSideBar().openSiteMenu();
 		
-		// サイトメニューの表示を待つ
-		TestHelper.waitPresent(driver, By.id("portal-tree-menucontainer"));
-		
-		TestHelper.getScreenShot("サイトメニュー（ツリーを閉じた状態）", getDriver());
+		TestHelper.getScreenShot("サイトメニュー（ツリーを閉じた状態）", driver);
 
 		assertTrue(true);
 	}
@@ -57,12 +53,8 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 	public void サイトメニュー_ツリーを開いた状態(){
 		WebDriver driver = getDriver();
 		
-		// サイトメニューボタンの表示を待つ
-		TestHelper.waitPresent(driver, By.id("siteMenuOpen"));
-		driver.findElement(By.id("openImage")).click();
-		
-		// サイトメニューの表示を待つ
-		TestHelper.waitPresent(driver, By.id("portal-tree-menucontainer"));
+		//サイトメニューを開く
+		getPortal().getSideBar().openSiteMenu();
 		
 		// 全て展開リンクの生成を待つ
 		TestHelper.waitPresent(driver, By.className("showAll"));
@@ -71,7 +63,7 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 		// ツリーが展開するのを待つ
 		TestHelper.waitPresent(driver, By.id("t_etcWidgets_WidgetRanking"));
 
-		TestHelper.getScreenShot("サイトメニュー（ツリーを開いた状態）", getDriver());
+		TestHelper.getScreenShot("サイトメニュー（ツリーを開いた状態）", driver);
 
 		assertTrue(true);
 	}
@@ -83,23 +75,10 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 	public void コンテンツ追加_RSS(){
 		WebDriver driver = getDriver();
 		
-		// サイトメニューボタンの表示を待つ
-		TestHelper.waitPresent(driver, By.id("siteMenuOpen"));
-		driver.findElement(By.id("openRssSearch")).click();
-		
-		// サイトメニューの表示を待つ
-		TestHelper.waitPresent(driver, By.id("portal-tree-menucontainer"));
-		
-		// URLを入力する
-		driver.findElement(By.xpath("//div[@class='SidePanel_AddContents']/div[2]/input[@type='text']")).sendKeys("http://www.infoscoop.org/index.php/ja/news.feed");
-		
-		// プレビューボタンをクリック
-		driver.findElement(By.xpath("//div[@class='SidePanel_AddContents']/div[3]/input[@type='button']")).click();
+		// RSSをプレビュー
+		getPortal().getSideBar().previewContents("http://www.infoscoop.org/index.php/ja/news.feed");
 
-		// ロードを待つ
-		TestHelper.waitInvisible(driver, By.xpath("//div[@class='SidePanel_AddContents']/div[3]/img"));
-
-		TestHelper.getScreenShot("コンテンツ追加（RSS）", getDriver());
+		TestHelper.getScreenShot("コンテンツ追加（RSS）", driver);
 
 		assertTrue(true);
 	}
@@ -111,23 +90,10 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 	public void コンテンツ追加_Webサイト(){
 		WebDriver driver = getDriver();
 		
-		// サイトメニューボタンの表示を待つ
-		TestHelper.waitPresent(driver, By.id("siteMenuOpen"));
-		driver.findElement(By.id("openRssSearch")).click();
-		
-		// サイトメニューの表示を待つ
-		TestHelper.waitPresent(driver, By.id("portal-tree-menucontainer"));
-		
-		// URLを入力する
-		driver.findElement(By.xpath("//div[@class='SidePanel_AddContents']/div[2]/input[@type='text']")).sendKeys("http://www.infoscoop.org/index.php/ja/");
-		
-		// プレビューボタンをクリック
-		driver.findElement(By.xpath("//div[@class='SidePanel_AddContents']/div[3]/input[@type='button']")).click();
+		// Webサイトをプレビュー
+		getPortal().getSideBar().previewContents("http://www.infoscoop.org/index.php/ja/");
 
-		// ロードを待つ
-		TestHelper.waitInvisible(driver, By.xpath("//div[@class='SidePanel_AddContents']/div[3]/img"));
-
-		TestHelper.getScreenShot("コンテンツ追加（Webサイト）", getDriver());
+		TestHelper.getScreenShot("コンテンツ追加（Webサイト）", driver);
 
 		assertTrue(true);
 	}
@@ -139,23 +105,10 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 	public void コンテンツ追加_ガジェット(){
 		WebDriver driver = getDriver();
 		
-		// サイトメニューボタンの表示を待つ
-		TestHelper.waitPresent(driver, By.id("siteMenuOpen"));
-		driver.findElement(By.id("openRssSearch")).click();
-		
-		// サイトメニューの表示を待つ
-		TestHelper.waitPresent(driver, By.id("portal-tree-menucontainer"));
-		
-		// URLを入力する
-		driver.findElement(By.xpath("//div[@class='SidePanel_AddContents']/div[2]/input[@type='text']")).sendKeys("http://www.infoscoop.org/gadgets/hello.xml");
-		
-		// プレビューボタンをクリック
-		driver.findElement(By.xpath("//div[@class='SidePanel_AddContents']/div[3]/input[@type='button']")).click();
+		// Webサイトをプレビュー
+		getPortal().getSideBar().previewContents("http://www.infoscoop.org/gadgets/hello.xml");
 
-		// ロードを待つ
-		TestHelper.waitInvisible(driver, By.xpath("//div[@class='SidePanel_AddContents']/div[3]/img"));
-
-		TestHelper.getScreenShot("コンテンツ追加（ガジェット）", getDriver());
+		TestHelper.getScreenShot("コンテンツ追加（ガジェット）", driver);
 
 		assertTrue(true);
 	}
@@ -167,14 +120,10 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 	public void マイサイトマップ_ツリーを開いた状態(){
 		WebDriver driver = getDriver();
 		
-		// マイサイトマップボタンの表示を待つ
-		TestHelper.waitPresent(driver, By.id("siteMenuOpen"));
-		driver.findElement(By.className("mySiteMapOpen")).click();
-		
-		// マイサイトマップの表示を待つ
-		TestHelper.waitPresent(driver, By.id("portal-tree-menucontainer"));
+		// マイサイトマップを開く
+		getPortal().getSideBar().openMySiteMap();
 
-		TestHelper.getScreenShot("マイサイトマップ（ツリーを開いた状態）", getDriver());
+		TestHelper.getScreenShot("マイサイトマップ（ツリーを開いた状態）", driver);
 
 		assertTrue(true);
 	}
@@ -186,12 +135,8 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 	public void マイサイトマップ_ツリーを閉じた状態(){
 		WebDriver driver = getDriver();
 		
-		// マイサイトマップボタンの表示を待つ
-		TestHelper.waitPresent(driver, By.id("siteMenuOpen"));
-		driver.findElement(By.className("mySiteMapOpen")).click();
-		
-		// マイサイトマップの表示を待つ
-		TestHelper.waitPresent(driver, By.id("portal-tree-menucontainer"));
+		// マイサイトマップを開く
+		getPortal().getSideBar().openMySiteMap();
 		
 		// 全て閉じるリンクの生成を待つ
 //		TestHelper.waitPresent(driver, By.className("hideAll"));
@@ -200,7 +145,7 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 		// ツリーが展開するのを待つ
 		TestHelper.waitPresent(driver, By.className("showAll"));
 
-		TestHelper.getScreenShot("マイサイトマップ（ツリーを閉じた状態）", getDriver());
+		TestHelper.getScreenShot("マイサイトマップ（ツリーを閉じた状態）", driver);
 
 		assertTrue(true);
 	}

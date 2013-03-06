@@ -37,31 +37,23 @@ public class AlarmGadget extends Gadget{
 	 * @param minute
 	 */
 	public void setAlarm(String title, NOTIFY notify, int hour, int minute){
-		getGadgetPreference().show();
-
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
 		// タイトル
-		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_title']/input")).sendKeys(title);
+		setTitle(title);
 
 		// お知らせ方法
-		Select select = new Select(driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_method']/select")));
-		select.selectByValue(notify.getValue());
+		selectNotification(notify);
 
 		// 年月日
-		// カレンダーを開く
-		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_ymd']/div[@class='DatatypeCalendar']/a")).click();		
-		TestHelper.waitPresent(driver, By.className("CalendarComponent_Panel"));
-		// 日付を指定する
-		driver.findElement(By.xpath("//table[@class='CalendarComponent_Table calendar widgetContent']/tbody/tr[2]/td[2]/div")).click();
+		setCalendar();
 
 		// 時
-		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_hour']/input")).sendKeys(Integer.toString(hour));
+		setHour(hour);
 
 		// 分
-		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_minute']/input")).sendKeys(Integer.toString(minute));
-		
+		setMinute(minute);		
 	}	
 	
 	/**
@@ -69,8 +61,6 @@ public class AlarmGadget extends Gadget{
 	 * @param title
 	 */
 	public void setTitle(String title){
-		getGadgetPreference().show();
-
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
@@ -81,9 +71,7 @@ public class AlarmGadget extends Gadget{
 	 * お知らせ方法変更
 	 * @param notify
 	 */
-	public void changeNotification(NOTIFY notify){
-		getGadgetPreference().show();
-
+	public void selectNotification(NOTIFY notify){
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
@@ -95,8 +83,6 @@ public class AlarmGadget extends Gadget{
 	 * 年月日設定
 	 */
 	public void setCalendar(){
-		getGadgetPreference().show();
-
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
@@ -113,8 +99,6 @@ public class AlarmGadget extends Gadget{
 	 * @param hour
 	 */
 	public void setHour(int hour){
-		getGadgetPreference().show();
-
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
@@ -126,8 +110,6 @@ public class AlarmGadget extends Gadget{
 	 * @param minute
 	 */
 	public void setMinute(int minute){
-		getGadgetPreference().show();
-
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		

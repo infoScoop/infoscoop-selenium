@@ -8,7 +8,6 @@ import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.AlarmGadget;
 import org.infoscoop_selenium.portal.gadget.AlarmGadget.NOTIFY;
 import org.junit.Test;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -118,7 +117,10 @@ public class AlarmGadgetScreenShot extends IS_BaseItTestCase {
 	public void アラームガジェット_ガジェット設定(){
 		WebDriver driver = getDriver();
 		
-		// ガジェット設定
+		// ガジェット設定を開く
+		GADGET.getGadgetPreference().show();
+
+		// アラームを設定
 		GADGET.setAlarm("アラームテスト", NOTIFY.SHAKE, 12, 30);
 
 		TestHelper.getScreenShot("アラームガジェット（ガジェット設定）", driver);
@@ -135,8 +137,11 @@ public class AlarmGadgetScreenShot extends IS_BaseItTestCase {
 	 */
 	public void アラームガジェット_設定済み表示(){
 		WebDriver driver = getDriver();
-		
-		// ガジェット設定
+
+		// ガジェット設定を開く
+		GADGET.getGadgetPreference().show();
+
+		// アラームを設定
 		GADGET.setAlarm("アラームテスト", NOTIFY.SHAKE, 12, 30);
 
 		// ガジェット設定を閉じる

@@ -4,7 +4,9 @@ import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.gadget.AlarmGadget;
 import org.infoscoop_selenium.portal.gadget.GadgetPreference;
 import org.infoscoop_selenium.portal.gadget.GenericGadget;
+import org.infoscoop_selenium.portal.gadget.MessageGadget;
 import org.infoscoop_selenium.portal.gadget.RssReaderGadget;
+import org.infoscoop_selenium.portal.gadget.ScheduleGadget;
 import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.openqa.selenium.By;
@@ -22,6 +24,8 @@ public abstract class Gadget {
 		TODOLIST(ToDoListGadget.class),
 		RSSREADER(RssReaderGadget.class),
 		ALARM(AlarmGadget.class),
+		MESSAGE(MessageGadget.class),
+		SCHEDULE(ScheduleGadget.class),
 		GENERIC(GenericGadget.class);
 		
 		private final Class gadgetClass;
@@ -66,6 +70,17 @@ public abstract class Gadget {
 	public void close(){
 		openMenu();
 		driver.findElement(By.xpath("//div[@id='hm_" + gadgetId + "_close']/a[1]")).click();
+	}
+	
+	/**
+	 * ガジェットの最大化
+	 * @return
+	 */
+	public void maximaize(){
+		TestHelper.waitPresent(driver, By.id("hi_"+gadgetId+"_maximize"));
+		this.driver.findElement(By.id("hi_"+gadgetId+"_maximize")).click();
+		
+		TestHelper.waitPresent(this.driver, By.className("headerIcon_turnbackMaximize"));
 	}
 	
 	public GadgetPreference getGadgetPreference(){
