@@ -46,9 +46,14 @@ public class TrashBox {
 		show();
 		Actions actions = new Actions(this.driver);
 		WebElement trashTable = this.driver.findElement(By.className("trashTable"));
-		WebElement targetElement = trashTable.findElement(By.xpath("//div[@class='menuItemIcon'][" + idx + "]"));
+		WebElement targetElement = trashTable.findElement(By.xpath("//table[@class='trashTable']//tr[" + idx + "]/td[div/@class='menuItemIcon']"));
+//		WebElement targetElement = trashTable.findElement(By.xpath("//div[@class='menuItemIcon'][1]"));
+		
+		actions.moveToElement(targetElement);
 		actions.contextClick(targetElement);
 		actions.perform();
+		
+		TestHelper.waitPresent(driver, By.id("trashContext"));
 	}
 	
 	/**
