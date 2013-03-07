@@ -40,7 +40,7 @@ public class TopMenu {
 	 * e.g) asahi.com = news_asahi
 	 */
 	public Gadget dropGadget(String parentId, String id, int columnNum){
-		return dropGadget(parentId, id, columnNum, GADGET_TYPE.GENERIC);
+		return dropGadget(parentId, id, columnNum, GADGET_TYPE.GENERIC, true);
 	}
 
 	/**
@@ -48,6 +48,14 @@ public class TopMenu {
 	 * e.g) asahi.com = news_asahi
 	 */
 	public Gadget dropGadget(String parentId, String id, int columnNum, GADGET_TYPE gadgetType){
+		return dropGadget(parentId, id, columnNum, gadgetType, true);
+	}
+	
+	/**
+	 * 指定IDのガジェットをドロップする
+	 * e.g) asahi.com = news_asahi
+	 */
+	public Gadget dropGadget(String parentId, String id, int columnNum, GADGET_TYPE gadgetType, boolean dropFlg){
 		openTopMenu(parentId);
 		
 		WebElement dropElement = driver.findElement(By.xpath("//div[@class='column' and @colnum='" + columnNum + "']"));
@@ -64,23 +72,40 @@ public class TopMenu {
 		actions.moveToElement(targetElement);
 		actions.clickAndHold();
 		actions.moveByOffset(dropPoint.x, dropPoint.y);
-		actions.release();
-		actions.perform();
+		if(dropFlg)
+			actions.release();
+		actions.build().perform();
 		
-		// FIXME: IEだとオーバーレイが残ってしまい、操作不能になる。できればWebDriverでなんとかしたい
-		((JavascriptExecutor)driver).executeScript("IS_Portal.hideDragOverlay();");
-		
-		String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
-		
-//		return new Gadget(driver, widgetId);
-		Class<Gadget> c = gadgetType.getValue();
-		try {
-			return (Gadget)c.getConstructor(new Class[]{WebDriver.class, String.class})
-					.newInstance(new Object[]{driver, widgetId});
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException();
+		if(dropFlg){
+			// FIXME: IEだとオーバーレイが残ってしまい、操作不能になる。できればWebDriverでなんとかしたい
+			((JavascriptExecutor)driver).executeScript("IS_Portal.hideDragOverlay();");
+			
+			// メニューが残っている場合消去する
+			if(driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']")).isDisplayed()){
+				try{
+					Thread.sleep(500);
+				}catch(Exception e){
+					throw new RuntimeException(e);
+				}
+				WebElement closeDiv = driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']"));
+				actions.moveToElement(closeDiv);
+				actions.build().perform();
+			}
+			
+			String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
+			
+//			return new Gadget(driver, widgetId);
+			Class<Gadget> c = gadgetType.getValue();
+			try {
+				return (Gadget)c.getConstructor(new Class[]{WebDriver.class, String.class})
+						.newInstance(new Object[]{driver, widgetId});
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new RuntimeException();
+			}
+		}else{
+			return null;
 		}
 	}
 
@@ -88,13 +113,20 @@ public class TopMenu {
 	 * まとめてドロップ
 	 */
 	public Gadget dropFolder(String parentId, int columnNum){
-		return dropFolder(parentId, columnNum, GADGET_TYPE.GENERIC);
+		return dropFolder(parentId, columnNum, GADGET_TYPE.GENERIC, true);
 	}
 
 	/**
 	 * まとめてドロップ
 	 */
 	public Gadget dropFolder(String parentId, int columnNum, GADGET_TYPE gadgetType){
+		return dropFolder(parentId, columnNum, gadgetType, true);
+	}
+	
+	/**
+	 * まとめてドロップ
+	 */
+	public Gadget dropFolder(String parentId, int columnNum, GADGET_TYPE gadgetType, boolean dropFlg){
 		openTopMenu(parentId);
 		
 		WebElement dropElement = driver.findElement(By.xpath("//div[@class='column' and @colnum='" + columnNum + "']"));
@@ -112,23 +144,40 @@ public class TopMenu {
 		actions.moveToElement(targetElement);
 		actions.clickAndHold();
 		actions.moveByOffset(dropPoint.x, dropPoint.y);
-		actions.release();
-		actions.perform();
+		if(dropFlg)
+			actions.release();
+		actions.build().perform();
 		
-		// FIXME: IEだとオーバーレイが残ってしまい、操作不能になる。できればWebDriverでなんとかしたい
-		((JavascriptExecutor)driver).executeScript("IS_Portal.hideDragOverlay();");
-		
-		String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
-		
-//		return new Gadget(driver, widgetId);
-		Class<Gadget> c = gadgetType.getValue();
-		try {
-			return (Gadget)c.getConstructor(new Class[]{WebDriver.class, String.class})
-					.newInstance(new Object[]{driver, widgetId});
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException();
+		if(dropFlg){
+			// FIXME: IEだとオーバーレイが残ってしまい、操作不能になる。できればWebDriverでなんとかしたい
+			((JavascriptExecutor)driver).executeScript("IS_Portal.hideDragOverlay();");
+			
+			// メニューが残っている場合消去する
+			if(driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']")).isDisplayed()){
+				try{
+					Thread.sleep(500);
+				}catch(Exception e){
+					throw new RuntimeException(e);
+				}
+				WebElement closeDiv = driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']"));
+				actions.moveToElement(closeDiv);
+				actions.build().perform();
+			}
+			
+			String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
+			
+//			return new Gadget(driver, widgetId);
+			Class<Gadget> c = gadgetType.getValue();
+			try {
+				return (Gadget)c.getConstructor(new Class[]{WebDriver.class, String.class})
+						.newInstance(new Object[]{driver, widgetId});
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new RuntimeException();
+			}
+		}else{
+			return null;
 		}
 	}
 }

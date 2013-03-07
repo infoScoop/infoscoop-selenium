@@ -10,6 +10,7 @@ import org.infoscoop_selenium.portal.gadget.ScheduleGadget;
 import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -81,6 +82,27 @@ public abstract class Gadget {
 		this.driver.findElement(By.id("hi_"+gadgetId+"_maximize")).click();
 		
 		TestHelper.waitPresent(this.driver, By.className("headerIcon_turnbackMaximize"));
+	}
+	
+	/**
+	 * ガジェットのカラム移動
+	 * FFで移動しない。理由は不明（Windowsで要検証）
+	 */
+	public void moveColumn(int columnNum, boolean dropFlg){
+		WebElement dropElement = driver.findElement(By.xpath("//div[@class='column' and @colnum='" + columnNum + "']"));
+		Point dropPoint = dropElement.getLocation();
+		
+		WebElement targetElement = driver.findElement(By.xpath("//div[@id='" + gadgetId + "']//div[@class='widgetHeader']/div[1]"));
+
+		Actions actions = new Actions(driver);
+		
+		// IE, FFで動作するコード
+		actions.moveToElement(targetElement);
+		actions.clickAndHold();
+		actions.moveByOffset(dropPoint.x, dropPoint.y);
+		if(dropFlg)
+			actions.release();
+		actions.build().perform();
 	}
 	
 	public GadgetPreference getGadgetPreference(){
