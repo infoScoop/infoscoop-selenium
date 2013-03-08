@@ -17,6 +17,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -127,7 +128,10 @@ public class TestHelper {
 	 */
 	public static void getScreenShot(final String fileName, final WebDriver driver) {
 		try{
-			File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			WebDriver augmentedDriver = driver;
+			if((augmentedDriver.toString()).indexOf("RemoteWebDriver") > -1)
+				augmentedDriver = new Augmenter().augment(driver);
+			File file = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(file, new File(driver.getClass().getName() + File.separator + fileName + ".png"));
 		}catch(Exception e){
 			e.printStackTrace();

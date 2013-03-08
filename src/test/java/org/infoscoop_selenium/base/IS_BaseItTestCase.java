@@ -1,12 +1,17 @@
 package org.infoscoop_selenium.base;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.infoscoop_selenium.Portal;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.*;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 
@@ -25,9 +30,19 @@ public abstract class IS_BaseItTestCase {
 		
 		if(driver == null){
 			// TODO: 実行時の引数でドライバを変える
-//			WebDriver driver = new RemoteWebDriver(new URL("http://shd092v:4444/wd/hub"), DesiredCapabilities.firefox());
+			try {
+				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+				capabilities.setPlatform(Platform.WINDOWS);
+				capabilities.setBrowserName("iexplorer");
+				capabilities.setVersion("9");
+				capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+				driver = new RemoteWebDriver(new URL("http://172.22.113.136:4444/wd/hub"), capabilities);
+			} catch (MalformedURLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
 //			driver = new FirefoxDriver();
-			driver = new InternetExplorerDriver();
+//			driver = new InternetExplorerDriver();
 		}
 		String url = "http://s00215:8080/infoscoop";
 		portal = new Portal(driver, url);
