@@ -26,11 +26,6 @@ public class PortalInlineFrameScreenShot extends IS_BaseItTestCase {
 		getPortal().login();
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * ポータル内フレーム

@@ -25,11 +25,6 @@ public class SearchScreenShot extends IS_BaseItTestCase{
 		getPortal().login();
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-
 	@Test
 	/**
 	 * 検索

@@ -23,11 +23,6 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 		getPortal().login();
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-
 	@Test
 	/**
 	 * サイトメニュー（ツリーを閉じた状態）

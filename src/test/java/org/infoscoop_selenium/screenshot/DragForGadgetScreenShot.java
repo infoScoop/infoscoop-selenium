@@ -34,11 +34,6 @@ public class DragForGadgetScreenShot extends IS_BaseItTestCase {
 		
 //		GADGET = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_worldclock", 1, GADGET_TYPE.GENERIC, true);
 	}
-
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
 	
 	@Test
 	/**

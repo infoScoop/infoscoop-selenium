@@ -32,11 +32,6 @@ public class RssReaderGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET = (RssReaderGadget)getPortal().getSideBar().addContents("http://www.infoscoop.org/index.php/ja/news.feed", GADGET_TYPE.RSSREADER);
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * RSSリーダーガジェット

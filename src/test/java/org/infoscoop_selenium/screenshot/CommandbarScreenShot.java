@@ -28,11 +28,6 @@ public class CommandbarScreenShot extends IS_BaseItTestCase{
 		getPortal().getCommandBar().getPortalPreference().initializeData();
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-
 	@Test
 	/**
 	 * 全体設定

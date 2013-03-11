@@ -24,11 +24,6 @@ public class MessageConsoleScreenShot extends IS_BaseItTestCase{
 		getPortal().login();
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-
 	@Test
 	/**
 	 * メッセージコンソール（ポータル画面）

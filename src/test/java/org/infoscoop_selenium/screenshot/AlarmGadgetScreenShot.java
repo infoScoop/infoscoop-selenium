@@ -34,11 +34,6 @@ public class AlarmGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET = (AlarmGadget)getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_alarm", 1, GADGET_TYPE.ALARM);
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * アラームガジェット（初期ドロップ）

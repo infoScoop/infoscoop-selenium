@@ -31,11 +31,6 @@ public class CalculatorGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET = (GenericGadget)getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_calculator", 1);
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * 電卓ガジェット

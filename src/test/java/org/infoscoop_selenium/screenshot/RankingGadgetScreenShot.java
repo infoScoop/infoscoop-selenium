@@ -38,11 +38,6 @@ public class RankingGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_WidgetRanking", 1);
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * ランキングガジェット

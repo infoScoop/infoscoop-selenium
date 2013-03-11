@@ -31,11 +31,6 @@ public class StickyGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET = (StickyGadget)getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_stickey", 1, GADGET_TYPE.STICKY);
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * 付箋ガジェット

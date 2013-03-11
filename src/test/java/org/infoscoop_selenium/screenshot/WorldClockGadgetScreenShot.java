@@ -30,11 +30,6 @@ public class WorldClockGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_worldclock", 1);
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * 標準時時計ガジェット

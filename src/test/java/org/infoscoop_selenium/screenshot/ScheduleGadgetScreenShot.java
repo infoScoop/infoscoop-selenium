@@ -32,11 +32,6 @@ public class ScheduleGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET = (ScheduleGadget)getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_schedule", 1, GADGET_TYPE.SCHEDULE);
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * スケジュールガジェット（初期ドロップ）

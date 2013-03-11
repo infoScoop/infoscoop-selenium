@@ -25,11 +25,6 @@ public class TopMenuScreenShot extends IS_BaseItTestCase{
 		getPortal().login();
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-
 	@Test
 	/**
 	 * トップメニュー（マウスオーバー_ニュース）

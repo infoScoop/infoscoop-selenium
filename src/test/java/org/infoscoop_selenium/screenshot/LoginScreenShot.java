@@ -21,11 +21,6 @@ public class LoginScreenShot extends IS_BaseItTestCase{
 		// テストケースごとの事前処理
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-
 	@Test
 	/**
 	 * ログイン

@@ -32,11 +32,6 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET = (ToDoListGadget)getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_TodoList", 1, GADGET_TYPE.TODOLIST);
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * ToDoリストガジェット

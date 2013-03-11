@@ -32,11 +32,6 @@ public class MessageGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET = (MessageGadget)getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_Message", 1, GADGET_TYPE.MESSAGE);
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * メッセージガジェット

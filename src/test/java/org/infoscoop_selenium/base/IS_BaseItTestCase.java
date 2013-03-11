@@ -72,14 +72,15 @@ public abstract class IS_BaseItTestCase {
 	
 	@BeforeClass
 	public static void doBeforeClass() {
-		System.out.println("");
 	}
 
 	@Before
 	public abstract void doBefore();
 
 	@After
-	public abstract void doAfter();
+	public void doAfter(){
+		driver.close();
+	}
 
 	@AfterClass
 	public static void doAfterClass() {

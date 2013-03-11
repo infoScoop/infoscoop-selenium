@@ -36,11 +36,6 @@ public class MultiRssReaderGadgetScreenShot extends IS_BaseItTestCase {
 		TestHelper.waitInvisible(getDriver(), By.id(GADGET.getId()+"_widgetIndicator"));
 	}
 
-	@Override
-	public void doAfter() {
-		// テストケースごとの事後処理
-	}
-	
 	@Test
 	/**
 	 * マルチRSSリーダーガジェット
