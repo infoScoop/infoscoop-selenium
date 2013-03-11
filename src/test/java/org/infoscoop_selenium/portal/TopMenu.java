@@ -81,16 +81,16 @@ public class TopMenu {
 			((JavascriptExecutor)driver).executeScript("IS_Portal.hideDragOverlay();");
 			
 			// メニューが残っている場合消去する
-			if(driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']")).isDisplayed()){
-				try{
-					Thread.sleep(500);
-				}catch(Exception e){
-					throw new RuntimeException(e);
-				}
-				WebElement closeDiv = driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']"));
-				actions.moveToElement(closeDiv);
-				actions.build().perform();
-			}
+//			if(driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']")).isDisplayed()){
+//				try{
+//					Thread.sleep(500);
+//				}catch(Exception e){
+//					throw new RuntimeException(e);
+//				}
+//				WebElement closeDiv = driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']"));
+//				actions.moveToElement(closeDiv);
+//				actions.build().perform();
+//			}
 			
 			String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
 			
@@ -153,16 +153,16 @@ public class TopMenu {
 			((JavascriptExecutor)driver).executeScript("IS_Portal.hideDragOverlay();");
 			
 			// メニューが残っている場合消去する
-			if(driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']")).isDisplayed()){
-				try{
-					Thread.sleep(500);
-				}catch(Exception e){
-					throw new RuntimeException(e);
-				}
-				WebElement closeDiv = driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']"));
-				actions.moveToElement(closeDiv);
-				actions.build().perform();
-			}
+//			if(driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']")).isDisplayed()){
+//				try{
+//					Thread.sleep(500);
+//				}catch(Exception e){
+//					throw new RuntimeException(e);
+//				}
+//				WebElement closeDiv = driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']"));
+//				actions.moveToElement(closeDiv);
+//				actions.build().perform();
+//			}
 			
 			String widgetId = dropElement.findElements(By.className("widget")).get(0).getAttribute("id");
 			

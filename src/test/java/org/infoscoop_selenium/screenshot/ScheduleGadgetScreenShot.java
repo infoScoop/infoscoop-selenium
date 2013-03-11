@@ -68,9 +68,6 @@ public class ScheduleGadgetScreenShot extends IS_BaseItTestCase {
 	public void スケジュールガジェット_ガジェット設定(){
 		WebDriver driver = getDriver();
 		
-		// ガジェットメニューを開く
-		GADGET.openMenu();
-		
 		// ガジェット設定を開く
 		GADGET.getGadgetPreference().show();
 		
@@ -85,9 +82,6 @@ public class ScheduleGadgetScreenShot extends IS_BaseItTestCase {
 	 */
 	public void スケジュールガジェット_設定済み表示(){
 		WebDriver driver = getDriver();
-		
-		// ガジェットメニューを開く
-		GADGET.openMenu();
 		
 		// ガジェット設定を開く
 		GADGET.getGadgetPreference().show();
@@ -110,9 +104,6 @@ public class ScheduleGadgetScreenShot extends IS_BaseItTestCase {
 	 */
 	public void スケジュールガジェット_詳細表示(){
 		WebDriver driver = getDriver();
-		
-		// ガジェットメニューを開く
-		GADGET.openMenu();
 		
 		// ガジェット設定を開く
 		GADGET.getGadgetPreference().show();
@@ -139,9 +130,6 @@ public class ScheduleGadgetScreenShot extends IS_BaseItTestCase {
 	public void スケジュールガジェット_最大化(){
 		WebDriver driver = getDriver();
 		
-		// ガジェットメニューを開く
-		GADGET.openMenu();
-		
 		// ガジェット設定を開く
 		GADGET.getGadgetPreference().show();
 		
@@ -166,9 +154,6 @@ public class ScheduleGadgetScreenShot extends IS_BaseItTestCase {
 	 */
 	public void スケジュールガジェット_最大化_詳細ポップアップ(){
 		WebDriver driver = getDriver();
-		
-		// ガジェットメニューを開く
-		GADGET.openMenu();
 		
 		// ガジェット設定を開く
 		GADGET.getGadgetPreference().show();

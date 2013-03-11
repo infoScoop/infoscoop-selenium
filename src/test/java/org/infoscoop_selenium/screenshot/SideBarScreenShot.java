@@ -21,6 +21,10 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 		// テストケースごとの事前処理
 		// login
 		getPortal().login();
+		
+		// 初期化
+		getPortal().getCommandBar().getPortalPreference().initializeData();
+
 	}
 
 	@Test
@@ -29,9 +33,6 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 	 */
 	public void サイトメニュー_ツリーを閉じた状態(){
 		WebDriver driver = getDriver();
-		
-		// 初期化
-		getPortal().getCommandBar().getPortalPreference().initializeData();
 		
 		//サイトメニューを開く
 		getPortal().getSideBar().openSiteMenu();
@@ -135,10 +136,10 @@ public class SideBarScreenShot extends IS_BaseItTestCase{
 		
 		// 全て閉じるリンクの生成を待つ
 //		TestHelper.waitPresent(driver, By.className("hideAll"));
-		driver.findElement(By.className("hideAll")).click();
+		driver.findElement(By.xpath("//div[@class='mySiteMap']//div[@class='hideAll']")).click();
 		
 		// ツリーが展開するのを待つ
-		TestHelper.waitPresent(driver, By.className("showAll"));
+		TestHelper.waitPresent(driver, By.xpath("//div[@class='mySiteMap']//div[@class='showAll']"));
 
 		TestHelper.getScreenShot("マイサイトマップ（ツリーを閉じた状態）", driver);
 
