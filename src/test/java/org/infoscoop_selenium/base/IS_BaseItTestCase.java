@@ -52,13 +52,13 @@ public abstract class IS_BaseItTestCase {
 					capabilities.setPlatform(Platform.WINDOWS);
 					capabilities.setBrowserName("iexplorer");
 					capabilities.setVersion("9");
+					capabilities.setCapability("maxInstances", 5);
 					capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 					break;
 				case BROWSER_FF:
 					capabilities = DesiredCapabilities.firefox();
 					capabilities.setPlatform(Platform.WINDOWS);
 					capabilities.setBrowserName("firefox");
-					capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 				}
 				
 				driver = new RemoteWebDriver(new URL(env.getRemoteUrl()), capabilities);
