@@ -21,7 +21,7 @@ public class MessageConsoleScreenShot extends IS_BaseItTestCase{
 	public void doBefore() {
 		// テストケースごとの事前処理
 		// login
-		getPortal().login("test_user2", "password");
+		getPortal().login();
 	}
 
 	@Override
@@ -91,11 +91,4 @@ public class MessageConsoleScreenShot extends IS_BaseItTestCase{
 		assertTrue(true);
 	}
 	
-	private static void sleep(long sleep){
-		try {
-			Thread.sleep(sleep);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 }

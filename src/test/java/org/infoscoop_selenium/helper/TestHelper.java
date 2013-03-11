@@ -10,6 +10,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FileUtils;
+import org.infoscoop_selenium.properties.TestEnv;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
@@ -132,7 +133,7 @@ public class TestHelper {
 			if((augmentedDriver.toString()).indexOf("RemoteWebDriver") > -1)
 				augmentedDriver = new Augmenter().augment(driver);
 			File file = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(file, new File(driver.getClass().getName() + File.separator + fileName + ".png"));
+			FileUtils.copyFile(file, new File(TestEnv.getInstance().getBrowser() + File.separator + fileName + ".png"));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -152,7 +153,7 @@ public class TestHelper {
 			Graphics g = bimg.getGraphics();
 			g.drawImage(img, 0, 0, null);
 			g.dispose();
-			if (!ImageIO.write(bimg, "png", new File(driver.getClass().getName() + File.separator + fileName + ".png"))) {
+			if (!ImageIO.write(bimg, "png", new File(TestEnv.getInstance().getBrowser() + File.separator + fileName + ".png"))) {
 				throw new Exception("フォーマットが対象外");
 			}
 		}catch(Exception e){

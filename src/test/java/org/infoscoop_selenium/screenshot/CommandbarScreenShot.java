@@ -10,8 +10,6 @@ import org.infoscoop_selenium.portal.TopMenu;
 import org.infoscoop_selenium.portal.commandbar.PortalPreference;
 import org.infoscoop_selenium.portal.commandbar.TrashBox;
 import org.junit.Test;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
 
 /**
  * タブUIのスクリーンショット
@@ -24,7 +22,7 @@ public class CommandbarScreenShot extends IS_BaseItTestCase{
 	public void doBefore() {
 		// テストケースごとの事前処理
 		// login
-		getPortal().login(TEST_USER_1, TEST_PASSWORD);
+		getPortal().login();
 		
 		// 初期化
 		getPortal().getCommandBar().getPortalPreference().initializeData();
@@ -204,11 +202,4 @@ public class CommandbarScreenShot extends IS_BaseItTestCase{
 		tb.clear();
 	}
 	
-	private static void sleep(long sleep){
-		try {
-			Thread.sleep(sleep);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 }

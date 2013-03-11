@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.infoscoop_selenium.Portal;
+import org.infoscoop_selenium.properties.TestEnv;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,34 +19,56 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 public abstract class IS_BaseItTestCase {
 	private static WebDriver driver;
 	private static Portal portal;
-	
-	protected static final String TEST_USER_1 = "test_user1";
-	protected static final String TEST_USER_2 = "test_user2";
-	protected static final String TEST_USER_3 = "test_user3";
-	protected static final String TEST_PASSWORD = "password";
+	private static final String BROWSER_IE8 = "IE8";
+	private static final String BROWSER_IE9 = "IE9";
+	private static final String BROWSER_FF = "FireFox";
 	
 	public IS_BaseItTestCase() {
 		File file = new File("drivers/IEDriverServer.exe");
 		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 		
-		if(driver == null){
-			// TODO: 実行時の引数でドライバを変える
+		TestEnv env = TestEnv.getInstance();
+		boolean isLocal = env.getType().equals("local");
+		
+		if(isLocal){
+			switch(env.getBrowser()){
+				case BROWSER_IE8:
+				case BROWSER_IE9:
+					System.out.println("!!");
+					driver = new InternetExplorerDriver();
+					break;
+				case BROWSER_FF:
+					driver = new FirefoxDriver();
+			}
+		} else {
+			DesiredCapabilities capabilities = null;
+			String version = null;
 			try {
-				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-				capabilities.setPlatform(Platform.WINDOWS);
-				capabilities.setBrowserName("iexplorer");
-				capabilities.setVersion("9");
-				capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-				driver = new RemoteWebDriver(new URL("http://172.22.113.136:4444/wd/hub"), capabilities);
+				switch(env.getBrowser()){
+				case BROWSER_IE8:
+					version = "8";
+				case BROWSER_IE9:
+					version = (version == null)? "9" : version;
+					capabilities = DesiredCapabilities.internetExplorer();
+					capabilities.setPlatform(Platform.WINDOWS);
+					capabilities.setBrowserName("iexplorer");
+					capabilities.setVersion("9");
+					capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+					break;
+				case BROWSER_FF:
+					capabilities = DesiredCapabilities.firefox();
+					capabilities.setPlatform(Platform.WINDOWS);
+					capabilities.setBrowserName("firefox");
+					capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+				}
+				
+				driver = new RemoteWebDriver(new URL(env.getRemoteUrl()), capabilities);
 			} catch (MalformedURLException e) {
 				// TODO 自動生成された catch ブロック
 				e.printStackTrace();
 			}
-//			driver = new FirefoxDriver();
-//			driver = new InternetExplorerDriver();
 		}
-		String url = "http://s00215:8080/infoscoop";
-		portal = new Portal(driver, url);
+		portal = new Portal(driver, env.getAppUrl());
 	}
 	
 	@BeforeClass

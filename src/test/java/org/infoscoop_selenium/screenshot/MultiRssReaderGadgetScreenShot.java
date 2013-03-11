@@ -6,7 +6,6 @@ import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.RssReaderGadget;
-import org.infoscoop_selenium.portal.gadget.RssReaderGadget.DETAIL;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,7 +24,7 @@ public class MultiRssReaderGadgetScreenShot extends IS_BaseItTestCase {
 	public void doBefore() {
 		// テストケースごとの事前処理
 		// login
-		getPortal().login("test_user2", "password");
+		getPortal().login();
 
 		// 初期化
 		getPortal().getCommandBar().getPortalPreference().initializeData();

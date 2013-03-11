@@ -1,6 +1,8 @@
 package org.infoscoop_selenium.screenshot;
 
 
+import static org.junit.Assert.assertTrue;
+
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.junit.Test;
@@ -8,8 +10,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * トップメニューのスクリーンショット
@@ -22,7 +22,7 @@ public class TopMenuScreenShot extends IS_BaseItTestCase{
 	public void doBefore() {
 		// テストケースごとの事前処理
 		// login
-		getPortal().login("test_user2", "password");
+		getPortal().login();
 	}
 
 	@Override
@@ -111,11 +111,5 @@ public class TopMenuScreenShot extends IS_BaseItTestCase{
 
 		assertTrue(true);
 	}
-	private static void sleep(long sleep){
-		try {
-			Thread.sleep(sleep);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+	
 }

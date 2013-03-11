@@ -7,11 +7,8 @@ import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 
@@ -21,13 +18,12 @@ import org.openqa.selenium.interactions.Actions;
  *
  */
 public class DragForGadgetScreenShot extends IS_BaseItTestCase {	
-	private static Gadget GADGET;
 	
 	@Override
 	public void doBefore() {
 		// テストケースごとの事前処理
 		// login
-		getPortal().login("test_user2", "password");
+		getPortal().login();
 
 		// 初期化
 		getPortal().getCommandBar().getPortalPreference().initializeData();

@@ -25,7 +25,7 @@ public class AlarmGadgetScreenShot extends IS_BaseItTestCase {
 	public void doBefore() {
 		// テストケースごとの事前処理
 		// login
-		getPortal().login("test_user2", "password");
+		getPortal().login();
 
 		// 初期化
 		getPortal().getCommandBar().getPortalPreference().initializeData();

@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
-import org.infoscoop_selenium.portal.Gadget;
-import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.GenericGadget;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -24,7 +22,7 @@ public class CalculatorGadgetScreenShot extends IS_BaseItTestCase {
 		// テストケースごとの事前処理
 		
 		// login
-		getPortal().login("test_user2", "password");
+		getPortal().login();
 
 		// 初期化
 		getPortal().getCommandBar().getPortalPreference().initializeData();
@@ -69,11 +67,4 @@ public class CalculatorGadgetScreenShot extends IS_BaseItTestCase {
 		assertTrue(true);
 	}
 	
-	private static void sleep(long sleep){
-		try {
-			Thread.sleep(sleep);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 }

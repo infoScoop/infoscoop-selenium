@@ -248,18 +248,11 @@ public class LoginScreenShot extends IS_BaseItTestCase{
 		WebDriver driver = getDriver();
 
 		// login
-		getPortal().login("test_user2", "password");
+		getPortal().login();
 		
 		TestHelper.getScreenShot("初期ロード画面", driver);
 		
 		assertTrue(true);
 	}
 	
-	private static void sleep(long sleep){
-		try {
-			Thread.sleep(sleep);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 }

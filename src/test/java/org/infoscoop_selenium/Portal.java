@@ -5,6 +5,7 @@ import org.infoscoop_selenium.portal.CommandBar;
 import org.infoscoop_selenium.portal.SideBar;
 import org.infoscoop_selenium.portal.Tab;
 import org.infoscoop_selenium.portal.TopMenu;
+import org.infoscoop_selenium.properties.TestEnv;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -25,13 +26,11 @@ public class Portal {
 		this.topMenu = new TopMenu(driver);
 		this.sideBar = new SideBar(driver);
 	}
-	/*
-	public void open(){
-		this.driver.get("about:blank");
-		logout();
-		this.driver.get(url);
+	
+	public void login(){
+		login(TestEnv.getInstance().getUserId(), TestEnv.getInstance().getPasswd());
 	}
-	*/
+	
 	public void login(String uid, String pass){
 		this.driver.get(url + "/login.jsp");
 		this.driver.findElement(By.id("uid")).sendKeys(uid);
