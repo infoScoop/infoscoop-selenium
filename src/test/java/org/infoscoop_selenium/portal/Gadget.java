@@ -99,7 +99,7 @@ public abstract class Gadget {
 		// IE, FFで動作するコード
 		actions.moveToElement(targetElement);
 		actions.clickAndHold();
-		actions.moveByOffset(dropPoint.x, dropPoint.y);
+		actions.moveByOffset(dropPoint.x-50, 20);
 		if(dropFlg)
 			actions.release();
 		actions.build().perform();

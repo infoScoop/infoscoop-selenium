@@ -2,6 +2,10 @@ package org.infoscoop_selenium.screenshot;
 
 import static org.junit.Assert.assertTrue;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
@@ -62,8 +66,13 @@ public class DragForGadgetScreenShot extends IS_BaseItTestCase {
 		getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_worldclock", 1, GADGET_TYPE.GENERIC, false);
 
 		// Ctrlキーを押す
-		Actions action = new Actions(driver);
-		action.sendKeys(Keys.CONTROL).perform();
+		try {
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_CONTROL);
+		} catch (AWTException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 		
 		TestHelper.getScreenShot("ガジェットのドラッグ（トップメニュー／Ctrlオプション）", driver);
 	
@@ -105,8 +114,14 @@ public class DragForGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットの移動
 		gadget.moveColumn(3, false);
 		
-		Actions action = new Actions(driver);
-		action.sendKeys(Keys.CONTROL).perform();
+		// Ctrlキーを押す
+		try {
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_CONTROL);
+		} catch (AWTException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 		
 		TestHelper.getScreenShot("ガジェットのドラッグ（カラム移動／Ctrlオプション）", driver);
 	
