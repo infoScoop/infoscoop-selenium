@@ -79,7 +79,8 @@ public abstract class IS_BaseItTestCase {
 
 	@After
 	public void doAfter(){
-		driver.close();
+//		driver.close();
+		driver.quit();
 	}
 
 	@AfterClass
