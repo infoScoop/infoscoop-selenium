@@ -34,7 +34,6 @@ public abstract class IS_BaseItTestCase {
 			switch(env.getBrowser()){
 				case BROWSER_IE8:
 				case BROWSER_IE9:
-					System.out.println("!!");
 					driver = new InternetExplorerDriver();
 					break;
 				case BROWSER_FF:
