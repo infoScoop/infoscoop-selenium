@@ -62,12 +62,12 @@ public class DragForGadgetScreenShot extends IS_BaseItTestCase {
 		try {
 			Robot robot = new Robot();
 			robot.keyPress(KeyEvent.VK_CONTROL);
+			TestHelper.getScreenShot("ガジェットのドラッグ（トップメニュー／Ctrlオプション）", driver);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
 		} catch (AWTException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		
-		TestHelper.getScreenShot("ガジェットのドラッグ（トップメニュー／Ctrlオプション）", driver);
 	
 		assertTrue(true);
 	}
@@ -111,13 +111,13 @@ public class DragForGadgetScreenShot extends IS_BaseItTestCase {
 		try {
 			Robot robot = new Robot();
 			robot.keyPress(KeyEvent.VK_CONTROL);
+			TestHelper.getScreenShot("ガジェットのドラッグ（カラム移動／Ctrlオプション）", driver);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
 		} catch (AWTException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 		
-		TestHelper.getScreenShot("ガジェットのドラッグ（カラム移動／Ctrlオプション）", driver);
-	
 		assertTrue(true);
 	}
 	
