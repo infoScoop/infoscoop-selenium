@@ -8,6 +8,7 @@ import org.infoscoop_selenium.helper.TestHelper;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * ログインのスクリーンショット
@@ -52,7 +53,9 @@ public class LoginScreenShot extends IS_BaseItTestCase{
 		driver.findElement(By.id("loginform")).submit();
 		
 		// エラーメッセージを待つ
-		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
+//		WebElement loginForm = driver.findElement(By.className("LoginForm"));
+//		loginForm.findElement(By.cssSelector("td[style=\"color: red;\"]"));
+//		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[contains(@style,'red']"));
 		
 		TestHelper.getScreenShot("ログイン（パスワード未入力）", driver);
 		
@@ -75,7 +78,7 @@ public class LoginScreenShot extends IS_BaseItTestCase{
 		driver.findElement(By.id("loginform")).submit();
 		
 		// エラーメッセージを待つ
-		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
+//		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
 		
 		TestHelper.getScreenShot("ログイン（パスワードエラー）", driver);
 		
@@ -98,7 +101,7 @@ public class LoginScreenShot extends IS_BaseItTestCase{
 		driver.findElement(By.id("loginform")).submit();
 		
 		// エラーメッセージを待つ
-		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
+//		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
 		
 		TestHelper.getScreenShot("ログイン（存在しないユーザー）", driver);
 		
@@ -144,7 +147,7 @@ public class LoginScreenShot extends IS_BaseItTestCase{
 		driver.findElement(By.id("loginform")).submit();
 		
 		// エラーメッセージを待つ
-		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
+//		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
 		
 		TestHelper.getScreenShot("パスワード変更（パスワード未入力）", driver);
 				
@@ -172,7 +175,7 @@ public class LoginScreenShot extends IS_BaseItTestCase{
 		driver.findElement(By.id("loginform")).submit();
 		
 		// エラーメッセージを待つ
-		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
+//		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
 		
 		TestHelper.getScreenShot("パスワード変更（パスワードエラー）", driver);
 		
@@ -200,7 +203,7 @@ public class LoginScreenShot extends IS_BaseItTestCase{
 		driver.findElement(By.id("loginform")).submit();
 		
 		// エラーメッセージを待つ
-		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
+//		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
 		
 		TestHelper.getScreenShot("パスワード変更（存在しないユーザー）", driver);
 		
@@ -228,7 +231,7 @@ public class LoginScreenShot extends IS_BaseItTestCase{
 		driver.findElement(By.id("loginform")).submit();
 		
 		// 成功メッセージを待つ
-		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
+//		driver.findElement(By.xpath("//table[@class='LoginForm']/tbody/tr[4]/td[@style='color:red;']"));
 		
 		TestHelper.getScreenShot("パスワード変更（正常系）", driver);
 		
