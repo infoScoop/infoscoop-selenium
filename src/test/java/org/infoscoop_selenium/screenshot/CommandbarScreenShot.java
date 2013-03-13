@@ -3,6 +3,8 @@ package org.infoscoop_selenium.screenshot;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
@@ -10,6 +12,9 @@ import org.infoscoop_selenium.portal.TopMenu;
 import org.infoscoop_selenium.portal.commandbar.PortalPreference;
 import org.infoscoop_selenium.portal.commandbar.TrashBox;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * タブUIのスクリーンショット
@@ -196,5 +201,26 @@ public class CommandbarScreenShot extends IS_BaseItTestCase{
 		// ゴミ箱を空に
 		tb.clear();
 	}
-	
+
+	@Test
+	/**
+	 * ランキング
+	 */
+	public void ランキング(){
+		WebDriver driver = getDriver();
+		
+		// コマンドバーメニューを開く
+		getPortal().getCommandBar().openMenu();
+		
+		List<WebElement> elements = driver.findElements(By.xpath("//div[@class='command-ranking']"));
+		if(elements.size() > 0)
+			return;
+		
+		TestHelper.waitPresent(driver, By.id("command-ranking"));
+		driver.findElement(By.id("command-ranking")).click();
+		TestHelper.waitPresent(driver, By.id("p_1_w_6_div"));		
+		TestHelper.waitInvisible(driver, By.id("p_1_w_6_widgetIndicator"));
+
+		TestHelper.getScreenShot("ランキング", getDriver());
+	}	
 }
