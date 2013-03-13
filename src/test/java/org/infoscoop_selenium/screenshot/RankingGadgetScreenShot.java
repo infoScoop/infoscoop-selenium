@@ -6,11 +6,12 @@ import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 
 /**
- * ランキングガジェットのスクリーンショット
+ * 人気ガジェットのスクリーンショット
  * @author mikami
  *
  */
@@ -40,12 +41,13 @@ public class RankingGadgetScreenShot extends IS_BaseItTestCase {
 
 	@Test
 	/**
-	 * ランキングガジェット
+	 * 人気ガジェット
 	 */
-	public void ランキングガジェット(){
-		WebDriver driver = getDriver();		
-		
-		TestHelper.getScreenShot("ランキングガジェット", driver);
+	public void 人気ガジェット(){
+		WebDriver driver = getDriver();	
+		TestHelper.waitInvisible(driver, By.id("w_etcWidgets_WidgetRanking_widgetIndicator"));
+
+		TestHelper.getScreenShot("人気ガジェット", driver);
 	
 		assertTrue(true);
 	}
@@ -54,13 +56,13 @@ public class RankingGadgetScreenShot extends IS_BaseItTestCase {
 	/**
 	 * ランキングガジェット（ガジェットメニュー）
 	 */
-	public void ランキングガジェット_ガジェットメニュー(){
+	public void 人気ガジェット_ガジェットメニュー(){
 		WebDriver driver = getDriver();
 		
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("ランキングガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("人気ガジェット（ガジェットメニュー）", driver);
 	
 		assertTrue(true);
 	}
