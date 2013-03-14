@@ -133,6 +133,7 @@ public class TestHelper {
 	 */
 	public static void getScreenShot(final String fileName, final WebDriver driver) {
 		try{
+			Thread.sleep(500);
 			WebDriver augmentedDriver = driver;
 			if((augmentedDriver.toString()).indexOf("RemoteWebDriver") > -1)
 				augmentedDriver = new Augmenter().augment(driver);
