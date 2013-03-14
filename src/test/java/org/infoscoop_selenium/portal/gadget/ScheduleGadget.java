@@ -20,10 +20,11 @@ public class ScheduleGadget extends Gadget{
 	 * @param order(>=0)
 	 */
 	public void setSchedule(String name, String url, boolean perweek, int order) {
+		//IEだとname属性でinputタグを取得できない
 		// 名前の設定
-		driver.findElement(By.name(super.getId()+"_editConfig_"+order+"_name")).sendKeys(name);
+		driver.findElement(By.xpath("//table[@class='scheduleSettingFormLayoutTable']//input[@type='text'][1]")).sendKeys(name);
 		// URLの設定
-		driver.findElement(By.name(super.getId()+"_editConfig_"+order+"_url")).sendKeys(url);
+		driver.findElement(By.xpath("//table[@class='scheduleSettingFormLayoutTable']/tbody/tr[2]/td[2]/input[@type='text']")).sendKeys(url);
 		// 週ごとに情報を取得するかの設定
 		if(!perweek)
 			driver.findElement(By.name(super.getId()+"_editConfig_"+order+"_perweek")).click();
@@ -36,7 +37,6 @@ public class ScheduleGadget extends Gadget{
 	public void clickDetail(int dayNum) {
 		WebElement contents = driver.findElement(By.id(super.getId()+"_scheduleContent_day"+dayNum));
 		contents.findElement(By.className("sheduleMore")).click();
-		TestHelper.waitPresent(driver, By.className("detail"));
 	}
 	
 	/**

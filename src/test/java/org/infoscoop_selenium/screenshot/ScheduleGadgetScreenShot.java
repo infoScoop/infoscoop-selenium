@@ -175,5 +175,12 @@ public class ScheduleGadgetScreenShot extends IS_BaseItTestCase {
 	
 		assertTrue(true);
 	}
-	
+
+	private static void sleep(long sleep){
+		try {
+			Thread.sleep(sleep);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}	
 }
