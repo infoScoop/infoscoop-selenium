@@ -47,7 +47,7 @@ public class ScheduleGadget extends Gadget{
 	public void mouseOverDetail(int dayNum, int itemNum) {
 		WebElement hoverTarget = driver.findElement(By.id("__Maximize__"+super.getId()+"_"+super.getId()+"_0_"+super.getId()+"_0_0_"+dayNum+"_item"+itemNum));
 		Actions action = new Actions(driver);
-		action.moveToElement(hoverTarget).clickAndHold().build().perform();
+		action.moveToElement(hoverTarget).click().build().perform();
 		TestHelper.waitPresent(driver, By.id("__Maximize__"+super.getId()+"_"+super.getId()+"_0_"+super.getId()+"_0_0_"+dayNum+"_item"+itemNum+"_detail"));
 	}
 }

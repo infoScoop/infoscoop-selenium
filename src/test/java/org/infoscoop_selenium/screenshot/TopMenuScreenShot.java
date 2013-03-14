@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
+import org.infoscoop_selenium.properties.TestEnv;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -35,9 +36,16 @@ public class TopMenuScreenShot extends IS_BaseItTestCase{
 		// 初期化
 		getPortal().getCommandBar().getPortalPreference().initializeData();
 		
+		TestHelper.waitPresent(driver, By.id("news"));
+		
 		// トップメニューにマウスオーバー
 		Actions action = new Actions(driver);
-		action.moveToElement(driver.findElement(By.id("news"))).perform();
+		action.moveToElement(driver.findElement(By.id("news")));
+
+		if(isFireFox())
+			action.contextClick();
+		
+		action.perform();
 
 		// トップメニューの表示を待つ
 		TestHelper.waitPresent(driver, By.id("mg_news_0"));
@@ -54,9 +62,16 @@ public class TopMenuScreenShot extends IS_BaseItTestCase{
 	public void トップメニュー_マウスオーバー_スポーツ(){
 		WebDriver driver = getDriver();
 		
+		TestHelper.waitPresent(driver, By.id("sports"));
+		
 		// トップメニューにマウスオーバー
 		Actions action = new Actions(driver);
-		action.moveToElement(driver.findElement(By.id("sports"))).perform();
+		action.moveToElement(driver.findElement(By.id("sports")));
+		
+		if(isFireFox())
+			action.contextClick();
+
+		action.perform();
 
 		// トップメニューの表示を待つ
 		TestHelper.waitPresent(driver, By.id("mg_sports_0"));
@@ -73,10 +88,17 @@ public class TopMenuScreenShot extends IS_BaseItTestCase{
 	public void トップメニュー_マウスオーバー_その他ガジェット(){
 		WebDriver driver = getDriver();
 		
+		TestHelper.waitPresent(driver, By.id("etcWidgets"));
+		
 		// トップメニューにマウスオーバー
 		Actions action = new Actions(driver);
-		action.moveToElement(driver.findElement(By.id("etcWidgets"))).perform();
+		action.moveToElement(driver.findElement(By.id("etcWidgets")));
 
+		if(isFireFox())
+			action.contextClick();
+
+		action.perform();
+		
 		// トップメニューの表示を待つ
 		TestHelper.waitPresent(driver, By.id("mg_etcWidgets_0"));
 		
@@ -92,13 +114,20 @@ public class TopMenuScreenShot extends IS_BaseItTestCase{
 	public void トップメニュー_多段表示(){
 		WebDriver driver = getDriver();
 		
+		TestHelper.waitPresent(driver, By.id("news"));
+		
 		//画面サイズをかえる
-		driver.manage().window().setSize(new Dimension(360, 240));
+		driver.manage().window().setSize(new Dimension(360, 300));
 		
 		// トップメニューにマウスオーバー
 		Actions action = new Actions(driver);
-		action.moveToElement(driver.findElement(By.id("news"))).perform();
-
+		action.moveToElement(driver.findElement(By.id("news")));
+		
+		if(isFireFox())
+			action.contextClick();
+		
+		action.perform();
+		
 		// トップメニューの表示を待つ
 		TestHelper.waitPresent(driver, By.id("mg_news_0"));
 		

@@ -20,9 +20,9 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 public abstract class IS_BaseItTestCase {
 	private static WebDriver driver;
 	private static Portal portal;
-	private static final String BROWSER_IE8 = "IE8";
-	private static final String BROWSER_IE9 = "IE9";
-	private static final String BROWSER_FF = "FireFox";
+	protected static final String BROWSER_IE8 = "IE8";
+	protected static final String BROWSER_IE9 = "IE9";
+	protected static final String BROWSER_FF = "FireFox";
 	
 	public IS_BaseItTestCase() {
 		File file = new File("drivers/IEDriverServer.exe");
@@ -97,5 +97,17 @@ public abstract class IS_BaseItTestCase {
 	
 	public Portal getPortal(){
 		return portal;
+	}
+	
+	public boolean isFireFox(){
+		return BROWSER_FF.equals(TestEnv.getInstance().getBrowser());
+	}
+	
+	public boolean isIE8(){
+		return BROWSER_IE8.equals(TestEnv.getInstance().getBrowser());
+	}
+	
+	public boolean isIE9(){
+		return BROWSER_IE9.equals(TestEnv.getInstance().getBrowser());
 	}
 }
