@@ -279,16 +279,13 @@ public class RssReaderGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET.maximaize();
 		
 		// 現在表示しているWindowIDを取得する
-//		String currentWindowId = driver.getWindowHandle();
 		
-		//ヘルプを表示
-//		GADGET.openHelp(currentWindowId);
+		// ヘルプを表示
 		GADGET.openHelp();
 		
 		TestHelper.getScreenShot("RSSリーダーガジェット（最大化／ヘルプ）", driver);
         
-		// 別画面を閉じる
-//		TestHelper.getCurrentWindowDriver(driver, currentWindowId);
+		// ヘルプを閉じる
 		GADGET.closeHelp();
 		
 		assertTrue(true);
