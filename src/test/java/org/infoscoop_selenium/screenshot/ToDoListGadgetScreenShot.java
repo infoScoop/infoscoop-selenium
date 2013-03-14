@@ -119,6 +119,7 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 		TestHelper.switchToFrame(driver, "ifrm_"+GADGET.getId());
 		driver.findElement(By.xpath("//tbody[@id='"+GADGET.getId()+"_list']/tr[1]/td[@class='todoPriorityTd']/div")).click();
 		driver.findElement(By.xpath("//tbody[@id='"+GADGET.getId()+"_list']/tr[1]/td[@class='todoPriorityTd']/select")).click();
+		TestHelper.backToTopFrame(driver);
 		TestHelper.getScreenShot("ToDoリストガジェット（優先度セレクター）", driver);
 		
 		assertTrue(true);
