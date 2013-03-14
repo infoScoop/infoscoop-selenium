@@ -17,6 +17,8 @@ public class Portal {
 	Tab tab;
 	TopMenu topMenu;
 	SideBar sideBar;
+	WebDriver messageConsoleDriver;
+	AdminPage adminPage;
 	
 	public Portal(WebDriver driver, String url) {
 		this.driver = driver;
@@ -25,6 +27,8 @@ public class Portal {
 		this.tab = new Tab(driver);
 		this.topMenu = new TopMenu(driver);
 		this.sideBar = new SideBar(driver);
+		
+		WindowManager.init(driver);
 	}
 	
 	public void login(){
@@ -46,6 +50,35 @@ public class Portal {
 	}
 	public void logout(){
 		this.driver.get(url + "/logout");
+	}
+	
+	/**
+	 * 管理画面を開き、Adminオブジェクトを返す
+	 * @return
+	 */
+	public AdminPage openAdminPage(){
+		getCommandBar().openMenu();
+		WebDriver adminPageDriver = WindowManager.getInstance().newWindow(driver.findElement(By.id("admin-link")));
+		this.adminPage = new AdminPage(adminPageDriver);
+		return this.adminPage;
+	}
+	
+	/**
+	 * メッセージコンソールを開く
+	 * @return
+	 */
+	public WebDriver openMessageConsole(){
+        TestHelper.waitPresent(driver, By.id("messageIcon"));
+		this.messageConsoleDriver = WindowManager.getInstance().newWindow(driver.findElement(By.id("messageIcon")));
+		return this.messageConsoleDriver;
+	}
+	
+	/**
+	 * メッセージコンソールを閉じる
+	 */
+	public void closeMessageConsole(){
+		if(this.messageConsoleDriver != null)
+			 WindowManager.getInstance().closeWindow(this.messageConsoleDriver.getWindowHandle());
 	}
 	
 	public CommandBar getCommandBar(){

@@ -70,6 +70,7 @@ public class TestHelper {
 	 * @param fileName
 	 * @param driver
 	 */
+	/*
 	public static WebDriver getNewWindowDriver(final WebDriver driver, final String currentWindowId) {
 	    // ウィンドウ表示までに時間がかかると、seleniumが先走ることがあるのでウィンドウが増えるまで待機。
         (new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
@@ -87,6 +88,7 @@ public class TestHelper {
         
         return driver.switchTo().window(newWindowId);
 	}	
+	*/
 	
 	/**
 	 * 別ウィンドウを閉じる
@@ -94,10 +96,12 @@ public class TestHelper {
 	 * @param fileName
 	 * @param driver
 	 */
+	/*
 	public static WebDriver getCurrentWindowDriver(final WebDriver driver, final String currentWindowId) {
 		driver.close();
         return driver.switchTo().window(currentWindowId);
 	}
+	*/
 
 	/**
 	 * フレームを移動する

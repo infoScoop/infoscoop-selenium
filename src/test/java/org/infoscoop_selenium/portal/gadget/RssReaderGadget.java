@@ -1,5 +1,6 @@
 package org.infoscoop_selenium.portal.gadget;
 
+import org.infoscoop_selenium.WindowManager;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
@@ -10,7 +11,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 public class RssReaderGadget extends Gadget{
-
+	private WebDriver helpWindowDriver;
+	
 	public RssReaderGadget(WebDriver driver, String gadgetId) {
 		super(driver, gadgetId);
 	}
@@ -204,15 +206,21 @@ public class RssReaderGadget extends Gadget{
 	 * 最大化時
 	 * ヘルプ表示
 	 */
-	public void openHelp(String windowId) {
-		driver.findElement(By.id("hi___Maximize__"+super.getId()+"_showShortcuts")).click();
+	public void openHelp() {
+		WebElement target = driver.findElement(By.id("hi___Maximize__"+super.getId()+"_showShortcuts"));
+		helpWindowDriver = WindowManager.getInstance().newWindow(target);
+//		driver.findElement(By.id("hi___Maximize__"+super.getId()+"_showShortcuts")).click();
 		
-        TestHelper.getNewWindowDriver(driver, windowId);
-        TestHelper.waitPresent(driver, By.tagName("body"));
+//        TestHelper.getNewWindowDriver(driver, windowId);
+
+        TestHelper.waitPresent(helpWindowDriver, By.tagName("body"));
 
 //		driver.findElement(By.id("hi___Maximize__"+super.getId()+"_date")).click();
 	}
 	
+	public void closeHelp(){
+		WindowManager.getInstance().closeWindow(helpWindowDriver.getWindowHandle());
+	}
 	
 	/**
 	 * 最大化時

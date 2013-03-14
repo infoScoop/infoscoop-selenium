@@ -2,6 +2,7 @@ package org.infoscoop_selenium.screenshot;
 
 import static org.junit.Assert.assertTrue;
 
+import org.infoscoop_selenium.WindowManager;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
@@ -278,16 +279,18 @@ public class RssReaderGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET.maximaize();
 		
 		// 現在表示しているWindowIDを取得する
-		String currentWindowId = driver.getWindowHandle();
+//		String currentWindowId = driver.getWindowHandle();
 		
 		//ヘルプを表示
-		GADGET.openHelp(currentWindowId);
+//		GADGET.openHelp(currentWindowId);
+		GADGET.openHelp();
 		
 		TestHelper.getScreenShot("RSSリーダーガジェット（最大化／ヘルプ）", driver);
         
 		// 別画面を閉じる
-		TestHelper.getCurrentWindowDriver(driver, currentWindowId);
-	
+//		TestHelper.getCurrentWindowDriver(driver, currentWindowId);
+		GADGET.closeHelp();
+		
 		assertTrue(true);
 	}
 	
