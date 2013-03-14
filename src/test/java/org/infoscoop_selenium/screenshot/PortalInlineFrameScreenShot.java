@@ -51,6 +51,7 @@ public class PortalInlineFrameScreenShot extends IS_BaseItTestCase {
 
 		// フレームを移動
 		TestHelper.switchToFrame(driver, "ifrm");
+		TestHelper.backToTopFrame(driver);
 		
 		TestHelper.getScreenShot("ポータル内フレーム", driver);
 	

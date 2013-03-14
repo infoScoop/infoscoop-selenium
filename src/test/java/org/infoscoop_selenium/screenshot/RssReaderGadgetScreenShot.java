@@ -120,7 +120,7 @@ public class RssReaderGadgetScreenShot extends IS_BaseItTestCase {
 		//詳細ボタンをクリック
 		GADGET.showDetail(0);
 		
-		TestHelper.getScreenShot("RSSリーダーガジェット（詳細表示／インライン）", driver);
+		TestHelper.getScreenShot("RSSリーダーガジェット（詳細表示／ポップアップ）", driver);
 	
 		assertTrue(true);
 	}

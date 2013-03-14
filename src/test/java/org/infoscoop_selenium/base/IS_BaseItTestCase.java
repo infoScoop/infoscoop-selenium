@@ -67,6 +67,7 @@ public abstract class IS_BaseItTestCase {
 				e.printStackTrace();
 			}
 		}
+		driver.manage().window().maximize();
 		portal = new Portal(driver, env.getAppUrl());
 	}
 	

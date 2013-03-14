@@ -192,6 +192,7 @@ public class RssReaderGadget extends Gadget{
 	public void clickHtmlDisp() {
 		driver.findElement(By.id("hi___Maximize__"+super.getId()+"_iframeview_on")).click();
 		TestHelper.switchToFrame(driver, "maximize_ifrm");
+		TestHelper.backToTopFrame(driver);
 	}
 	
 	/**

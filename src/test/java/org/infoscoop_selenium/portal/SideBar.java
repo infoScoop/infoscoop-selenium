@@ -93,6 +93,7 @@ public class SideBar {
 
 		// ロードを待つ
 		TestHelper.waitInvisible(driver, By.xpath("//div[@class='SidePanel_AddContents']/div[3]/img"));
+		TestHelper.waitInvisible(driver, By.xpath("//div[@class='SidePanel_AddContents']/div[5]//img[@class='widgetIndicator']"));		
 	}
 	
 	/**
@@ -111,7 +112,7 @@ public class SideBar {
 		previewContents(url);
 		
 		// 追加ボタンをクリック
-		driver.findElement(By.xpath("//div[@class='SidePanel_AddContents']/div[5]/div/div[1]/div[3]/input[@type='button']")).click();
+		driver.findElement(By.xpath("//div[@class='SidePanel_AddContents']/div[5]//input[@type='button']")).click();
 		
 		// サイドバーを閉じる
 		closeAddContents();
