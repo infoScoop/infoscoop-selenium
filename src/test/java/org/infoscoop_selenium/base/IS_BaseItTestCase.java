@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.*;
@@ -67,7 +68,8 @@ public abstract class IS_BaseItTestCase {
 				e.printStackTrace();
 			}
 		}
-		driver.manage().window().maximize();
+//		driver.manage().window().maximize();
+		driver.manage().window().setSize(new Dimension(1024, 768));
 		portal = new Portal(driver, env.getAppUrl());
 	}
 	
