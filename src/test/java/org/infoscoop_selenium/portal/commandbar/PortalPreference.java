@@ -169,12 +169,11 @@ public class PortalPreference {
 		}catch(TimeoutException e){
 			// たまに押せない時があるので、アラームが出現しなければ再度クリック
 			targetElement.click();
-			alert = driver.switchTo().alert();
+			alert = new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
 		}
 		alert.accept();
-//		driver.switchTo().alert().accept();
-		TestHelper.backToTopFrame(driver);
-		sleep(500);
+		
+		alert = new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
 
 		// confirmを閉じる
 		driver.switchTo().alert().accept();
