@@ -54,7 +54,7 @@ public class MessageGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("メッセージガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("メッセージガジェット（ガジェットメニュー）", driver, true);
 	
 		assertTrue(true);
 	}

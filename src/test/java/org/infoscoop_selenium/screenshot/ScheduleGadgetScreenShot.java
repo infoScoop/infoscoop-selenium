@@ -56,7 +56,7 @@ public class ScheduleGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("スケジュールガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("スケジュールガジェット（ガジェットメニュー）", driver, true);
 	
 		assertTrue(true);
 	}

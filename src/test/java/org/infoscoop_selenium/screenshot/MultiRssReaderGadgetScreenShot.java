@@ -58,7 +58,7 @@ public class MultiRssReaderGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("マルチRSSリーダーガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("マルチRSSリーダーガジェット（ガジェットメニュー）", driver, true);
 	
 		assertTrue(true);
 	}

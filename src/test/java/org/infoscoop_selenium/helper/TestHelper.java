@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.infoscoop_selenium.properties.TestEnv;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.SearchContext;
@@ -122,6 +123,30 @@ public class TestHelper {
 	public static WebDriver backToTopFrame(final WebDriver driver) {
 		driver.switchTo().defaultContent();
         return driver;
+	}
+	
+	/**
+	 * Event.observeでwindowに付与されたイベントを全て外す。<br/>
+	 * IS_Event.observeされたイベントを全て外す。<br/>
+	 * スナップショット撮影時にリサイズイベントが発生してしまうIE用
+	 * @param driver
+	 */
+	public static void stopResizeEvent(WebDriver driver){
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("IS_Event.unloadAllCache();");
+		// TODO: prototype 1.6系だとダメらしい
+//		js.executeScript("Event.stopObserving(window, 'resize');");
+	}
+
+	/**
+	 * スクリーンショットの撮影
+	 * @param fileName
+	 * @param driver
+	 */
+	public static void getScreenShot(final String fileName, final WebDriver driver, boolean isFreeze) {
+		if(isFreeze)
+			stopResizeEvent(driver);
+		getScreenShot(fileName, driver);
 	}
 	
 	/**

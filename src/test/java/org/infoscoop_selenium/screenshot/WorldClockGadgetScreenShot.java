@@ -56,7 +56,7 @@ public class WorldClockGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("標準時時計ガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("標準時時計ガジェット（ガジェットメニュー）", driver, true);
 	
 		assertTrue(true);
 	}

@@ -68,7 +68,7 @@ public class RssReaderGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("RSSリーダーガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("RSSリーダーガジェット（ガジェットメニュー）", driver, true);
 	
 		assertTrue(true);
 	}
@@ -176,7 +176,7 @@ public class RssReaderGadgetScreenShot extends IS_BaseItTestCase {
 		//ヘルプにマウスオーバー
 		GADGET.mouseOverTitleFilterHelp();
 		
-		TestHelper.getScreenShot("RSSリーダーガジェット（タイトルフィルターヘルプ）", driver);
+		TestHelper.getScreenShot("RSSリーダーガジェット（タイトルフィルターヘルプ）", driver, true);
 	
 		assertTrue(true);
 	}

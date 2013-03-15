@@ -221,6 +221,6 @@ public class CommandbarScreenShot extends IS_BaseItTestCase{
 		TestHelper.waitPresent(driver, By.id("p_1_w_6_div"));		
 		TestHelper.waitInvisible(driver, By.id("p_1_w_6_widgetIndicator"));
 
-		TestHelper.getScreenShot("ランキング", getDriver());
+		TestHelper.getScreenShot("ランキング", getDriver(), true);
 	}	
 }

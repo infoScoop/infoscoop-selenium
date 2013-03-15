@@ -57,7 +57,7 @@ public class CalculatorGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("電卓ガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("電卓ガジェット（ガジェットメニュー）", driver, true);
 	
 		assertTrue(true);
 	}

@@ -62,7 +62,7 @@ public class RankingGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("人気ガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("人気ガジェット（ガジェットメニュー）", driver, true);
 	
 		assertTrue(true);
 	}

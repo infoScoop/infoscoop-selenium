@@ -57,7 +57,7 @@ public class StickyGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("付箋ガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("付箋ガジェット（ガジェットメニュー）", driver, true);
 	
 		assertTrue(true);
 	}

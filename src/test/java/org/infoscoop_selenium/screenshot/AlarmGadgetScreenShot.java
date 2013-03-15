@@ -57,7 +57,7 @@ public class AlarmGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("アラームガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("アラームガジェット（ガジェットメニュー）", driver, true);
 	
 		assertTrue(true);
 	}

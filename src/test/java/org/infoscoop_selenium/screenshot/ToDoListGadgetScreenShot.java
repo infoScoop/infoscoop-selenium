@@ -58,7 +58,7 @@ public class ToDoListGadgetScreenShot extends IS_BaseItTestCase {
 		// ガジェットメニューを開く
 		GADGET.openMenu();
 		
-		TestHelper.getScreenShot("ToDoリストガジェット（ガジェットメニュー）", driver);
+		TestHelper.getScreenShot("ToDoリストガジェット（ガジェットメニュー）", driver, true);
 	
 		assertTrue(true);
 	}
