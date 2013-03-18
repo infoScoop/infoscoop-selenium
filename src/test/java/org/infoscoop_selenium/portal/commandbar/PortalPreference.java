@@ -36,7 +36,7 @@ public class PortalPreference {
 			return;
 		
 		TestHelper.waitPresent(this.driver, By.id("portal-preference"));
-		this.driver.findElement(By.id("portal-preference")).click();
+		this.driver.findElement(By.xpath("//div[@id='portal-preference']//a")).click();
 	}
 	
 	/**
