@@ -25,7 +25,8 @@ import com.thoughtworks.selenium.Wait;
 
 public class TestHelper {
 	private static int WAIT_SECOND = 5;
-
+	private static String SNAPSHOT_DIR = "snapshot";
+	
 	/**
 	 * 要素の出現を待つ
 	 * @param context
@@ -161,7 +162,7 @@ public class TestHelper {
 			if((augmentedDriver.toString()).indexOf("RemoteWebDriver") > -1)
 				augmentedDriver = new Augmenter().augment(driver);
 			File file = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(file, new File(TestEnv.getInstance().getBrowser() + File.separator + fileName + ".png"));
+			FileUtils.copyFile(file, new File(SNAPSHOT_DIR + File.separator + TestEnv.getInstance().getBrowser() + File.separator + fileName + ".png"));
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -181,7 +182,7 @@ public class TestHelper {
 			Graphics g = bimg.getGraphics();
 			g.drawImage(img, 0, 0, null);
 			g.dispose();
-			if (!ImageIO.write(bimg, "png", new File(TestEnv.getInstance().getBrowser() + File.separator + fileName + ".png"))) {
+			if (!ImageIO.write(bimg, "png", new File(SNAPSHOT_DIR + File.separator + TestEnv.getInstance().getBrowser() + File.separator + fileName + ".png"))) {
 				throw new Exception("フォーマットが対象外");
 			}
 		}catch(Exception e){
