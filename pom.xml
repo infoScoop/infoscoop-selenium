@@ -10,10 +10,7 @@
   <name>infoscoop-selenium</name>
   <url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
+  <build>
 	<plugins>
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
@@ -23,7 +20,12 @@
 				<target>1.7</target>
 			</configuration>
 		</plugin>
-	</plugins>
+	</plugins>  
+  </build>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
   <dependencies>
     <dependency>
