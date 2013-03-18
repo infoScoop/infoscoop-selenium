@@ -26,13 +26,21 @@ import com.thoughtworks.selenium.Wait;
 public class TestHelper {
 	private static int WAIT_SECOND = 5;
 	private static String SNAPSHOT_DIR = "snapshot";
-	
 	/**
 	 * 要素の出現を待つ
 	 * @param context
 	 * @param by
 	 */
 	public static void waitPresent(final SearchContext context, final By by) {
+		waitPresent(context, by, WAIT_SECOND);
+	}
+
+	/**
+	 * 要素の出現を待つ
+	 * @param context
+	 * @param by
+	 */
+	public static void waitPresent(final SearchContext context, final By by, int seconds) {
 		Wait wait = new Wait() {
 			@Override
 			public boolean until() {
@@ -45,7 +53,7 @@ public class TestHelper {
 			}
 		};
 
-		wait.wait("Element not exists", WAIT_SECOND * 1000);
+		wait.wait("Element not exists", seconds * 1000);
 	}
 	
 	/**
