@@ -29,7 +29,7 @@ public class TrashBox {
 			return;
 		
 		TestHelper.waitPresent(this.driver, By.id("portal-trash"));
-		this.driver.findElement(By.id("portal-trash")).click();
+		this.driver.findElement(By.xpath("//div[@id='portal-trash']//a")).click();
 	}
 	
 	/**
