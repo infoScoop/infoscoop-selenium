@@ -106,6 +106,6 @@ public class Portal {
 	}
 	
 	public static void waitPortalLoadComplete(WebDriver driver){
-		TestHelper.waitPresent(driver, By.id("columns0"));
+		TestHelper.waitPresent(driver, By.id("columns0"), 20);
 	}
 }

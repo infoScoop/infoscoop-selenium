@@ -32,7 +32,7 @@ public class PortalPreference {
 		/* 存在しない要素をfindElementするとエラーになる。存在チェックはほかの方法があるのか？
 		*/
 		List<WebElement> elements = driver.findElements(By.xpath("//div[@class='preferencePage']"));
-		if(elements.size() > 0)
+		if(elements.size() > 0 && elements.get(0).isDisplayed())
 			return;
 		
 		TestHelper.waitPresent(this.driver, By.id("portal-preference"));
@@ -51,11 +51,11 @@ public class PortalPreference {
 	 * 壁紙変更
 	 */
 	public void changeBackGroundImage(int idx){
-		List<WebElement> radioList = this.driver.findElements(By.xpath("//div[@id='modal_container']//fieldset[1]//input[@type='radio']"));
+		List<WebElement> radioList = this.driver.findElements(By.xpath("//div[@class='preferencePage']//fieldset[1]//input[@type='radio']"));
 		
 		radioList.get(idx).click();
 		
-		WebElement applyButton = this.driver.findElement(By.xpath("//div[@id='modal_container']//fieldset[1]//input[@type='button']"));
+		WebElement applyButton = this.driver.findElement(By.xpath("//div[@class='preferencePage']//fieldset[1]//input[@type='button']"));
 		applyButton.click();
 	}
 	
@@ -64,7 +64,7 @@ public class PortalPreference {
 	 * @return
 	 */
 	public int getBackGroundImageNum(){
-		return this.driver.findElements(By.xpath("//div[@id='modal_container']//fieldset[1]//input[@type='radio']")).size();
+		return this.driver.findElements(By.xpath("//div[@class='preferencePage']//fieldset[1]//input[@type='radio']")).size();
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class PortalPreference {
 		
 		radioList.get(idx).click();
 		
-		WebElement applyButton = this.driver.findElement(By.xpath("//div[@id='modal_container']//fieldset[2]//input[@type='button']"));
+		WebElement applyButton = this.driver.findElement(By.xpath("//div[@class='preferencePage']//fieldset[2]//input[@type='button']"));
 		applyButton.click();
 	}
 	
@@ -95,7 +95,7 @@ public class PortalPreference {
 		
 		radioList.get(idx).click();
 		
-		WebElement applyButton = this.driver.findElement(By.xpath("//div[@id='modal_container']//fieldset[2]//input[@type='button']"));
+		WebElement applyButton = this.driver.findElement(By.xpath("//div[@class='preferencePage']//fieldset[2]//input[@type='button']"));
 		applyButton.click();
 	}
 
@@ -119,7 +119,7 @@ public class PortalPreference {
 			checkBox.click();
 		}
 
-		WebElement applyButton = this.driver.findElement(By.xpath("//div[@id='modal_container']//fieldset[2]//input[@type='button']"));
+		WebElement applyButton = this.driver.findElement(By.xpath("//div[@class='preferencePage']//fieldset[2]//input[@type='button']"));
 		applyButton.click();
 	}
 	
@@ -136,7 +136,7 @@ public class PortalPreference {
 			checkBox.click();
 		}
 
-		WebElement applyButton = this.driver.findElement(By.xpath("//div[@id='modal_container']//fieldset[2]//input[@type='button']"));
+		WebElement applyButton = this.driver.findElement(By.xpath("//div[@class='preferencePage']//fieldset[2]//input[@type='button']"));
 		applyButton.click();
 	}
 	
@@ -156,7 +156,7 @@ public class PortalPreference {
 		driver.manage().window().setPosition(new Point(0, 0));
 		
 		show();
-		WebElement modal_container = this.driver.findElement(By.id("modal_container"));
+		WebElement modal_container = this.driver.findElement(By.className("preferencePage"));
 		
 		// 初期化ボタンをクリック
 		WebElement targetElement = modal_container.findElement(By.xpath("//fieldSet[5]//input[@type='button']"));

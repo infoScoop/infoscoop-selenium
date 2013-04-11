@@ -238,6 +238,6 @@ public class RssReaderGadget extends Gadget{
 	 */
 	public void openMessageDialog() {
 		driver.findElement(By.id("mti___Maximize__"+super.getId()+"_close_message")).click();
-		TestHelper.waitPresent(driver, By.id("modal_container"));
+		TestHelper.waitPresent(driver, By.id("articleShare"));
 	}
 }
