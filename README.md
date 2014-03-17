@@ -3,11 +3,11 @@ This server is the structure which photos a screen shot for infoScoop.
   
 ## Run up
 ### Selenium Server
-*for Modern Web Browser*
+*Screenshot for Modern Web Browser*
 
     java -jar selenium-server-standalone-2.31.0.jar -role hub
 
-*for InternetExplorer*  
+*Screenshot for InternetExplorer*  
 (required: InternetExplorer Driver)  
 
     java -Dwebdriver.ie.driver=IEDriverServer.exe -jar selenium-server-standalone-2.31.0.jar -role webdriver  
