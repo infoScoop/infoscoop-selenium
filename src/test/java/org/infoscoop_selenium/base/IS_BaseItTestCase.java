@@ -13,6 +13,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -23,10 +24,14 @@ public abstract class IS_BaseItTestCase {
 	protected static final String BROWSER_IE8 = "IE8";
 	protected static final String BROWSER_IE9 = "IE9";
 	protected static final String BROWSER_FF = "FireFox";
+	protected static final String BROWSER_CHROME = "Chrome";
 	
 	public IS_BaseItTestCase() {
-		File file = new File("drivers/IEDriverServer.exe");
-		System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
+		File ieDriver = new File("drivers/IEDriverServer.exe");
+		File chromeDriver = new File("drivers/chromedriver.exe");
+		
+		System.setProperty("webdriver.ie.driver", ieDriver.getAbsolutePath());
+		System.setProperty("webdriver.chrome.driver", chromeDriver.getAbsolutePath());
 		
 		TestEnv env = TestEnv.getInstance();
 		boolean isLocal = env.getType().equals("local");
@@ -39,6 +44,8 @@ public abstract class IS_BaseItTestCase {
 					break;
 				case BROWSER_FF:
 					driver = new FirefoxDriver();
+				case BROWSER_CHROME:
+					driver = new ChromeDriver();
 			}
 		} else {
 			DesiredCapabilities capabilities = null;
@@ -60,6 +67,10 @@ public abstract class IS_BaseItTestCase {
 					capabilities = DesiredCapabilities.firefox();
 					capabilities.setPlatform(Platform.WINDOWS);
 					capabilities.setBrowserName("firefox");
+				case BROWSER_CHROME:
+					capabilities = DesiredCapabilities.chrome();
+					capabilities.setPlatform(Platform.WINDOWS);
+					capabilities.setBrowserName("chrome");
 				}
 				
 				driver = new RemoteWebDriver(new URL(env.getRemoteUrl()), capabilities);
