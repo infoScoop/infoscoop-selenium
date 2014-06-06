@@ -44,8 +44,10 @@ public abstract class IS_BaseItTestCase {
 					break;
 				case BROWSER_FF:
 					driver = new FirefoxDriver();
+					break;
 				case BROWSER_CHROME:
 					driver = new ChromeDriver();
+					break;
 			}
 		} else {
 			DesiredCapabilities capabilities = null;
