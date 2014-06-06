@@ -26,6 +26,7 @@ import com.thoughtworks.selenium.Wait;
 public class TestHelper {
 	private static int WAIT_SECOND = 5;
 	private static String SNAPSHOT_DIR = "snapshot";
+	
 	/**
 	 * 要素の出現を待つ
 	 * @param context
@@ -41,12 +42,27 @@ public class TestHelper {
 	 * @param by
 	 */
 	public static void waitPresent(final SearchContext context, final By by, int seconds) {
+		waitPresent(context.findElement(by), seconds);
+	}
+
+	/**
+	 * 要素の出現を待つ
+	 * @param element
+	 */
+	public static void waitPresent(final WebElement element) {
+		waitPresent(element, WAIT_SECOND);
+	}
+
+	/**
+	 * 要素の出現を待つ
+	 * @param element
+	 */
+	public static void waitPresent(final WebElement element, int seconds) {
 		Wait wait = new Wait() {
 			@Override
 			public boolean until() {
 				try {
-					WebElement elem = context.findElement(by);
-					return elem.isDisplayed();
+					return element.isDisplayed();
 				} catch (NoSuchElementException e) {
 					return false;
 				}
@@ -55,7 +71,7 @@ public class TestHelper {
 
 		wait.wait("Element not exists", seconds * 1000);
 	}
-	
+
 	/**
 	 * 要素が消えるのを待つ
 	 * @param context

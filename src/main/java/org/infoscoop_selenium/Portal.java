@@ -106,6 +106,15 @@ public class Portal {
 	}
 	
 	public static void waitPortalLoadComplete(WebDriver driver){
+		sleep(1000);
 		TestHelper.waitPresent(driver, By.id("columns0"), 20);
+	}
+
+	private static void sleep(long sleep){
+		try {
+			Thread.sleep(sleep);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }

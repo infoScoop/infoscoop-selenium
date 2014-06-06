@@ -167,11 +167,11 @@ public class PortalPreference {
 		try{
 			alert = new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
 		}catch(TimeoutException e){
-			// たまに押せない時があるので、アラームが出現しなければ再度クリック
+			// たまに押せない時があるので、アラートが出現しなければ再度クリック
 			targetElement.click();
 			alert = new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
 		}
-		alert.accept();
+//		alert.accept();
 		
 		alert = new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
 
