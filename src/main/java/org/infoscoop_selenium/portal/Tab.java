@@ -1,5 +1,7 @@
 package org.infoscoop_selenium.portal;
 
+import java.util.List;
+
 import org.infoscoop_selenium.helper.TestHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -41,5 +43,17 @@ public class Tab {
 	public WebElement getIndicator(){
 		WebElement indicator = driver.findElement(By.cssSelector("#divOverlay.tabLoading"));
 		return indicator;
+	}
+
+	public int getNumberOfTab() {
+		List<WebElement> tabsLis = driver.findElements(By.cssSelector("#tabsUl li"));
+		
+		
+		return tabsLis.size();
+	}
+
+	public String getFarRightTabId() {
+		WebElement farRightTab = driver.findElement(By.cssSelector("#tabsUl li:last-of-type"));
+		return farRightTab.getAttribute("id");
 	}
 }
