@@ -56,4 +56,9 @@ public class Tab {
 		WebElement farRightTab = driver.findElement(By.cssSelector("#tabsUl li:last-of-type"));
 		return farRightTab.getAttribute("id");
 	}
+
+	public String getTabLiDisplayProperty() {
+		WebElement tabLi = driver.findElement(By.cssSelector("#tabsUl li:first-of-type"));
+		return tabLi.getCssValue("display");
+	}
 }
