@@ -61,4 +61,49 @@ public class Tab {
 		WebElement tabLi = driver.findElement(By.cssSelector("#tabsUl li:first-of-type"));
 		return tabLi.getCssValue("display");
 	}
+	
+	public WebElement getSelectMenu(String tabId) {
+		WebElement selectMenu = driver.findElement(By.id(tabId + "_selectMenu"));
+		return selectMenu;
+	}
+	
+	public void selectSelectMenu(String tabId) {
+		WebElement selectMenu = getSelectMenu(tabId);
+		selectMenu.click();
+	}
+	
+	public WebElement getTabMenu(String tabId) {
+		WebElement tabMenu = driver.findElement(By.id(tabId + "_menu"));
+		return tabMenu;
+	}
+	
+	public WebElement getRefreshItem(String tabId) {
+		WebElement refreshItem = driver.findElement(By.id(tabId + "_menu_refresh"));
+		return refreshItem;
+	}
+	
+	public WebElement getCloseItem(String tabId) {
+		WebElement closeItem = driver.findElement(By.id(tabId + "_menu_close"));
+		return closeItem;
+	}
+	
+	public WebElement getNameInput(String tabId) {
+		WebElement nameInput = driver.findElement(By.id(tabId + "_menu_rename_input"));
+		return nameInput;
+	}
+	
+	public WebElement getColumnNumSelect(String tabId) {
+		WebElement columnNumSelect = driver.findElement(By.id(tabId + "_menu_changeColumnNum_select"));
+		return columnNumSelect;
+	}
+	
+	public WebElement getResetColumnWidthItem(String tabId) {
+		WebElement resetColumnWidthItem = driver.findElement(By.id(tabId + "_menu_resetColumnWidth"));
+		return resetColumnWidthItem;
+	}
+	
+	public WebElement getInitializeItem(String tabId) {
+		WebElement initializeItem = driver.findElement(By.id(tabId + "_menu_initialize"));
+		return initializeItem;
+	}
 }
