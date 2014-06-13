@@ -2,11 +2,14 @@ package org.infoscoop_selenium.portal.commandbar;
 
 import java.util.List;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import org.infoscoop_selenium.Portal;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -171,12 +174,14 @@ public class PortalPreference {
 			targetElement.click();
 			alert = new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
 		}
-//		alert.accept();
+		alert.accept();
 		
-		alert = new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
-
 		// confirmを閉じる
-		driver.switchTo().alert().accept();
+		if (isAlertPresent()){
+			alert = new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
+			driver.switchTo().alert().accept();
+		}
+		
 		TestHelper.backToTopFrame(driver);
 		
 		Portal.waitPortalLoadComplete(driver);
@@ -203,5 +208,16 @@ public class PortalPreference {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private boolean isAlertPresent() {
+		try { 
+			driver.switchTo().alert(); 
+			return true; 
+		} 
+		catch (NoAlertPresentException Ex) { 
+			return false; 
+		}
+		
 	}
 }
