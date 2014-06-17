@@ -4,11 +4,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
+import org.infoscoop_selenium.constants.ISConstants;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-
-import Constants.ISConstants;
 
 public class Tab_TabMenuTest extends IS_BaseItTestCase {
 	@Override

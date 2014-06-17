@@ -1,5 +1,9 @@
 package org.infoscoop_selenium.portal;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.gadget.AlarmGadget;
 import org.infoscoop_selenium.portal.gadget.GadgetPreference;
@@ -20,6 +24,9 @@ public abstract class Gadget {
 	GadgetPreference gadgetPreference;
 	String gadgetId;
 	
+	public static final String ICON_TYPE_MINIMIZE = "minimize";
+	public static final String ICON_TYPE_SHOWTOOLS = "showTools";
+
 	public static enum GADGET_TYPE {
 		STICKY(StickyGadget.class),
 		TODOLIST(ToDoListGadget.class),
@@ -154,5 +161,37 @@ public abstract class Gadget {
 		int height = driver.findElement(By.tagName("body")).getSize().height;
 		blur();
 		return height;
+	}
+	
+	public List<String> getHeaderIconTypes(){
+		List<String> list = new ArrayList<String>();
+		
+		List<WebElement> icons = driver.findElements(By.cssSelector("#" + this.getId() + " .widgetHeader .headerIcon"));
+		
+		for(Iterator<WebElement> ite=icons.iterator();ite.hasNext();){
+			WebElement icon = ite.next();
+			
+			if(icon.isDisplayed()){
+				list.add(getIconType(icon));
+			}
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * サポートされるヘッダアイコンタイプのリストを返す
+	 * @return
+	 */
+	abstract public List<String> getSupportedHeaderIcons();
+	
+	/**
+	 * アイコンのタイプを返す
+	 * @param icon
+	 * @return
+	 */
+	private String getIconType(WebElement icon){
+		String iconId = icon.getAttribute("id");
+		return iconId.substring(iconId.lastIndexOf("_") + 1, iconId.length());
 	}
 }

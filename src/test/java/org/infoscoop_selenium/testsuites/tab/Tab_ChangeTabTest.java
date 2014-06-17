@@ -3,9 +3,8 @@ package org.infoscoop_selenium.testsuites.tab;
 import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
+import org.infoscoop_selenium.constants.ISConstants;
 import org.junit.Test;
-
-import Constants.ISConstants;
 
 
 /**

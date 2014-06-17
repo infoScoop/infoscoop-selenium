@@ -5,6 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+/**
+ * ガジェット設定のページクラス
+ * @author b1738
+ *
+ */
 public class GadgetPreference {
 	WebDriver driver;
 	Gadget gadget;
