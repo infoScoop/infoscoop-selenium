@@ -122,4 +122,37 @@ public abstract class Gadget {
 		action.moveToElement(headerDiv);
 		action.build().perform();
 	}
+
+
+	/**
+	 * フレームにフォーカスする<br/>
+	 * フレーム内のドキュメントにアクセスできるようになる。
+	 */
+	public void focus(){
+		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+	}
+	
+	/**
+	 * 親ドキュメントに戻る
+	 */
+	public void blur(){
+		TestHelper.backToTopFrame(driver);
+	}
+	
+	/**
+	 * ガジェット表示フレームを返す
+	 */
+	public WebElement getFrame(){
+		return driver.findElement(By.id("ifrm_"+this.getId()));
+	}
+	
+	/**
+	 * ガジェット内の高さを返す
+	 */
+	public int getContentHeight(){
+		focus();
+		int height = driver.findElement(By.tagName("body")).getSize().height;
+		blur();
+		return height;
+	}
 }
