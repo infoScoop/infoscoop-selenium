@@ -4,6 +4,7 @@ import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class ToDoListGadget extends Gadget{
@@ -87,4 +88,43 @@ public class ToDoListGadget extends Gadget{
 		// ガジェット設定を閉じる
 		getGadgetPreference().ok();
 	}
+	
+	/**
+	 * TODO追加テキストフォームを返す
+	 * @return
+	 */
+	public WebElement getTodoAddTextBox(){
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		WebElement textBox = driver.findElement(By.cssSelector(".todoAddTextBox"));
+		TestHelper.backToTopFrame(driver);
+		
+		return textBox;
+	}
+
+	/**
+	 * TODO追加ボタンを返す
+	 * @return
+	 */
+	public WebElement getTodoAddButton(){
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		WebElement addButton =  driver.findElement(By.cssSelector(".todoAddTable input[type=\"button\"]"));
+		TestHelper.backToTopFrame(driver);
+		
+		return addButton;
+	}
+
+	/**
+	 * TODO登録数を返す
+	 * @return
+	 */
+	public int getTodoLength(){
+		int len;
+		
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		len = driver.findElements(By.cssSelector(".todoListTable tr")).size();
+		TestHelper.backToTopFrame(driver);
+		
+		return len;
+	}
+	
 }
