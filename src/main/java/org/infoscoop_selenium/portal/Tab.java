@@ -3,6 +3,7 @@ package org.infoscoop_selenium.portal;
 import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,11 +11,11 @@ import org.openqa.selenium.interactions.Actions;
 
 public class Tab {
 	WebDriver driver;
-		
+
 	public Tab(WebDriver driver) {
 		this.driver = driver;
 	}
-	
+
 	/**
 	 * タブを追加する
 	 */
@@ -25,14 +26,14 @@ public class Tab {
 		driver.findElement(By.cssSelector("#addTab a")).click();
 		return getCurrentTabId();
 	}
-	
+
 	/**
 	 * タブを選択する
 	 */
 	public void selectTab(String tabId){
 		driver.findElement(By.id(tabId)).click();
 	}
-	
+
 	/**
 	 * 選択されているタブidを返す
 	 */
@@ -40,7 +41,7 @@ public class Tab {
 		WebElement currentTabEl = driver.findElement(By.cssSelector(".tab.selected"));
 		return currentTabEl.getAttribute("id");
 	}
-	
+
 	/**
 	 * タブロード時のインディケータを返す
 	 */
@@ -79,7 +80,7 @@ public class Tab {
 	public void dragAndDropTabToTopLeft(String draggedTabElementId, String droppedTabElementId) {
 		dragAndDropTab(draggedTabElementId, droppedTabElementId, 0);
 	}
-	
+
 	/**
 	 * タブを要素（droppedTabElementId）の右端へドロップする
 	 */
@@ -96,7 +97,7 @@ public class Tab {
 	private void dragAndDropTab(String draggedTabElementId, String droppedTabElementId, int offsetx) {
 		WebElement dropElement = driver.findElement(By.id(droppedTabElementId));
 		WebElement targetElement = driver.findElement(By.id(draggedTabElementId));
-		
+
 		Actions actions = new Actions(driver);
 		actions.moveToElement(targetElement);
 		actions.clickAndHold();
@@ -104,7 +105,7 @@ public class Tab {
 		actions.release();
 		actions.build().perform();
 	}
-	
+
 	/**
 	 * 右隣のタブIDを返す
 	 */
@@ -112,7 +113,7 @@ public class Tab {
 		WebElement nextTab = driver.findElement(By.cssSelector("#" + tabElementId + " + li"));
 		return nextTab.getAttribute("id");
 	}
-	
+
 	/**
 	 * タブメニューボタンを返す
 	 */
@@ -120,7 +121,7 @@ public class Tab {
 		WebElement selectMenu = driver.findElement(By.id(tabId + "_selectMenu"));
 		return selectMenu;
 	}
-	
+
 	/**
 	 * タブメニューボタンをクリックする
 	 */
@@ -128,7 +129,7 @@ public class Tab {
 		WebElement selectMenu = getSelectMenu(tabId);
 		selectMenu.click();
 	}
-	
+
 	/**
 	 * タブメニューを返す
 	 */
@@ -136,7 +137,7 @@ public class Tab {
 		WebElement tabMenu = driver.findElement(By.id(tabId + "_menu"));
 		return tabMenu;
 	}
-	
+
 	/**
 	 * タブメニューの[再読み込み]を返す
 	 */
@@ -144,7 +145,7 @@ public class Tab {
 		WebElement refreshItem = driver.findElement(By.id(tabId + "_menu_refresh"));
 		return refreshItem;
 	}
-	
+
 	/**
 	 * タブメニューの[削除]を返す
 	 */
@@ -152,7 +153,20 @@ public class Tab {
 		WebElement closeItem = driver.findElement(By.id(tabId + "_menu_close"));
 		return closeItem;
 	}
-	
+
+	/**
+	 * タブメニューの[削除]を選択
+	 */
+	public void selectCloseItem(String tabId, Boolean accept) {
+		WebElement closeItem = driver.findElement(By.cssSelector("#" + tabId + "_menu_close.close"));
+		closeItem.click();
+		Alert confirm = driver.switchTo().alert();
+	    if( accept )
+	    	confirm.accept();
+	    else
+	    	confirm.dismiss();
+	}
+
 	/**
 	 * タブメニューの[名称変更]を返す
 	 */
@@ -160,7 +174,7 @@ public class Tab {
 		WebElement nameInput = driver.findElement(By.id(tabId + "_menu_rename_input"));
 		return nameInput;
 	}
-	
+
 	/**
 	 * タブメニューの[列数変更]を返す
 	 */
@@ -168,7 +182,7 @@ public class Tab {
 		WebElement columnNumSelect = driver.findElement(By.id(tabId + "_menu_changeColumnNum_select"));
 		return columnNumSelect;
 	}
-	
+
 	/**
 	 * タブメニューの[列の幅を揃える]を返す
 	 */
@@ -176,7 +190,7 @@ public class Tab {
 		WebElement resetColumnWidthItem = driver.findElement(By.id(tabId + "_menu_resetColumnWidth"));
 		return resetColumnWidthItem;
 	}
-	
+
 	/**
 	 * タブメニューの[タブの構成を初期化する]を返す
 	 */
