@@ -214,4 +214,17 @@ public class TestHelper {
 		}
 
 	}
+	
+	/**
+	 * 指定ミリ秒sleepする
+	 * @param msec
+	 */
+	public static void sleep(int msec){
+		try {
+			Thread.sleep(msec);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

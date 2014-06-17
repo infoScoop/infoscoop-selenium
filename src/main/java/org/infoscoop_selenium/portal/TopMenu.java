@@ -25,13 +25,10 @@ public class TopMenu {
 		
 		// トップメニューにマウスオーバー
 		Actions action = new Actions(driver);
-//		action.moveToElement(driver.findElement(By.id(menuId))).perform();
-		action.moveToElement(driver.findElement(By.id(menuId))).click().build().perform();
-		/*
-		WebElement targetElement = driver.findElement(By.id(menuId));
-		System.out.println((targetElement.getLocation().x + 30) + ", " +  (targetElement.getLocation().y + 30));
-		action.moveByOffset(targetElement.getLocation().x + 30, targetElement.getLocation().y + 30).perform();
-		*/
+//		action.moveToElement(driver.findElement(By.id(menuId))).click().build().perform();
+		action.moveToElement(driver.findElement(By.id(menuId))).build().perform();
+		TestHelper.sleep(1000);
+		
 		TestHelper.waitPresent(driver, By.xpath("//li[@id='" + menuId + "']//ul[1]"));
 	}
 
