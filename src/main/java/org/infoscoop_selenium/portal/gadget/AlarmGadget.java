@@ -1,5 +1,7 @@
 package org.infoscoop_selenium.portal.gadget;
 
+import java.util.List;
+
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
@@ -114,5 +116,11 @@ public class AlarmGadget extends Gadget{
 			return;
 		
 		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_minute']/input")).sendKeys(Integer.toString(minute));
+	}
+
+	@Override
+	public List<String> getSupportedHeaderIcons() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

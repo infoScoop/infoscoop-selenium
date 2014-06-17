@@ -1,5 +1,7 @@
 package org.infoscoop_selenium.portal.gadget;
 
+import java.util.List;
+
 import org.infoscoop_selenium.WindowManager;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
@@ -239,5 +241,11 @@ public class RssReaderGadget extends Gadget{
 	public void openMessageDialog() {
 		driver.findElement(By.id("mti___Maximize__"+super.getId()+"_close_message")).click();
 		TestHelper.waitPresent(driver, By.id("articleShare"));
+	}
+
+	@Override
+	public List<String> getSupportedHeaderIcons() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

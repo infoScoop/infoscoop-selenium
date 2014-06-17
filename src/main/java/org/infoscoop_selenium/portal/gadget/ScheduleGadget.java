@@ -1,5 +1,7 @@
 package org.infoscoop_selenium.portal.gadget;
 
+import java.util.List;
+
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
@@ -49,5 +51,11 @@ public class ScheduleGadget extends Gadget{
 		Actions action = new Actions(driver);
 		action.moveToElement(hoverTarget).click().build().perform();
 		TestHelper.waitPresent(driver, By.id("__Maximize__"+super.getId()+"_"+super.getId()+"_0_"+super.getId()+"_0_0_"+dayNum+"_item"+itemNum+"_detail"));
+	}
+
+	@Override
+	public List<String> getSupportedHeaderIcons() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

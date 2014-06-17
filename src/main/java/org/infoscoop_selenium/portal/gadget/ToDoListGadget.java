@@ -1,5 +1,8 @@
 package org.infoscoop_selenium.portal.gadget;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
@@ -125,6 +128,11 @@ public class ToDoListGadget extends Gadget{
 		TestHelper.backToTopFrame(driver);
 		
 		return len;
+	}
+
+	@Override
+	public List<String> getSupportedHeaderIcons() {
+		return Arrays.asList(Gadget.ICON_TYPE_MINIMIZE, Gadget.ICON_TYPE_SHOWTOOLS);
 	}
 	
 }

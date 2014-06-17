@@ -1,5 +1,7 @@
 package org.infoscoop_selenium.portal.gadget;
 
+import java.util.List;
+
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
@@ -53,5 +55,11 @@ public class MessageGadget extends Gadget{
 		el.findElement(By.xpath("//div[1]/textarea")).sendKeys(msg);
 		el.findElement(By.xpath("//div[1]/div[3]/input[1]")).click();
 		TestHelper.waitPresent(driver, By.className("latestMsg"));
+	}
+
+	@Override
+	public List<String> getSupportedHeaderIcons() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

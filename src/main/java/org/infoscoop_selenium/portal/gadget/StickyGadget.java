@@ -1,5 +1,7 @@
 package org.infoscoop_selenium.portal.gadget;
 
+import java.util.List;
+
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
@@ -103,5 +105,11 @@ public class StickyGadget extends Gadget{
 		
 		// ガジェット設定を閉じる
 		getGadgetPreference().ok();		
+	}
+
+	@Override
+	public List<String> getSupportedHeaderIcons() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
