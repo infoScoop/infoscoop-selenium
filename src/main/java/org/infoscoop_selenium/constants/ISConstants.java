@@ -1,4 +1,4 @@
-package Constants;
+package org.infoscoop_selenium.constants;
 
 /**
  * テストで利用する定数クラス
