@@ -62,4 +62,11 @@ public class TrashBox {
 	public void clear(){
 		this.driver.findElement(By.className("trashHeaderMenu")).click();
 	}
+	
+	/**
+	 * ゴミ箱内のアイテム数を返す
+	 */
+	public int getTrashedItemCount(){
+		return this.driver.findElements(By.xpath("//table[@class='trashTable']/tbody/tr")).size();
+	}
 }
