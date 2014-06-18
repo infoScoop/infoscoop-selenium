@@ -15,8 +15,6 @@ import org.openqa.selenium.WebElement;
  * タブ/タブ削除
  */
 public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
-	WebDriver driver;
-	
 	@Override
 	public void doBefore() {
 		// テストケースごとの事前処理
@@ -25,8 +23,6 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 
 		// 初期化
 		getPortal().getCommandBar().getPortalPreference().initializeData();
-		
-		driver = getPortal().getDriver();
 	}
 
 	@Test
@@ -47,7 +43,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		//削除メニューの選択
 		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
-		Alert confirm = this.driver.switchTo().alert();
+		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();
 
 		int afterNumberOfTab = getPortal().getTab().getNumberOfTab();
@@ -73,7 +69,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		//削除メニューの選択してダイアログをキャンセル
 		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
-		Alert confirm = this.driver.switchTo().alert();
+		Alert confirm = getDriver().switchTo().alert();
     	confirm.dismiss();
     	
 		int afterNumberOfTab = getPortal().getTab().getNumberOfTab();
@@ -99,7 +95,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		//削除メニューの選択
 		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
-		Alert confirm = this.driver.switchTo().alert();
+		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();
 
 		//ポータル再表示
@@ -128,7 +124,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		//削除メニューの選択
 		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
-		Alert confirm = this.driver.switchTo().alert();
+		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();
 
 		// ガジェットの再ドロップ
@@ -160,7 +156,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		//削除メニューの選択
 		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
-		Alert confirm = this.driver.switchTo().alert();
+		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();
     	
 		//ゴミ箱アイテム数の取得

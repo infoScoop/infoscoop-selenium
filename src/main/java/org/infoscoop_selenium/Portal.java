@@ -121,10 +121,6 @@ public class Portal {
 		TestHelper.waitPresent(driver, By.id("columns0"), 20);
 	}
 	
-	public WebDriver getDriver() {
-		return this.driver;
-	}
-
 	private static void sleep(long sleep){
 		try {
 			Thread.sleep(sleep);
