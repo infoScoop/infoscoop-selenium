@@ -85,21 +85,20 @@ public class TopMenu {
 		actions.build().perform();
 
 		if(dropFlg){
-			// FIXME: IEだとオーバーレイが残ってしまい、操作不能になる。できればWebDriverでなんとかしたい
-			((JavascriptExecutor)driver).executeScript("IS_Portal.hideDragOverlay();");
-
 			// メニューが残っている場合消去する
 			if(driver.findElement(By.xpath("//li[@id='" + parentId + "']//img[@class='closeMenu']")).isDisplayed()){
-				try{
-					Thread.sleep(500);
-				}catch(Exception e){
-					throw new RuntimeException(e);
-				}
 				WebElement closeDiv = driver.findElement(By.xpath("//li[@id='" + parentId + "']//img[@class='closeMenu']"));
 				actions.moveToElement(closeDiv);
 				actions.build().perform();
 			}
-
+			
+			// オーバーレイの消去
+			WebElement menuOverlay = driver.findElement(By.cssSelector(".menuOverlay"));
+			if( menuOverlay != null && menuOverlay.isDisplayed() )
+				menuOverlay.click();
+			
+			TestHelper.sleep(500);
+			
 			String widgetId = activeTabEl.findElements(By.className("widget")).get(0).getAttribute("id");
 
 //			return new Gadget(driver, widgetId);
