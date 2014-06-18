@@ -59,12 +59,9 @@ public class TopMenu {
 		openTopMenu(parentId);
 
 		List<WebElement> panels = driver.findElements(By.cssSelector(".panel"));
-		System.out.println(panels.size());
 		WebElement activeTabEl = null;
 		for( int i=0;i<panels.size();i++ ) {
 			WebElement el = panels.get(i);
-			System.out.println(el);
-			System.out.println(el.isDisplayed());
 			if( el.isDisplayed() )
 				activeTabEl = el;
 		}
@@ -92,18 +89,17 @@ public class TopMenu {
 			((JavascriptExecutor)driver).executeScript("IS_Portal.hideDragOverlay();");
 
 			// メニューが残っている場合消去する
-			if(driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']")).isDisplayed()){
+			if(driver.findElement(By.xpath("//li[@id='" + parentId + "']//img[@class='closeMenu']")).isDisplayed()){
 				try{
 					Thread.sleep(500);
 				}catch(Exception e){
 					throw new RuntimeException(e);
 				}
-				WebElement closeDiv = driver.findElement(By.xpath("//li[@id='etcWidgets']//img[@class='closeMenu']"));
+				WebElement closeDiv = driver.findElement(By.xpath("//li[@id='" + parentId + "']//img[@class='closeMenu']"));
 				actions.moveToElement(closeDiv);
 				actions.build().perform();
 			}
 
-			System.out.println("dropElement: " + dropElement);
 			String widgetId = activeTabEl.findElements(By.className("widget")).get(0).getAttribute("id");
 
 //			return new Gadget(driver, widgetId);

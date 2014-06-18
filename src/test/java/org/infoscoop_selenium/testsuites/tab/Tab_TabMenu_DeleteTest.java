@@ -5,14 +5,19 @@ import static org.junit.Assert.*;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
-import org.infoscoop_selenium.portal.commandbar.TrashBox;
 import org.infoscoop_selenium.portal.gadget.GenericGadget;
 import org.junit.Test;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * タブ/タブ削除
  */
 public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
+	WebDriver driver;
+	
 	@Override
 	public void doBefore() {
 		// テストケースごとの事前処理
@@ -21,6 +26,8 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 
 		// 初期化
 		getPortal().getCommandBar().getPortalPreference().initializeData();
+		
+		driver = getPortal().getDriver();
 	}
 
 	@Test
@@ -39,11 +46,14 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(addedTabId);
 
 		//削除メニューの選択
-		getPortal().getTab().selectCloseItem(addedTabId, true);
+		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
+		closeItem.findElement(By.cssSelector(".close")).click();
+		Alert confirm = this.driver.switchTo().alert();
+    	confirm.accept();
 
 		int afterNumberOfTab = getPortal().getTab().getNumberOfTab();
 
-		assertTrue(beforeNumberOfTab == afterNumberOfTab);
+		assertEquals(beforeNumberOfTab, afterNumberOfTab);
 	}
 
 	@Test
@@ -62,10 +72,13 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(addedTabId);
 
 		//削除メニューの選択してダイアログをキャンセル
-		getPortal().getTab().selectCloseItem(addedTabId, false);
-
+		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
+		closeItem.findElement(By.cssSelector(".close")).click();
+		Alert confirm = this.driver.switchTo().alert();
+    	confirm.dismiss();
+    	
 		int afterNumberOfTab = getPortal().getTab().getNumberOfTab();
-
+		
 		assertTrue(beforeNumberOfTab + 1 == afterNumberOfTab);
 	}
 
@@ -85,15 +98,47 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(addedTabId);
 
 		//削除メニューの選択
-		getPortal().getTab().selectCloseItem(addedTabId, true);
+		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
+		closeItem.findElement(By.cssSelector(".close")).click();
+		Alert confirm = this.driver.switchTo().alert();
+    	confirm.accept();
 
 		//ポータル再表示
 		getPortal().login();
 
 		int afterNumberOfTab = getPortal().getTab().getNumberOfTab();
 
-		assertTrue(beforeNumberOfTab == afterNumberOfTab);
+		assertEquals(beforeNumberOfTab, afterNumberOfTab);
 	}
+	
+	@Test
+	/**
+	 * iscp-5756:メニューグレーアウト復帰
+	 * タブ削除後、削除したタブ内の全てのWidgetがメニューからグレーアウトから復帰することを確認。ドロップ可能なWidget全種で確認すること
+	 */
+	public void iscp_5756(){
+		// 新規タブ追加
+		String addedTabId = getPortal().getTab().addTab();
+		
+		// ガジェットのドロップ
+		getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_Message", 1);
+		TestHelper.sleep(1000);
+		
+		//タブメニューの表示
+		getPortal().getTab().selectSelectMenu(addedTabId);
+
+		//削除メニューの選択
+		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
+		closeItem.findElement(By.cssSelector(".close")).click();
+		Alert confirm = this.driver.switchTo().alert();
+    	confirm.accept();
+
+		// ガジェットの再ドロップ
+		Gadget gadget = (GenericGadget) getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_Message", 1);
+		
+		assertTrue(!gadget.getId().equals(""));
+	}
+	
 
 
 	@Test
@@ -102,28 +147,30 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 	 * タブ削除後、削除したタブ内の全ての Widget がごみ箱に入る
 	 */
 	public void iscp_5757(){
+		//ゴミ箱アイテム数の取得
+		int trashedItemCount1 = getPortal().getCommandBar().getTrashBox().getTrashedItemCount();
+		
 		// 新規タブ追加
 		String addedTabId = getPortal().getTab().addTab();
 
 		// ガジェットのドロップ
-		Gadget gadget = (GenericGadget) getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_calculator", 1);
-		System.out.println(gadget.getId());
-
-		TestHelper.sleep(2000);
+		getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_calculator", 1);
+		TestHelper.sleep(1000);
 
 		//タブメニューの表示
 		getPortal().getTab().selectSelectMenu(addedTabId);
 
 		//削除メニューの選択
-		getPortal().getTab().selectCloseItem(addedTabId, true);
-
-		//ゴミ箱の表示
-		TrashBox trashBox = getPortal().getCommandBar().getTrashBox();
-		trashBox.show();
-
-		int trashedItemCount = trashBox.getTrashedItemCount();
+		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
+		closeItem.findElement(By.cssSelector(".close")).click();
+		Alert confirm = this.driver.switchTo().alert();
+    	confirm.accept();
+    	
+		//ゴミ箱アイテム数の取得
+		int trashedItemCount2 = getPortal().getCommandBar().getTrashBox().getTrashedItemCount();
 		
-		assertTrue(trashedItemCount == 1);
-}
+		//ゴミ箱のアイテム数が１つ増えていたら成功
+		assertTrue(trashedItemCount1 + 1 == trashedItemCount2);
+	}
 
 }

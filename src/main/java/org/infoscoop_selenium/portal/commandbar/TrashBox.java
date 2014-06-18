@@ -67,6 +67,9 @@ public class TrashBox {
 	 * ゴミ箱内のアイテム数を返す
 	 */
 	public int getTrashedItemCount(){
-		return this.driver.findElements(By.xpath("//table[@class='trashTable']/tbody/tr")).size();
+		this.show();
+		int count =  this.driver.findElements(By.xpath("//table[@class='trashTable']/tbody/tr")).size();
+		this.hide();
+		return count;
 	}
 }
