@@ -27,8 +27,6 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 
 		// 初期化
 		getPortal().getCommandBar().getPortalPreference().initializeData();
-		
-		driver = getPortal().getDriver();
 	}
 
 	@Test
@@ -43,7 +41,7 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 		WebElement menuItem = getPortal().getTab().getInitializeItem(ISConstants.TABID_HOME);
 		
 		menuItem.click();
-		Alert confirm = this.driver.switchTo().alert();
+		Alert confirm = getDriver().switchTo().alert();
 		String text = confirm.getText();
 		int idx = text.indexOf("追加したガジェットを全て削除します、よろしいですか？\n(削除したガジェットはごみ箱に入ります)");
 		
@@ -65,7 +63,7 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 		WebElement menuItem = getPortal().getTab().getInitializeItem(ISConstants.TABID_HOME);
 		
 		menuItem.click();
-		Alert confirm = this.driver.switchTo().alert();
+		Alert confirm = getDriver().switchTo().alert();
     	confirm.dismiss();
 		
 		//ポータル再表示
