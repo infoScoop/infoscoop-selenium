@@ -193,6 +193,15 @@ public class Tab {
 		return nameInput.getAttribute("value");
 	}
 	
+	
+	/**
+	 * 指定タブ内のガジェット要素リストを返す
+	 */
+	public List<WebElement> getGadgetElements(String tabId) {
+		String panelId = tabId.replace("tab", "panel");
+		return driver.findElements(By.cssSelector("#" + panelId + " .widget"));
+	}
+	
 	/**
 	 * タブメニューの[名称変更]のフィールドをクリック
 	 * TODO: クリックでフォーカスが当たらない

@@ -90,16 +90,18 @@ public class TopMenu {
 				WebElement closeDiv = driver.findElement(By.xpath("//li[@id='" + parentId + "']//img[@class='closeMenu']"));
 				actions.moveToElement(closeDiv);
 				actions.build().perform();
+				TestHelper.waitInvisible(driver, By.xpath("//li[@id='" + parentId + "']//img[@class='closeMenu']"));
 			}
 			
 			// オーバーレイの消去
 			WebElement menuOverlay = driver.findElement(By.cssSelector(".menuOverlay"));
-			if( menuOverlay != null && menuOverlay.isDisplayed() )
+			if( menuOverlay != null && menuOverlay.isDisplayed() ) {
 				menuOverlay.click();
+				TestHelper.waitInvisible(driver, By.cssSelector(".menuOverlay"));
+			}
 			
-			TestHelper.sleep(500);
-			
-			String widgetId = activeTabEl.findElements(By.className("widget")).get(0).getAttribute("id");
+			// パーソナライズエリアの最初のガジェットIDを取得
+			String widgetId = activeTabEl.findElements(By.cssSelector(".column .widget")).get(0).getAttribute("id");
 
 //			return new Gadget(driver, widgetId);
 			Class<Gadget> c = gadgetType.getValue();
