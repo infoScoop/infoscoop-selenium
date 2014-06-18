@@ -3,7 +3,6 @@ package org.infoscoop_selenium.testsuites.tab;
 import static org.junit.Assert.*;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
-import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.infoscoop_selenium.portal.gadget.GenericGadget;
 import org.junit.Test;
@@ -122,7 +121,6 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		
 		// ガジェットのドロップ
 		getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_Message", 1);
-		TestHelper.sleep(1000);
 		
 		//タブメニューの表示
 		getPortal().getTab().selectSelectMenu(addedTabId);
@@ -155,7 +153,6 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 
 		// ガジェットのドロップ
 		getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_calculator", 1);
-		TestHelper.sleep(1000);
 
 		//タブメニューの表示
 		getPortal().getTab().selectSelectMenu(addedTabId);
