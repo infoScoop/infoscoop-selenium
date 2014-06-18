@@ -62,7 +62,12 @@ public class TestHelper {
 			@Override
 			public boolean until() {
 				try {
-					return element.isDisplayed();
+					if( element.isDisplayed() == true ) {
+						// FIXME CSSのプロパティは書き換わっても画面に反映しないため待機
+						TestHelper.sleep(100);
+						return true;
+					}
+					return false;
 				} catch (NoSuchElementException e) {
 					return false;
 				}
@@ -82,7 +87,12 @@ public class TestHelper {
 			@Override
 			public boolean until() {
 				WebElement elem = context.findElement(by);
-				return false == elem.isDisplayed();
+				if( elem.isDisplayed() == false ) {
+					// FIXME CSSのプロパティは書き換わっても画面に反映しないため待機
+					TestHelper.sleep(100);
+					return true;
+				}
+				return false;
 			}
 		};
 		wait.wait("Element exists", WAIT_SECOND * 1000);
