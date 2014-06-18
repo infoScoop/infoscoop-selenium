@@ -1,5 +1,7 @@
 package org.infoscoop_selenium;
 
+import java.util.List;
+
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
 import org.infoscoop_selenium.portal.SideBar;
@@ -8,6 +10,7 @@ import org.infoscoop_selenium.portal.TopMenu;
 import org.infoscoop_selenium.properties.TestEnv;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 
 public class Portal {
@@ -80,7 +83,15 @@ public class Portal {
 		if(this.messageConsoleDriver != null)
 			 WindowManager.getInstance().closeWindow(this.messageConsoleDriver.getWindowHandle());
 	}
-	
+
+    /**
+     * パネルのカラム数を返す
+     * @return
+     */
+    public int getNumberOfColumn(String columnsId) {
+        return driver.findElements(By.cssSelector("#" + columnsId + " .column")).size();
+    }
+
 	public CommandBar getCommandBar(){
 		return commandBar;
 	}
