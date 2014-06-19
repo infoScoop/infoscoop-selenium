@@ -62,4 +62,10 @@ public class MessageGadget extends Gadget{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<String> getSupportedMenuItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

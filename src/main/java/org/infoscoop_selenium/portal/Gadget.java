@@ -27,6 +27,9 @@ public abstract class Gadget {
 	public static final String ICON_TYPE_MINIMIZE = "minimize";
 	public static final String ICON_TYPE_SHOWTOOLS = "showTools";
 
+	public static final String MENU_TYPE_EDIT = "edit";
+	public static final String MENU_TYPE_DELETE = "close";
+	
 	public static enum GADGET_TYPE {
 		STICKY(StickyGadget.class),
 		TODOLIST(ToDoListGadget.class),
@@ -163,6 +166,10 @@ public abstract class Gadget {
 		return height;
 	}
 	
+	/**
+	 * ガジェットヘッダの表示アイコンをリストで返す
+	 * @return
+	 */
 	public List<String> getHeaderIconTypes(){
 		List<String> list = new ArrayList<String>();
 		
@@ -172,7 +179,28 @@ public abstract class Gadget {
 			WebElement icon = ite.next();
 			
 			if(icon.isDisplayed()){
-				list.add(getIconType(icon));
+				list.add(getItemType(icon));
+			}
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * ガジェットメニューの表示アイテムをリストで返す
+	 * @return
+	 */
+	public List<String> getMenuItemTypes(){
+		openMenu();
+		List<String> list = new ArrayList<String>();
+		
+		List<WebElement> icons = driver.findElements(By.cssSelector("#" + this.getId() + "_close_menu .headerIcon"));
+		
+		for(Iterator<WebElement> ite=icons.iterator();ite.hasNext();){
+			WebElement icon = ite.next();
+			
+			if(icon.isDisplayed()){
+				list.add(getItemType(icon));
 			}
 		}
 		
@@ -186,11 +214,17 @@ public abstract class Gadget {
 	abstract public List<String> getSupportedHeaderIcons();
 	
 	/**
-	 * アイコンのタイプを返す
+	 * サポートされるヘッダアイコンタイプのリストを返す
+	 * @return
+	 */
+	abstract public List<String> getSupportedMenuItems();
+	
+	/**
+	 * ヘッダアイコン、メニューアイテムのタイプを返す
 	 * @param icon
 	 * @return
 	 */
-	private String getIconType(WebElement icon){
+	private String getItemType(WebElement icon){
 		String iconId = icon.getAttribute("id");
 		return iconId.substring(iconId.lastIndexOf("_") + 1, iconId.length());
 	}

@@ -18,4 +18,10 @@ public class GenericGadget extends Gadget{
 		return null;
 	}
 
+	@Override
+	public List<String> getSupportedMenuItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
