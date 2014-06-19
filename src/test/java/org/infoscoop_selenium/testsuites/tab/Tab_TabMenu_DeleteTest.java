@@ -8,7 +8,6 @@ import org.infoscoop_selenium.portal.gadget.GenericGadget;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -116,7 +115,14 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		String addedTabId = getPortal().getTab().addTab();
 		
 		// ガジェットのドロップ
-		getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_Message", 1);
+		Gadget g1 = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_Message", 1);
+		System.out.println(g1.getId());
+		
+		// メニューアイテムがグレーアウトしているか
+		getPortal().getTopMenu().openTopMenu("etcWidgets");
+		WebElement menuItem = getDriver().findElement(By.id("etcWidgets_Message"));
+		assertTrue(menuItem.findElement(By.cssSelector(".menuItemIcon_dropped")).isDisplayed());
+		getPortal().getTopMenu().closeMenu("etcWidgets");
 		
 		//タブメニューの表示
 		getPortal().getTab().selectSelectMenu(addedTabId);
@@ -129,8 +135,8 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 
 		// ガジェットの再ドロップ
 		Gadget gadget = (GenericGadget) getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_Message", 1);
-		
-		assertTrue(!gadget.getId().equals(""));
+		System.out.println(gadget.getId());
+		assertTrue(getDriver().findElement(By.id(gadget.getId())).isDisplayed());
 	}
 	
 
