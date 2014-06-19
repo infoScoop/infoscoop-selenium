@@ -31,13 +31,25 @@ public class ToolGadgets_TodoList_HeaderTest extends IS_BaseItTestCase{
 	@Test
 	/**
 	 * パーソナライズ領域
-	 * パーソナライズ領域に配置されている場合、ウィジェットヘッダに適切なアイコンが表示されることを確認
+	 * パーソナライズ領域に配置されている場合、ウィジェットヘッダ・メニューに適切なアイコンが表示されることを確認
 	 */
 	public void iscp_179(){
 		List<String> headerIconTypes = GADGET.getHeaderIconTypes();
 		
 		// ガジェットから取得したアイコンタイプのリストとサポートアイコンのリストを比較。全部一致で成功
 		assertTrue(GADGET.getSupportedHeaderIcons().containsAll(headerIconTypes));
+		
+		// TODO: メニューを開き、適切な項目が表示されていることを確認
+		List<String> menuItemTypes = GADGET.getMenuItemTypes();
+		assertTrue(GADGET.getSupportedMenuItems().containsAll(menuItemTypes));
 	}
 	
+//	@Test
+	/**
+	 * 固定領域
+	 * 固定領域に配置されている場合、ウィジェットヘッダ・メニューに適切なアイコンが表示されることを確認
+	 */
+	public void iscp_180(){
+		// 管理画面操作が必要であるため保留
+	}
 }
