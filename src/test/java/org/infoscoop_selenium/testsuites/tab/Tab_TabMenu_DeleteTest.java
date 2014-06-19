@@ -115,8 +115,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		String addedTabId = getPortal().getTab().addTab();
 		
 		// ガジェットのドロップ
-		Gadget g1 = getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_Message", 1);
-		System.out.println(g1.getId());
+		getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_Message", 1);
 		
 		// メニューアイテムがグレーアウトしているか
 		getPortal().getTopMenu().openTopMenu("etcWidgets");
@@ -135,7 +134,6 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 
 		// ガジェットの再ドロップ
 		Gadget gadget = (GenericGadget) getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_Message", 1);
-		System.out.println(gadget.getId());
 		assertTrue(getDriver().findElement(By.id(gadget.getId())).isDisplayed());
 	}
 	
