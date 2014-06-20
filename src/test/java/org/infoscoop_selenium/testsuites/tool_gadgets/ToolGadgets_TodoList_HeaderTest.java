@@ -39,7 +39,7 @@ public class ToolGadgets_TodoList_HeaderTest extends IS_BaseItTestCase{
 		// ガジェットから取得したアイコンタイプのリストとサポートアイコンのリストを比較。全部一致で成功
 		assertTrue(GADGET.getSupportedHeaderIcons().containsAll(headerIconTypes));
 		
-		// TODO: メニューを開き、適切な項目が表示されていることを確認
+		// ガジェットから取得したメニュータイプのリストとサポートメニューアイテムのリストを比較。全部一致で成功
 		List<String> menuItemTypes = GADGET.getMenuItemTypes();
 		assertTrue(GADGET.getSupportedMenuItems().containsAll(menuItemTypes));
 	}
