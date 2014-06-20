@@ -137,7 +137,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
 
         String tabId = ISConstants.TABID_HOME;
         String columnsId = "columns0";
-        
+
         int numberOfColumn = panel.getNumberOfColumn(columnsId);
         if (2 > numberOfColumn)
             fail("This test assumes that the number of columns is 2.");
@@ -151,7 +151,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         int index = numberOfColumn - 1;
         List<String> correct = beforeGadgetIds.get(index - 1);
         correct.addAll(beforeGadgetIds.get(index));
-        
+
         // change number of column (-1)
         tab.selectSelectMenu(tabId);
         Select select = new Select(tab.getColumnNumSelect(tabId));
@@ -176,11 +176,34 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         // TODO: 書かなくてもいいようにできないか。
         // stall for time to change number of column
         Portal.waitPortalLoadComplete(getDriver());
-        
+
         List<List<String>> restoredGadgetIds = panel.getDeployedGadgetIds(columnsId);
         List<String> zeroGadget = restoredGadgetIds.get(restoredGadgetIds.size() - 1);
         if (0 != zeroGadget.size())
             fail("Gadgets in the right column exists.");
+    }
+
+//    @Test
+    /**
+     * タブごとの列数設定
+     * 各タブごとに列数が設定されることを確認する。
+     * TODO: 確認のためのテスト方法が不明なためスキップ。
+     */
+    public void iscp_5764() {}
+
+//    @Test
+    /*
+     * ウェイト
+     * セレクトボックスを高速に切り替えても画面がフリーズしないことを確認する。
+     * TODO: このコードでは意味が無い。
+     */
+    public void iscp_5765() {
+        Tab tab = getPortal().getTab();
+        tab.selectSelectMenu(ISConstants.TABID_HOME);
+        Select select = new Select(tab.getColumnNumSelect(ISConstants.TABID_HOME));
+        for (int i = 0; i < 1000; i++) {
+            select.selectByValue(Integer.toString(i % MAX_NUMBER_OF_COLUMN + 1));
+        }
     }
 
 }
