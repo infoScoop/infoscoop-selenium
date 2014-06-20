@@ -3,6 +3,8 @@ package org.infoscoop_selenium.testsuites.tab;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.constants.ISConstants;
 import org.junit.Test;
@@ -131,18 +133,60 @@ public class Tab_TabMenuTest extends IS_BaseItTestCase {
 		assertFalse(tabMenu1.isDisplayed());
 	}
 
-	//@Test
+	@Test
 	/**
 	 * 多段表示されている状態
 	 */
 	public void iscp_5737(){
+		WebElement selectMenu0 = getPortal().getTab().getSelectMenu(ISConstants.TABID_HOME);
+		int selectMenuY0 = selectMenu0.getLocation().getY();
+		// タブメニューボタンを選択
+		getPortal().getTab().selectSelectMenu(ISConstants.TABID_HOME);
+		WebElement tabMenu0 = getPortal().getTab().getTabMenu(ISConstants.TABID_HOME);
+		int tabMenuY0 = tabMenu0.getLocation().getY();
+		String tabId = null;
+		// タブメニューボタンのY座標が、ホームのタブメニューボタンのY座標より下になるまでループ
+		for (int i=0; i<ISConstants.DEFAULT_MAX_TABS; i++) {
+			tabId = getPortal().getTab().addTab();
+			WebElement selectMenu = getPortal().getTab().getSelectMenu(tabId);
+			if (selectMenuY0 < selectMenu.getLocation().getY()) break;
+		}
+		// 2段目のタブのタブメニューボタンを選択
+		getPortal().getTab().selectSelectMenu(tabId);
+		WebElement tabMenu = getPortal().getTab().getTabMenu(tabId);
+		// タブメニューのY座標が、ホームのタブメニューのY座標より下になることをチェック
+		assertTrue(tabMenuY0 < tabMenu.getLocation().getY());
 	}
 
-	//@Test
+	@Test
 	/**
 	 * ウィンドウ右端での表示
 	 */
 	public void iscp_5738(){
+		ArrayList<String> tabIdList = new ArrayList<String>();
+		WebElement selectMenu0 = getPortal().getTab().getSelectMenu(ISConstants.TABID_HOME);
+		int selectMenuY0 = selectMenu0.getLocation().getY();
+		// タブメニューボタンを選択
+		getPortal().getTab().selectSelectMenu(ISConstants.TABID_HOME);
+		WebElement tabMenu0 = getPortal().getTab().getTabMenu(ISConstants.TABID_HOME);
+		// タブメニューのX座標からのタブメニューボタンのX座標のオフセットを保存
+		int offsetX0 = selectMenu0.getLocation().getX() - tabMenu0.getLocation().getX();
+		// タブメニューボタンのY座標が、ホームのタブメニューボタンのY座標より下になるまでループ
+		for (int i=0; i<ISConstants.DEFAULT_MAX_TABS; i++) {
+			String tabId = getPortal().getTab().addTab();
+			tabIdList.add(tabId);
+			WebElement selectMenu = getPortal().getTab().getSelectMenu(tabId);
+			if (selectMenuY0 < selectMenu.getLocation().getY()) break;
+		}
+		// 1段目の右端のタブのタブメニューボタンを選択
+		String tabId2 = tabIdList.get(tabIdList.size()-2);
+		getPortal().getTab().selectTab(tabId2);
+		getPortal().getTab().selectSelectMenu(tabId2);
+		WebElement selectMenu = getPortal().getTab().getSelectMenu(tabId2);
+		WebElement tabMenu = getPortal().getTab().getTabMenu(tabId2);
+		int offsetX = selectMenu.getLocation().getX() - tabMenu.getLocation().getX();
+		// タブメニューからのタブメニューボタンのオフセットが大きくなっている（タブメニューが左に移動している）ことをチェック
+		assertTrue(offsetX0 < offsetX);
 	}
 
 }
