@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -62,7 +63,14 @@ public class GadgetPreference {
 		if(!driver.findElement(By.id("frm_"+gadget.getId())).isDisplayed())
 			return;
 		
-		driver.findElement(By.xpath("//form[@id='frm_"+gadget.getId()+"']/div[@class='widgetSave']")).click();
+		WebElement okEl = driver.findElement(By.xpath("//form[@id='frm_"+gadget.getId()+"']/div[@class='widgetSave']"));
+		okEl.click();
+		
+		TestHelper.sleep(500);
+		
+		gadget.focus();
+		TestHelper.waitPresent(driver.findElement(By.tagName("body")));
+		gadget.blur();
 	}
 	
 	/**
