@@ -1,5 +1,12 @@
 package org.infoscoop_selenium.portal.gadget;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.tuple.Pair;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -41,7 +48,11 @@ public class GadgetPreference {
 		if(!driver.findElement(By.id("frm_"+gadget.getId())).isDisplayed())
 			return;
 		
-		driver.findElement(By.xpath("//td[@id='eb_"+gadget.getId()+"_widget_title']/input")).sendKeys(title);
+		WebElement targetElement = driver.findElement(By.id("eb_"+gadget.getId()+"_widget_title"));
+		targetElement.clear();
+		targetElement.sendKeys(title);
+		
+		ok();
 	}
 	
 	/**
@@ -63,5 +74,32 @@ public class GadgetPreference {
 			return;
 		
 		driver.findElement(By.xpath("//form[@id='frm_"+gadget.getId()+"']/div[@class='widgetCancel']")).click();
+	}
+	
+	/**
+	 * UserPrefのMapを返す
+	 * @return
+	 */
+	public Map<String, WebElement> getDisplayUserPrefs(){
+		show();
+		WebElement editPanelEl = driver.findElement(By.id("frm_"+gadget.getId()));
+		
+		List<WebElement> list = editPanelEl.findElements(By.tagName("td"));
+		
+		Map<String, WebElement> prefsMap = new LinkedHashMap<String, WebElement>();
+		String label = "";
+		for(Iterator<WebElement> ite=list.iterator();ite.hasNext();){
+			WebElement prefTd = ite.next();
+			
+			if(prefTd.getAttribute("class").equals("widget_edit_pref_col_label")){
+				label = prefTd.getText();
+			}
+			else if(prefTd.getAttribute("class").equals("widget_edit_pref_col_value")){
+				WebElement prefValueEl = prefTd.findElement(By.xpath("*"));
+				prefsMap.put(label, prefValueEl);
+			}
+		}
+		
+		return prefsMap;
 	}
 }
