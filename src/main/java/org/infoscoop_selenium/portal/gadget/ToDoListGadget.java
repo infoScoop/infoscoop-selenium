@@ -85,7 +85,7 @@ public class ToDoListGadget extends Gadget{
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
-		Select font = new Select(driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_fontSize']/select")));
+		Select font = new Select(driver.findElement(By.cssSelector("#eb_" + super.getId() + "_fontSize>select")));
 		font.selectByValue(fontSize.getValue());
 		
 		// ガジェット設定を閉じる
@@ -130,6 +130,21 @@ public class ToDoListGadget extends Gadget{
 		return len;
 	}
 
+	/**
+	 * フォントサイズを返す。
+	 * UserPrefの設定値ではなく、DOMノードの高さをpixelで返す
+	 * @return
+	 */
+	public int getDisplayFontSize(){
+		if(getTodoLength() == 0)
+			addToDo("test");
+		
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		int displayFontSize = driver.findElement(By.className("todoText")).getSize().height;
+		TestHelper.backToTopFrame(driver);
+		return displayFontSize;
+	}
+	
 	@Override
 	public List<String> getSupportedHeaderIcons() {
 		return Arrays.asList(Gadget.ICON_TYPE_MINIMIZE, Gadget.ICON_TYPE_SHOWTOOLS);
