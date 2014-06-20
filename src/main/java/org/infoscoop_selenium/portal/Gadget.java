@@ -14,6 +14,7 @@ import org.infoscoop_selenium.portal.gadget.ScheduleGadget;
 import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -205,6 +206,29 @@ public abstract class Gadget {
 		}
 		
 		return list;
+	}
+	
+	/**
+	 * ガジェットのタイトルを返す
+	 * @return
+	 */
+	public String getTitle(){
+		WebElement titleEl = driver.findElement(By.id(this.gadgetId + "_widgetTitle"));
+		
+		WebElement titleLinkEl = null;
+		try{
+			titleLinkEl = titleEl.findElement(By.tagName("a"));
+		}catch(NoSuchElementException e){
+			// ignore
+		}
+		
+		String title = titleEl.getText();
+		if(titleLinkEl != null){
+			// タイトルリンクが存在する場合はAタグから取得
+			title = titleLinkEl.getText();
+		}
+		
+		return title;
 	}
 	
 	/**
