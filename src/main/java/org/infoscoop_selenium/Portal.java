@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
+import org.infoscoop_selenium.portal.Panel;
 import org.infoscoop_selenium.portal.SideBar;
 import org.infoscoop_selenium.portal.Tab;
 import org.infoscoop_selenium.portal.TopMenu;
@@ -20,6 +21,7 @@ public class Portal {
 	Tab tab;
 	TopMenu topMenu;
 	SideBar sideBar;
+    Panel panel;
 	WebDriver messageConsoleDriver;
 	AdminPage adminPage;
 	
@@ -30,7 +32,8 @@ public class Portal {
 		this.tab = new Tab(driver);
 		this.topMenu = new TopMenu(driver);
 		this.sideBar = new SideBar(driver);
-		
+        this.panel = new Panel(driver);
+
 		WindowManager.init(driver);
 	}
 	
@@ -84,14 +87,6 @@ public class Portal {
 			 WindowManager.getInstance().closeWindow(this.messageConsoleDriver.getWindowHandle());
 	}
 
-    /**
-     * パネルのカラム数を返す
-     * @return
-     */
-    public int getNumberOfColumn(String columnsId) {
-        return driver.findElements(By.cssSelector("#" + columnsId + " .column")).size();
-    }
-
 	public CommandBar getCommandBar(){
 		return commandBar;
 	}
@@ -107,7 +102,11 @@ public class Portal {
 	public SideBar getSideBar(){
 		return sideBar;
 	}
-	
+
+	public Panel getPanel() {
+	    return panel;
+	}
+
 	public String getUrl(){
 		return url;
 	}
