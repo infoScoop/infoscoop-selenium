@@ -50,7 +50,7 @@ public class Tab_TabMenuTest extends IS_BaseItTestCase {
 		// ホームタブのタブメニューは存在しない
 		try {
 			getPortal().getTab().getTabMenu(ISConstants.TABID_HOME);
-			assertTrue("must throw NoSuchElementException", true);
+			assertTrue("must throw NoSuchElementException", false);
 		} catch (NoSuchElementException e) {
 			//success
 		}

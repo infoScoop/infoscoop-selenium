@@ -85,6 +85,27 @@ public abstract class Gadget {
 	}
 	
 	/**
+	 * [削除]エレメントを返す
+	 */
+	public WebElement getCloseElement(){
+		return driver.findElement(By.id("hm_" + gadgetId + "_close"));
+	}
+	
+	/**
+	 * [表示件数を減らす]エレメントを返す
+	 */
+	public WebElement getWidgetRssUpElement(){
+		return driver.findElement(By.id("hm_" + gadgetId + "_widgetRssUp"));
+	}
+	
+	/**
+	 * [表示件数を増やす]エレメントを返す
+	 */
+	public WebElement getWidgetRssDownElement(){
+		return driver.findElement(By.id("hm_" + gadgetId + "_widgetRssDown"));
+	}
+	
+	/**
 	 * ガジェットの最大化
 	 * @return
 	 */

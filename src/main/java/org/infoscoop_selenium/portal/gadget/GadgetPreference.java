@@ -57,6 +57,13 @@ public class GadgetPreference {
 	}
 	
 	/**
+	 * [記事表示件数]を返す
+	 */
+	public WebElement getItemsnumElement() {
+		return driver.findElement(By.id("eb_"+gadget.getId()+"_itemsnum"));
+	}
+	
+	/**
 	 * ガジェット設定OK
 	 */
 	public void ok(){
