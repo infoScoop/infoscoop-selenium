@@ -3,10 +3,13 @@ package org.infoscoop_selenium.portal;
 import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
+import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 
 public class Tab {
 	WebDriver driver;
@@ -16,13 +19,24 @@ public class Tab {
 	}
 	
 	/**
+	 * [タブを追加する]ボタンを返す
+	 */
+	//XXX iscp_5720で要素が非表示であることを確認する際に不要な例外を発生させてしまっている
+	public WebElement getAddTabButton(){
+		try {
+			// タブ追加の出現を待つ
+			TestHelper.waitPresent(driver, By.id("addTab"));
+		} catch (Exception e) {
+			// Do nothing 
+		}
+		return driver.findElement(By.cssSelector("#addTab a"));
+	}
+	
+	/**
 	 * タブを追加する
 	 */
 	public String addTab(){
-		// タブ追加の出現を待つ
-		TestHelper.waitPresent(driver, By.id("addTab"));
-		// タブ追加
-		driver.findElement(By.cssSelector("#addTab a")).click();
+		getAddTabButton().click();
 		return getCurrentTabId();
 	}
 	
@@ -238,5 +252,12 @@ public class Tab {
 		WebElement tabName = driver.findElement(By.id(tabId + "_title"));
 		return tabName.getText();
 	}*/
+	
+	public void deleteTab(String tabId) {
+		selectSelectMenu(tabId);
+		WebElement closeItem = getCloseItem(tabId);
+		closeItem.findElement(By.cssSelector(".close")).click();
+		driver.switchTo().alert().accept();
+	}
 
 }

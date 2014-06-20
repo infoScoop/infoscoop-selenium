@@ -3,7 +3,10 @@ package org.infoscoop_selenium.testsuites.tab;
 import static org.junit.Assert.*;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
+import org.infoscoop_selenium.constants.ISConstants;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 /**
  * タブ/タブ追加
@@ -55,14 +58,36 @@ public class Tab_AddTabTest extends IS_BaseItTestCase{
 		assertTrue(addedTabId.equals(currentTabId));
 	}
 	
-//	@Test
-//	/**
-//	 * タブ追加4
-//	 * タブが制限数まで表示されている状態でタブを削除すると、「タブを追加」ボタンが再表示されることを確認
-//	 * TODO: タブの制限数が不明なため保留
-//	 */
-//	public void iscp_5720(){
-//		
-//	}
+	@Test
+	/**
+	 * タブ追加4
+	 * タブが制限数まで表示されている状態でタブを削除すると、「タブを追加」ボタンが再表示されることを確認
+	 */
+	public void iscp_5720(){
+		int numberOfTab = getPortal().getTab().getNumberOfTab();
+		WebElement addTabButton;
+		
+		// 繰り返す回数 = 制限値-固定タブ数-最後の1回
+		int numberOftabToAdd = ISConstants.DEFAULT_MAX_TABS-numberOfTab-1;
+		// タブを制限数まで追加。
+		for (int i = 0; i < numberOftabToAdd; i++) {
+			//タブを追加
+			getPortal().getTab().addTab();
+			//[タブを追加]ボタンが表示されることを確認
+			addTabButton = getPortal().getTab().getAddTabButton();
+			assertTrue(addTabButton.isDisplayed());
+		}
+		
+		//最後のタブを追加。タブの制限数を超えた場合は[タブを追加]ボタンが表示されない
+		String addedTabId = getPortal().getTab().addTab();
+		//XXX 動作するが、不要な例外を発生させてしまっている
+		addTabButton = getPortal().getTab().getAddTabButton();
+		assertFalse(addTabButton.isDisplayed());
+		
+		//その後タブを削除すると[タブを追加]ボタンが表示される
+		getPortal().getTab().deleteTab(addedTabId);
+		addTabButton = getPortal().getTab().getAddTabButton();
+		assertTrue(addTabButton.isDisplayed());
+	}
 	
 }
