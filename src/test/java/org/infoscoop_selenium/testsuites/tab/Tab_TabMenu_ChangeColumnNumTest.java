@@ -4,15 +4,21 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.infoscoop_selenium.Portal;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.constants.ISConstants;
+import org.infoscoop_selenium.portal.Panel;
 import org.infoscoop_selenium.portal.Tab;
+import org.infoscoop_selenium.portal.TopMenu;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
+
+    // max number of column is changeable
+    private int MAX_NUMBER_OF_COLUMN = 10;
 
     @Override
     public void doBefore() {
@@ -30,7 +36,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         Tab tab = getPortal().getTab();
         String tabId = ISConstants.TABID_HOME;
 
-        // open tab
+        // open tab menu
         tab.selectSelectMenu(tabId);
 
         WebElement element = tab.getColumnNumSelect(tabId);
@@ -41,18 +47,17 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
     /**
      * 初期値
      * セレクトボックスにはタブの列数が選択されていることを確認する。
-     * TODO: カレントタブのパネルの列数が取得できれば更に厳密なテスト内容にできる。
      */
     public void iscp_5759() {
-        Tab tab = getPortal().getTab();
+        Portal portal = getPortal();
+        Tab tab = portal.getTab();
         String tabId = ISConstants.TABID_HOME;
 
         tab.selectSelectMenu(tabId);
         WebElement element = tab.getColumnNumSelect(tabId);
 
-        // default is 3
-        String columnCount = "3";
-        assertEquals(columnCount, element.getAttribute("value"));
+        String numberOfColumn = Integer.toString(portal.getPanel().getNumberOfColumn("columns0"));
+        assertEquals(numberOfColumn, element.getAttribute("value"));
     }
 
     @Test
@@ -63,48 +68,119 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
     public void iscp_5760() {
         Tab tab = getPortal().getTab();
         String tabId = ISConstants.TABID_HOME;
-        
+
         tab.selectSelectMenu(tabId);
         WebElement selectE = tab.getColumnNumSelect(tabId);
         List<WebElement> optionEs = selectE.findElements(By.cssSelector("option"));
-        
-        // default is 10
-        int maxNumberOfColumn = 10;
-        if (maxNumberOfColumn != optionEs.size())
+
+        // check number of option element
+        if (MAX_NUMBER_OF_COLUMN != optionEs.size())
             fail("Number of option elements does not match max number of column.");
 
         // check 1 ~ 10
-        for (int listI = 0, no = 1; no <= maxNumberOfColumn; listI++, no++) {
+        for (int listI = 0, no = 1; no <= MAX_NUMBER_OF_COLUMN; listI++, no++) {
             WebElement optionE = optionEs.get(listI);
             if (!Integer.toString(no).equals(optionE.getAttribute("value")))
                 fail("Option elements contains illegal value attribute.");
         }
     }
-    
-//    @Test
+
+    @Test
     /**
      * 選択
      * セレクトボックスで列数を選択すると、パネルの列数が変更されることを確認する。
-     * TODO: パネルの列数がを取得する方法が無いと難しい。
      */
-//    public void iscp_5761() {
-//        Tab tab = getPortal().getTab();
-//        String tabId = ISConstants.TABID_HOME;
-//        
-//        // change column number
-//        tab.selectSelectMenu(tabId);
-//        Select select = new Select(tab.getColumnNumSelect(tabId));
-//        select.selectByValue("5");
-//    }
-    
-    @Test
+    public void iscp_5761() {
+        String id = "0";
+        String columnsId = "columns" + id;
+        String tabId = "tab" + id;
+
+        Portal portal = getPortal();
+        Panel panel = portal.getPanel();
+
+        // get number of column on a panel
+        int numberOfColumn = panel.getNumberOfColumn(columnsId);
+
+        // change selectbox value
+        Tab tab = portal.getTab();
+        tab.selectSelectMenu(tabId);
+        Select select = new Select(tab.getColumnNumSelect(tabId));
+        int value = (MAX_NUMBER_OF_COLUMN == numberOfColumn) ? 1 : numberOfColumn + 1;
+        select.selectByValue(Integer.toString(value));
+        // TODO: 書かなくてもいいようにできないか。
+        // stall for time to change number of column
+        Portal.waitPortalLoadComplete(getDriver());
+
+        assertEquals(value, panel.getNumberOfColumn(columnsId));
+    }
+
+//    @Test
     /**
      * 保存確認
      * 列数を変更し、更新すると指定された列数で保存されることを確認する。
+     * TODO: ブラウザをリロードする手段が無いと難しい。（可能と思うがスキル不足で時間が掛かりそうなのでスキップする。）
      */
     public void iscp_5762() {}
-    
+
     @Test
-    public void iscp_5763() {}
+    /**
+     * ウィジェットの位置調整
+     * ガジェットを複数ドロップし、列数変更で現在ドロップされているガジェットの列数以下の列数に変更すると、
+     * 右端のガジェットが下に移動する。
+     * 再び列数を増やしてもガジェットは最初にあった列に戻らないことも確認する。
+     */
+    public void iscp_5763() {
+        Portal portal = getPortal();
+        TopMenu topMenu = portal.getTopMenu();
+        Panel panel = portal.getPanel();
+        Tab tab = portal.getTab();
+
+        String tabId = ISConstants.TABID_HOME;
+        String columnsId = "columns0";
+        
+        int numberOfColumn = panel.getNumberOfColumn(columnsId);
+        if (2 > numberOfColumn)
+            fail("This test assumes that the number of columns is 2.");
+
+        // drop 10 gadgets (sticky) to panel
+        for (int columnNum = 1; columnNum <= 10; columnNum++) {
+            topMenu.dropGadget("etcWidgets", "etcWidgets_stickey", columnNum % numberOfColumn + 1);
+        }
+
+        List<List<String>> beforeGadgetIds = panel.getDeployedGadgetIds(columnsId);
+        int index = numberOfColumn - 1;
+        List<String> correct = beforeGadgetIds.get(index - 1);
+        correct.addAll(beforeGadgetIds.get(index));
+        
+        // change number of column (-1)
+        tab.selectSelectMenu(tabId);
+        Select select = new Select(tab.getColumnNumSelect(tabId));
+
+        select.selectByValue(Integer.toString(numberOfColumn - 1));        
+        // TODO: 書かなくてもいいようにできないか。
+        // stall for time to change number of column
+        Portal.waitPortalLoadComplete(getDriver());
+
+        List<List<String>> afterGadgetIds = panel.getDeployedGadgetIds(columnsId);
+        List<String> test = afterGadgetIds.get(afterGadgetIds.size() - 1);
+
+        if (correct.size() != test.size())
+            fail("Number of gadget in a column is illegal.");
+        for (int i = 0, end = test.size(); i < end; i++) {
+            if (!correct.get(i).equals(test.get(i)))
+                fail("Gadget does not exist or extra gadget exist.");
+        }
+
+        // restore number of column
+        select.selectByValue(Integer.toString(numberOfColumn));
+        // TODO: 書かなくてもいいようにできないか。
+        // stall for time to change number of column
+        Portal.waitPortalLoadComplete(getDriver());
+        
+        List<List<String>> restoredGadgetIds = panel.getDeployedGadgetIds(columnsId);
+        List<String> zeroGadget = restoredGadgetIds.get(restoredGadgetIds.size() - 1);
+        if (0 != zeroGadget.size())
+            fail("Gadgets in the right column exists.");
+    }
 
 }
