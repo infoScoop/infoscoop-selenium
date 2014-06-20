@@ -7,6 +7,7 @@ import java.util.List;
 import org.infoscoop_selenium.Portal;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.constants.ISConstants;
+import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Panel;
 import org.infoscoop_selenium.portal.Tab;
 import org.infoscoop_selenium.portal.TopMenu;
@@ -107,9 +108,8 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         Select select = new Select(tab.getColumnNumSelect(tabId));
         int value = (MAX_NUMBER_OF_COLUMN == numberOfColumn) ? 1 : numberOfColumn + 1;
         select.selectByValue(Integer.toString(value));
-        // TODO: 書かなくてもいいようにできないか。
         // stall for time to change number of column
-        Portal.waitPortalLoadComplete(getDriver());
+        TestHelper.sleep(1000);
 
         assertEquals(value, panel.getNumberOfColumn(columnsId));
     }
@@ -157,9 +157,8 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         Select select = new Select(tab.getColumnNumSelect(tabId));
 
         select.selectByValue(Integer.toString(numberOfColumn - 1));        
-        // TODO: 書かなくてもいいようにできないか。
         // stall for time to change number of column
-        Portal.waitPortalLoadComplete(getDriver());
+        TestHelper.sleep(1000);
 
         List<List<String>> afterGadgetIds = panel.getDeployedGadgetIds(columnsId);
         List<String> test = afterGadgetIds.get(afterGadgetIds.size() - 1);
@@ -173,9 +172,8 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
 
         // restore number of column
         select.selectByValue(Integer.toString(numberOfColumn));
-        // TODO: 書かなくてもいいようにできないか。
         // stall for time to change number of column
-        Portal.waitPortalLoadComplete(getDriver());
+        TestHelper.sleep(1000);
 
         List<List<String>> restoredGadgetIds = panel.getDeployedGadgetIds(columnsId);
         List<String> zeroGadget = restoredGadgetIds.get(restoredGadgetIds.size() - 1);
@@ -192,7 +190,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
     public void iscp_5764() {}
 
 //    @Test
-    /*
+    /**
      * ウェイト
      * セレクトボックスを高速に切り替えても画面がフリーズしないことを確認する。
      * TODO: このコードでは意味が無い。
