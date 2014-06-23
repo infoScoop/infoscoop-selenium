@@ -1,7 +1,5 @@
 package org.infoscoop_selenium;
 
-import java.util.List;
-
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
 import org.infoscoop_selenium.portal.Panel;
@@ -11,7 +9,6 @@ import org.infoscoop_selenium.portal.TopMenu;
 import org.infoscoop_selenium.properties.TestEnv;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 
 public class Portal {
@@ -21,7 +18,6 @@ public class Portal {
 	Tab tab;
 	TopMenu topMenu;
 	SideBar sideBar;
-    Panel panel;
 	WebDriver messageConsoleDriver;
 	AdminPage adminPage;
 	
@@ -32,7 +28,6 @@ public class Portal {
 		this.tab = new Tab(driver);
 		this.topMenu = new TopMenu(driver);
 		this.sideBar = new SideBar(driver);
-        this.panel = new Panel(driver);
 
 		WindowManager.init(driver);
 	}
@@ -103,8 +98,8 @@ public class Portal {
 		return sideBar;
 	}
 
-	public Panel getPanel() {
-	    return panel;
+	public Panel getPanel(String tabId) {
+	    return new Panel(driver, tabId);
 	}
 
 	public String getUrl(){

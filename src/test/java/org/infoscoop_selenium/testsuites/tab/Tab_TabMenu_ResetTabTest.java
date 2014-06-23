@@ -72,7 +72,7 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 		
 		// 追加したガジェットの存在チェック
 		Boolean existGadget = false;
-		List<WebElement> elements = getPortal().getTab().getGadgetElements(ISConstants.TABID_HOME);
+		List<WebElement> elements = getPortal().getPanel(ISConstants.TABID_HOME).getGadgetElements();
 		for( int i=0;i<elements.size();i++ ) {
 			WebElement el = (WebElement) elements.get(i);
 			String id = el.getAttribute("id");
@@ -109,7 +109,7 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 		
 		// 追加したガジェットの存在チェック
 		Boolean existGadget = false;
-		List<WebElement> elements = getPortal().getTab().getGadgetElements(ISConstants.TABID_HOME);
+		List<WebElement> elements = getPortal().getPanel(ISConstants.TABID_HOME).getGadgetElements();
 		for( int i=0;i<elements.size();i++ ) {
 			WebElement el = (WebElement) elements.get(i);
 			String id = el.getAttribute("id");

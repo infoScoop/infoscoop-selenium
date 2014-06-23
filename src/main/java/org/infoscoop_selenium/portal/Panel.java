@@ -10,9 +10,15 @@ import org.openqa.selenium.WebElement;
 public class Panel {
 
     WebDriver driver;
+    String tabId;
+    String panelId;
+    WebElement panelEl;
 
-    public Panel(WebDriver driver) {
+    public Panel(WebDriver driver, String tabId) {
         this.driver = driver;
+        this.tabId = tabId;
+        this.panelId = tabId.replace("tab", "panel");
+        this.panelEl = driver.findElement(By.id(this.panelId));
     }
 
     /**
@@ -46,7 +52,14 @@ public class Panel {
     }
 
     private List<WebElement> getColumns(String columnsId) {
-        return driver.findElements(By.cssSelector("#" + columnsId + " .column"));
+        return this.panelEl.findElements(By.cssSelector("#" + columnsId + " .column"));
     }
 
+	
+	/**
+	 * ガジェット要素リストを返す
+	 */
+	public List<WebElement> getGadgetElements() {
+		return this.panelEl.findElements(By.cssSelector(".widget"));
+	}
 }

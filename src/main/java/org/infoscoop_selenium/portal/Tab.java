@@ -3,13 +3,10 @@ package org.infoscoop_selenium.portal;
 import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
-import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 
 public class Tab {
 	WebDriver driver;
@@ -205,15 +202,6 @@ public class Tab {
 	public String getNameInputValue(String tabId) {
 		WebElement nameInput = getNameInput(tabId);
 		return nameInput.getAttribute("value");
-	}
-	
-	
-	/**
-	 * 指定タブ内のガジェット要素リストを返す
-	 */
-	public List<WebElement> getGadgetElements(String tabId) {
-		String panelId = tabId.replace("tab", "panel");
-		return driver.findElements(By.cssSelector("#" + panelId + " .widget"));
 	}
 	
 	/**

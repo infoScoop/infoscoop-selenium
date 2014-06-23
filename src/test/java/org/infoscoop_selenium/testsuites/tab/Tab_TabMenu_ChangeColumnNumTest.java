@@ -57,7 +57,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         tab.selectSelectMenu(tabId);
         WebElement element = tab.getColumnNumSelect(tabId);
 
-        String numberOfColumn = Integer.toString(portal.getPanel().getNumberOfColumn("columns0"));
+        String numberOfColumn = Integer.toString(portal.getPanel(tabId).getNumberOfColumn("columns0"));
         assertEquals(numberOfColumn, element.getAttribute("value"));
     }
 
@@ -97,7 +97,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         String tabId = "tab" + id;
 
         Portal portal = getPortal();
-        Panel panel = portal.getPanel();
+        Panel panel = portal.getPanel(tabId);
 
         // get number of column on a panel
         int numberOfColumn = panel.getNumberOfColumn(columnsId);
@@ -132,10 +132,10 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
     public void iscp_5763() {
         Portal portal = getPortal();
         TopMenu topMenu = portal.getTopMenu();
-        Panel panel = portal.getPanel();
         Tab tab = portal.getTab();
 
         String tabId = ISConstants.TABID_HOME;
+        Panel panel = portal.getPanel(tabId);
         String columnsId = "columns0";
 
         int numberOfColumn = panel.getNumberOfColumn(columnsId);
