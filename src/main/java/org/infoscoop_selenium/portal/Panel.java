@@ -22,23 +22,14 @@ public class Panel {
     }
 
     /**
-     * パネルのカラム数を返す
-     * @param columnsId
-     * @return
-     */
-    public int getNumberOfColumn(String columnsId) {
-        return getColumns(columnsId).size();
-    }
-
-    /**
      * パネルの各カラムに配置されているガジェットのＩＤを返す
      * @param columnsId
      * @return
      */
-    public List<List<String>> getDeployedGadgetIds(String columnsId) {
+    public List<List<String>> getDeployedGadgetIds() {
         List<List<String>> deployedGadgetIds = new ArrayList<>();
 
-        List<WebElement> columns = getColumns(columnsId);
+        List<WebElement> columns =  this.panelEl.findElements(By.cssSelector(".column"));
         for (WebElement column : columns) {
             List<String> ids = new ArrayList<>();
             List<WebElement> gadgets = column.findElements(By.cssSelector(".widget"));
@@ -50,16 +41,32 @@ public class Panel {
 
         return deployedGadgetIds;
     }
+    
+	/**
+	 * カラム要素リストを返す
+	 */
+	public List<WebElement> getColumnElements() {
+		return this.panelEl.findElements(By.cssSelector(".column"));
+	}
 
-    private List<WebElement> getColumns(String columnsId) {
-        return this.panelEl.findElements(By.cssSelector("#" + columnsId + " .column"));
-    }
-
-	
 	/**
 	 * ガジェット要素リストを返す
 	 */
 	public List<WebElement> getGadgetElements() {
 		return this.panelEl.findElements(By.cssSelector(".widget"));
+	}
+	
+	/**
+	 * 列数を返す
+	 */
+	public int getColumnLength() {
+		return this.panelEl.findElements(By.cssSelector(".column")).size();
+	}
+
+	/**
+	 * 列幅調整バーを返す
+	 */
+	public WebElement getAdjustBar(int idx) {
+		return this.panelEl.findElements(By.cssSelector(".adjustBarOut")).get(idx);
 	}
 }

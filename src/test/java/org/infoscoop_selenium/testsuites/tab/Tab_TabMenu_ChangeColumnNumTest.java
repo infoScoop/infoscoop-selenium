@@ -57,7 +57,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         tab.selectSelectMenu(tabId);
         WebElement element = tab.getColumnNumSelect(tabId);
 
-        String numberOfColumn = Integer.toString(portal.getPanel(tabId).getNumberOfColumn("columns0"));
+        String numberOfColumn = Integer.toString(portal.getPanel(tabId).getColumnLength());
         assertEquals(numberOfColumn, element.getAttribute("value"));
     }
 
@@ -100,7 +100,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         Panel panel = portal.getPanel(tabId);
 
         // get number of column on a panel
-        int numberOfColumn = panel.getNumberOfColumn(columnsId);
+        int numberOfColumn = panel.getColumnLength();
 
         // change selectbox value
         Tab tab = portal.getTab();
@@ -111,7 +111,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         // stall for time to change number of column
         TestHelper.sleep(1000);
 
-        assertEquals(value, panel.getNumberOfColumn(columnsId));
+        assertEquals(value, panel.getColumnLength());
     }
 
 //    @Test
@@ -136,9 +136,8 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
 
         String tabId = ISConstants.TABID_HOME;
         Panel panel = portal.getPanel(tabId);
-        String columnsId = "columns0";
 
-        int numberOfColumn = panel.getNumberOfColumn(columnsId);
+        int numberOfColumn = panel.getColumnLength();
         if (2 > numberOfColumn)
             fail("This test assumes that the number of columns is 2.");
 
@@ -147,7 +146,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
             topMenu.dropGadget("etcWidgets", "etcWidgets_stickey", columnNum % numberOfColumn + 1);
         }
 
-        List<List<String>> beforeGadgetIds = panel.getDeployedGadgetIds(columnsId);
+        List<List<String>> beforeGadgetIds = panel.getDeployedGadgetIds();
         int index = numberOfColumn - 1;
         List<String> correct = beforeGadgetIds.get(index - 1);
         correct.addAll(beforeGadgetIds.get(index));
@@ -160,7 +159,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         // stall for time to change number of column
         TestHelper.sleep(1000);
 
-        List<List<String>> afterGadgetIds = panel.getDeployedGadgetIds(columnsId);
+        List<List<String>> afterGadgetIds = panel.getDeployedGadgetIds();
         List<String> test = afterGadgetIds.get(afterGadgetIds.size() - 1);
 
         if (correct.size() != test.size())
@@ -175,7 +174,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         // stall for time to change number of column
         TestHelper.sleep(1000);
 
-        List<List<String>> restoredGadgetIds = panel.getDeployedGadgetIds(columnsId);
+        List<List<String>> restoredGadgetIds = panel.getDeployedGadgetIds();
         List<String> zeroGadget = restoredGadgetIds.get(restoredGadgetIds.size() - 1);
         if (0 != zeroGadget.size())
             fail("Gadgets in the right column exists.");
