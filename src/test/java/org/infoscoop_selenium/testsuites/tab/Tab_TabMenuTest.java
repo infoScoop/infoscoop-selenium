@@ -2,6 +2,7 @@ package org.infoscoop_selenium.testsuites.tab;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,7 @@ public class Tab_TabMenuTest extends IS_BaseItTestCase {
 		// ホームタブのタブメニューは存在しない
 		try {
 			getPortal().getTab().getTabMenu(ISConstants.TABID_HOME);
-			assertTrue("must throw NoSuchElementException", false);
+			fail("must throw NoSuchElementException");
 		} catch (NoSuchElementException e) {
 			//success
 		}

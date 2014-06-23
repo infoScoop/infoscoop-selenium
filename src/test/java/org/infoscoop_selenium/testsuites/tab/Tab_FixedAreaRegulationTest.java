@@ -1,6 +1,6 @@
 package org.infoscoop_selenium.testsuites.tab;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
@@ -48,7 +48,7 @@ public class Tab_FixedAreaRegulationTest extends IS_BaseItTestCase {
 		// [削除]が存在しない
 		try {
 			gadget.getCloseElement();
-			assertTrue("must throw NoSuchElementException", false);
+			fail("must throw NoSuchElementException");
 		} catch (NoSuchElementException e) {
 			//success
 		}
@@ -80,7 +80,7 @@ public class Tab_FixedAreaRegulationTest extends IS_BaseItTestCase {
 		// [表示件数を減らす]が存在しない
 		try {
 			gadget.getWidgetRssUpElement();
-			assertTrue("must throw NoSuchElementException", false);
+			fail("must throw NoSuchElementException");
 		} catch (NoSuchElementException e) {
 			//success
 		}
@@ -88,7 +88,7 @@ public class Tab_FixedAreaRegulationTest extends IS_BaseItTestCase {
 		// [表示件数を増やす]が存在しない
 		try {
 			gadget.getWidgetRssDownElement();
-			assertTrue("must throw NoSuchElementException", false);
+			fail("must throw NoSuchElementException");
 		} catch (NoSuchElementException e) {
 			//success
 		}
@@ -112,7 +112,7 @@ public class Tab_FixedAreaRegulationTest extends IS_BaseItTestCase {
 		// [記事表示件数]が存在しない
 		try {
 			gadget.getGadgetPreference().getItemsnumElement();
-			assertTrue("must throw NoSuchElementException", false);
+			fail("must throw NoSuchElementException");
 		} catch (NoSuchElementException e) {
 			//success
 		}
