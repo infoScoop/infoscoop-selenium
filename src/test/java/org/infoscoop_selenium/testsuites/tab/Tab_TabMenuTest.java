@@ -2,6 +2,7 @@ package org.infoscoop_selenium.testsuites.tab;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
@@ -52,7 +53,7 @@ public class Tab_TabMenuTest extends IS_BaseItTestCase {
 		// ホームタブのタブメニューは存在しない
 		try {
 			getPortal().getTab().getTabMenu(ISConstants.TABID_HOME);
-			assertTrue("must throw NoSuchElementException", false);
+			fail("must throw NoSuchElementException");
 		} catch (NoSuchElementException e) {
 			//success
 		}
@@ -155,7 +156,8 @@ public class Tab_TabMenuTest extends IS_BaseItTestCase {
 		getPortal().getTab().selectSelectMenu(tabId);
 		WebElement tabMenu = getPortal().getTab().getTabMenu(tabId);
 		// タブメニューのY座標が、ホームのタブメニューのY座標より下になることをチェック
-		assertTrue(tabMenuY0 < tabMenu.getLocation().getY());
+		assertTrue(tabMenuY0 + " < " + tabMenu.getLocation().getY(),
+				tabMenuY0 < tabMenu.getLocation().getY());
 	}
 
 	@Test
@@ -186,7 +188,7 @@ public class Tab_TabMenuTest extends IS_BaseItTestCase {
 		WebElement tabMenu = getPortal().getTab().getTabMenu(tabId2);
 		int offsetX = selectMenu.getLocation().getX() - tabMenu.getLocation().getX();
 		// タブメニューからのタブメニューボタンのオフセットが大きくなっている（タブメニューが左に移動している）ことをチェック
-		assertTrue(offsetX0 < offsetX);
+		assertTrue(offsetX0 + " < " + offsetX, offsetX0 < offsetX);
 	}
 
 }

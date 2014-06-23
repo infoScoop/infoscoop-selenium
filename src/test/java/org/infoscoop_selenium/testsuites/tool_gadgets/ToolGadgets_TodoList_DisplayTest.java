@@ -1,5 +1,6 @@
 package org.infoscoop_selenium.testsuites.tool_gadgets;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
@@ -43,7 +44,7 @@ public class ToolGadgets_TodoList_DisplayTest extends IS_BaseItTestCase{
 		// ボタンが表示されていることを確認
 		assertTrue(todoAddButton.isDisplayed());
 		// テキストボックスが表示されていることを確認
-		assertTrue(todoLength == 0);
+		assertEquals(0, todoLength);
 		GADGET.blur();
 	}
 	
@@ -64,6 +65,7 @@ public class ToolGadgets_TodoList_DisplayTest extends IS_BaseItTestCase{
 		GADGET.addToDo("test");
 		
 		// ガジェット内の高さとフレームの高さを比較。ガジェット内の高さがフレームの高さを下回っていれば成功
-		assertTrue(GADGET.getFrame().getSize().height > GADGET.getContentHeight());
+		assertTrue(GADGET.getFrame().getSize().height + " > " + GADGET.getContentHeight(),
+				GADGET.getFrame().getSize().height > GADGET.getContentHeight());
 	}
 }

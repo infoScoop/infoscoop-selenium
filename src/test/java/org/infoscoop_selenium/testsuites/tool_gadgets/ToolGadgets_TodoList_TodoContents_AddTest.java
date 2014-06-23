@@ -92,7 +92,7 @@ public class ToolGadgets_TodoList_TodoContents_AddTest extends IS_BaseItTestCase
 		int todoLen = GADGET.getTodoLength();
 		
 		// 現在の表示件数が1件であることを確認
-		assertEquals(todoLen, 1);
+		assertEquals(1, todoLen);
 		
 		// コンテンツの高さが増加していることの確認
 		assertTrue(afterHeight + ">" + beforeHeight, afterHeight > beforeHeight);

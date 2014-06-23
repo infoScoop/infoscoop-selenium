@@ -1,6 +1,6 @@
 package org.infoscoop_selenium.testsuites.tab;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.junit.Test;
@@ -28,6 +28,6 @@ public class Tab_DisplayTabTest extends IS_BaseItTestCase {
 	public void iscp_5721() {
 		//多段表示にするスタイルがあるかを確認
 		String tabLiDisplayProperty = getPortal().getTab().getTabLiDisplayProperty();
-		assertTrue(tabLiDisplayProperty.equals("inline-block"));
+		assertEquals("inline-block", tabLiDisplayProperty);
 	}
 }

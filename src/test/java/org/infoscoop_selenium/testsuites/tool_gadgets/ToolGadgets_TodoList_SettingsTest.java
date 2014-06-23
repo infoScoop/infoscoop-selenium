@@ -42,7 +42,7 @@ public class ToolGadgets_TodoList_SettingsTest extends IS_BaseItTestCase{
 		// 表示されているUserPref情報取得
 		Map prefsMap = GADGET.getGadgetPreference().getDisplayUserPrefs();
 		
-		assertEquals(prefsMap.keySet().size(), 2);
+		assertEquals(2, prefsMap.keySet().size());
 		
 		int order = 0;
 		for(Iterator<Map.Entry> ite = prefsMap.entrySet().iterator();ite.hasNext();){
@@ -50,15 +50,15 @@ public class ToolGadgets_TodoList_SettingsTest extends IS_BaseItTestCase{
 			Map.Entry entry = ite.next();
 			if(order == 0){
 				// 1行目は「ガジェットタイトル:」、テキストフォーム
-				assertEquals(entry.getKey(), "ガジェットタイトル:");
+				assertEquals("ガジェットタイトル:", entry.getKey());
 				WebElement el = (WebElement)entry.getValue();
-				assertEquals(el.getAttribute("type"), "text");
+				assertEquals("text", el.getAttribute("type"));
 			}
 			else if(order == 1){
 				// 2行目は「フォントサイズ:」、セレクトボックス
-				assertEquals(entry.getKey(), "フォントサイズ:");
+				assertEquals("フォントサイズ:", entry.getKey());
 				WebElement el = (WebElement)entry.getValue();
-				assertEquals(el.getTagName(), "select");
+				assertEquals("select", el.getTagName());
 				
 				// TODO: selectのoption要素チェック
 				List<WebElement> options = el.findElements(By.tagName("option"));
@@ -69,11 +69,11 @@ public class ToolGadgets_TodoList_SettingsTest extends IS_BaseItTestCase{
 					WebElement option = options.get(i);
 					if(i == 0){
 						// option 1行目は value=normal
-						assertEquals(option.getAttribute("value"), "normal");
+						assertEquals("normal", option.getAttribute("value"));
 					}
 					else if(i == 1){
 						// option 2行目は value=large
-						assertEquals(option.getAttribute("value"), "large");
+						assertEquals("large", option.getAttribute("value"));
 					}
 				}
 			}
