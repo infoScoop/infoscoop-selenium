@@ -85,6 +85,13 @@ public abstract class Gadget {
 	}
 	
 	/**
+	 * ガジェットエレメントを返す
+	 */
+	public WebElement getGadgetElement(){
+		return driver.findElement(By.id(gadgetId));
+	}
+	
+	/**
 	 * [削除]エレメントを返す
 	 */
 	public WebElement getCloseElement(){

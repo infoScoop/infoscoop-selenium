@@ -6,6 +6,7 @@ import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 /* TODO
@@ -29,6 +30,15 @@ public class AlarmGadget extends Gadget{
 		public String getValue(){
 			return notify;
 		}
+	}
+	
+	/**
+	 * コンテンツエレメントを返す。
+	 */
+	public WebElement getContent() {
+		WebElement gadget = super.getGadgetElement();
+		WebElement content = gadget.findElement(By.cssSelector(".widgetShade .widgetBox .widgetContent"));
+		return content;
 	}
 	
 	/**
@@ -92,8 +102,10 @@ public class AlarmGadget extends Gadget{
 		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_ymd']/div[@class='DatatypeCalendar']/a")).click();		
 		TestHelper.waitPresent(driver, By.className("CalendarComponent_Panel"));
 		
+		// 翌月にする
+		driver.findElement(By.xpath("//table[@class='CalendarComponent_Table Calendar widgetContent']/thead//a[@class='calnavright']")).click();
 		// 日付を指定する
-		driver.findElement(By.xpath("//table[@class='CalendarComponent_Table calendar widgetContent']/tbody/tr[2]/td[2]/div")).click();
+		driver.findElement(By.xpath("//table[@class='CalendarComponent_Table Calendar widgetContent']/tbody/tr[2]/td[2]/div")).click();
 	}
 	
 	/**
