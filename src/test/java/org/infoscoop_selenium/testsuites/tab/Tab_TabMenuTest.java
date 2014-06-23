@@ -155,7 +155,8 @@ public class Tab_TabMenuTest extends IS_BaseItTestCase {
 		getPortal().getTab().selectSelectMenu(tabId);
 		WebElement tabMenu = getPortal().getTab().getTabMenu(tabId);
 		// タブメニューのY座標が、ホームのタブメニューのY座標より下になることをチェック
-		assertTrue(tabMenuY0 < tabMenu.getLocation().getY());
+		assertTrue(tabMenuY0 + " < " + tabMenu.getLocation().getY(),
+				tabMenuY0 < tabMenu.getLocation().getY());
 	}
 
 	@Test
@@ -186,7 +187,7 @@ public class Tab_TabMenuTest extends IS_BaseItTestCase {
 		WebElement tabMenu = getPortal().getTab().getTabMenu(tabId2);
 		int offsetX = selectMenu.getLocation().getX() - tabMenu.getLocation().getX();
 		// タブメニューからのタブメニューボタンのオフセットが大きくなっている（タブメニューが左に移動している）ことをチェック
-		assertTrue(offsetX0 < offsetX);
+		assertTrue(offsetX0 + " < " + offsetX, offsetX0 < offsetX);
 	}
 
 }

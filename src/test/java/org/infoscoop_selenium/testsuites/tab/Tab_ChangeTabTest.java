@@ -1,6 +1,7 @@
 package org.infoscoop_selenium.testsuites.tab;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.constants.ISConstants;
@@ -29,7 +30,7 @@ public class Tab_ChangeTabTest extends IS_BaseItTestCase {
 		String currentTabId = getPortal().getTab().getCurrentTabId();
 		
 		// ログイン時のカレントタブIDが"tab0"であれば成功
-		assertTrue("currentTabId=" + currentTabId, currentTabId.equals(ISConstants.TABID_HOME));
+		assertEquals(ISConstants.TABID_HOME, currentTabId);
 	}
 
 	@Test
@@ -42,12 +43,12 @@ public class Tab_ChangeTabTest extends IS_BaseItTestCase {
 		
 		// カレントタブがホーム以外になっていることを確認
 		String currentTabId = getPortal().getTab().getCurrentTabId();
-		assertTrue(!currentTabId.equals(ISConstants.TABID_HOME));
+		assertFalse(currentTabId.equals(ISConstants.TABID_HOME));
 		
 		// 非アクティブのホームタブをクリックし、カレントタブがホームになっていればなら成功
 		getPortal().getTab().selectTab(ISConstants.TABID_HOME);
 		currentTabId = getPortal().getTab().getCurrentTabId();
-		assertTrue(ISConstants.TABID_HOME.equals(currentTabId));
+		assertEquals(ISConstants.TABID_HOME, currentTabId);
 	}
 	
 	/**
@@ -70,6 +71,4 @@ public class Tab_ChangeTabTest extends IS_BaseItTestCase {
 		assertTrue(true);
 	}
 	*/
-
-
 }

@@ -1,58 +1,11 @@
 package org.infoscoop_selenium.testsuites.tool_gadgets;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.infoscoop_selenium.base.IS_BaseItTestCase;
-import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
-import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.infoscoop_selenium.base.IS_BaseItTestCase;
-import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
-import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.infoscoop_selenium.base.IS_BaseItTestCase;
-import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
-import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 /**
  * ツール系ガジェット/TODOリスト/設定/フォントサイズ

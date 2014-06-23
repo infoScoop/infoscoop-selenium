@@ -1,11 +1,12 @@
 package org.infoscoop_selenium.testsuites.tab;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.constants.ISConstants;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -37,11 +38,11 @@ public class Tab_AddTabTest extends IS_BaseItTestCase{
 		
 		// タブがひとつ多くなっていることを確認
 		int afterNumberOfTab = getPortal().getTab().getNumberOfTab();
-		assertTrue(beforeNumberOfTab + 1 == afterNumberOfTab);
+		assertEquals(beforeNumberOfTab + 1, afterNumberOfTab);
 		
 		// 追加されたタブが一番最後（右）になっていることを確認	
 		String farRightTabId = getPortal().getTab().getFarRightTabId();
-		assertTrue(addedTabId.equals(farRightTabId));
+		assertEquals(addedTabId, farRightTabId);
 	}
 	
 	@Test
@@ -55,7 +56,7 @@ public class Tab_AddTabTest extends IS_BaseItTestCase{
 		
 		//追加したタブID=カレントタブID（アクティブタブのID）なら成功
 		String currentTabId = getPortal().getTab().getCurrentTabId();
-		assertTrue(addedTabId.equals(currentTabId));
+		assertEquals(addedTabId, currentTabId);
 	}
 	
 	@Test

@@ -1,6 +1,8 @@
 package org.infoscoop_selenium.testsuites.tab;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.portal.Gadget;
@@ -73,7 +75,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
     	
 		int afterNumberOfTab = getPortal().getTab().getNumberOfTab();
 		
-		assertTrue(beforeNumberOfTab + 1 == afterNumberOfTab);
+		assertEquals(beforeNumberOfTab + 1, afterNumberOfTab);
 	}
 
 	@Test
@@ -167,7 +169,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		int trashedItemCount2 = getPortal().getCommandBar().getTrashBox().getTrashedItemCount();
 		
 		//ゴミ箱のアイテム数が１つ増えていたら成功
-		assertTrue(trashedItemCount1 + 1 == trashedItemCount2);
+		assertEquals(trashedItemCount1 + 1, trashedItemCount2);
 	}
 
 }
