@@ -82,6 +82,8 @@ public class TopMenu {
 		if(dropFlg)
 			actions.release();
 		actions.build().perform();
+		
+		TestHelper.sleep(1000);
 
 		if(dropFlg){
 			// メニューを閉じる
@@ -111,8 +113,8 @@ public class TopMenu {
 	public void closeMenu(String parentId) {
 		Actions actions = new Actions(driver);
 		// メニューが残っている場合消去する
-		if(driver.findElement(By.xpath("//li[@id='" + parentId + "']//img[@class='closeMenu']")).isDisplayed()){
-			WebElement closeDiv = driver.findElement(By.xpath("//li[@id='" + parentId + "']//img[@class='closeMenu']"));
+		WebElement closeDiv = driver.findElement(By.xpath("//li[@id='" + parentId + "']//img[@class='closeMenu']"));
+		if(closeDiv != null){
 			actions.moveToElement(closeDiv);
 			actions.build().perform();
 			TestHelper.waitInvisible(driver, By.xpath("//li[@id='" + parentId + "']//img[@class='closeMenu']"));
@@ -124,6 +126,7 @@ public class TopMenu {
 			menuOverlay.click();
 			TestHelper.waitInvisible(driver, By.cssSelector(".menuOverlay"));
 		}
+		TestHelper.sleep(1000);
 	}
 
 	/**

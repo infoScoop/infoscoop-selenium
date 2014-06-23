@@ -37,6 +37,7 @@ public class TrashBox {
 	 */
 	public void hide(){
 		this.driver.findElement(By.className("alphacube_close")).click();
+		TestHelper.waitInvisible(driver, By.className("dialog"));
 	}
 	
 	/**
@@ -54,6 +55,30 @@ public class TrashBox {
 		actions.perform();
 		
 		TestHelper.waitPresent(driver, By.id("trashContext"));
+	}
+	
+	/**
+	 * 元に戻すメニューを返す
+	 */
+	public WebElement getResetMenuItem(){
+		WebElement menuItem = driver.findElements(By.cssSelector("#trashContext > table > tbody > tr > td")).get(0);
+		return menuItem;
+	}
+	
+	/**
+	 * 削除メニューを返す
+	 */
+	public WebElement getDeleteMenuItem(){
+		WebElement menuItem = driver.findElements(By.cssSelector("#trashContext > table > tbody > tr > td")).get(1);
+		return menuItem;
+	}
+	
+	/**
+	 * 削除メニューを返す
+	 */
+	public WebElement getCancelMenuItem(){
+		WebElement menuItem = driver.findElements(By.cssSelector("#trashContext > table > tbody > tr > td")).get(2);
+		return menuItem;
 	}
 	
 	/**

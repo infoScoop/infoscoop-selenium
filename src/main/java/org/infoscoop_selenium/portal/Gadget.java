@@ -137,6 +137,25 @@ public abstract class Gadget {
 		actions.build().perform();
 	}
 	
+	/**
+	 * ガジェットのタブ移動
+	 */
+	public void moveTab(String tabId) {
+		WebElement dropElement = driver.findElement(By.id(tabId));
+		
+		WebElement targetElement = driver.findElement(By.xpath("//div[@id='" + gadgetId + "']//div[@class='widgetHeader']/div[1]"));
+
+		Actions actions = new Actions(driver);
+		
+		actions.moveToElement(targetElement);
+		actions.clickAndHold();
+		actions.moveToElement(dropElement);
+		actions.release();
+		actions.build().perform();
+		
+		TestHelper.sleep(1000);
+	}
+	
 	public GadgetPreference getGadgetPreference(){
 		return gadgetPreference;
 	}
