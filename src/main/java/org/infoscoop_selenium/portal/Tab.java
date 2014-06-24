@@ -41,7 +41,14 @@ public class Tab {
 	 * タブを選択する
 	 */
 	public void selectTab(String tabId){
-		driver.findElement(By.id(tabId)).click();
+		getTab(tabId).click();
+	}
+	
+	/**
+	 * タブを返す
+	 */
+	public WebElement getTab(String tabId) {
+		return driver.findElement(By.id(tabId));
 	}
 	
 	/**
