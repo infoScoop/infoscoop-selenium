@@ -16,16 +16,26 @@ public class ToDoListGadget extends Gadget{
 	}
 	
 	public static enum PRIORITY {
-		HIGH(0),
-		MIDDLE(1),
-		LOW(2);
+		HIGH(0, "高", "rgba(255, 0, 0, 1)"),
+		MIDDLE(1, "中", "rgba(0, 153, 0, 1)"),
+		LOW(2, "低", "rgba(34, 34, 136, 1)");
 
 		private final int priority;
-		private PRIORITY(int priority){
+		private final String text;
+		private final String cssColor;
+		private PRIORITY(int priority, String text, String cssColor){
 			this.priority = priority;
+			this.text = text;
+			this.cssColor = cssColor;
 		}
 		public int getValue(){
 			return priority;
+		}
+		public String getText() {
+		    return text;
+		}
+		public String getCssColor() {
+		    return cssColor;
 		}
 	}
 	
@@ -91,7 +101,43 @@ public class ToDoListGadget extends Gadget{
 		// ガジェット設定を閉じる
 		getGadgetPreference().ok();
 	}
-	
+
+    /**
+     * 優先度テキストを表示している要素を返す。
+     * @param order
+     * @return
+     */
+    public WebElement getTodoPriority(int order) {
+        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        List<WebElement> childNodes = driver.findElements(By.cssSelector(
+                ".todoListTable tr:nth-of-type(" + order + ") .todoPriorityTd > *"));
+        WebElement todoPriority = null;
+        if (0 < childNodes.size()
+                && "todoPriority".equals(childNodes.get(0).getAttribute("class"))) {
+            todoPriority = childNodes.get(0);
+        }
+        TestHelper.backToTopFrame(driver);
+        return todoPriority;
+    }
+
+    /**
+     * 優先度のセレクトボックスを返す。
+     * @param order
+     * @return
+     */
+    public WebElement getChangePrioritySelectBox(int order) {
+        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        List<WebElement> childNodes = driver.findElements(By.cssSelector(
+                ".todoListTable tr:nth-of-type(" + order + ") .todoPriorityTd > *"));
+        WebElement selectBox = null;
+        for (WebElement element : childNodes) {
+            if ("select".equals(element.getTagName()))
+                selectBox = element;
+        }
+        TestHelper.backToTopFrame(driver);
+        return selectBox;
+    }
+
 	/**
 	 * TODO追加テキストフォームを返す
 	 * @return

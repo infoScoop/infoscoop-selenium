@@ -93,7 +93,6 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
      */
     public void iscp_5761() {
         String id = "0";
-        String columnsId = "columns" + id;
         String tabId = "tab" + id;
 
         Portal portal = getPortal();
