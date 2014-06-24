@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.constants.ISConstants;
+import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Panel;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
@@ -45,7 +46,11 @@ public class Tab_ChangetTabWidthTest extends IS_BaseItTestCase{
 		actions.moveToElement(bar);
 		actions.build().perform();
 		
+		// CSSクラス確認
 		assertEquals(bar.getAttribute("class"), "adjustBarOver");
+		
+		// スナップショット取得
+		TestHelper.getScreenShot("iscp-5774_列幅調整バー表示", getDriver(), true);
 	}
 	
 	@Test
@@ -106,7 +111,11 @@ public class Tab_ChangetTabWidthTest extends IS_BaseItTestCase{
 		actions.moveByOffset(100, 0);
 		actions.build().perform();
 		
+		// CSSクラスの確認
 		assertEquals(bar.getAttribute("class"), "adjustBarOut");
+		
+		// スナップショット取得
+		TestHelper.getScreenShot("iscp-5776_列幅調整バーの非表示", getDriver(), true);
 	}
 	
 	@Test
