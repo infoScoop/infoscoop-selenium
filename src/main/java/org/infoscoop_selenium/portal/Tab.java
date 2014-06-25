@@ -1,5 +1,6 @@
 package org.infoscoop_selenium.portal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
@@ -73,6 +74,24 @@ public class Tab {
 	public int getNumberOfTab() {
 		List<WebElement> tabsLis = driver.findElements(By.cssSelector("#tabsUl li"));
 		return tabsLis.size();
+	}
+	
+	/**
+	 * タブIDのリストを返す（左から右の順番で）
+	 */
+	public List<String> getTabIdList() {
+		int numberOfTab = getNumberOfTab();
+		List<String> tabs = new ArrayList<String>();
+		String tabId;
+		
+		WebElement tabsUl = driver.findElement(By.cssSelector("#tabsUl"));
+		for (int i = 0; i < numberOfTab; i++) {
+			int n = i+1;
+			tabId = tabsUl.findElement(By.cssSelector("li:nth-of-type("+ n +")"))
+				.getAttribute("id");
+			tabs.add(tabId);
+		}
+		return tabs;
 	}
 
 	/**

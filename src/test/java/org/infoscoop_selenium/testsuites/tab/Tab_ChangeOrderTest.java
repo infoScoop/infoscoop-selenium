@@ -1,8 +1,13 @@
 package org.infoscoop_selenium.testsuites.tab;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
+import org.infoscoop_selenium.constants.ISConstants;
 import org.junit.Test;
 
 public class Tab_ChangeOrderTest extends IS_BaseItTestCase {
@@ -22,16 +27,24 @@ public class Tab_ChangeOrderTest extends IS_BaseItTestCase {
 	 * 順序変更
 	 */
 	public void iscp_5723() {
-		//タブを2つ追加
-		String droppedTabElementId = getPortal().getTab().addTab();
-		String draggedTabElementId = getPortal().getTab().addTab();
+		// 固定タブのリストを取得
+		List<String> expected = new ArrayList<String>();
+		expected = getPortal().getTab().getTabIdList();
 		
-		//2つめのタブを1つめのタブの前に移動
-		getPortal().getTab().dragAndDropTabToTopLeft(draggedTabElementId, droppedTabElementId);
+		//　タブを2つ追加
+		String tab1 = getPortal().getTab().addTab();
+		String tab2 = getPortal().getTab().addTab();
 		
-		//移動されているか確認(draggedTabElementIdがdroppedTabElementIdの前に来ている)
-		String nextTabId = getPortal().getTab().getNextTabId(draggedTabElementId);
-		assertEquals(droppedTabElementId, nextTabId);
+		//　2つめのタブを1つめのタブの前に移動
+		getPortal().getTab().dragAndDropTabToTopLeft(tab2, tab1);
+		
+		// タブIDのリストの期待値(順番は固定タブ,tab2,tab1)	
+		expected.add(tab2);
+		expected.add(tab1);
+		
+		//　順序変更後のタブIDのリストが期待値と同じになっているかを確認
+		List<String> actual = getPortal().getTab().getTabIdList();
+		assertEquals(expected, actual);
 	}
 	
 	@Test
@@ -39,21 +52,26 @@ public class Tab_ChangeOrderTest extends IS_BaseItTestCase {
 	 * 固定タブは移動不可
 	 */
 	public void iscp_5725() {
-		//タブ1つしかなければ新規タブ追加
+		// タブ1つしかなければ新規タブ追加
 		if (getPortal().getTab().getNumberOfTab() <= 1){
 			getPortal().getTab().addTab();
 		}
-		//ドラッグされるタブ（ホーム）ID
-		String currentTabId = getPortal().getTab().getCurrentTabId();
-		//ドロップ先のタブID
-		String nextTabId = getPortal().getTab().getNextTabId(currentTabId);
 		
-		//ホームタブを右隣のタブの右へ移動
-		getPortal().getTab().dragAndDropTabToTopRight(currentTabId, nextTabId);
+		// タブのリストを取得
+		List<String> expected = new ArrayList<String>();
+		expected = getPortal().getTab().getTabIdList();
 		
-		//移動できないことを確認(ホームタブと隣のタブの並び順が変わっていない)
-		String nextTabIdAfter = getPortal().getTab().getNextTabId(currentTabId);
-		assertEquals(nextTabId, nextTabIdAfter);
+		// ドラッグされるタブ（ホーム）ID
+		String homeTabId = ISConstants.TABID_HOME;
+		// ドロップ先のタブID
+		String nextTabId = getPortal().getTab().getNextTabId(homeTabId);
+		
+		// ホームタブを右隣のタブの右へ移動
+		getPortal().getTab().dragAndDropTabToTopRight(homeTabId, nextTabId);
+		
+		// 移動されていないことを確認
+		List<String> actual = getPortal().getTab().getTabIdList();
+		assertEquals(expected, actual);
 	}
 	
 	@Test
