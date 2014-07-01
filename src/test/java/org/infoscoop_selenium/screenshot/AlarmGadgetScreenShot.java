@@ -116,7 +116,7 @@ public class AlarmGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET.getGadgetPreference().show();
 
 		// アラームを設定
-		GADGET.setAlarm("アラームテスト", NOTIFY.SHAKE, 12, 30);
+		GADGET.setAlarm("アラームテスト", NOTIFY.SHAKE, 0, 12, 30);
 
 		TestHelper.getScreenShot("アラームガジェット（ガジェット設定）", driver);
 
@@ -137,7 +137,7 @@ public class AlarmGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET.getGadgetPreference().show();
 
 		// アラームを設定
-		GADGET.setAlarm("アラームテスト", NOTIFY.SHAKE, 12, 30);
+		GADGET.setAlarm("アラームテスト", NOTIFY.SHAKE, 0, 12, 30);
 
 		// ガジェット設定を閉じる
 		GADGET.getGadgetPreference().ok();

@@ -42,13 +42,46 @@ public class AlarmGadget extends Gadget{
 	}
 	
 	/**
+	 * 日付を返す。
+	 */
+	public String getDate() {
+		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		WebElement content = driver.findElement(By.xpath("//div[@id='small']"));
+		String text = content.getText();
+		TestHelper.backToTopFrame(driver);
+		return text;
+	}
+	
+	/**
+	 * タイトルを返す。
+	 */
+	public String getTitle() {
+		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		WebElement content = driver.findElement(By.xpath("//div[@id='title']"));
+		String text = content.getText();
+		TestHelper.backToTopFrame(driver);
+		return text;
+	}
+	
+	/**
+	 * 時間を返す。
+	 */
+	public String getTime() {
+		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		WebElement content = driver.findElement(By.xpath("//div[@id='time']"));
+		String text = content.getText();
+		TestHelper.backToTopFrame(driver);
+		return text;
+	}
+	
+	/**
 	 * アラーム設定
 	 * @param title
 	 * @param notify
 	 * @param hour
 	 * @param minute
 	 */
-	public void setAlarm(String title, NOTIFY notify, int hour, int minute){
+	public void setAlarm(String title, NOTIFY notify, int dir, int hour, int minute){
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
@@ -59,7 +92,7 @@ public class AlarmGadget extends Gadget{
 		selectNotification(notify);
 
 		// 年月日
-		setCalendar();
+		setCalendar(dir);
 
 		// 時
 		setHour(hour);
@@ -94,7 +127,7 @@ public class AlarmGadget extends Gadget{
 	/**
 	 * 年月日設定
 	 */
-	public void setCalendar(){
+	public void setCalendar(int dir){
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
@@ -102,8 +135,13 @@ public class AlarmGadget extends Gadget{
 		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_ymd']/div[@class='DatatypeCalendar']/a")).click();		
 		TestHelper.waitPresent(driver, By.className("CalendarComponent_Panel"));
 		
-		// 翌月にする
-		driver.findElement(By.xpath("//table[@class='CalendarComponent_Table Calendar widgetContent']/thead//a[@class='calnavright']")).click();
+		if (dir < 0) {
+			// 前月にする
+			driver.findElement(By.xpath("//table[@class='CalendarComponent_Table Calendar widgetContent']/thead//a[@class='calnavleft']")).click();
+		} else if (dir > 0) {
+			// 翌月にする
+			driver.findElement(By.xpath("//table[@class='CalendarComponent_Table Calendar widgetContent']/thead//a[@class='calnavright']")).click();
+		}
 		// 日付を指定する
 		driver.findElement(By.xpath("//table[@class='CalendarComponent_Table Calendar widgetContent']/tbody/tr[2]/td[2]/div")).click();
 	}
