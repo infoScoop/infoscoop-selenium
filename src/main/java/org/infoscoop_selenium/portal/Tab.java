@@ -232,41 +232,39 @@ public class Tab {
 	
 	/**
 	 * タブメニューの[名称変更]のフィールドをクリック
-	 * TODO: クリックでフォーカスが当たらない
-	 * TODO: 中断中のiscp_5746とiscp_5747で使用のためコメントアウト
 	 */
-/*	public WebElement clickNameInput(String tabId) {
+	public WebElement clickNameInput(String tabId) {
 		WebElement nameInput = getNameInput(tabId);
 		nameInput.click();
 		return nameInput;
-	}*/
+	}
 
 	/**
 	 * 現在フォーカスされている要素を返す
-	 * TODO: 中断中のiscp_5746で使用のためコメントアウト
 	 */
-/*	public WebElement getCurrentFocusedElement() {
+	public WebElement getCurrentFocusedElement() {
 		return driver.switchTo().activeElement();
-	}*/
+	}
 
 	/**
 	 * タブ名を変更する
-	 * TODO: 中断中のiscp_5747で使用のためコメントアウト
 	 */
-/*	public void inputTabName(String tabId, String tabName) {
+	public void inputTabName(String tabId, String tabName) {
 		WebElement nameInput = getNameInput(tabId);
 		nameInput.sendKeys(tabName);
-	}*/
+	}
 
 	/**
 	 * タブ名を返す
-	 * TODO: 中断中のiscp_5747で使用のためコメントアウト
 	 */
-/*	public String getTabName(String tabId) {
+	public String getTabName(String tabId) {
 		WebElement tabName = driver.findElement(By.id(tabId + "_title"));
 		return tabName.getText();
-	}*/
+	}
 	
+	/**
+	 * タブを削除する
+	 */
 	public void deleteTab(String tabId) {
 		selectSelectMenu(tabId);
 		WebElement closeItem = getCloseItem(tabId);
