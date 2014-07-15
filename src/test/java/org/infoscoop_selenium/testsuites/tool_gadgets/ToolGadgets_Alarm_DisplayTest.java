@@ -1,6 +1,8 @@
 package org.infoscoop_selenium.testsuites.tool_gadgets;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
@@ -8,9 +10,6 @@ import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.AlarmGadget;
 import org.infoscoop_selenium.portal.gadget.AlarmGadget.NOTIFY;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class ToolGadgets_Alarm_DisplayTest extends IS_BaseItTestCase {
 	private static AlarmGadget GADGET;	

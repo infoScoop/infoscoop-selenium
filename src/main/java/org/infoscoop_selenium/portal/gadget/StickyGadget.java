@@ -1,5 +1,6 @@
 package org.infoscoop_selenium.portal.gadget;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
@@ -44,6 +45,16 @@ public class StickyGadget extends Gadget{
 		public String getValue(){
 			return color;
 		}
+	}
+	
+	/**
+	 * 付箋の値を取得
+	 */
+	public String getContent() {
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		String text = driver.findElement(By.id("editor")).getText();
+		TestHelper.backToTopFrame(driver);
+		return text;
 	}
 
 	/**
@@ -109,13 +120,11 @@ public class StickyGadget extends Gadget{
 
 	@Override
 	public List<String> getSupportedHeaderIcons() {
-		// TODO Auto-generated method stub
-		return null;
+		return Arrays.asList(Gadget.ICON_TYPE_MINIMIZE, Gadget.ICON_TYPE_SHOWTOOLS);
 	}
 
 	@Override
 	public List<String> getSupportedMenuItems() {
-		// TODO Auto-generated method stub
-		return null;
+		return Arrays.asList(Gadget.MENU_TYPE_EDIT, Gadget.MENU_TYPE_DELETE);
 	}
 }
