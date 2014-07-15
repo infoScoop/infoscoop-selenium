@@ -40,7 +40,6 @@ public class ToolGadgets_Sticky_DisplayTest extends IS_BaseItTestCase {
 	@Test
 	/**
 	 * 初期表示
-	 * @XXX 値が取れない
 	 */
 	public void iscp_4085(){
 		String content = GADGET.getContent();

@@ -52,7 +52,7 @@ public class StickyGadget extends Gadget{
 	 */
 	public String getContent() {
 		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
-		String text = driver.findElement(By.id("editor")).getText();
+		String text = driver.findElement(By.id("editor")).getAttribute("value");
 		TestHelper.backToTopFrame(driver);
 		return text;
 	}
