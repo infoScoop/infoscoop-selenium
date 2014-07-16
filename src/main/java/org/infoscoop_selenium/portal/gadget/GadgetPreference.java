@@ -1,12 +1,10 @@
 package org.infoscoop_selenium.portal.gadget;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
@@ -63,6 +61,13 @@ public class GadgetPreference {
 		return driver.findElement(By.id("eb_"+gadget.getId()+"_itemsnum"));
 	}
 	
+	public WebElement getOkElement() {
+		if(!driver.findElement(By.id("frm_"+gadget.getId())).isDisplayed())
+			return null;
+		
+		return driver.findElement(By.xpath("//form[@id='frm_"+gadget.getId()+"']/div[@class='widgetSave']"));
+	}
+	
 	/**
 	 * ガジェット設定OK
 	 */
@@ -70,7 +75,7 @@ public class GadgetPreference {
 		if(!driver.findElement(By.id("frm_"+gadget.getId())).isDisplayed())
 			return;
 		
-		WebElement okEl = driver.findElement(By.xpath("//form[@id='frm_"+gadget.getId()+"']/div[@class='widgetSave']"));
+		WebElement okEl = getOkElement();
 		okEl.click();
 		
 		TestHelper.sleep(500);
