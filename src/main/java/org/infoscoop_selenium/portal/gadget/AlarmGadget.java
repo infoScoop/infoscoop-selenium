@@ -55,8 +55,9 @@ public class AlarmGadget extends Gadget{
 	
 	/**
 	 * タイトルを返す。
+	 * Gadget#getTitle と競合しないように AlarmGadget#getTitleStr とする
 	 */
-	public String getTitle() {
+	public String getTitleStr() {
 		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
 		WebElement content = driver.findElement(By.xpath("//div[@id='title']"));
 		String text = content.getText();
@@ -103,6 +104,16 @@ public class AlarmGadget extends Gadget{
 	}	
 	
 	/**
+	 * タイトルエレメントを返す
+	 */
+	public WebElement getTitleElement() {
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
+			return null;
+		
+		return driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_title']/input"));
+	}
+	
+	/**
 	 * タイトル設定
 	 * @param title
 	 */
@@ -110,7 +121,17 @@ public class AlarmGadget extends Gadget{
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
-		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_title']/input")).sendKeys(title);
+		getTitleElement().sendKeys(title);
+	}
+	
+	/**
+	 * お知らせ方法エレメントを返す
+	 */
+	public WebElement getNotificationElement() {
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
+			return null;
+		
+		return driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_method']/select"));
 	}
 	
 	/**
@@ -121,8 +142,18 @@ public class AlarmGadget extends Gadget{
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
-		Select select = new Select(driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_method']/select")));
+		Select select = new Select(getNotificationElement());
 		select.selectByValue(notify.getValue());
+	}
+	
+	/**
+	 * 年月日エレメントを返す
+	 */
+	public WebElement getCalendarElement() {
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
+			return null;
+		
+		return driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_ymd']/div[@class='DatatypeCalendar']/input"));
 	}
 	
 	/**
@@ -148,6 +179,16 @@ public class AlarmGadget extends Gadget{
 	}
 	
 	/**
+	 * 時刻エレメントを返す
+	 */
+	public WebElement getHourElement() {
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
+			return null;
+		
+		return driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_hour']/input"));
+	}
+	
+	/**
 	 * 時刻設定
 	 * @param hour
 	 */
@@ -155,7 +196,17 @@ public class AlarmGadget extends Gadget{
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
-		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_hour']/input")).sendKeys(Integer.toString(hour));
+		getHourElement().sendKeys(Integer.toString(hour));
+	}
+	
+	/**
+	 * 分エレメントを返す
+	 */
+	public WebElement getMinuteElement() {
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
+			return null;
+		
+		return driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_minute']/input"));
 	}
 	
 	/**

@@ -54,7 +54,7 @@ public class ToolGadgets_Alarm_DisplayTest extends IS_BaseItTestCase {
 		String date = GADGET.getDate();
 		assertTrue("date="+date, date.endsWith("12:30」の"));
 		//タイトルを確認
-		String title = GADGET.getTitle();
+		String title = GADGET.getTitleStr();
 		assertEquals("「アラームテスト」まで、あと", title);
 		//2秒間で残り時間が変わることを確認
 		String time = GADGET.getTime();
@@ -81,7 +81,7 @@ public class ToolGadgets_Alarm_DisplayTest extends IS_BaseItTestCase {
 		String date = GADGET.getDate();
 		assertEquals("", date);
 		//タイトルを確認
-		String title = GADGET.getTitle();
+		String title = GADGET.getTitleStr();
 		assertEquals("「アラームテスト」の時間です。", title);
 		//2秒間で残り時間が変わらないことを確認
 		String time = GADGET.getTime();
