@@ -66,6 +66,28 @@ public class AlarmGadget extends Gadget{
 	}
 	
 	/**
+	 * タイトル（エラー時メッセージ）を返す
+	 */
+	public String getTitleMessageStr() {
+		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		WebElement content = driver.findElement(By.xpath("//div[@id='title']/div[@class='message']"));
+		String text = content.getText();
+		TestHelper.backToTopFrame(driver);
+		return text;
+	}
+	
+	/**
+	 * タイトル（エラー時エラー）を返す
+	 */
+	public String getTitleErrorStr() {
+		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		WebElement content = driver.findElement(By.xpath("//div[@id='title']/div[@class='error']"));
+		String text = content.getText();
+		TestHelper.backToTopFrame(driver);
+		return text;
+	}
+	
+	/**
 	 * 時間を返す。
 	 */
 	public String getTime() {
