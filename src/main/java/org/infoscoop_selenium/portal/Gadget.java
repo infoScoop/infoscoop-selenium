@@ -217,6 +217,16 @@ public abstract class Gadget {
 	}
 	
 	/**
+	 * ガジェット内の幅を返す
+	 */
+    public int getContentWidth() {
+        focus();
+        int width = driver.findElement(By.tagName("body")).getSize().width;
+        blur();
+        return width;
+    }
+	
+	/**
 	 * ガジェットヘッダの表示アイコンをリストで返す
 	 * @return
 	 */

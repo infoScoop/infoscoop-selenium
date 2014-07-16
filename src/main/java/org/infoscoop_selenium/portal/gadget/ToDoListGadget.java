@@ -6,6 +6,7 @@ import java.util.List;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -102,6 +103,22 @@ public class ToDoListGadget extends Gadget{
 		getGadgetPreference().ok();
 	}
 
+	/**
+	 * TODOテキストを変更する。
+	 * @param order
+	 * @param msg
+	 */
+    public void changeTodoText(int order, String msg) {
+        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        WebElement todoTextTd = driver.findElement(By.cssSelector(
+                ".todoListTable tr:nth-of-type(" + order + ") .todoTextTd"));
+        WebElement todoText = todoTextTd.findElement(By.cssSelector(".todoText"));
+        todoText.click();
+        WebElement todoTextEdit = todoTextTd.findElement(By.tagName("input"));
+        todoTextEdit.sendKeys(msg, Keys.ENTER);
+        TestHelper.backToTopFrame(driver);
+    }
+
     /**
      * 優先度テキストを表示している要素を返す。
      * @param order
@@ -136,6 +153,42 @@ public class ToDoListGadget extends Gadget{
         }
         TestHelper.backToTopFrame(driver);
         return selectBox;
+    }
+
+    /**
+     * TODOテキストエレメントを返す。
+     * @param order
+     * @return 
+     */
+    public WebElement getTodoText(int order) {
+        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        List<WebElement> childNodes = driver.findElements(By.cssSelector(
+                ".todoListTable tr:nth-of-type(" + order + ") .todoTextTd > *"));
+        WebElement todoText = null;
+        for (WebElement element : childNodes) {
+            if ("todoTextDiv".equals(element.getAttribute("class")))
+                todoText = element.findElement(By.className("todoText"));
+        }
+        TestHelper.backToTopFrame(driver);
+        return todoText;
+    }
+
+    /**
+     * TODOテキスト編集エレメントを返す。
+     * @param order
+     * @return 
+     */
+    public WebElement getTodoTextEdit(int order) {
+        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        List<WebElement> childNodes = driver.findElements(By.cssSelector(
+                ".todoListTable tr:nth-of-type(" + order + ") .todoTextTd > *"));
+        WebElement todoTextEdit = null;
+        for (WebElement element : childNodes) {
+            if ("todoTextEdit".equals(element.getAttribute("class")))
+                todoTextEdit = element;
+        }
+        TestHelper.backToTopFrame(driver);
+        return todoTextEdit;
     }
 
 	/**
