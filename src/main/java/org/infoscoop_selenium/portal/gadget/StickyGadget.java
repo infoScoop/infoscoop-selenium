@@ -59,12 +59,13 @@ public class StickyGadget extends Gadget{
 
 	/**
 	 * 付箋に値を代入
-	 * @param msg
 	 */
-	public void writeSticky(String msg){
+	public void writeSticky(String msg, boolean bEOL){
 		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
 		driver.findElement(By.id("editor")).sendKeys(msg);
-		driver.findElement(By.id("editor")).sendKeys(Keys.RETURN);
+		if (bEOL) {
+			driver.findElement(By.id("editor")).sendKeys(Keys.RETURN);
+		}
 		TestHelper.backToTopFrame(driver);
 	}
 	

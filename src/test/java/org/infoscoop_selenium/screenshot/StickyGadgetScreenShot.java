@@ -88,11 +88,11 @@ public class StickyGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 		
 		// 付箋ガジェットに値を代入
-		GADGET.writeSticky("");
-		GADGET.writeSticky("hoge");
-		GADGET.writeSticky("huga");
-		GADGET.writeSticky("piyo");
-		GADGET.writeSticky("null");
+		GADGET.writeSticky("", true);
+		GADGET.writeSticky("hoge", true);
+		GADGET.writeSticky("huga", true);
+		GADGET.writeSticky("piyo", true);
+		GADGET.writeSticky("null", true);
 
 		TestHelper.getScreenShot("付箋ガジェット（dynamic_height）", driver);
 		

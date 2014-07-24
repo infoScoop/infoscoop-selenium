@@ -26,9 +26,6 @@ public class ToolGadgets_Alarm_RefreshTest extends IS_BaseItTestCase {
 		GADGET = (AlarmGadget)getPortal().getTopMenu().dropGadget("etcWidgets", "etcWidgets_alarm", 1, GADGET_TYPE.ALARM);
 	}
 
-	/**
-	 * 
-	 */
 	@Test
 	/**
 	 * 更新
