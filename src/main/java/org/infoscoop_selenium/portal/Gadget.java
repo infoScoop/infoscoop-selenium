@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.gadget.AlarmGadget;
+import org.infoscoop_selenium.portal.gadget.CalculatorGadget;
 import org.infoscoop_selenium.portal.gadget.ClockGadget;
 import org.infoscoop_selenium.portal.gadget.GadgetPreference;
 import org.infoscoop_selenium.portal.gadget.GenericGadget;
@@ -40,6 +41,7 @@ public abstract class Gadget {
 		MESSAGE(MessageGadget.class),
 		SCHEDULE(ScheduleGadget.class),
 		CLOCK(ClockGadget.class),
+		CALCULATOR(CalculatorGadget.class),
 		GENERIC(GenericGadget.class);
 		
 		private final Class gadgetClass;
