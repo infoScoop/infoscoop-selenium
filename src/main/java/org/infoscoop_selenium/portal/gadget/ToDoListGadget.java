@@ -62,6 +62,19 @@ public class ToDoListGadget extends Gadget{
 		driver.findElement(By.xpath("//table[@class='todoAddTable']/tbody/tr/td[2]/input[@type='button']")).click();		
 		TestHelper.backToTopFrame(driver);
 	}
+	
+	/**
+	 * ToDoをエンターキーで追加
+	 * @param msg
+	 */
+	public void addToDoByEnter(String msg){
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		WebElement inputText = driver.findElement(By.id(super.getId()+"_inputText"));
+		inputText.sendKeys(msg);
+		
+		inputText.sendKeys(Keys.RETURN);
+		TestHelper.backToTopFrame(driver);
+	}
 
 	/**
 	 * 優先度の変更
@@ -138,6 +151,22 @@ public class ToDoListGadget extends Gadget{
     }
 
     /**
+     * 削除のチェックが入っているか否かを返す。
+     * @param order
+     * @return
+     */
+    public boolean getCheckState(int order) {
+        WebElement todoRow = getTodoRow(order);
+        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        WebElement todoCheck = todoRow.findElement(By.className("todoCheck"));
+        
+        boolean checked = todoCheck.isSelected();
+        
+        TestHelper.backToTopFrame(driver);
+        return checked;
+    }
+
+    /**
      * 優先度のセレクトボックスを返す。
      * @param order
      * @return
@@ -169,8 +198,24 @@ public class ToDoListGadget extends Gadget{
             if ("todoTextDiv".equals(element.getAttribute("class")))
                 todoText = element.findElement(By.className("todoText"));
         }
+        
+        System.out.println(todoText);
         TestHelper.backToTopFrame(driver);
         return todoText;
+    }
+
+    /**
+     * TODOテキストを返す。
+     * @param order
+     * @return 
+     */
+    public String getTodoTextStr(int order) {
+        String todoMsg = "";
+        WebElement el = getTodoText(order);
+        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        todoMsg = el.getText();
+        TestHelper.backToTopFrame(driver);
+        return todoMsg;
     }
 
     /**
@@ -215,6 +260,19 @@ public class ToDoListGadget extends Gadget{
 		return addButton;
 	}
 
+	/**
+	 * TODOの行要素を返す
+	 * @return
+	 */
+	public WebElement getTodoRow(int order){
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		List<WebElement> rows = driver.findElements(By.cssSelector(".todoListTable tr"));
+		WebElement row  = rows.get(order-1);
+		TestHelper.backToTopFrame(driver);
+		
+		return row;
+	}
+	
 	/**
 	 * TODO登録数を返す
 	 * @return
