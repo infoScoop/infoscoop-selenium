@@ -144,8 +144,12 @@ public class TestHelper {
 	 * @param driver
 	 */
 	public static WebDriver switchToFrame(final WebDriver driver, final String frameName) {
-		driver.switchTo().frame(frameName);
-		TestHelper.waitPresent(driver, By.tagName("body"));
+		try{
+			driver.switchTo().frame(frameName);
+			TestHelper.waitPresent(driver, By.tagName("body"));
+		}catch(Exception e){
+			// ignore
+		}
         return driver;
 	}
 
