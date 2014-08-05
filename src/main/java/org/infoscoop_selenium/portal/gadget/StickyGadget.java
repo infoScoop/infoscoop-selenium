@@ -8,6 +8,7 @@ import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 public class StickyGadget extends Gadget{
@@ -70,6 +71,41 @@ public class StickyGadget extends Gadget{
 	}
 	
 	/**
+	 * タイトルエレメントを返す
+	 */
+	public WebElement getTitleElement() {
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
+			return null;
+		
+		return driver.findElement(By.xpath("//input[@id='eb_"+super.getId()+"_widget_title']"));
+	}
+	
+	/**
+	 * タイトル変更
+	 */
+	public void changeTitle(String title) {
+		getGadgetPreference().show();
+
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
+			return;
+		
+		getTitleElement().sendKeys(title);
+		
+		// ガジェット設定を閉じる
+		getGadgetPreference().ok();
+	}
+	
+	/**
+	 * フォントサイズエレメントを返す
+	 */
+	public WebElement getFontSizeElement() {
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
+			return null;
+		
+		return driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_fontSize']/input"));
+	}
+	
+	/**
 	 * フォントサイズ変更
 	 * @param fontSize
 	 */
@@ -79,10 +115,20 @@ public class StickyGadget extends Gadget{
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
-		driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_fontSize']/input")).sendKeys(fontSize);
+		getFontSizeElement().sendKeys(fontSize);
 		
 		// ガジェット設定を閉じる
 		getGadgetPreference().ok();
+	}
+	
+	/**
+	 * 背景色エレメントを返す
+	 */
+	public WebElement getBackgroundColorElement() {
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
+			return null;
+		
+		return driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_bgColor']/select"));
 	}
 	
 	/**
@@ -95,11 +141,21 @@ public class StickyGadget extends Gadget{
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
-		Select select = new Select(driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_bgColor']/select")));
+		Select select = new Select(getBackgroundColorElement());
 		select.selectByValue(bgColor.getValue());
 		
 		// ガジェット設定を閉じる
 		getGadgetPreference().ok();
+	}
+	
+	/**
+	 * 文字色エレメントを返す
+	 */
+	public WebElement getColorElement() {
+		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
+			return null;
+		
+		return driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_fgColor']/select"));
 	}
 	
 	/**
@@ -112,7 +168,7 @@ public class StickyGadget extends Gadget{
 		if(!driver.findElement(By.id("frm_"+super.getId())).isDisplayed())
 			return;
 		
-		Select select = new Select(driver.findElement(By.xpath("//td[@id='eb_"+super.getId()+"_fgColor']/select")));
+		Select select = new Select(getColorElement());
 		select.selectByValue(color.getValue());
 		
 		// ガジェット設定を閉じる
