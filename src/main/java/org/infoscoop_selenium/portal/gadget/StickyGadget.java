@@ -79,6 +79,16 @@ public class StickyGadget extends Gadget{
 	}
 
 	/**
+	 * 付箋の文字色を取得
+	 */
+	public String getContentColor() {
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		String bgcolor = driver.findElement(By.id("editor")).getCssValue("color");
+		TestHelper.backToTopFrame(driver);
+		return bgcolor;
+	}
+
+	/**
 	 * 付箋に値を代入
 	 */
 	public void writeSticky(String msg, boolean bEOL){
