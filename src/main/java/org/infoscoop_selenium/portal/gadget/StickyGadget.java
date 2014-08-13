@@ -59,6 +59,16 @@ public class StickyGadget extends Gadget{
 	}
 
 	/**
+	 * 付箋のフォントサイズを取得
+	 */
+	public String getContentFontSize() {
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		String fontSize = driver.findElement(By.id("editor")).getCssValue("font-size");
+		TestHelper.backToTopFrame(driver);
+		return fontSize;
+	}
+
+	/**
 	 * 付箋に値を代入
 	 */
 	public void writeSticky(String msg, boolean bEOL){
