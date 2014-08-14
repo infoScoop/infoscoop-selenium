@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
+import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.junit.Test;
@@ -159,24 +160,31 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         assertTrue(cssValue.startsWith("line-through"));
     }
 
-//    @Test
+    @Test
     /**
      * 特殊文字
      * 追加又は編集で、TODO内容に以下の文字を含めた場合も正常に表示されることを確認する。
      * ①㈱㌢<>&"'!"#$%'()~=-^@`'*+;:[{]}\_/?<>\.タダイマポチゼンブアソボゾウノファミリ―～∥－￤(U+2000B)(U+2A6B2)
      * (U+2000B)(U+2A6B2)は参照文字ではなくサロゲートペアの文字を直接入力
-     * TODO: ChromeDriver only supports characters in the BMP
      */
     public void iscp_4039() {
+		String inputStr = "①㈱㌢<>&\"'!\"#$%'()~=-^@`'*+;:[{]}\\_/?<>\\.タダイマポチゼンブアソボゾウノファミリ―～∥－￤";
+        GADGET.addToDo(inputStr);
+        
+        // check todo text
+        WebElement todoText = GADGET.getTodoText(1);
+        GADGET.focus();
+        String text = todoText.getText();
+        GADGET.blur();
+        assertEquals(inputStr, text);
     }
 
-//    @Test
+    @Test
     /**
      * 折り返し
      * TODO内容の文字列がTODOリストの幅より長い場合は、表示範囲内で適切に改行されることを確認する。
      * IEはシングルバイトの連続文字も折り返すが、Firefoxはシングルバイトの連続文字ははみ出した部分が隠れる。
      * 固定領域でも確認する。
-     * TODO: 固定領域の確認およびシングルバイトについてはテストしていない。（折り返した方がいいから。）
      */
     public void iscp_4040() {
         // add a todo
@@ -204,16 +212,81 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         assertTrue(afterWidth < GADGET.getContentWidth());
     }
 
-    //@Test
+    @Test
     /**
      * 境界値
      * タイトルは長さ制限がない。
-     * ブラウザのテキストボックスの制限はあるので40000byteの文字列を登録できることを確認する。
+     * ブラウザのテキストボックスの制限はあるので4000byteの文字列を登録できることを確認する。
      */
     public void iscp_4041() {
-        // add a todo with 40,000 bytes text
-        GADGET.addToDo("");
+		//4000文字の文字列を作成
+		StringBuilder sb = new StringBuilder();
+		for (int i=1; i<=400; i++) {
+			sb.append("0123456789");
+		}
+		String inputStr = sb.toString();
+        // add a todo with 4000 bytes text
+        GADGET.addToDo(inputStr);
+        
+        // check todo text
+        WebElement todoText = GADGET.getTodoText(1);
+        GADGET.focus();
+        String text = todoText.getText();
+        GADGET.blur();
+        assertEquals(inputStr, text);
     }
 
+    //@Test
+    /**
+     * ツールチップ
+     * TODO内容のテキストにカーソルを合わせると、登録内容がツールチップで表示され、内容を編集後は変更された内容が表示されることを確認
+     */
+    public void iscp_4042() {
+    	
+    }
+    
+    @Test
+    /**
+     * 保存確認
+     * TODO内容変更後にブラウザリロードしても変更された状態になっていることを確認（保存確認）
+     */
+    public void iscp_4043() {
+    	String inputStr = "change";
+    	
+        // add a todo
+        GADGET.addToDo("test");
+
+        WebElement todoText = GADGET.getTodoText(1);
+
+        // click <span class="todoText"></span>
+        GADGET.focus();
+        todoText.click();
+        GADGET.blur();
+
+        WebElement todoTextEdit = GADGET.getTodoTextEdit(1);
+
+        // send enter key
+        GADGET.focus();
+        todoTextEdit.sendKeys(Keys.chord(inputStr), Keys.ENTER);
+        GADGET.blur();
+
+        // check todo text
+        todoText = GADGET.getTodoText(1);
+        GADGET.focus();
+        String text = todoText.getText();
+        GADGET.blur();
+        assertEquals(inputStr, text);
+        
+		// ブラウザの更新
+		super.getDriver().navigate().refresh();
+		TestHelper.sleep(2000);
+		
+        // check todo text
+        todoText = GADGET.getTodoText(1);
+        GADGET.focus();
+        text = todoText.getText();
+        GADGET.blur();
+        assertEquals(inputStr, text);
+    }
 }
 
