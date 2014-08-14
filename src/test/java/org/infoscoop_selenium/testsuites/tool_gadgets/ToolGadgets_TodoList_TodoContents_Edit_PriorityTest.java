@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
+import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget.PRIORITY;
@@ -157,20 +158,29 @@ public class ToolGadgets_TodoList_TodoContents_Edit_PriorityTest extends IS_Base
         WebElement todoPriority3 = GADGET.getTodoPriority(3);
 
         GADGET.focus();
-        if (!PRIORITY.HIGH.getCssColor().equals(todoPriority1.getCssValue("color")))
-            fail("Text color Priority \"HIGH\" is illegal.");
-        if (!PRIORITY.MIDDLE.getCssColor().equals(todoPriority2.getCssValue("color")))
-            fail("Text color Priority \"MIDDLE\" is illegal.");
-        if (!PRIORITY.LOW.getCssColor().equals(todoPriority3.getCssValue("color")))
-            fail("Text color Priority \"Low\" is illegal.");
+        assertEquals(PRIORITY.HIGH.getCssColor(), todoPriority1.getCssValue("color"));
+        assertEquals(PRIORITY.MIDDLE.getCssColor(), todoPriority2.getCssValue("color"));
+        assertEquals(PRIORITY.LOW.getCssColor(), todoPriority3.getCssValue("color"));
     }
 
-//    @Test
+    @Test
     /**
      * 保存確認
      * 重要度を変更してブラウザリロードしても変更された状態になっていることを確認する。
-     * TODO: ブラウザをリロードする手段が無いと難しい。（可能と思うがスキル不足で時間が掛かりそうなのでスキップする。）
      */
-    public void iscp_4035() {}
-
+    public void iscp_4035() {
+        GADGET.addToDo("test");
+        GADGET.changePriority(1, PRIORITY.HIGH);
+        WebElement todoPriority1 = GADGET.getTodoPriority(1);
+        GADGET.focus();
+        assertEquals(PRIORITY.HIGH.getCssColor(), todoPriority1.getCssValue("color"));
+        
+		// ブラウザの更新
+		super.getDriver().navigate().refresh();
+		TestHelper.sleep(2000);
+		
+        WebElement todoPriority2 = GADGET.getTodoPriority(1);
+        GADGET.focus();
+        assertEquals(PRIORITY.HIGH.getCssColor(), todoPriority2.getCssValue("color"));
+    }
 }
