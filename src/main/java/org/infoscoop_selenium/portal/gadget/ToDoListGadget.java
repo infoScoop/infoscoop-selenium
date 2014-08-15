@@ -100,6 +100,16 @@ public class ToDoListGadget extends Gadget{
 	}
 	
 	/**
+	 * 削除する
+	 * @param order (ToDoの上から数えての順番)
+	 */
+	public void deleteToDo(int order){
+		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		driver.findElement(By.xpath("//tbody[@id='"+super.getId()+"_list']/tr["+order+"]/td[@class='todoDeleteTd']/img")).click();
+		TestHelper.backToTopFrame(driver);		
+	}
+	
+	/**
 	 * フォントサイズの変更
 	 * @param fontSize
 	 */
