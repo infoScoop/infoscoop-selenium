@@ -225,7 +225,7 @@ public class Tab {
 	/**
 	 * タブメニューの[名称変更]の値を返す
 	 */
-	public String getNameInputValue(String tabId) {
+	public String getNameInput(String tabId) {
 		WebElement nameInput = getNameInputElement(tabId);
 		return nameInput.getAttribute("value");
 	}

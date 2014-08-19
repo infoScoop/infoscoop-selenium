@@ -53,7 +53,7 @@ public class Tab_TabMenu_RenameTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(addedTabId);
 		
 		//名称変更のinput要素に値が入っていることを確認
-		String value = getPortal().getTab().getNameInputValue(addedTabId);
+		String value = getPortal().getTab().getNameInput(addedTabId);
 		assertFalse("value=" + value, "".equals(value));
 	}
 	
