@@ -55,9 +55,9 @@ public class ToolGadgets_TodoList_TodoContents_DeleteTest extends IS_BaseItTestC
         GADGET.addToDo("test2");
         GADGET.addToDo("test3");
         
-		WebElement item1 = GADGET.getTodoRow(1);
-		WebElement item2 = GADGET.getTodoRow(2);
-		WebElement item3 = GADGET.getTodoRow(3);
+		WebElement item1 = GADGET.getTodoRowElement(1);
+		WebElement item2 = GADGET.getTodoRowElement(2);
+		WebElement item3 = GADGET.getTodoRowElement(3);
 		GADGET.focus();
 		assertEquals("todoItemOdd", item1.getAttribute("class"));
 		assertEquals("todoItemEven", item2.getAttribute("class"));
@@ -66,8 +66,8 @@ public class ToolGadgets_TodoList_TodoContents_DeleteTest extends IS_BaseItTestC
 		
         GADGET.deleteToDo(2);
         
-		WebElement item11 = GADGET.getTodoRow(1);
-		WebElement item12 = GADGET.getTodoRow(2);
+		WebElement item11 = GADGET.getTodoRowElement(1);
+		WebElement item12 = GADGET.getTodoRowElement(2);
 		GADGET.focus();
 		assertEquals("todoItemOdd", item11.getAttribute("class"));
 		assertEquals("todoItemEven", item12.getAttribute("class"));

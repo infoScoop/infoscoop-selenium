@@ -75,19 +75,19 @@ public class Tab_AddTabTest extends IS_BaseItTestCase{
 			//タブを追加
 			getPortal().getTab().addTab();
 			//[タブを追加]ボタンが表示されることを確認
-			addTabButton = getPortal().getTab().getAddTabButton();
+			addTabButton = getPortal().getTab().getAddTabButtonElement();
 			assertTrue(addTabButton.isDisplayed());
 		}
 		
 		//最後のタブを追加。タブの制限数を超えた場合は[タブを追加]ボタンが表示されない
 		String addedTabId = getPortal().getTab().addTab();
 		//XXX 動作するが、不要な例外を発生させてしまっている
-		addTabButton = getPortal().getTab().getAddTabButton();
+		addTabButton = getPortal().getTab().getAddTabButtonElement();
 		assertFalse(addTabButton.isDisplayed());
 		
 		//その後タブを削除すると[タブを追加]ボタンが表示される
 		getPortal().getTab().deleteTab(addedTabId);
-		addTabButton = getPortal().getTab().getAddTabButton();
+		addTabButton = getPortal().getTab().getAddTabButtonElement();
 		assertTrue(addTabButton.isDisplayed());
 	}
 	

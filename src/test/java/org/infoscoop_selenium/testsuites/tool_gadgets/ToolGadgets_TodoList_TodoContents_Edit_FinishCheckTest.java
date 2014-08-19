@@ -37,7 +37,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_FinishCheckTest extends IS_B
         GADGET.checkToDo(1);
 
         // check that todo text has "line-through" CSS property
-        WebElement todoText = GADGET.getTodoText(1);
+        WebElement todoText = GADGET.getTodoTextElement(1);
         GADGET.focus();
         String cssValue = todoText.getCssValue("text-decoration");
         GADGET.blur();
@@ -48,7 +48,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_FinishCheckTest extends IS_B
 		TestHelper.sleep(2000);
 		
         // check that todo text has "line-through" CSS property
-        WebElement todoText2 = GADGET.getTodoText(1);
+        WebElement todoText2 = GADGET.getTodoTextElement(1);
         GADGET.focus();
         String cssValue2 = todoText2.getCssValue("text-decoration");
         GADGET.blur();
@@ -65,7 +65,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_FinishCheckTest extends IS_B
         GADGET.checkToDo(1);
 
         // check that todo text has "line-through" CSS property
-        WebElement todoText = GADGET.getTodoText(1);
+        WebElement todoText = GADGET.getTodoTextElement(1);
         GADGET.focus();
         String cssValue = todoText.getCssValue("text-decoration");
         GADGET.blur();
@@ -74,7 +74,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_FinishCheckTest extends IS_B
         GADGET.checkToDo(1);
         
         // check that todo text doesn't have "line-through" CSS property
-        WebElement todoText2 = GADGET.getTodoText(1);
+        WebElement todoText2 = GADGET.getTodoTextElement(1);
         GADGET.focus();
         String cssValue2 = todoText2.getCssValue("text-decoration");
         GADGET.blur();

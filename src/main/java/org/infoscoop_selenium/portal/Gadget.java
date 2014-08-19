@@ -204,7 +204,7 @@ public abstract class Gadget {
 	/**
 	 * ガジェット表示フレームを返す
 	 */
-	public WebElement getFrame(){
+	public WebElement getFrameElement(){
 		return driver.findElement(By.id("ifrm_"+this.getId()));
 	}
 	

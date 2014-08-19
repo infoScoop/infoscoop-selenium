@@ -41,7 +41,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(addedTabId);
 
 		//削除メニューの選択
-		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
+		WebElement closeItem = getPortal().getTab().getCloseItemElement(addedTabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
 		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();
@@ -67,7 +67,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(addedTabId);
 
 		//削除メニューの選択してダイアログをキャンセル
-		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
+		WebElement closeItem = getPortal().getTab().getCloseItemElement(addedTabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
 		Alert confirm = getDriver().switchTo().alert();
     	confirm.dismiss();
@@ -93,7 +93,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(addedTabId);
 
 		//削除メニューの選択
-		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
+		WebElement closeItem = getPortal().getTab().getCloseItemElement(addedTabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
 		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();
@@ -128,7 +128,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(addedTabId);
 
 		//削除メニューの選択
-		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
+		WebElement closeItem = getPortal().getTab().getCloseItemElement(addedTabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
 		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();
@@ -159,7 +159,7 @@ public class Tab_TabMenu_DeleteTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(addedTabId);
 
 		//削除メニューの選択
-		WebElement closeItem = getPortal().getTab().getCloseItem(addedTabId);
+		WebElement closeItem = getPortal().getTab().getCloseItemElement(addedTabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
 		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();

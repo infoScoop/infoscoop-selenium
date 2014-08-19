@@ -37,7 +37,7 @@ public class Tab_TabMenu_RenameTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(addedTabId);
 		
 		//名称変更のinput要素があることを確認
-		WebElement renameInput = getPortal().getTab().getNameInput(addedTabId);
+		WebElement renameInput = getPortal().getTab().getNameInputElement(addedTabId);
 		assertTrue(renameInput.isDisplayed());
 	}
 	

@@ -39,7 +39,7 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(ISConstants.TABID_HOME);
 		
 		// タブの構成を初期化するをクリック
-		WebElement menuItem = getPortal().getTab().getInitializeItem(ISConstants.TABID_HOME);
+		WebElement menuItem = getPortal().getTab().getInitializeItemElement(ISConstants.TABID_HOME);
 		
 		menuItem.click();
 		Alert confirm = getDriver().switchTo().alert();
@@ -61,7 +61,7 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(ISConstants.TABID_HOME);
 		
 		// タブの構成を初期化するをクリック
-		WebElement menuItem = getPortal().getTab().getInitializeItem(ISConstants.TABID_HOME);
+		WebElement menuItem = getPortal().getTab().getInitializeItemElement(ISConstants.TABID_HOME);
 		
 		menuItem.click();
 		Alert confirm = getDriver().switchTo().alert();
@@ -98,7 +98,7 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(ISConstants.TABID_HOME);
 		
 		// タブの構成を初期化するをクリック
-		WebElement menuItem = getPortal().getTab().getInitializeItem(ISConstants.TABID_HOME);
+		WebElement menuItem = getPortal().getTab().getInitializeItemElement(ISConstants.TABID_HOME);
 		
 		menuItem.click();
 		Alert confirm = getDriver().switchTo().alert();
@@ -137,7 +137,7 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(ISConstants.TABID_HOME);
 		
 		// タブの構成を初期化するをクリック
-		WebElement menuItem = getPortal().getTab().getInitializeItem(ISConstants.TABID_HOME);
+		WebElement menuItem = getPortal().getTab().getInitializeItemElement(ISConstants.TABID_HOME);
 		menuItem.click();
 		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();
@@ -164,7 +164,7 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(ISConstants.TABID_HOME);
 		
 		// タブの構成を初期化するをクリック
-		WebElement menuItem = getPortal().getTab().getInitializeItem(ISConstants.TABID_HOME);
+		WebElement menuItem = getPortal().getTab().getInitializeItemElement(ISConstants.TABID_HOME);
 		menuItem.click();
 		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();
@@ -208,7 +208,7 @@ public class Tab_TabMenu_ResetTabTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(ISConstants.TABID_HOME);
 		
 		// タブの構成を初期化するをクリック
-		WebElement menuItem = getPortal().getTab().getInitializeItem(ISConstants.TABID_HOME);
+		WebElement menuItem = getPortal().getTab().getInitializeItemElement(ISConstants.TABID_HOME);
 		menuItem.click();
 		Alert confirm = getDriver().switchTo().alert();
     	confirm.accept();

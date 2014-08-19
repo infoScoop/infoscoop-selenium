@@ -147,7 +147,7 @@ public class ToDoListGadget extends Gadget{
      * @param order
      * @return
      */
-    public WebElement getTodoPriority(int order) {
+    public WebElement getTodoPriorityElement(int order) {
         TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
         List<WebElement> childNodes = driver.findElements(By.cssSelector(
                 ".todoListTable tr:nth-of-type(" + order + ") .todoPriorityTd > *"));
@@ -166,7 +166,7 @@ public class ToDoListGadget extends Gadget{
      * @return
      */
     public boolean getCheckState(int order) {
-        WebElement todoRow = getTodoRow(order);
+        WebElement todoRow = getTodoRowElement(order);
         TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
         WebElement todoCheck = todoRow.findElement(By.className("todoCheck"));
         
@@ -181,7 +181,7 @@ public class ToDoListGadget extends Gadget{
      * @param order
      * @return
      */
-    public WebElement getChangePrioritySelectBox(int order) {
+    public WebElement getChangePrioritySelectBoxElement(int order) {
         TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
         List<WebElement> childNodes = driver.findElements(By.cssSelector(
                 ".todoListTable tr:nth-of-type(" + order + ") .todoPriorityTd > *"));
@@ -199,7 +199,7 @@ public class ToDoListGadget extends Gadget{
      * @param order
      * @return 
      */
-    public WebElement getTodoText(int order) {
+    public WebElement getTodoTextElement(int order) {
         TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
         List<WebElement> childNodes = driver.findElements(By.cssSelector(
                 ".todoListTable tr:nth-of-type(" + order + ") .todoTextTd > *"));
@@ -221,7 +221,7 @@ public class ToDoListGadget extends Gadget{
      */
     public String getTodoTextStr(int order) {
         String todoMsg = "";
-        WebElement el = getTodoText(order);
+        WebElement el = getTodoTextElement(order);
         TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
         todoMsg = el.getText();
         TestHelper.backToTopFrame(driver);
@@ -233,7 +233,7 @@ public class ToDoListGadget extends Gadget{
      * @param order
      * @return 
      */
-    public WebElement getTodoTextEdit(int order) {
+    public WebElement getTodoTextEditElement(int order) {
         TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
         List<WebElement> childNodes = driver.findElements(By.cssSelector(
                 ".todoListTable tr:nth-of-type(" + order + ") .todoTextTd > *"));
@@ -250,7 +250,7 @@ public class ToDoListGadget extends Gadget{
 	 * TODO追加テキストフォームを返す
 	 * @return
 	 */
-	public WebElement getTodoAddTextBox(){
+	public WebElement getTodoAddTextBoxElement(){
 		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
 		WebElement textBox = driver.findElement(By.cssSelector(".todoAddTextBox"));
 		TestHelper.backToTopFrame(driver);
@@ -262,7 +262,7 @@ public class ToDoListGadget extends Gadget{
 	 * TODO追加ボタンを返す
 	 * @return
 	 */
-	public WebElement getTodoAddButton(){
+	public WebElement getTodoAddButtonElement(){
 		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
 		WebElement addButton =  driver.findElement(By.cssSelector(".todoAddTable input[type=\"button\"]"));
 		TestHelper.backToTopFrame(driver);
@@ -274,7 +274,7 @@ public class ToDoListGadget extends Gadget{
 	 * TODOの行要素を返す
 	 * @return
 	 */
-	public WebElement getTodoRow(int order){
+	public WebElement getTodoRowElement(int order){
 		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
 		List<WebElement> rows = driver.findElements(By.cssSelector(".todoListTable tr"));
 		WebElement row  = rows.get(order-1);

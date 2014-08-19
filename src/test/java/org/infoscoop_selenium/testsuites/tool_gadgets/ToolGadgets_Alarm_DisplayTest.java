@@ -32,7 +32,7 @@ public class ToolGadgets_Alarm_DisplayTest extends IS_BaseItTestCase {
 	 * 未設定
 	 */
 	public void iscp_3987(){
-		String content = GADGET.getContent().getText();
+		String content = GADGET.getContentElement().getText();
 		assertEquals("ガジェットは必要な設定がすべて完了するまで表示できません。", content);
 	}
 	

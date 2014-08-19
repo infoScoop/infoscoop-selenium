@@ -20,7 +20,7 @@ public class Tab {
 	 * [タブを追加する]ボタンを返す
 	 */
 	//XXX iscp_5720で要素が非表示であることを確認する際に不要な例外を発生させてしまっている
-	public WebElement getAddTabButton(){
+	public WebElement getAddTabButtonElement(){
 		try {
 			// タブ追加の出現を待つ
 			TestHelper.waitPresent(driver, By.id("addTab"));
@@ -34,7 +34,7 @@ public class Tab {
 	 * タブを追加する
 	 */
 	public String addTab(){
-		getAddTabButton().click();
+		getAddTabButtonElement().click();
 		return getCurrentTabId();
 	}
 	
@@ -42,13 +42,13 @@ public class Tab {
 	 * タブを選択する
 	 */
 	public void selectTab(String tabId){
-		getTab(tabId).click();
+		getTabElement(tabId).click();
 	}
 	
 	/**
 	 * タブを返す
 	 */
-	public WebElement getTab(String tabId) {
+	public WebElement getTabElement(String tabId) {
 		return driver.findElement(By.id(tabId));
 	}
 	
@@ -63,7 +63,7 @@ public class Tab {
 	/**
 	 * タブロード時のインディケータを返す
 	 */
-	public WebElement getIndicator(){
+	public WebElement getIndicatorElement(){
 		WebElement indicator = driver.findElement(By.cssSelector("#divOverlay.tabLoading"));
 		return indicator;
 	}
@@ -153,7 +153,7 @@ public class Tab {
 	/**
 	 * タブメニューボタンを返す
 	 */
-	public WebElement getSelectMenu(String tabId) {
+	public WebElement getSelectMenuElement(String tabId) {
 		WebElement selectMenu = driver.findElement(By.id(tabId + "_selectMenu"));
 		return selectMenu;
 	}
@@ -162,14 +162,14 @@ public class Tab {
 	 * タブメニューボタンをクリックする
 	 */
 	public void selectSelectMenu(String tabId) {
-		WebElement selectMenu = getSelectMenu(tabId);
+		WebElement selectMenu = getSelectMenuElement(tabId);
 		selectMenu.click();
 	}
 	
 	/**
 	 * タブメニューを返す
 	 */
-	public WebElement getTabMenu(String tabId) {
+	public WebElement getTabMenuElement(String tabId) {
 		WebElement tabMenu = driver.findElement(By.id(tabId + "_menu"));
 		return tabMenu;
 	}
@@ -177,7 +177,7 @@ public class Tab {
 	/**
 	 * タブメニューの[再読み込み]を返す
 	 */
-	public WebElement getRefreshItem(String tabId) {
+	public WebElement getRefreshItemElement(String tabId) {
 		WebElement refreshItem = driver.findElement(By.id(tabId + "_menu_refresh"));
 		return refreshItem;
 	}
@@ -185,7 +185,7 @@ public class Tab {
 	/**
 	 * タブメニューの[削除]を返す
 	 */
-	public WebElement getCloseItem(String tabId) {
+	public WebElement getCloseItemElement(String tabId) {
 		WebElement closeItem = driver.findElement(By.id(tabId + "_menu_close"));
 		return closeItem;
 	}
@@ -193,7 +193,7 @@ public class Tab {
 	/**
 	 * タブメニューの[名称変更]を返す
 	 */
-	public WebElement getNameInput(String tabId) {
+	public WebElement getNameInputElement(String tabId) {
 		WebElement nameInput = driver.findElement(By.id(tabId + "_menu_rename_input"));
 		return nameInput;
 	}
@@ -201,7 +201,7 @@ public class Tab {
 	/**
 	 * タブメニューの[列数変更]を返す
 	 */
-	public WebElement getColumnNumSelect(String tabId) {
+	public WebElement getColumnNumSelectElement(String tabId) {
 		WebElement columnNumSelect = driver.findElement(By.id(tabId + "_menu_changeColumnNum_select"));
 		return columnNumSelect;
 	}
@@ -209,7 +209,7 @@ public class Tab {
 	/**
 	 * タブメニューの[列の幅を揃える]を返す
 	 */
-	public WebElement getResetColumnWidthItem(String tabId) {
+	public WebElement getResetColumnWidthItemElement(String tabId) {
 		WebElement resetColumnWidthItem = driver.findElement(By.id(tabId + "_menu_resetColumnWidth"));
 		return resetColumnWidthItem;
 	}
@@ -217,7 +217,7 @@ public class Tab {
 	/**
 	 * タブメニューの[タブの構成を初期化する]を返す
 	 */
-	public WebElement getInitializeItem(String tabId) {
+	public WebElement getInitializeItemElement(String tabId) {
 		WebElement initializeItem = driver.findElement(By.id(tabId + "_menu_initialize"));
 		return initializeItem;
 	}
@@ -226,7 +226,7 @@ public class Tab {
 	 * タブメニューの[名称変更]の値を返す
 	 */
 	public String getNameInputValue(String tabId) {
-		WebElement nameInput = getNameInput(tabId);
+		WebElement nameInput = getNameInputElement(tabId);
 		return nameInput.getAttribute("value");
 	}
 	
@@ -234,7 +234,7 @@ public class Tab {
 	 * タブメニューの[名称変更]のフィールドをクリック
 	 */
 	public WebElement clickNameInput(String tabId) {
-		WebElement nameInput = getNameInput(tabId);
+		WebElement nameInput = getNameInputElement(tabId);
 		nameInput.click();
 		return nameInput;
 	}
@@ -250,7 +250,7 @@ public class Tab {
 	 * タブ名を変更する
 	 */
 	public void inputTabName(String tabId, String tabName) {
-		WebElement nameInput = getNameInput(tabId);
+		WebElement nameInput = getNameInputElement(tabId);
 		nameInput.sendKeys(tabName);
 	}
 
@@ -267,7 +267,7 @@ public class Tab {
 	 */
 	public void deleteTab(String tabId) {
 		selectSelectMenu(tabId);
-		WebElement closeItem = getCloseItem(tabId);
+		WebElement closeItem = getCloseItemElement(tabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
 		driver.switchTo().alert().accept();
 	}

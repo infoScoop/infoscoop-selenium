@@ -34,8 +34,8 @@ public class ToolGadgets_TodoList_DisplayTest extends IS_BaseItTestCase{
 	 * 何も登録されていない初期表示状態で追加用テキストボックスと追加ボタンのみが表示されることを確認
 	 */
 	public void iscp_4011(){
-		WebElement todoAddTextBox = GADGET.getTodoAddTextBox();
-		WebElement todoAddButton = GADGET.getTodoAddButton();
+		WebElement todoAddTextBox = GADGET.getTodoAddTextBoxElement();
+		WebElement todoAddButton = GADGET.getTodoAddButtonElement();
 		int todoLength = GADGET.getTodoLength();
 		
 		GADGET.focus();
@@ -65,7 +65,7 @@ public class ToolGadgets_TodoList_DisplayTest extends IS_BaseItTestCase{
 		GADGET.addToDo("test");
 		
 		// ガジェット内の高さとフレームの高さを比較。ガジェット内の高さがフレームの高さを下回っていれば成功
-		assertTrue(GADGET.getFrame().getSize().height + " > " + GADGET.getContentHeight(),
-				GADGET.getFrame().getSize().height > GADGET.getContentHeight());
+		assertTrue(GADGET.getFrameElement().getSize().height + " > " + GADGET.getContentHeight(),
+				GADGET.getFrameElement().getSize().height > GADGET.getContentHeight());
 	}
 }

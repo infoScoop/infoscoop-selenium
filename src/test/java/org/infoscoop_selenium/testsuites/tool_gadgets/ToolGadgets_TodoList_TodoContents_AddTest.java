@@ -105,7 +105,7 @@ public class ToolGadgets_TodoList_TodoContents_AddTest extends IS_BaseItTestCase
 		GADGET.addToDo("test_4026");
 		
 		// 要素の確認
-		WebElement todoRow = GADGET.getTodoRow(1);
+		WebElement todoRow = GADGET.getTodoRowElement(1);
 		GADGET.focus();
 		List<WebElement> todoRowEls = todoRow.findElements(By.tagName("td"));
 		String todoPriorityTd = todoRowEls.get(0).getAttribute("class");
@@ -131,7 +131,7 @@ public class ToolGadgets_TodoList_TodoContents_AddTest extends IS_BaseItTestCase
 		GADGET.addToDo("test_4027");
 		
 		// 優先度が「中」であることを確認
-		WebElement todoPriority = GADGET.getTodoPriority(1);
+		WebElement todoPriority = GADGET.getTodoPriorityElement(1);
 		GADGET.focus();
 		assertEquals(todoPriority.getText(), "中");
 		GADGET.blur();
@@ -154,8 +154,8 @@ public class ToolGadgets_TodoList_TodoContents_AddTest extends IS_BaseItTestCase
 		GADGET.addToDo("test_4028_1");
 		
 		
-		WebElement todoItemOddEl = GADGET.getTodoRow(1);
-		WebElement todoItemEvenEl = GADGET.getTodoRow(2);
+		WebElement todoItemOddEl = GADGET.getTodoRowElement(1);
+		WebElement todoItemEvenEl = GADGET.getTodoRowElement(2);
 		GADGET.focus();
 		String todoItemOddClassName = todoItemOddEl.getAttribute("class");
 		String todoItemEvenClassName = todoItemEvenEl.getAttribute("class");

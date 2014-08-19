@@ -16,21 +16,21 @@ public class MessageGadget extends Gadget{
 	/**
 	 * ガジェットコンテンツの取得
 	 */
-	public WebElement getContents() {
+	public WebElement getContentsElement() {
 		return driver.findElement(By.xpath("//div[@class='widgetContent Message']/table/tbody/tr/td"));
 	}
 	
 	/**
 	 * ガジェットコンテンツの取得（最大化時/リスト）
 	 */
-	public WebElement getMaximaizeContentsList() {
+	public WebElement getMaximaizeContentsListElement() {
 		return driver.findElement(By.xpath("//div[@class='widgetContent Message maximize']/table/tbody/tr/td[@class='maximizeMsgListTd']"));
 	}
 
 	/**
 	 * ガジェットコンテンツの取得（最大化時/メニュー）
 	 */
-	public WebElement getMaximaizeContentsMenu() {
+	public WebElement getMaximaizeContentsMenuElement() {
 		return driver.findElement(By.xpath("//div[@class='widgetContent Message maximize']/table/tbody/tr/td[@class='maximizeMsgMenuTd']/div[@class='maximizeMsgMenu']"));
 	}
 	

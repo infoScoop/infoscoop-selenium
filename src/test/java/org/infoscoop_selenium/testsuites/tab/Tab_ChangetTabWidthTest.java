@@ -67,14 +67,14 @@ public class Tab_ChangetTabWidthTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(ISConstants.TABID_HOME);
 		
 		// 列数を変更
-		Select menu = new Select(getPortal().getTab().getColumnNumSelect(ISConstants.TABID_HOME));
+		Select menu = new Select(getPortal().getTab().getColumnNumSelectElement(ISConstants.TABID_HOME));
 		menu.selectByValue(Integer.toString(columnLengthBefore + 1));
 		
 		// 値が反映するのを待機
 		Wait wait = new Wait() {
 			@Override
 			public boolean until() {
-				Select menu =  new Select(getPortal().getTab().getColumnNumSelect(ISConstants.TABID_HOME));
+				Select menu =  new Select(getPortal().getTab().getColumnNumSelectElement(ISConstants.TABID_HOME));
 				if( getPortal().getPanel(ISConstants.TABID_HOME).getColumnLength() == Integer.parseInt(menu.getFirstSelectedOption().getText()) ) {
 					return true;
 				}

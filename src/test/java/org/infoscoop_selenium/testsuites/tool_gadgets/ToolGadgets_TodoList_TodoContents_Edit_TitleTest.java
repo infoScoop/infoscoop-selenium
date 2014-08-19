@@ -41,14 +41,14 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         // add a todo
         GADGET.addToDo("test");
 
-        WebElement todoText = GADGET.getTodoText(1);
+        WebElement todoText = GADGET.getTodoTextElement(1);
 
         // click <span class="todoText"></span>
         GADGET.focus();
         todoText.click();
         GADGET.blur();
 
-        WebElement todoTextEdit = GADGET.getTodoTextEdit(1);
+        WebElement todoTextEdit = GADGET.getTodoTextEditElement(1);
 
         // send enter key
         GADGET.focus();
@@ -56,11 +56,11 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         GADGET.blur();
 
         // check text box does not exist
-        if (GADGET.getTodoTextEdit(1) != null)
+        if (GADGET.getTodoTextEditElement(1) != null)
             fail("TODO text box is exist.");
 
         // check todo text
-        todoText = GADGET.getTodoText(1);
+        todoText = GADGET.getTodoTextElement(1);
         GADGET.focus();
         String text = todoText.getText();
         GADGET.blur();
@@ -72,16 +72,16 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         GADGET.addToDo("test");
 
         // for blur
-        WebElement todoAddTextBox = GADGET.getTodoAddTextBox();
+        WebElement todoAddTextBox = GADGET.getTodoAddTextBoxElement();
 
-        WebElement todoText = GADGET.getTodoText(1);
+        WebElement todoText = GADGET.getTodoTextElement(1);
 
         // click <span class="todoText"></span>
         GADGET.focus();
         todoText.click();
         GADGET.blur();
 
-        WebElement todoTextEdit = GADGET.getTodoTextEdit(1);
+        WebElement todoTextEdit = GADGET.getTodoTextEditElement(1);
 
         // change todo text
         GADGET.focus();
@@ -90,7 +90,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         GADGET.blur();
 
         // check todo text
-        todoText = GADGET.getTodoText(1);
+        todoText = GADGET.getTodoTextElement(1);
         GADGET.focus();
         String text = todoText.getText();
         GADGET.blur();
@@ -105,21 +105,21 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
     public void iscp_4037() {
         GADGET.addToDo("test");
 
-        WebElement todoText = GADGET.getTodoText(1);
+        WebElement todoText = GADGET.getTodoTextElement(1);
 
         // click
         GADGET.focus();
         todoText.click();
         GADGET.blur();
 
-        WebElement todoTextEdit = GADGET.getTodoTextEdit(1);
+        WebElement todoTextEdit = GADGET.getTodoTextEditElement(1);
 
         // change todo text box
         GADGET.focus();
         todoTextEdit.sendKeys(Keys.DELETE, Keys.ENTER);
         GADGET.blur();
 
-        todoText = GADGET.getTodoText(1);
+        todoText = GADGET.getTodoTextElement(1);
 
         // check that todo text isn't changed
         GADGET.focus();
@@ -138,14 +138,14 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         GADGET.addToDo("test");
         GADGET.checkToDo(1);
 
-        WebElement todoText = GADGET.getTodoText(1);
+        WebElement todoText = GADGET.getTodoTextElement(1);
 
         // click <span class="todoText"></span>
         GADGET.focus();
         todoText.click();
         GADGET.blur();
 
-        WebElement todoTextEdit = GADGET.getTodoTextEdit(1);
+        WebElement todoTextEdit = GADGET.getTodoTextEditElement(1);
 
         // change todo text
         GADGET.focus();
@@ -153,7 +153,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         GADGET.blur();
 
         // check that todo text has "line-through" CSS property
-        todoText = GADGET.getTodoText(1);
+        todoText = GADGET.getTodoTextElement(1);
         GADGET.focus();
         String cssValue = todoText.getCssValue("text-decoration");
         GADGET.blur();
@@ -172,7 +172,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         GADGET.addToDo(inputStr);
         
         // check todo text
-        WebElement todoText = GADGET.getTodoText(1);
+        WebElement todoText = GADGET.getTodoTextElement(1);
         GADGET.focus();
         String text = todoText.getText();
         GADGET.blur();
@@ -190,7 +190,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         // add a todo
         GADGET.addToDo("test");
 
-        WebElement todoText = GADGET.getTodoText(1);
+        WebElement todoText = GADGET.getTodoTextElement(1);
 
         // get height
         GADGET.focus();
@@ -199,7 +199,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
 
         // change todo text
         GADGET.changeTodoText(1, "ああああああああああああああああああああああああああああああ");
-        todoText = GADGET.getTodoText(1);
+        todoText = GADGET.getTodoTextElement(1);
 
         GADGET.focus();
         int afterHeight = todoText.getSize().height;
@@ -229,7 +229,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         GADGET.addToDo(inputStr);
         
         // check todo text
-        WebElement todoText = GADGET.getTodoText(1);
+        WebElement todoText = GADGET.getTodoTextElement(1);
         GADGET.focus();
         String text = todoText.getText();
         GADGET.blur();
@@ -256,14 +256,14 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         // add a todo
         GADGET.addToDo("test");
 
-        WebElement todoText = GADGET.getTodoText(1);
+        WebElement todoText = GADGET.getTodoTextElement(1);
 
         // click <span class="todoText"></span>
         GADGET.focus();
         todoText.click();
         GADGET.blur();
 
-        WebElement todoTextEdit = GADGET.getTodoTextEdit(1);
+        WebElement todoTextEdit = GADGET.getTodoTextEditElement(1);
 
         // send enter key
         GADGET.focus();
@@ -271,7 +271,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
         GADGET.blur();
 
         // check todo text
-        todoText = GADGET.getTodoText(1);
+        todoText = GADGET.getTodoTextElement(1);
         GADGET.focus();
         String text = todoText.getText();
         GADGET.blur();
@@ -282,7 +282,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_TitleTest extends IS_BaseItT
 		TestHelper.sleep(2000);
 		
         // check todo text
-        todoText = GADGET.getTodoText(1);
+        todoText = GADGET.getTodoTextElement(1);
         GADGET.focus();
         text = todoText.getText();
         GADGET.blur();

@@ -40,14 +40,14 @@ public class ToolGadgets_TodoList_TodoContents_Edit_PriorityTest extends IS_Base
         GADGET.addToDo("test");
 
         // <div class="todoPriority"></div>
-        WebElement todoPriority = GADGET.getTodoPriority(1);
+        WebElement todoPriority = GADGET.getTodoPriorityElement(1);
 
         // click
         GADGET.focus();
         todoPriority.click();
         GADGET.blur();
         
-        WebElement selectBox = GADGET.getChangePrioritySelectBox(1);
+        WebElement selectBox = GADGET.getChangePrioritySelectBoxElement(1);
 
         // check that <div class="todoPriority"> is invisible
         GADGET.focus();
@@ -72,8 +72,8 @@ public class ToolGadgets_TodoList_TodoContents_Edit_PriorityTest extends IS_Base
     public void iscp_4031() {
         GADGET.addToDo("test");
 
-        WebElement todoAddTextBox = GADGET.getTodoAddTextBox();
-        WebElement todoPriority = GADGET.getTodoPriority(1);
+        WebElement todoAddTextBox = GADGET.getTodoAddTextBoxElement();
+        WebElement todoPriority = GADGET.getTodoPriorityElement(1);
 
         // click
         GADGET.focus();
@@ -81,7 +81,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_PriorityTest extends IS_Base
         GADGET.blur();
 
         // change select box value
-        WebElement selectBox = GADGET.getChangePrioritySelectBox(1);
+        WebElement selectBox = GADGET.getChangePrioritySelectBoxElement(1);
         GADGET.focus();
         Select select = new Select(selectBox);
         select.selectByValue(Integer.toString(PRIORITY.HIGH.getValue()));
@@ -91,7 +91,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_PriorityTest extends IS_Base
         GADGET.blur();
 
         // check that select box is not exist
-        if (GADGET.getChangePrioritySelectBox(1) != null)
+        if (GADGET.getChangePrioritySelectBoxElement(1) != null)
             fail("Selectbox is exist.");
 
         // check priority text
@@ -121,15 +121,15 @@ public class ToolGadgets_TodoList_TodoContents_Edit_PriorityTest extends IS_Base
             GADGET.addToDo("test");
         }
 
-        WebElement todoPriority1 = GADGET.getTodoPriority(1);
-        WebElement todoPriority5 = GADGET.getTodoPriority(5);
+        WebElement todoPriority1 = GADGET.getTodoPriorityElement(1);
+        WebElement todoPriority5 = GADGET.getTodoPriorityElement(5);
 
         // click order 1
         GADGET.focus();
         todoPriority1.click();
         GADGET.blur();
 
-        if (GADGET.getChangePrioritySelectBox(1) == null)
+        if (GADGET.getChangePrioritySelectBoxElement(1) == null)
             fail("Select box does not exist.");
 
         // click order 5
@@ -137,7 +137,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_PriorityTest extends IS_Base
         todoPriority5.click();
         GADGET.blur();
 
-        assertEquals(null, GADGET.getChangePrioritySelectBox(1));
+        assertEquals(null, GADGET.getChangePrioritySelectBoxElement(1));
     }
 
     @Test
@@ -153,9 +153,9 @@ public class ToolGadgets_TodoList_TodoContents_Edit_PriorityTest extends IS_Base
         GADGET.addToDo("test");
         GADGET.changePriority(3, PRIORITY.LOW);
 
-        WebElement todoPriority1 = GADGET.getTodoPriority(1);
-        WebElement todoPriority2 = GADGET.getTodoPriority(2);
-        WebElement todoPriority3 = GADGET.getTodoPriority(3);
+        WebElement todoPriority1 = GADGET.getTodoPriorityElement(1);
+        WebElement todoPriority2 = GADGET.getTodoPriorityElement(2);
+        WebElement todoPriority3 = GADGET.getTodoPriorityElement(3);
 
         GADGET.focus();
         assertEquals(PRIORITY.HIGH.getCssColor(), todoPriority1.getCssValue("color"));
@@ -171,7 +171,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_PriorityTest extends IS_Base
     public void iscp_4035() {
         GADGET.addToDo("test");
         GADGET.changePriority(1, PRIORITY.HIGH);
-        WebElement todoPriority1 = GADGET.getTodoPriority(1);
+        WebElement todoPriority1 = GADGET.getTodoPriorityElement(1);
         GADGET.focus();
         assertEquals(PRIORITY.HIGH.getCssColor(), todoPriority1.getCssValue("color"));
         
@@ -179,7 +179,7 @@ public class ToolGadgets_TodoList_TodoContents_Edit_PriorityTest extends IS_Base
 		super.getDriver().navigate().refresh();
 		TestHelper.sleep(2000);
 		
-        WebElement todoPriority2 = GADGET.getTodoPriority(1);
+        WebElement todoPriority2 = GADGET.getTodoPriorityElement(1);
         GADGET.focus();
         assertEquals(PRIORITY.HIGH.getCssColor(), todoPriority2.getCssValue("color"));
     }

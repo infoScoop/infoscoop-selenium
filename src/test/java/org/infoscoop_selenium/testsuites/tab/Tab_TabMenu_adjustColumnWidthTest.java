@@ -63,7 +63,7 @@ public class Tab_TabMenu_adjustColumnWidthTest extends IS_BaseItTestCase{
 		getPortal().getTab().selectSelectMenu(ISConstants.TABID_HOME);
 		
 		// 列の幅を揃えるを選択
-		WebElement columnWidthItem = getPortal().getTab().getResetColumnWidthItem(ISConstants.TABID_HOME);
+		WebElement columnWidthItem = getPortal().getTab().getResetColumnWidthItemElement(ISConstants.TABID_HOME);
 		columnWidthItem.click();
 		
 		// 値が反映するのを待機

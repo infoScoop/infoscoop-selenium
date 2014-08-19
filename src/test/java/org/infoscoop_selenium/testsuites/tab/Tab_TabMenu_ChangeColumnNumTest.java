@@ -40,7 +40,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         // open tab menu
         tab.selectSelectMenu(tabId);
 
-        WebElement element = tab.getColumnNumSelect(tabId);
+        WebElement element = tab.getColumnNumSelectElement(tabId);
         assertEquals("select", element.getTagName());
     }
 
@@ -55,7 +55,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         String tabId = ISConstants.TABID_HOME;
 
         tab.selectSelectMenu(tabId);
-        WebElement element = tab.getColumnNumSelect(tabId);
+        WebElement element = tab.getColumnNumSelectElement(tabId);
 
         String numberOfColumn = Integer.toString(portal.getPanel(tabId).getColumnLength());
         assertEquals(numberOfColumn, element.getAttribute("value"));
@@ -71,7 +71,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         String tabId = ISConstants.TABID_HOME;
 
         tab.selectSelectMenu(tabId);
-        WebElement selectE = tab.getColumnNumSelect(tabId);
+        WebElement selectE = tab.getColumnNumSelectElement(tabId);
         List<WebElement> optionEs = selectE.findElements(By.cssSelector("option"));
 
         // check number of option element
@@ -104,7 +104,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         // change selectbox value
         Tab tab = portal.getTab();
         tab.selectSelectMenu(tabId);
-        Select select = new Select(tab.getColumnNumSelect(tabId));
+        Select select = new Select(tab.getColumnNumSelectElement(tabId));
         int value = (MAX_NUMBER_OF_COLUMN == numberOfColumn) ? 1 : numberOfColumn + 1;
         select.selectByValue(Integer.toString(value));
         // stall for time to change number of column
@@ -152,7 +152,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
 
         // change number of column (-1)
         tab.selectSelectMenu(tabId);
-        Select select = new Select(tab.getColumnNumSelect(tabId));
+        Select select = new Select(tab.getColumnNumSelectElement(tabId));
 
         select.selectByValue(Integer.toString(numberOfColumn - 1));        
         // stall for time to change number of column
@@ -196,7 +196,7 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
     public void iscp_5765() {
         Tab tab = getPortal().getTab();
         tab.selectSelectMenu(ISConstants.TABID_HOME);
-        Select select = new Select(tab.getColumnNumSelect(ISConstants.TABID_HOME));
+        Select select = new Select(tab.getColumnNumSelectElement(ISConstants.TABID_HOME));
         for (int i = 0; i < 1000; i++) {
             select.selectByValue(Integer.toString(i % MAX_NUMBER_OF_COLUMN + 1));
         }

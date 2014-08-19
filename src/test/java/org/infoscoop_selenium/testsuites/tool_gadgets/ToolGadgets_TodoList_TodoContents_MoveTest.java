@@ -41,8 +41,8 @@ public class ToolGadgets_TodoList_TodoContents_MoveTest extends IS_BaseItTestCas
         GADGET.addToDo("test3");
     	
         // swap todo1 and todo2
-        WebElement todoText1 = GADGET.getTodoText(1);
-        WebElement todoText2 = GADGET.getTodoText(2);
+        WebElement todoText1 = GADGET.getTodoTextElement(1);
+        WebElement todoText2 = GADGET.getTodoTextElement(2);
         GADGET.focus();
         int offX = todoText1.getSize().getWidth() * 2;
         int offY = todoText2.getLocation().getY() - todoText1.getLocation().getY();
@@ -80,12 +80,12 @@ public class ToolGadgets_TodoList_TodoContents_MoveTest extends IS_BaseItTestCas
         // check
         GADGET.checkToDo(1);
         // priority to high
-        WebElement todoAddTextBox = GADGET.getTodoAddTextBox();
-        WebElement todoPriority = GADGET.getTodoPriority(1);
+        WebElement todoAddTextBox = GADGET.getTodoAddTextBoxElement();
+        WebElement todoPriority = GADGET.getTodoPriorityElement(1);
         GADGET.focus();
         todoPriority.click();
         GADGET.blur();
-        WebElement selectBox = GADGET.getChangePrioritySelectBox(1);
+        WebElement selectBox = GADGET.getChangePrioritySelectBoxElement(1);
         GADGET.focus();
         Select select = new Select(selectBox);
         select.selectByValue(Integer.toString(PRIORITY.HIGH.getValue()));
@@ -93,8 +93,8 @@ public class ToolGadgets_TodoList_TodoContents_MoveTest extends IS_BaseItTestCas
         GADGET.blur();
         
         // swap todo1 and todo2
-        WebElement todoText1 = GADGET.getTodoText(1);
-        WebElement todoText2 = GADGET.getTodoText(2);
+        WebElement todoText1 = GADGET.getTodoTextElement(1);
+        WebElement todoText2 = GADGET.getTodoTextElement(2);
         GADGET.focus();
         int offX = todoText1.getSize().getWidth() * 2;
         int offY = todoText2.getLocation().getY() - todoText1.getLocation().getY();
@@ -110,7 +110,7 @@ public class ToolGadgets_TodoList_TodoContents_MoveTest extends IS_BaseItTestCas
         assertEquals("test2", GADGET.getTodoTextStr(1));
         assertEquals("test1", GADGET.getTodoTextStr(2));
         assertEquals("test3", GADGET.getTodoTextStr(3));
-        WebElement todoText = GADGET.getTodoText(2);
+        WebElement todoText = GADGET.getTodoTextElement(2);
         GADGET.focus();
         String cssValue = todoText.getCssValue("text-decoration");
         String priorityText = todoPriority.getText();
@@ -130,8 +130,8 @@ public class ToolGadgets_TodoList_TodoContents_MoveTest extends IS_BaseItTestCas
         GADGET.addToDo("test3");
     	
         // swap todo1 and todo2
-        WebElement todoText1 = GADGET.getTodoText(1);
-        WebElement todoText2 = GADGET.getTodoText(2);
+        WebElement todoText1 = GADGET.getTodoTextElement(1);
+        WebElement todoText2 = GADGET.getTodoTextElement(2);
         GADGET.focus();
         int offX = todoText1.getSize().getWidth() * 2;
         int offY = todoText2.getLocation().getY() - todoText1.getLocation().getY();

@@ -100,7 +100,7 @@ public class MessageGadgetScreenShot extends IS_BaseItTestCase {
 		WebDriver driver = getDriver();
 
 		//公開メッセージの送信
-		GADGET.sendPublicMessage("メッセージテスト", GADGET.getContents());
+		GADGET.sendPublicMessage("メッセージテスト", GADGET.getContentsElement());
 		
 		TestHelper.getScreenShot("メッセージガジェット（メッセージ投稿）", driver);
 	
@@ -118,10 +118,10 @@ public class MessageGadgetScreenShot extends IS_BaseItTestCase {
 		GADGET.maximaize();
 
 		// 公開メッセージの送信
-		GADGET.sendPublicMessage("メッセージテスト", GADGET.getMaximaizeContentsMenu());
+		GADGET.sendPublicMessage("メッセージテスト", GADGET.getMaximaizeContentsMenuElement());
 
 		// 全ユーザの公開メッセージを開く
-		GADGET.getMaximaizeContentsMenu().findElement(By.xpath("//ul[@class='messageUsers']/li[4]/a")).click();
+		GADGET.getMaximaizeContentsMenuElement().findElement(By.xpath("//ul[@class='messageUsers']/li[4]/a")).click();
 		
 		TestHelper.getScreenShot("メッセージガジェット（最大化）", driver);
 	

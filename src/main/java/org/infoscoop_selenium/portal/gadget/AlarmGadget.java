@@ -36,7 +36,7 @@ public class AlarmGadget extends Gadget{
 	/**
 	 * コンテンツエレメントを返す。
 	 */
-	public WebElement getContent() {
+	public WebElement getContentElement() {
 		WebElement gadget = super.getGadgetElement();
 		WebElement content = gadget.findElement(By.cssSelector(".widgetShade .widgetBox .widgetContent"));
 		return content;

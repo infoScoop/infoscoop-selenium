@@ -43,8 +43,8 @@ public class Tab_DisplayTabTest extends IS_BaseItTestCase {
 		String tabLastId = getPortal().getTab().addTab();
 		
 		//一つ目のタブの左上の点のY座標 < 最後のタブの左上の点のY座標 になっていることを確認
-		int tab1Y0 = getPortal().getTab().getTab(tab1Id).getLocation().getY();
-		int tabLastY0 = getPortal().getTab().getTab(tabLastId).getLocation().getY();
+		int tab1Y0 = getPortal().getTab().getTabElement(tab1Id).getLocation().getY();
+		int tabLastY0 = getPortal().getTab().getTabElement(tabLastId).getLocation().getY();
 		assertTrue(tab1Y0 + "<" + tabLastY0 , tab1Y0 < tabLastY0);
 	}
 }
