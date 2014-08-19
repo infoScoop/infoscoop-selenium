@@ -3,7 +3,6 @@ package org.infoscoop_selenium.portal.gadget;
 import java.util.Arrays;
 import java.util.List;
 
-import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,10 +17,10 @@ public class ClockGadget extends Gadget{
 	 * JP日付を返す。
 	 */
 	public String getJpDate() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.id("jp_date"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	
@@ -29,10 +28,10 @@ public class ClockGadget extends Gadget{
 	 * JP時刻を返す。
 	 */
 	public String getJpTime() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.id("jp_time"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	
@@ -40,10 +39,10 @@ public class ClockGadget extends Gadget{
 	 * UK日付を返す。
 	 */
 	public String getUkDate() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.id("uk_date"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	
@@ -51,10 +50,10 @@ public class ClockGadget extends Gadget{
 	 * UK時刻を返す。
 	 */
 	public String getUkTime() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.id("uk_time"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	
@@ -62,10 +61,10 @@ public class ClockGadget extends Gadget{
 	 * US日付を返す。
 	 */
 	public String getUsDate() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.id("us_date"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	
@@ -73,10 +72,10 @@ public class ClockGadget extends Gadget{
 	 * US時刻を返す。
 	 */
 	public String getUsTime() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.id("us_time"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	

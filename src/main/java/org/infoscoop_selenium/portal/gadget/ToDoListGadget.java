@@ -57,10 +57,10 @@ public class ToDoListGadget extends Gadget{
 	 * @param msg
 	 */
 	public void addToDo(String msg){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		driver.findElement(By.id(super.getId()+"_inputText")).sendKeys(msg);
 		driver.findElement(By.xpath("//table[@class='todoAddTable']/tbody/tr/td[2]/input[@type='button']")).click();		
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 	}
 	
 	/**
@@ -68,12 +68,12 @@ public class ToDoListGadget extends Gadget{
 	 * @param msg
 	 */
 	public void addToDoByEnter(String msg){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		WebElement inputText = driver.findElement(By.id(super.getId()+"_inputText"));
 		inputText.sendKeys(msg);
 		
 		inputText.sendKeys(Keys.RETURN);
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 	}
 
 	/**
@@ -82,11 +82,11 @@ public class ToDoListGadget extends Gadget{
 	 * @param priority
 	 */
 	public void changePriority(int order, PRIORITY priority){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		driver.findElement(By.xpath("//tbody[@id='"+super.getId()+"_list']/tr["+order+"]/td[@class='todoPriorityTd']/div")).click();
 		Select select = new Select(driver.findElement(By.xpath("//tbody[@id='"+super.getId()+"_list']/tr["+order+"]/td[@class='todoPriorityTd']/select")));
 		select.selectByIndex(priority.getValue());
-		TestHelper.backToTopFrame(driver);		
+		super.blur();		
 	}
 	
 	/**
@@ -94,9 +94,9 @@ public class ToDoListGadget extends Gadget{
 	 * @param order (ToDoの上から数えての順番)
 	 */
 	public void checkToDo(int order){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		driver.findElement(By.xpath("//tbody[@id='"+super.getId()+"_list']/tr["+order+"]/td[@class='todoCheckTd']/input")).click();
-		TestHelper.backToTopFrame(driver);		
+		super.blur();		
 	}
 	
 	/**
@@ -104,9 +104,9 @@ public class ToDoListGadget extends Gadget{
 	 * @param order (ToDoの上から数えての順番)
 	 */
 	public void deleteToDo(int order){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		driver.findElement(By.xpath("//tbody[@id='"+super.getId()+"_list']/tr["+order+"]/td[@class='todoDeleteTd']/img")).click();
-		TestHelper.backToTopFrame(driver);		
+		super.blur();		
 	}
 	
 	/**
@@ -132,14 +132,14 @@ public class ToDoListGadget extends Gadget{
 	 * @param msg
 	 */
     public void changeTodoText(int order, String msg) {
-        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        super.focus();
         WebElement todoTextTd = driver.findElement(By.cssSelector(
                 ".todoListTable tr:nth-of-type(" + order + ") .todoTextTd"));
         WebElement todoText = todoTextTd.findElement(By.cssSelector(".todoText"));
         todoText.click();
         WebElement todoTextEdit = todoTextTd.findElement(By.tagName("input"));
         todoTextEdit.sendKeys(msg, Keys.ENTER);
-        TestHelper.backToTopFrame(driver);
+        super.blur();
     }
 
     /**
@@ -148,7 +148,7 @@ public class ToDoListGadget extends Gadget{
      * @return
      */
     public WebElement getTodoPriorityElement(int order) {
-        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        super.focus();
         List<WebElement> childNodes = driver.findElements(By.cssSelector(
                 ".todoListTable tr:nth-of-type(" + order + ") .todoPriorityTd > *"));
         WebElement todoPriority = null;
@@ -156,7 +156,7 @@ public class ToDoListGadget extends Gadget{
                 && "todoPriority".equals(childNodes.get(0).getAttribute("class"))) {
             todoPriority = childNodes.get(0);
         }
-        TestHelper.backToTopFrame(driver);
+        super.blur();
         return todoPriority;
     }
 
@@ -167,12 +167,12 @@ public class ToDoListGadget extends Gadget{
      */
     public boolean getCheckState(int order) {
         WebElement todoRow = getTodoRowElement(order);
-        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        super.focus();
         WebElement todoCheck = todoRow.findElement(By.className("todoCheck"));
         
         boolean checked = todoCheck.isSelected();
         
-        TestHelper.backToTopFrame(driver);
+        super.blur();
         return checked;
     }
 
@@ -182,7 +182,7 @@ public class ToDoListGadget extends Gadget{
      * @return
      */
     public WebElement getChangePrioritySelectBoxElement(int order) {
-        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        super.focus();
         List<WebElement> childNodes = driver.findElements(By.cssSelector(
                 ".todoListTable tr:nth-of-type(" + order + ") .todoPriorityTd > *"));
         WebElement selectBox = null;
@@ -190,7 +190,7 @@ public class ToDoListGadget extends Gadget{
             if ("select".equals(element.getTagName()))
                 selectBox = element;
         }
-        TestHelper.backToTopFrame(driver);
+        super.blur();
         return selectBox;
     }
 
@@ -200,7 +200,7 @@ public class ToDoListGadget extends Gadget{
      * @return 
      */
     public WebElement getTodoTextElement(int order) {
-        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        super.focus();
         List<WebElement> childNodes = driver.findElements(By.cssSelector(
                 ".todoListTable tr:nth-of-type(" + order + ") .todoTextTd > *"));
         WebElement todoText = null;
@@ -210,7 +210,7 @@ public class ToDoListGadget extends Gadget{
         }
         
         System.out.println(todoText);
-        TestHelper.backToTopFrame(driver);
+        super.blur();
         return todoText;
     }
 
@@ -222,9 +222,9 @@ public class ToDoListGadget extends Gadget{
     public String getTodoText(int order) {
         String todoMsg = "";
         WebElement el = getTodoTextElement(order);
-        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        super.focus();
         todoMsg = el.getText();
-        TestHelper.backToTopFrame(driver);
+        super.blur();
         return todoMsg;
     }
 
@@ -234,7 +234,7 @@ public class ToDoListGadget extends Gadget{
      * @return 
      */
     public WebElement getTodoTextEditElement(int order) {
-        TestHelper.switchToFrame(driver, "ifrm_" + super.getId());
+        super.focus();
         List<WebElement> childNodes = driver.findElements(By.cssSelector(
                 ".todoListTable tr:nth-of-type(" + order + ") .todoTextTd > *"));
         WebElement todoTextEdit = null;
@@ -242,7 +242,7 @@ public class ToDoListGadget extends Gadget{
             if ("todoTextEdit".equals(element.getAttribute("class")))
                 todoTextEdit = element;
         }
-        TestHelper.backToTopFrame(driver);
+        super.blur();
         return todoTextEdit;
     }
 
@@ -251,9 +251,9 @@ public class ToDoListGadget extends Gadget{
 	 * @return
 	 */
 	public WebElement getTodoAddTextBoxElement(){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		WebElement textBox = driver.findElement(By.cssSelector(".todoAddTextBox"));
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		
 		return textBox;
 	}
@@ -263,9 +263,9 @@ public class ToDoListGadget extends Gadget{
 	 * @return
 	 */
 	public WebElement getTodoAddButtonElement(){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		WebElement addButton =  driver.findElement(By.cssSelector(".todoAddTable input[type=\"button\"]"));
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		
 		return addButton;
 	}
@@ -275,10 +275,10 @@ public class ToDoListGadget extends Gadget{
 	 * @return
 	 */
 	public WebElement getTodoRowElement(int order){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		List<WebElement> rows = driver.findElements(By.cssSelector(".todoListTable tr"));
 		WebElement row  = rows.get(order-1);
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		
 		return row;
 	}
@@ -290,9 +290,9 @@ public class ToDoListGadget extends Gadget{
 	public int getTodoLength(){
 		int len;
 		
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		len = driver.findElements(By.cssSelector(".todoListTable tr")).size();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		
 		return len;
 	}
@@ -306,9 +306,9 @@ public class ToDoListGadget extends Gadget{
 		if(getTodoLength() == 0)
 			addToDo("test");
 		
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		int displayFontSize = driver.findElement(By.className("todoText")).getSize().height;
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return displayFontSize;
 	}
 	

@@ -52,9 +52,9 @@ public class StickyGadget extends Gadget{
 	 * 付箋の値を取得
 	 */
 	public String getContent() {
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		String text = driver.findElement(By.id("editor")).getAttribute("value");
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 
@@ -62,9 +62,9 @@ public class StickyGadget extends Gadget{
 	 * 付箋のフォントサイズを取得
 	 */
 	public String getContentFontSize() {
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		String fontSize = driver.findElement(By.id("editor")).getCssValue("font-size");
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return fontSize;
 	}
 
@@ -72,9 +72,9 @@ public class StickyGadget extends Gadget{
 	 * 付箋の背景色を取得
 	 */
 	public String getContentBackgroundColor() {
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		String bgcolor = driver.findElement(By.id("editor")).getCssValue("background-color");
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return bgcolor;
 	}
 
@@ -82,9 +82,9 @@ public class StickyGadget extends Gadget{
 	 * 付箋の文字色を取得
 	 */
 	public String getContentColor() {
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		String bgcolor = driver.findElement(By.id("editor")).getCssValue("color");
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return bgcolor;
 	}
 
@@ -92,12 +92,12 @@ public class StickyGadget extends Gadget{
 	 * 付箋に値を代入
 	 */
 	public void writeSticky(String msg, boolean bEOL){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		driver.findElement(By.id("editor")).sendKeys(msg);
 		if (bEOL) {
 			driver.findElement(By.id("editor")).sendKeys(Keys.RETURN);
 		}
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 	}
 	
 	/**

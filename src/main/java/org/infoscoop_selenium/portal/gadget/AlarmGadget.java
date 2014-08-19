@@ -46,10 +46,10 @@ public class AlarmGadget extends Gadget{
 	 * 日付を返す。
 	 */
 	public String getDate() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.xpath("//div[@id='small']"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	
@@ -58,10 +58,10 @@ public class AlarmGadget extends Gadget{
 	 * Gadget#getTitle と競合しないように AlarmGadget#getTitleStr とする
 	 */
 	public String getTitleStr() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.xpath("//div[@id='title']"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	
@@ -69,10 +69,10 @@ public class AlarmGadget extends Gadget{
 	 * タイトル（エラー時メッセージ）を返す
 	 */
 	public String getTitleMessage() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.xpath("//div[@id='title']/div[@class='message']"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	
@@ -80,10 +80,10 @@ public class AlarmGadget extends Gadget{
 	 * タイトル（エラー時エラー）を返す
 	 */
 	public String getTitleError() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.xpath("//div[@id='title']/div[@class='error']"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	
@@ -91,10 +91,10 @@ public class AlarmGadget extends Gadget{
 	 * 時間を返す。
 	 */
 	public String getTime() {
-		TestHelper.switchToFrame(driver, "ifrm_"+this.getId());
+		super.focus();
 		WebElement content = driver.findElement(By.xpath("//div[@id='time']"));
 		String text = content.getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return text;
 	}
 	

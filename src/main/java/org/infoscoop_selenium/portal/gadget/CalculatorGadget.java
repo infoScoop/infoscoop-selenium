@@ -2,7 +2,6 @@ package org.infoscoop_selenium.portal.gadget;
 
 import java.util.List;
 
-import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -34,16 +33,16 @@ public class CalculatorGadget extends Gadget{
 	 * @param msg
 	 */
 	public void selectOperationButton(KEY key){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		driver.findElement(By.id(key.getValue())).click();;
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 	}
 	
 	/**
 	 * 数字ボタン選択
 	 */
 	public void selectNumberButton(String num) {
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		for(int i=0;i<num.length();i++ ) {
 			String key = null;
 			char c = num.charAt(i);
@@ -61,7 +60,7 @@ public class CalculatorGadget extends Gadget{
 			}
 			driver.findElement(By.id(key)).click();;
 		}
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 	}
 	
 	/**
@@ -75,9 +74,9 @@ public class CalculatorGadget extends Gadget{
 	 * @param msg
 	 */
 	public String getResult(){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		String result = driver.findElement(By.id("display")).getAttribute("value");
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return result;
 	}
 	
@@ -87,9 +86,9 @@ public class CalculatorGadget extends Gadget{
 	 * @param msg
 	 */
 	public String getOperation(){
-		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
+		super.focus();
 		String result = driver.findElement(By.id("operation")).getText();
-		TestHelper.backToTopFrame(driver);
+		super.blur();
 		return result;
 	}
 	
