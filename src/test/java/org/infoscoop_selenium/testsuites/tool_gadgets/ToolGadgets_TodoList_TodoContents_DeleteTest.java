@@ -40,8 +40,8 @@ public class ToolGadgets_TodoList_TodoContents_DeleteTest extends IS_BaseItTestC
         
         assertEquals(2, GADGET.getTodoLength());
         GADGET.focus();
-        assertEquals("test1", GADGET.getTodoTextStr(1));
-        assertEquals("test3", GADGET.getTodoTextStr(2));
+        assertEquals("test1", GADGET.getTodoText(1));
+        assertEquals("test3", GADGET.getTodoText(2));
         GADGET.blur();
     }
 
@@ -88,8 +88,8 @@ public class ToolGadgets_TodoList_TodoContents_DeleteTest extends IS_BaseItTestC
         
         assertEquals(2, GADGET.getTodoLength());
         GADGET.focus();
-        assertEquals("test1", GADGET.getTodoTextStr(1));
-        assertEquals("test3", GADGET.getTodoTextStr(2));
+        assertEquals("test1", GADGET.getTodoText(1));
+        assertEquals("test3", GADGET.getTodoText(2));
         GADGET.blur();
         
 		// ブラウザの更新
@@ -98,8 +98,8 @@ public class ToolGadgets_TodoList_TodoContents_DeleteTest extends IS_BaseItTestC
 		
         assertEquals(2, GADGET.getTodoLength());
         GADGET.focus();
-        assertEquals("test1", GADGET.getTodoTextStr(1));
-        assertEquals("test3", GADGET.getTodoTextStr(2));
+        assertEquals("test1", GADGET.getTodoText(1));
+        assertEquals("test3", GADGET.getTodoText(2));
         GADGET.blur();
     }
 }

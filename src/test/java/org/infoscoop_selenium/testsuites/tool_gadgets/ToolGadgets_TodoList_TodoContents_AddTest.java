@@ -70,7 +70,7 @@ public class ToolGadgets_TodoList_TodoContents_AddTest extends IS_BaseItTestCase
 		GADGET.addToDoByEnter(txt);
 		
 		// 追加された1件目の内容を取得
-		String entryTxt = GADGET.getTodoTextStr(1);
+		String entryTxt = GADGET.getTodoText(1);
 		
 		// 入力内容と比較
 		assertEquals(entryTxt, txt);
@@ -189,7 +189,7 @@ public class ToolGadgets_TodoList_TodoContents_AddTest extends IS_BaseItTestCase
 		GADGET = new ToDoListGadget(driver, gadgetId);
 		
 		// 追加したTodoの内容取得
-		String afterTodoStr = GADGET.getTodoTextStr(1);
+		String afterTodoStr = GADGET.getTodoText(1);
 		
 		// 比較
 		assertEquals(beforeTodoStr, afterTodoStr);

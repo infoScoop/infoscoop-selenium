@@ -219,7 +219,7 @@ public class ToDoListGadget extends Gadget{
      * @param order
      * @return 
      */
-    public String getTodoTextStr(int order) {
+    public String getTodoText(int order) {
         String todoMsg = "";
         WebElement el = getTodoTextElement(order);
         TestHelper.switchToFrame(driver, "ifrm_" + super.getId());

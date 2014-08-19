@@ -55,9 +55,9 @@ public class ToolGadgets_TodoList_TodoContents_MoveTest extends IS_BaseItTestCas
 		actions.build().perform();
         GADGET.blur();
         
-        assertEquals("test2", GADGET.getTodoTextStr(1));
-        assertEquals("test1", GADGET.getTodoTextStr(2));
-        assertEquals("test3", GADGET.getTodoTextStr(3));
+        assertEquals("test2", GADGET.getTodoText(1));
+        assertEquals("test1", GADGET.getTodoText(2));
+        assertEquals("test3", GADGET.getTodoText(3));
     }
 
     //@Test
@@ -107,9 +107,9 @@ public class ToolGadgets_TodoList_TodoContents_MoveTest extends IS_BaseItTestCas
 		actions.build().perform();
         GADGET.blur();
         
-        assertEquals("test2", GADGET.getTodoTextStr(1));
-        assertEquals("test1", GADGET.getTodoTextStr(2));
-        assertEquals("test3", GADGET.getTodoTextStr(3));
+        assertEquals("test2", GADGET.getTodoText(1));
+        assertEquals("test1", GADGET.getTodoText(2));
+        assertEquals("test3", GADGET.getTodoText(3));
         WebElement todoText = GADGET.getTodoTextElement(2);
         GADGET.focus();
         String cssValue = todoText.getCssValue("text-decoration");
@@ -148,8 +148,8 @@ public class ToolGadgets_TodoList_TodoContents_MoveTest extends IS_BaseItTestCas
 		super.getDriver().navigate().refresh();
 		TestHelper.sleep(2000);
 		
-		assertEquals("test2", GADGET.getTodoTextStr(1));
-        assertEquals("test1", GADGET.getTodoTextStr(2));
-        assertEquals("test3", GADGET.getTodoTextStr(3));
+		assertEquals("test2", GADGET.getTodoText(1));
+        assertEquals("test1", GADGET.getTodoText(2));
+        assertEquals("test3", GADGET.getTodoText(3));
     }
 }
