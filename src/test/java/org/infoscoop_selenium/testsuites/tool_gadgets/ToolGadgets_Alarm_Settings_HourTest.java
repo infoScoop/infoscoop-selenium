@@ -42,9 +42,9 @@ public class ToolGadgets_Alarm_Settings_HourTest extends IS_BaseItTestCase {
 		// ガジェット設定を閉じる
 		GADGET.getGadgetPreference().ok();
 		
-		String msg = GADGET.getTitleMessageStr();
+		String msg = GADGET.getTitleMessage();
 		assertEquals("不正な値が入力されました。設定し直して下さい。", msg);
-		String err = GADGET.getTitleErrorStr();
+		String err = GADGET.getTitleError();
 		System.out.println(err);
 		assertEquals("[時] 0から23までの整数(半角)を入力してください", err);
 	}
