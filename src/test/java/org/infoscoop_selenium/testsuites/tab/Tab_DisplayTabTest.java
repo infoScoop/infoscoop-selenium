@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.constants.ISConstants;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
 
 /**
  * タブ/表示

@@ -3,7 +3,6 @@ package org.infoscoop_selenium.portal.gadget;
 import java.util.Arrays;
 import java.util.List;
 
-import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;

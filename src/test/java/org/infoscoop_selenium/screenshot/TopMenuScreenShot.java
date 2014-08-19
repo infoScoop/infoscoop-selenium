@@ -1,11 +1,9 @@
 package org.infoscoop_selenium.screenshot;
 
-
 import static org.junit.Assert.assertTrue;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
-import org.infoscoop_selenium.properties.TestEnv;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;

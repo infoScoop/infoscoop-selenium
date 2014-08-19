@@ -2,8 +2,6 @@ package org.infoscoop_selenium.portal.commandbar;
 
 import java.util.List;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import org.infoscoop_selenium.Portal;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;

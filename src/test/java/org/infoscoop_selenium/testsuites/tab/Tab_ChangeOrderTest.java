@@ -3,7 +3,6 @@ package org.infoscoop_selenium.testsuites.tab;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.infoscoop_selenium.base.IS_BaseItTestCase;

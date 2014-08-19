@@ -6,7 +6,6 @@ import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.StickyGadget;
-import org.infoscoop_selenium.portal.gadget.StickyGadget.BACKGROUNDCOLOR;
 import org.infoscoop_selenium.portal.gadget.StickyGadget.COLOR;
 import org.junit.Test;
 import org.openqa.selenium.support.ui.Select;

@@ -2,7 +2,6 @@ package org.infoscoop_selenium.screenshot;
 
 import static org.junit.Assert.assertTrue;
 
-import org.infoscoop_selenium.WindowManager;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
@@ -10,7 +9,6 @@ import org.infoscoop_selenium.portal.gadget.RssReaderGadget;
 import org.infoscoop_selenium.portal.gadget.RssReaderGadget.DETAIL;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-
 
 /**
  * RSSリーダーのスクリーンショット
