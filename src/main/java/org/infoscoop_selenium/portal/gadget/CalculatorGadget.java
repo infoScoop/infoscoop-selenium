@@ -86,7 +86,7 @@ public class CalculatorGadget extends Gadget{
 	 * 演算子取得
 	 * @param msg
 	 */
-	public String getOperationText(){
+	public String getOperation(){
 		TestHelper.switchToFrame(driver, "ifrm_"+super.getId());
 		String result = driver.findElement(By.id("operation")).getText();
 		TestHelper.backToTopFrame(driver);

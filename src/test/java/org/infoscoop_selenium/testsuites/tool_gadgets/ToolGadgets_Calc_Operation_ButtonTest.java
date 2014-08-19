@@ -64,13 +64,13 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 	 */
 	public void iscp_4065(){
 		GADGET.selectOperationButton(KEY.ADD);
-		assertEquals(GADGET.getOperationText(), "+");
+		assertEquals(GADGET.getOperation(), "+");
 		GADGET.selectOperationButton(KEY.SUBSTRACT);
-		assertEquals(GADGET.getOperationText(), "-");
+		assertEquals(GADGET.getOperation(), "-");
 		GADGET.selectOperationButton(KEY.MULTIPLY);
-		assertEquals(GADGET.getOperationText(), "*");
+		assertEquals(GADGET.getOperation(), "*");
 		GADGET.selectOperationButton(KEY.DIVIDE);
-		assertEquals(GADGET.getOperationText(), "/");
+		assertEquals(GADGET.getOperation(), "/");
 	}
 	
 	@Test
@@ -173,7 +173,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		assertEquals(GADGET.getResult(), "2");
 		GADGET.selectNumberButton("1");
 		assertEquals(GADGET.getResult(), "1");
-		assertEquals(GADGET.getOperationText(), "");
+		assertEquals(GADGET.getOperation(), "");
 		GADGET.selectOperationButton(KEY.AC);
 		
 		// 加算後に"."入力
@@ -184,7 +184,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		assertEquals(GADGET.getResult(), "2");
 		GADGET.selectNumberButton(".");
 		assertEquals(GADGET.getResult(), "0.");
-		assertEquals(GADGET.getOperationText(), "");
+		assertEquals(GADGET.getOperation(), "");
 		GADGET.selectOperationButton(KEY.AC);
 		
 		// 減算後に整数入力
@@ -195,7 +195,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		assertEquals(GADGET.getResult(), "2");
 		GADGET.selectNumberButton("1");
 		assertEquals(GADGET.getResult(), "1");
-		assertEquals(GADGET.getOperationText(), "");
+		assertEquals(GADGET.getOperation(), "");
 		GADGET.selectOperationButton(KEY.AC);
 		
 		// 減算後に"."入力
@@ -206,7 +206,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		assertEquals(GADGET.getResult(), "2");
 		GADGET.selectNumberButton(".");
 		assertEquals(GADGET.getResult(), "0.");
-		assertEquals(GADGET.getOperationText(), "");
+		assertEquals(GADGET.getOperation(), "");
 		GADGET.selectOperationButton(KEY.AC);
 		
 		// 乗算後に整数入力
@@ -217,7 +217,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		assertEquals(GADGET.getResult(), "6");
 		GADGET.selectNumberButton("1");
 		assertEquals(GADGET.getResult(), "1");
-		assertEquals(GADGET.getOperationText(), "");
+		assertEquals(GADGET.getOperation(), "");
 		GADGET.selectOperationButton(KEY.AC);
 		
 		// 乗算後に"."入力
@@ -228,7 +228,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		assertEquals(GADGET.getResult(), "6");
 		GADGET.selectNumberButton(".");
 		assertEquals(GADGET.getResult(), "0.");
-		assertEquals(GADGET.getOperationText(), "");
+		assertEquals(GADGET.getOperation(), "");
 		GADGET.selectOperationButton(KEY.AC);
 		
 		
@@ -240,7 +240,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		assertEquals(GADGET.getResult(), "1.5");
 		GADGET.selectNumberButton("1");
 		assertEquals(GADGET.getResult(), "1");
-		assertEquals(GADGET.getOperationText(), "");
+		assertEquals(GADGET.getOperation(), "");
 		GADGET.selectOperationButton(KEY.AC);
 		
 		// 除算後に"."入力
@@ -251,7 +251,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		assertEquals(GADGET.getResult(), "1.5");
 		GADGET.selectNumberButton(".");
 		assertEquals(GADGET.getResult(), "0.");
-		assertEquals(GADGET.getOperationText(), "");
+		assertEquals(GADGET.getOperation(), "");
 		GADGET.selectOperationButton(KEY.AC);
 	}
 	
@@ -343,7 +343,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		GADGET.selectNumberButton("1");
 		GADGET.selectOperationButton(KEY.ADD);
 		assertEquals(GADGET.getResult(), "2");
-		assertEquals(GADGET.getOperationText(), "+");
+		assertEquals(GADGET.getOperation(), "+");
 		GADGET.selectOperationButton(KEY.AC);
 		
 		// "-"表示
@@ -352,7 +352,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		GADGET.selectNumberButton("1");
 		GADGET.selectOperationButton(KEY.SUBSTRACT);
 		assertEquals(GADGET.getResult(), "2");
-		assertEquals(GADGET.getOperationText(), "-");
+		assertEquals(GADGET.getOperation(), "-");
 		GADGET.selectOperationButton(KEY.AC);
 		
 		// "*"表示
@@ -361,7 +361,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		GADGET.selectNumberButton("1");
 		GADGET.selectOperationButton(KEY.MULTIPLY);
 		assertEquals(GADGET.getResult(), "2");
-		assertEquals(GADGET.getOperationText(), "*");
+		assertEquals(GADGET.getOperation(), "*");
 		GADGET.selectOperationButton(KEY.AC);
 		
 		// "/"表示
@@ -370,7 +370,7 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		GADGET.selectNumberButton("1");
 		GADGET.selectOperationButton(KEY.DIVIDE);
 		assertEquals(GADGET.getResult(), "2");
-		assertEquals(GADGET.getOperationText(), "/");
+		assertEquals(GADGET.getOperation(), "/");
 	}
 	
 	@Test
@@ -399,9 +399,9 @@ public class ToolGadgets_Calc_Operation_ButtonTest extends IS_BaseItTestCase{
 		GADGET.selectNumberButton("1");
 		GADGET.selectOperationButton(KEY.ADD);
 		assertEquals(GADGET.getResult(), "2");
-		assertEquals(GADGET.getOperationText(), "+");
+		assertEquals(GADGET.getOperation(), "+");
 		GADGET.selectOperationButton(KEY.AC);
 		assertEquals(GADGET.getResult(), "0");
-		assertEquals(GADGET.getOperationText(), "");
+		assertEquals(GADGET.getOperation(), "");
 	}
 }
