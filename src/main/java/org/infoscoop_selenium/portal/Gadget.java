@@ -11,6 +11,7 @@ import org.infoscoop_selenium.portal.gadget.ClockGadget;
 import org.infoscoop_selenium.portal.gadget.GadgetPreference;
 import org.infoscoop_selenium.portal.gadget.GenericGadget;
 import org.infoscoop_selenium.portal.gadget.MessageGadget;
+import org.infoscoop_selenium.portal.gadget.RankingGadget;
 import org.infoscoop_selenium.portal.gadget.RssReaderGadget;
 import org.infoscoop_selenium.portal.gadget.ScheduleGadget;
 import org.infoscoop_selenium.portal.gadget.StickyGadget;
@@ -42,6 +43,7 @@ public abstract class Gadget {
 		SCHEDULE(ScheduleGadget.class),
 		CLOCK(ClockGadget.class),
 		CALCULATOR(CalculatorGadget.class),
+        RANKING(RankingGadget.class),
 		GENERIC(GenericGadget.class);
 		
 		private final Class gadgetClass;
