@@ -9,6 +9,7 @@ import org.infoscoop_selenium.portal.TopMenu;
 import org.infoscoop_selenium.properties.TestEnv;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 
 public class Portal {
@@ -106,6 +107,10 @@ public class Portal {
 		return url;
 	}
 	
+	public boolean isPanelVisible(){
+		return this.driver.findElement(By.id("panels")).isDisplayed();
+	}
+	
 	public void close(){
 		this.driver.close();
 	}
@@ -113,6 +118,14 @@ public class Portal {
 	public static void waitPortalLoadComplete(WebDriver driver){
 		sleep(1000);
 		TestHelper.waitPresent(driver, By.id("columns0"), 20);
+	}
+	
+	/**
+	 * パネル要素の取得
+	 * @return
+	 */
+	public WebElement getPanels(){
+		return this.driver.findElement(By.id("panels"));
 	}
 	
 	private static void sleep(long sleep){
