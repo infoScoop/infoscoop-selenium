@@ -5,6 +5,7 @@ import java.util.List;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -56,6 +57,18 @@ public class MessageGadget extends Gadget{
 		el.findElement(By.xpath("//div[1]/div[3]/input[1]")).click();
 		TestHelper.waitPresent(driver, By.className("latestMsg"));
 	}
+	
+	/**
+	 * 送信メッセージを入力するテキストエリアを返却する
+	 * @return
+	 */
+    public WebElement getTextAreaElement() {
+        try {
+            return driver.findElement(By.cssSelector("#" + super.getId() + " textarea"));
+        } catch (NoSuchElementException e) {
+            throw e;
+        }
+    }
 
 	@Override
 	public List<String> getSupportedHeaderIcons() {
