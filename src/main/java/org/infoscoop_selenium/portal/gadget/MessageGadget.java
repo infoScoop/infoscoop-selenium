@@ -9,7 +9,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class MessageGadget extends Gadget{
+public class MessageGadget extends Gadget {    
 	public MessageGadget(WebDriver driver, String gadgetId) {
 		super(driver, gadgetId);
 	}
@@ -59,6 +59,14 @@ public class MessageGadget extends Gadget{
 	}
 	
 	/**
+	 * メッセージ送信フォームのラベルの文字列を返却する
+	 * @return
+	 */
+	public String getMessageTo() {
+	    return driver.findElement(By.cssSelector("#" + super.getId() + " .messageTo")).getText();
+	}
+	
+	/**
 	 * 送信メッセージを入力するテキストエリアを返却する
 	 * @return
 	 */
@@ -68,6 +76,61 @@ public class MessageGadget extends Gadget{
         } catch (NoSuchElementException e) {
             throw e;
         }
+    }
+    
+    /**
+     * グループの帯（<div class="mesageGroup">）である要素を返却する
+     * @param order
+     * @return
+     */
+    public WebElement getMessageGroupElement(int order) {
+        WebElement contents = getContentsElement();
+        List<WebElement> msgGroupElms = contents.findElements(By.className("messageGroup"));
+        if (msgGroupElms.size() >= order) {
+            return msgGroupElms.get(order);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * グループのメニュー項目（「受信メッセージ」、「送信メッセージ」など）部分である要素を返却する
+     * @param order
+     * @return
+     */
+    public WebElement getMessageUsersElement(int order) {
+        WebElement contents = getContentsElement();
+        List<WebElement> msgUsersElms = contents.findElements(By.className("messageUsers"));
+        if (msgUsersElms.size() >= order) {
+            return msgUsersElms.get(order);
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+     * 「システム」グループのRSSアイコンの要素を返却する
+     * @param order
+     * @return
+     */
+    public WebElement getSystemRssIcon(int order) {
+        WebElement sysGrpUsers = getMessageUsersElement(0);
+        List<WebElement> menuItems = sysGrpUsers.findElements(By.tagName("li"));
+        if (menuItems.size() > order) {
+            return menuItems.get(order).findElement(By.tagName("img"));
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+     * 「システム」グループの「お知らせ」の編集アイコンの要素を返却する
+     * @return
+     */
+    public WebElement getSystemEditIcon() {
+        WebElement sysGrpUsers = getMessageUsersElement(0);
+        List<WebElement> menuItems = sysGrpUsers.findElements(By.tagName("li"));
+        return menuItems.get(2).findElements(By.tagName("img")).get(1);
     }
 
 	@Override

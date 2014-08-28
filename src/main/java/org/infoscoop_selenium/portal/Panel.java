@@ -42,6 +42,16 @@ public class Panel {
         return deployedGadgetIds;
     }
     
+    /**
+     * 指定した列、並び順のガジェットのＩＤを返却する
+     * @param lineNo 縦
+     * @param order 横
+     * @return
+     */
+    public String getDeployedGadgetId(int lineNo, int order) {
+        return getDeployedGadgetIds().get(lineNo).get(order);
+    }
+    
 	/**
 	 * カラム要素リストを返す
 	 */
