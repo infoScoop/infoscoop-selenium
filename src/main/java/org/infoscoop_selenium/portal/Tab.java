@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 public class Tab {
 	WebDriver driver;
@@ -270,6 +271,17 @@ public class Tab {
 		WebElement closeItem = getCloseItemElement(tabId);
 		closeItem.findElement(By.cssSelector(".close")).click();
 		driver.switchTo().alert().accept();
+	}
+
+	/**
+	 * パネルの列数を変更する
+	 * @param tabId
+	 * @param num
+	 */
+	public void changeColumnNum(String tabId, int num) {
+	    selectSelectMenu(tabId);
+	    Select selectBox = new Select(getColumnNumSelectElement(tabId));
+	    selectBox.selectByValue(Integer.toString(num));
 	}
 
 }

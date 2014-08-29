@@ -14,16 +14,6 @@ public class RankingGadget extends Gadget {
         super(driver, gadgetId);
     }
 
-    @Override
-    public List<String> getSupportedHeaderIcons() {
-        return Arrays.asList(Gadget.ICON_TYPE_MINIMIZE, Gadget.ICON_TYPE_SHOWTOOLS);
-    }
-
-    @Override
-    public List<String> getSupportedMenuItems() {
-        return Arrays.asList(Gadget.MENU_TYPE_EDIT, Gadget.MENU_TYPE_DELETE);
-    }
-
     /**
      * ランキングの表示件数が0の場合はtrueを返却する
      * 
@@ -63,6 +53,16 @@ public class RankingGadget extends Gadget {
         WebElement widgetRankTime = driver.findElement(By.cssSelector(
                 "#" + super.getId() + " .widgetContent .widgetRankTime"));
         return widgetRankTime.getText();
+    }
+
+    @Override
+    public List<String> getSupportedHeaderIcons() {
+        return Arrays.asList(Gadget.ICON_TYPE_MINIMIZE, Gadget.ICON_TYPE_SHOWTOOLS);
+    }
+
+    @Override
+    public List<String> getSupportedMenuItems() {
+        return Arrays.asList(Gadget.MENU_TYPE_DELETE);
     }
 
 }
