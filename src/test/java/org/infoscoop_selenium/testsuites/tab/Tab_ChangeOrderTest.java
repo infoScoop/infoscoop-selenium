@@ -5,8 +5,15 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.infoscoop_selenium.Portal;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.constants.ISConstants;
+import org.infoscoop_selenium.helper.TestHelper;
+import org.infoscoop_selenium.portal.Panel;
+import org.infoscoop_selenium.portal.Tab;
+import org.infoscoop_selenium.portal.TopMenu;
+import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
+import org.infoscoop_selenium.portal.gadget.AlarmGadget;
 import org.junit.Test;
 
 public class Tab_ChangeOrderTest extends IS_BaseItTestCase {
@@ -120,6 +127,91 @@ public class Tab_ChangeOrderTest extends IS_BaseItTestCase {
 		//移動されているか確認(tab4の右がtab3)
 		nextTabId = getPortal().getTab().getNextTabId(tablastId);
 		assertEquals(tab3Id, nextTabId);
+	}
+	
+	@Test
+	/**
+	 * タブの内容
+	 * 移動後も各タブのパネル内容に変化がないことを確認
+	 */
+	public void iscp_5727() {
+		Portal portal = getPortal();
+		TopMenu topMenu = portal.getTopMenu();
+		Tab tab = portal.getTab();
+		
+		//タブを追加
+		String tab1Id = tab.addTab();
+		String tab2Id = tab.addTab();
+		
+		Panel panel1 = portal.getPanel(tab1Id);
+		Panel panel2 = portal.getPanel(tab2Id);
+		
+		int numberOfColumnPanel1 = panel1.getColumnLength();
+		int numberOfColumnPanel2 = panel2.getColumnLength();
+		
+		if (3 > numberOfColumnPanel1 && 3 > numberOfColumnPanel2){
+			fail("This test assumes that the number of columns is atleast 3.");
+		}
+		
+		// drop 10 gadgets (sticky) to panel
+		tab.selectTab(tab1Id);
+		for (int columnNum = 1; columnNum <= 3; columnNum++) {
+			topMenu.dropGadget("etcWidgets", "etcWidgets_stickey", columnNum % numberOfColumnPanel1 + 1);
+		}
+		
+		tab.selectTab(tab2Id);
+		for (int columnNum = 1; columnNum <= 3; columnNum++) {
+			topMenu.dropGadget("etcWidgets", "etcWidgets_alarm", columnNum % numberOfColumnPanel1 + 1);
+		}
+		
+		//ガジェットの並び順を取得
+		List<List<String>> panel1BeforeGadgetIds = panel1.getDeployedGadgetIds();
+		List<List<String>> panel2BeforeGadgetIds = panel2.getDeployedGadgetIds();
+		
+		//タブの順序を入れ替え
+		getPortal().getTab().dragAndDropTabToTopLeft(tab2Id, tab1Id);
+		
+		//入れ替え後のガジェットの並び順を取得
+		List<List<String>> panel1AfterGadgetIds = panel1.getDeployedGadgetIds();
+		List<List<String>> panel2AfterGadgetIds = panel2.getDeployedGadgetIds();
+		
+		//パネル1のガジェットの並び順が変わっていないことを確認
+		int beforeColumnNum1 = panel1BeforeGadgetIds.size();
+		int afterColumnNum1 = panel1AfterGadgetIds.size();
+		if (beforeColumnNum1 != afterColumnNum1){
+			fail("Number of columns is illegal.");
+		}
+		for (int i = 0 ; i < beforeColumnNum1 ; i++) {
+			if (panel1BeforeGadgetIds.get(i).size() != panel1AfterGadgetIds.get(i).size()){
+				fail("Number of columns is illegal.");
+			}
+		}
+		for (int i = 0 ; i < afterColumnNum1; i++) {
+			for ( int k = 0, end2 = panel1AfterGadgetIds.get(i).size(); k < end2; k++ ) {
+				String before = panel1BeforeGadgetIds.get(i).get(k);
+				String after = panel1AfterGadgetIds.get(i).get(k);
+				assertEquals(after, before);
+			}
+		}
+		
+		//パネル2のガジェットの並び順が変わっていないことを確認
+		int beforeColumnNum2 = panel2BeforeGadgetIds.size();
+		int afterColumnNum2 = panel2AfterGadgetIds.size();
+		if (beforeColumnNum2 != afterColumnNum2){
+			fail("Number of columns is illegal.");
+		}
+		for (int i = 0 ; i < beforeColumnNum2 ; i++) {
+			if (panel2BeforeGadgetIds.get(i).size() != panel2AfterGadgetIds.get(i).size()){
+				fail("Number of columns is illegal.");
+			}
+		}
+		for (int i = 0 ; i < afterColumnNum2; i++) {
+			for ( int k = 0, end2 = panel2AfterGadgetIds.get(i).size(); k < end2; k++ ) {
+				String before = panel2BeforeGadgetIds.get(i).get(k);
+				String after = panel2AfterGadgetIds.get(i).get(k);
+				assertEquals(after, before);
+			}
+		}
 	}
 	
 	@Test
