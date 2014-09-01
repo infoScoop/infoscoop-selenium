@@ -64,8 +64,7 @@ public class TopMenu {
 			if( el.isDisplayed() )
 				activeTabEl = el;
 		}
-
-		WebElement dropElement = activeTabEl.findElement(By.xpath("//div[@class='column' and @colnum='" + columnNum + "']"));
+		WebElement dropElement = activeTabEl.findElement(By.cssSelector(".column[colnum='" + columnNum + "']"));
 		Point dropPoint = dropElement.getLocation();
 
 		WebElement targetElement = driver.findElement(By.id("mi_" + id));

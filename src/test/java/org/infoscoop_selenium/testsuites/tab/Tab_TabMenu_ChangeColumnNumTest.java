@@ -31,7 +31,6 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
     @Test
     /**
      * 列数変更
-     * 「列数変更」には列数を指定するセレクトボックスが表示されることを確認する。
      */
     public void iscp_5758() {
         Tab tab = getPortal().getTab();
@@ -47,7 +46,6 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
     @Test
     /**
      * 初期値
-     * セレクトボックスにはタブの列数が選択されていることを確認する。
      */
     public void iscp_5759() {
         Portal portal = getPortal();
@@ -64,7 +62,6 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
     @Test
     /**
      * 選択項目
-     * セレクトボックスには設定可能なパネルの列数（１～１０）が列挙されていることを確認する。
      */
     public void iscp_5760() {
         Tab tab = getPortal().getTab();
@@ -89,7 +86,6 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
     @Test
     /**
      * 選択
-     * セレクトボックスで列数を選択すると、パネルの列数が変更されることを確認する。
      */
     public void iscp_5761() {
         String id = "0";
@@ -113,20 +109,29 @@ public class Tab_TabMenu_ChangeColumnNumTest extends IS_BaseItTestCase {
         assertEquals(value, panel.getColumnLength());
     }
 
-//    @Test
+    @Test
     /**
      * 保存確認
-     * 列数を変更し、更新すると指定された列数で保存されることを確認する。
-     * TODO: ブラウザをリロードする手段が無いと難しい。（可能と思うがスキル不足で時間が掛かりそうなのでスキップする。）
      */
-    public void iscp_5762() {}
+    public void iscp_5762() {
+        int beforeColumnNum = getPortal().getPanel("tab0").getColumnLength();
+        
+        int afterColumnNum = (MAX_NUMBER_OF_COLUMN == beforeColumnNum) ? 1 : beforeColumnNum + 1;
+
+        // change column number
+        getPortal().getTab().changeColumnNum("tab0", afterColumnNum);
+        TestHelper.sleep(1000);
+        
+        // reload browser
+        getDriver().navigate().refresh();
+        TestHelper.sleep(1000);
+        
+        assertEquals(afterColumnNum, getPortal().getPanel("tab0").getColumnLength());
+    }
 
     @Test
     /**
      * ウィジェットの位置調整
-     * ガジェットを複数ドロップし、列数変更で現在ドロップされているガジェットの列数以下の列数に変更すると、
-     * 右端のガジェットが下に移動する。
-     * 再び列数を増やしてもガジェットは最初にあった列に戻らないことも確認する。
      */
     public void iscp_5763() {
         Portal portal = getPortal();
