@@ -1,5 +1,6 @@
 package org.infoscoop_selenium.portal;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,14 +114,20 @@ public class Tab {
 
 	/**
 	 * タブを要素（droppedTabElementId）の左端へドロップする
+	 * タブの移動先はおそらく中心からのポインタの位置で判定しているため、コーナーへのドロップは意図した場所へドロップできない場合がある。この実装方法はやめる
+	 * かわりに publicのdragAndDropTab を利用する
 	 */
+	@Deprecated
 	public void dragAndDropTabToTopLeft(String draggedTabElementId, String droppedTabElementId) {
 		dragAndDropTab(draggedTabElementId, droppedTabElementId, 0);
 	}
 	
 	/**
 	 * タブを要素（droppedTabElementId）の右端へドロップする
+	 * タブの移動先はおそらく中心からのポインタの位置で判定しているため、コーナーへのドロップは意図した場所へドロップできない場合がある。この実装方法はやめる
+	 * かわりに publicのdragAndDropTab を利用する
 	 */
+	@Deprecated
 	public void dragAndDropTabToTopRight(String draggedTabElementId, String droppedTabElementId) {
 		WebElement dropElement = driver.findElement(By.id(droppedTabElementId));
 		String dropElementWidth = dropElement.getCssValue("width");
@@ -130,7 +137,10 @@ public class Tab {
 
 	/**
 	 * タブを要素のtop leftからx方向へoffsetx分離れたところにドロップする
+	 * タブの移動先はおそらく中心からのポインタの位置で判定しているため、コーナーへのドロップは意図した場所へドロップできない場合がある。この実装方法はやめる
+	 * かわりに publicのdragAndDropTab を利用する
 	 */
+	@Deprecated
 	private void dragAndDropTab(String draggedTabElementId, String droppedTabElementId, int offsetx) {
 		WebElement dropElement = driver.findElement(By.id(droppedTabElementId));
 		WebElement targetElement = driver.findElement(By.id(draggedTabElementId));
@@ -142,6 +152,33 @@ public class Tab {
 		actions.release();
 		actions.build().perform();
 	}
+	
+	/**
+	 * タブを要素の右側へドロップする（要素のtop-leftからx方向へwidth分, y方向へ1/3離れたところにドロップする）
+	 * @param fromTabId 移動するタブ
+	 * @param toTabId ドロップ先のタブ
+	 */
+// 中断している iscp_5726 テストで使用
+//	public void dragAndDropTab (String fromTabId, String toTabId) {
+//		WebElement fromTab = driver.findElement(By.id(fromTabId));
+//		WebElement toTab = driver.findElement(By.id(toTabId));
+//		
+//		String toTabWidth = toTab.getCssValue("width").replace("px", "");// remove 'px'
+//		BigDecimal toTabWidthBD = new BigDecimal(toTabWidth).setScale(0, BigDecimal.ROUND_CEILING);
+//		
+//		String toTabHeight = toTab.getCssValue("height").replace("px", ""); // remove 'px';
+//		BigDecimal toTabHeightBD = new BigDecimal(toTabHeight).setScale(0, BigDecimal.ROUND_CEILING);
+//		
+//		int offsetx = toTabWidthBD.intValue() / 4 * 3;
+//		int offsety = toTabHeightBD.intValue() / 4;
+//		
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(fromTab);
+//		actions.clickAndHold();
+//		actions.moveToElement(toTab, offsetx, offsety);
+//		actions.release();
+//		actions.build().perform();
+//	}
 	
 	/**
 	 * 右隣のタブIDを返す
