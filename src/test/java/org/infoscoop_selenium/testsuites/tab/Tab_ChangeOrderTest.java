@@ -215,6 +215,47 @@ public class Tab_ChangeOrderTest extends IS_BaseItTestCase {
 		}
 	}
 	
+	/**
+	 * 保存確認
+	 * 移動後に画面を更新しても、タブの表示順に変化がないことを確認
+	 */
+	@Test
+	public void iscp_5728() {
+		Portal portal = getPortal();
+		Tab tab = portal.getTab();
+		int numberOfStaticTabs = tab.getNumberOfTab();
+		
+		//タブを複数追加
+		for (int i = 0; i < 10; i++) {
+			String tabId = tab.addTab();
+			tab.selectSelectMenu(tabId);
+			tab.inputTabName(tabId, Integer.toString(i));
+		}
+		List<String> tabIdList = tab.getTabIdList();
+		
+		//タブを移動
+		String fromTabId = tabIdList.get(numberOfStaticTabs);
+		String toTabId = tabIdList.get(tabIdList.size()-1);
+		tab.dragAndDropTab(fromTabId, toTabId);
+		
+		List<String> beforeTabIdList = tab.getTabIdList();
+		
+		// reload browser
+		getDriver().navigate().refresh();
+		TestHelper.sleep(1000);
+		
+		List<String> afterTabIdList = tab.getTabIdList();
+		
+		if (beforeTabIdList.size() != afterTabIdList.size()){
+			fail("Number of tab is illegal.");
+		}
+		for (int i = 0 ; i < afterTabIdList.size() ; i++) {
+			String before = beforeTabIdList.get(i);
+			String after = afterTabIdList.get(i);
+			assertEquals(before, after);
+		}
+	}
+	
 	@Test
 	/**
 	 * アクティブタブの切り替え

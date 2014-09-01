@@ -158,27 +158,26 @@ public class Tab {
 	 * @param fromTabId 移動するタブ
 	 * @param toTabId ドロップ先のタブ
 	 */
-// 中断している iscp_5726 テストで使用
-//	public void dragAndDropTab (String fromTabId, String toTabId) {
-//		WebElement fromTab = driver.findElement(By.id(fromTabId));
-//		WebElement toTab = driver.findElement(By.id(toTabId));
-//		
-//		String toTabWidth = toTab.getCssValue("width").replace("px", "");// remove 'px'
-//		BigDecimal toTabWidthBD = new BigDecimal(toTabWidth).setScale(0, BigDecimal.ROUND_CEILING);
-//		
-//		String toTabHeight = toTab.getCssValue("height").replace("px", ""); // remove 'px';
-//		BigDecimal toTabHeightBD = new BigDecimal(toTabHeight).setScale(0, BigDecimal.ROUND_CEILING);
-//		
-//		int offsetx = toTabWidthBD.intValue() / 4 * 3;
-//		int offsety = toTabHeightBD.intValue() / 4;
-//		
-//		Actions actions = new Actions(driver);
-//		actions.moveToElement(fromTab);
-//		actions.clickAndHold();
-//		actions.moveToElement(toTab, offsetx, offsety);
-//		actions.release();
-//		actions.build().perform();
-//	}
+	public void dragAndDropTab (String fromTabId, String toTabId) {
+		WebElement fromTab = driver.findElement(By.id(fromTabId));
+		WebElement toTab = driver.findElement(By.id(toTabId));
+		
+		String toTabWidth = toTab.getCssValue("width").replace("px", "");// remove 'px'
+		BigDecimal toTabWidthBD = new BigDecimal(toTabWidth).setScale(0, BigDecimal.ROUND_CEILING);
+		
+		String toTabHeight = toTab.getCssValue("height").replace("px", ""); // remove 'px';
+		BigDecimal toTabHeightBD = new BigDecimal(toTabHeight).setScale(0, BigDecimal.ROUND_CEILING);
+		
+		int offsetx = toTabWidthBD.intValue() / 4 * 3;
+		int offsety = toTabHeightBD.intValue() / 4;
+		
+		Actions actions = new Actions(driver);
+		actions.moveToElement(fromTab);
+		actions.clickAndHold();
+		actions.moveToElement(toTab, offsetx, offsety);
+		actions.release();
+		actions.build().perform();
+	}
 	
 	/**
 	 * 右隣のタブIDを返す
