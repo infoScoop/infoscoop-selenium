@@ -27,6 +27,11 @@ public class CommandBar {
 	public static final String ITEM_PREFERENCE_ID = "allPreference";
 	public static final String ITEM_ADMINLINK_ID = "admin-link";
 	
+	private static final String ITEM_MENUFONTSIZESELECT_ID = "font-size-select";
+	private static final String ITEM_MENUFONTSIZELARGE_ID = "option-large";
+	private static final String ITEM_MENUFONTSIZEMIDDLE_ID = "option-normal";
+	private static final String ITEM_MENUFONTSIZESMALL_ID = "option-small";
+	
 	public CommandBar(WebDriver driver) {
 		this.driver = driver;
 		this.portalPreference = new PortalPreference(this, driver);
@@ -134,5 +139,49 @@ public class CommandBar {
 		WebElement userMenuLabel = this.driver.findElement(By.id("portal-user-menu-label"));
 		return userMenuLabel.getText().trim();
 	}
+
+	/**
+	 * メニュー内の文字サイズ変更を返す
+	 */
+	public WebElement getMenuChangeFontSizeElement() {
+		return getElement(ITEM_MENUFONTSIZESELECT_ID);
+	}
+	
+	/**
+	 * コマンドバー内の指定要素を返す
+	 */
+	private WebElement getElement(String elementId) {
+		return driver.findElement(By.id(elementId));
+	}
+
+	/**
+	 * メニュー内の文字サイズ変更プルダウンを選択する
+	 */
+	public void selectMenuChangeFontSizeElement() {
+		WebElement selectMenu = getElement(ITEM_MENUFONTSIZESELECT_ID);
+		selectMenu.click();
+	}
+
+	/**
+	 * メニュー内の文字サイズ変更の大を返す
+	 */
+	public WebElement getMenuFontSizeLargeElement() {
+		return getElement(ITEM_MENUFONTSIZELARGE_ID);
+	}
+
+	/**
+	 * メニュー内の文字サイズ変更の中を返す
+	 */
+	public WebElement getMenuFontSizeMiddleElement() {
+		return getElement(ITEM_MENUFONTSIZEMIDDLE_ID);
+	}
+
+	/**
+	 * メニュー内の文字サイズ変更の小を返す
+	 */
+	public WebElement getMenuFontSizeSmallElement() {
+		return getElement(ITEM_MENUFONTSIZESMALL_ID);
+	}
+
 	
 }
