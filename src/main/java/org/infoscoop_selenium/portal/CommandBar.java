@@ -141,24 +141,24 @@ public class CommandBar {
 	}
 
 	/**
-	 * メニュー内の文字サイズ変更を返す
+	 * コマンドバー内の指定要素を返す
 	 */
-	public WebElement getMenuChangeFontSizeElement() {
-		return getElement(ITEM_MENUFONTSIZESELECT_ID);
+	private WebElement getElementById(String elementId) {
+		return driver.findElement(By.id(elementId));
 	}
 	
 	/**
-	 * コマンドバー内の指定要素を返す
+	 * メニュー内の文字サイズ変更を返す
 	 */
-	private WebElement getElement(String elementId) {
-		return driver.findElement(By.id(elementId));
+	public WebElement getMenuChangeFontSizeElement() {
+		return getElementById(ITEM_MENUFONTSIZESELECT_ID);
 	}
-
+	
 	/**
 	 * メニュー内の文字サイズ変更プルダウンを選択する
 	 */
 	public void selectMenuChangeFontSizeElement() {
-		WebElement selectMenu = getElement(ITEM_MENUFONTSIZESELECT_ID);
+		WebElement selectMenu = getElementById(ITEM_MENUFONTSIZESELECT_ID);
 		selectMenu.click();
 	}
 
@@ -166,22 +166,44 @@ public class CommandBar {
 	 * メニュー内の文字サイズ変更の大を返す
 	 */
 	public WebElement getMenuFontSizeLargeElement() {
-		return getElement(ITEM_MENUFONTSIZELARGE_ID);
+		return getElementById(ITEM_MENUFONTSIZELARGE_ID);
+	}
+	
+	/**
+	 * メニュー内の文字サイズ 大 を選択する
+	 */
+	public void selectLargeOfFontSizeSelectBox(){
+		getMenuFontSizeLargeElement().click();
 	}
 
 	/**
 	 * メニュー内の文字サイズ変更の中を返す
 	 */
 	public WebElement getMenuFontSizeMiddleElement() {
-		return getElement(ITEM_MENUFONTSIZEMIDDLE_ID);
+		return getElementById(ITEM_MENUFONTSIZEMIDDLE_ID);
 	}
 
+	/**
+	 * メニュー内の文字サイズ 中 を選択する
+	 */
+	public void selectMiddleOfFontSizeSelectBox() {
+		getMenuFontSizeMiddleElement().click();
+	}
+	
 	/**
 	 * メニュー内の文字サイズ変更の小を返す
 	 */
 	public WebElement getMenuFontSizeSmallElement() {
-		return getElement(ITEM_MENUFONTSIZESMALL_ID);
+		return getElementById(ITEM_MENUFONTSIZESMALL_ID);
 	}
 
-	
+	/**
+	 * 現在のbodyのフォントサイズを返す
+	 */
+	public String getCurrentBodyFontSize() {
+		WebElement body = driver.findElement(By.tagName("body"));
+		return body.getCssValue("font-size");
+	}
+
+
 }
