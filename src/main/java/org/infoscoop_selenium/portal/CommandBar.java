@@ -196,6 +196,10 @@ public class CommandBar {
 	public WebElement getMenuFontSizeSmallElement() {
 		return getElementById(ITEM_MENUFONTSIZESMALL_ID);
 	}
+	
+	public void selectSmallOfFontSizeSelectBox() {
+		getMenuFontSizeSmallElement().click();
+	}
 
 	/**
 	 * 現在のbodyのフォントサイズを返す
@@ -204,6 +208,4 @@ public class CommandBar {
 		WebElement body = driver.findElement(By.tagName("body"));
 		return body.getCssValue("font-size");
 	}
-
-
 }
