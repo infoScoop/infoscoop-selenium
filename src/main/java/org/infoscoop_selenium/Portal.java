@@ -54,6 +54,10 @@ public class Portal {
 		this.driver.get(url + "/logout");
 	}
 	
+	public void toLoginPage(){
+		this.driver.navigate().to(url + "/login.jsp");
+	}
+	
 	/**
 	 * 管理画面を開き、Adminオブジェクトを返す
 	 * @return
@@ -62,6 +66,9 @@ public class Portal {
 		getCommandBar().openMenu();
 		WebDriver adminPageDriver = WindowManager.getInstance().newWindow(driver.findElement(By.id("admin-link")));
 		this.adminPage = new AdminPage(adminPageDriver);
+		
+		TestHelper.waitPresent(adminPageDriver, By.id("admin-body"));
+		
 		return this.adminPage;
 	}
 	

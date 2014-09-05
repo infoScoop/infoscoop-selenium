@@ -4,7 +4,6 @@ import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.CommandBar;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class SearchForm {
 	WebDriver driver;
@@ -23,7 +22,6 @@ public class SearchForm {
 		this.driver.findElement(By.id("searchTextInput")).sendKeys(word);
 		this.driver.findElement(By.id("searchForm")).submit();
 		
-		WebElement searchIframe = this.driver.findElement(By.id("search-iframe"));
-		TestHelper.waitPresent(searchIframe);
+		TestHelper.waitPresent(driver, By.id("search-iframe"));
 	}
 }

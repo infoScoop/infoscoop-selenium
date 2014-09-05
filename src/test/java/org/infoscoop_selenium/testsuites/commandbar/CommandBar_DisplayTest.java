@@ -11,6 +11,7 @@ import org.infoscoop_selenium.portal.CommandBar;
 import org.infoscoop_selenium.portal.commandbar.SearchForm;
 import org.infoscoop_selenium.properties.TestEnv;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -66,11 +67,12 @@ public class CommandBar_DisplayTest extends IS_BaseItTestCase {
 		}
 	}
 
-	@Test
+//	@Test
 	/**
 	 * コマンドバーの表示 -ユーザー名
 	 */
 	public void iscp_6801(){
+		/*
 		CommandBar commandBar = getPortal().getCommandBar();
 
 		// ユーザー名表示確認
@@ -83,9 +85,7 @@ public class CommandBar_DisplayTest extends IS_BaseItTestCase {
 		action.moveToElement(menu).build().perform();
 		
 		// 色が反転していることを確認
-		assertEquals(menu.getCssValue("color"), "rgba(255, 255, 255, 1)");
-		
-		// TODO: 途中
+		*/
 	}
 
 //	@Test
@@ -189,7 +189,7 @@ public class CommandBar_DisplayTest extends IS_BaseItTestCase {
 		// ロゴクリック
 		WebElement logo = commandBar.getLogo();
 		logo.click();
-		TestHelper.waitPresent(getPortal().getPanels());
+		TestHelper.waitPresent(getDriver(), By.id(getPortal().getPanels().getAttribute("id")));
 		
 		// パネル表示確認
 		assertTrue(getPortal().isPanelVisible());

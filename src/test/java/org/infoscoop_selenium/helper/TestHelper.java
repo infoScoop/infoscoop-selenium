@@ -38,30 +38,14 @@ public class TestHelper {
 
 	/**
 	 * 要素の出現を待つ
-	 * @param context
-	 * @param by
+	 * @param element
 	 */
 	public static void waitPresent(final SearchContext context, final By by, int seconds) {
-		waitPresent(context.findElement(by), seconds);
-	}
-
-	/**
-	 * 要素の出現を待つ
-	 * @param element
-	 */
-	public static void waitPresent(final WebElement element) {
-		waitPresent(element, WAIT_SECOND);
-	}
-
-	/**
-	 * 要素の出現を待つ
-	 * @param element
-	 */
-	public static void waitPresent(final WebElement element, int seconds) {
 		Wait wait = new Wait() {
 			@Override
 			public boolean until() {
 				try {
+					WebElement element = context.findElement(by);
 					if( element.isDisplayed() == true ) {
 						// FIXME CSSのプロパティは書き換わっても画面に反映しないため待機
 						TestHelper.sleep(100);
@@ -76,7 +60,6 @@ public class TestHelper {
 
 		wait.wait("Element not exists", seconds * 1000);
 	}
-
 	/**
 	 * 要素が消えるのを待つ
 	 * @param context
@@ -86,13 +69,17 @@ public class TestHelper {
 		Wait wait = new Wait() {
 			@Override
 			public boolean until() {
-				WebElement elem = context.findElement(by);
-				if( elem.isDisplayed() == false ) {
-					// FIXME CSSのプロパティは書き換わっても画面に反映しないため待機
-					TestHelper.sleep(100);
-					return true;
+				try {
+					WebElement elem = context.findElement(by);
+					if( elem.isDisplayed() == false ) {
+						// FIXME CSSのプロパティは書き換わっても画面に反映しないため待機
+						TestHelper.sleep(100);
+						return true;
+					}
+					return false;
+				} catch (NoSuchElementException e) {
+					return false;
 				}
-				return false;
 			}
 		};
 		wait.wait("Element exists", WAIT_SECOND * 1000);

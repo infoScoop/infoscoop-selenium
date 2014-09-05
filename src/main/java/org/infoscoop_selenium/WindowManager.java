@@ -77,7 +77,7 @@ public class WindowManager {
 	 * @param windowHandle
 	 */
 	public void switchWindow(String windowHandle){
-		driver.switchTo().window(defaultWindowId);
+		driver.switchTo().window(windowHandle != null? windowHandle : defaultWindowId);
 	}
 
 }

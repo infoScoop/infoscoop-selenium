@@ -81,7 +81,7 @@ public class GadgetPreference {
 		TestHelper.sleep(500);
 		
 		gadget.focus();
-		TestHelper.waitPresent(driver.findElement(By.tagName("body")));
+		TestHelper.waitPresent(driver, By.tagName("body"));
 		gadget.blur();
 	}
 	

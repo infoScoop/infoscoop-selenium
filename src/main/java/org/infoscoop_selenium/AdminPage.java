@@ -1,13 +1,13 @@
 package org.infoscoop_selenium;
 
+import org.infoscoop_selenium.admin_page.OtherLayoutAdminPage;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class AdminPage {
-	WebDriver driver;
-	WebDriver messageConsoleDriver;
-	Portal portal;
+	private WebDriver driver;
+	private WebDriver messageConsoleDriver;
 
 	public AdminPage(WebDriver driver) {
 		this.driver = driver;
@@ -38,5 +38,30 @@ public class AdminPage {
 		WindowManager.getInstance().closeWindow(
 				this.messageConsoleDriver.getWindowHandle());
 		WindowManager.getInstance().switchWindow(this.driver.getWindowHandle());
+	}
+	
+	/**
+	 * レイアウト設定画面に遷移
+	 */
+	public void openLayoutAdminPage() {
+		By findBy = By.id("tab_defaultPanel");
+		TestHelper.waitPresent(driver, findBy);
+		driver.findElement(findBy).click();
+	}
+	
+	/**
+	 * 画面その他設定画面に遷移
+	 */
+	public OtherLayoutAdminPage openOtherLayoutAdminPage() {
+		openLayoutAdminPage();
+		By findBy = By.cssSelector("#defaultPanel-side-bar li:nth-child(2)>a");
+		TestHelper.waitPresent(driver, findBy);		
+		driver.findElement(findBy).click();
+		
+		return new OtherLayoutAdminPage(driver);
+	}
+	
+	public WebDriver getDriver() {
+		return driver;
 	}
 }
