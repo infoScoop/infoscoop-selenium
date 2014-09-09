@@ -5,6 +5,7 @@ import java.util.List;
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,6 +43,42 @@ public class MessageGadget extends Gadget {
 		// ガジェットメニューを開く
 		openMenu();
 		driver.findElement(By.xpath("//div[@id='hm_w_etcWidgets_Message_editGroup']/a")).click();
+	}
+	
+	/**
+	 * 新しいグループを追加する
+	 * @param name　グループ名
+	 */
+	public void addGroup(String name) {
+	    openGroupEdit();
+
+	    if (name != null) {
+	        driver.findElement(By.cssSelector("#group-setting--tabs > li.add-group")).click();
+	        changeTabName(driver.findElements(By.cssSelector("#group-setting--tabs > li.tab")).size() - 1, name);
+	    } else {
+	        // click "cancel" button
+	        driver.findElement(By.cssSelector(".user-search-modal .footer input")).click();
+	    }
+	}
+	
+	/**
+	 * グループ名を変更する
+	 * @param no
+	 * @param name
+	 */
+	public void changeTabName(int no, String name) {
+	    WebElement userSearchModal = driver.findElement(By.className("user-search-modal"));
+	    if (!userSearchModal.isDisplayed()) {
+	        openGroupEdit();
+	    }
+	    
+	    WebElement tab = driver.findElements(By.cssSelector("#group-setting--tabs > li.tab")).get(no);
+	    tab.click();
+	    tab.findElement(By.className("edit")).click();
+	    tab.findElement(By.tagName("input")).sendKeys(Keys.chord(Keys.CONTROL, "a"), name);
+	    
+	    // click "cancel" button
+	    driver.findElement(By.cssSelector(".user-search-modal .footer input")).click();
 	}
 	
 	/**
