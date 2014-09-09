@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
 import org.infoscoop_selenium.portal.Gadget;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
@@ -54,7 +55,7 @@ public class MessageGadget extends Gadget {
 
 	    if (name != null) {
 	        driver.findElement(By.cssSelector("#group-setting--tabs > li.add-group")).click();
-	        changeTabName(driver.findElements(By.cssSelector("#group-setting--tabs > li.tab")).size() - 1, name);
+	        changeGroupName(driver.findElements(By.cssSelector("#group-setting--tabs > li.tab")).size() - 1, name);
 	    } else {
 	        // click "cancel" button
 	        driver.findElement(By.cssSelector(".user-search-modal .footer input")).click();
@@ -66,7 +67,7 @@ public class MessageGadget extends Gadget {
 	 * @param no
 	 * @param name
 	 */
-	public void changeTabName(int no, String name) {
+	public void changeGroupName(int no, String name) {
 	    WebElement userSearchModal = driver.findElement(By.className("user-search-modal"));
 	    if (!userSearchModal.isDisplayed()) {
 	        openGroupEdit();
@@ -79,6 +80,18 @@ public class MessageGadget extends Gadget {
 	    
 	    // click "cancel" button
 	    driver.findElement(By.cssSelector(".user-search-modal .footer input")).click();
+	}
+	
+	public void deleteGroup(int no) {
+	    openGroupEdit();
+	    
+	    WebElement tab = driver.findElements(By.cssSelector("#group-setting--tabs > li.tab")).get(0);
+	    
+	    tab.findElement(By.className("delete")).click();
+	    
+	    // alert
+	    Alert alert = driver.switchTo().alert();
+	    alert.accept();
 	}
 	
 	/**
