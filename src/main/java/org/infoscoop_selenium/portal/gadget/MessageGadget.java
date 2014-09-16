@@ -129,33 +129,32 @@ public class MessageGadget extends Gadget {
     }
     
     /**
-     * グループの帯（<div class="mesageGroup">）である要素を返却する
-     * @param order
+     * システムグループの帯（<div class="messageGroup">）である要素を返却する
      * @return
      */
-    public WebElement getMessageGroupElement(int order) {
-        WebElement contents = getContentsElement();
-        List<WebElement> msgGroupElms = contents.findElements(By.className("messageGroup"));
-        if (msgGroupElms.size() >= order) {
-            return msgGroupElms.get(order);
-        } else {
-            return null;
-        }
+    public WebElement getSystemGroupBandElement() {
+        WebElement bandElement = getContentsElement().findElement(By.className("messageGroup"));
+        return bandElement;
     }
-
+    
     /**
-     * グループのメニュー項目（「受信メッセージ」、「送信メッセージ」など）部分である要素を返却する
-     * @param order
+     * システムグループのメニュー（<div class="messageUsers">）である要素を返却する
      * @return
      */
-    public WebElement getMessageUsersElement(int order) {
+    public WebElement getSystemGroupMenuElement() {
+        WebElement menuElement = getContentsElement().findElement(By.className("messageUsers"));
+        return menuElement;
+    }
+    
+    /**
+     * グループの帯（<div class="mesageGroup">）である要素を返却する
+     * @param order 開始は1から
+     * @return
+     */
+    public WebElement getGroupBandElement(int order) {
         WebElement contents = getContentsElement();
-        List<WebElement> msgUsersElms = contents.findElements(By.className("messageUsers"));
-        if (msgUsersElms.size() >= order) {
-            return msgUsersElms.get(order);
-        } else {
-            return null;
-        }
+        List<WebElement> bandElements = contents.findElements(By.className("messageGroup"));
+        return bandElements.get(order);
     }
     
     /**
@@ -164,13 +163,10 @@ public class MessageGadget extends Gadget {
      * @return
      */
     public WebElement getSystemRssIcon(int order) {
-        WebElement sysGrpUsers = getMessageUsersElement(0);
-        List<WebElement> menuItems = sysGrpUsers.findElements(By.tagName("li"));
-        if (menuItems.size() > order) {
-            return menuItems.get(order).findElement(By.tagName("img"));
-        } else {
-            return null;
-        }
+        WebElement sysGrpMenu = getSystemGroupMenuElement();
+        List<WebElement> menuItems = sysGrpMenu.findElements(By.tagName("li"));
+        WebElement rssIcon = menuItems.get(order).findElement(By.tagName("img"));
+        return rssIcon;
     }
     
     /**
@@ -178,9 +174,10 @@ public class MessageGadget extends Gadget {
      * @return
      */
     public WebElement getSystemEditIcon() {
-        WebElement sysGrpUsers = getMessageUsersElement(0);
-        List<WebElement> menuItems = sysGrpUsers.findElements(By.tagName("li"));
-        return menuItems.get(2).findElements(By.tagName("img")).get(1);
+        WebElement sysGrpMenu = getSystemGroupMenuElement();
+        List<WebElement> menuItems = sysGrpMenu.findElements(By.tagName("li"));
+        WebElement editIcon = menuItems.get(2).findElements(By.tagName("img")).get(1);
+        return editIcon;
     }
 
 	@Override

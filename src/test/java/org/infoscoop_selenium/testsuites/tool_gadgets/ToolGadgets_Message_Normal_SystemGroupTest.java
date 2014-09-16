@@ -33,13 +33,13 @@ public class ToolGadgets_Message_Normal_SystemGroupTest extends IS_BaseItTestCas
      * システムグループの開閉
      */
     public void iscp_4205() {
-        WebElement msgGroupElm = GADGET.getMessageGroupElement(0);
-        WebElement msgUsersElm = GADGET.getMessageUsersElement(0);
+        WebElement bandElement = GADGET.getSystemGroupBandElement();
+        WebElement grpMenuElement = GADGET.getSystemGroupMenuElement();
         
         // クリック
-        msgGroupElm.click();
+        bandElement.click();
         
-        assertTrue(!msgUsersElm.isDisplayed());
+        assertTrue(!grpMenuElement.isDisplayed());
     }
 
     @Test
