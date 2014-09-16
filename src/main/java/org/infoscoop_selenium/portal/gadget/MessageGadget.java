@@ -148,18 +148,48 @@ public class MessageGadget extends Gadget {
     
     /**
      * グループの帯（<div class="mesageGroup">）である要素を返却する
-     * @param order 開始は1から
+     * @param order 開始は0
      * @return
      */
     public WebElement getGroupBandElement(int order) {
-        WebElement contents = getContentsElement();
-        List<WebElement> bandElements = contents.findElements(By.className("messageGroup"));
-        return bandElements.get(order);
+        List<WebElement> bandElements = getContentsElement().findElements(By.className("messageGroup"));
+        // 1 + order: system-group + group (start with 0)
+        return bandElements.get(1 + order);
     }
     
     /**
-     * 「システム」グループのRSSアイコンの要素を返却する
+     * グループのメニュー（<div class="messageUsers">）である要素を返却する
+     * @param order 開始は0
+     */
+    public WebElement getGroupMenuElement(int order) {
+        List<WebElement> menuElements = getContentsElement().findElements(By.className("messageUsers"));
+        // 1 + order: system-group + group (start with 0)
+        return menuElements.get(1 + order);
+    }
+
+    /**
+     * グループの帯にあるRSSアイコン(<img>)である要素を返却する
+     * @param order 開始は0
+     * @return
+     */
+    public WebElement getGroupRssIconElement(int order) {
+        WebElement groupBand = getGroupBandElement(order);
+        return groupBand.findElement(By.tagName("img"));
+    }
+    
+    /**
+     * グループの帯にある編集アイコン（<img>）である要素を返却する
      * @param order
+     * @return
+     */
+    public WebElement getGroupEditIconElement(int order) {
+        WebElement groupBand = getGroupBandElement(order);
+        return groupBand.findElements(By.tagName("img")).get(1);
+    }
+    
+    /**
+     * システムグループのRSSアイコンの要素を返却する
+     * @param order 開始は0
      * @return
      */
     public WebElement getSystemRssIcon(int order) {
