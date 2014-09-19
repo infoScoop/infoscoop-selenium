@@ -37,5 +37,16 @@ public class WidgetFramework_Header_TitleTest extends IS_BaseItTestCase {
         GADGET.changeTitle(multi);
         assertEquals(multi, GADGET.getTitle());
     }
+    
+    @Test
+    /**
+     * 文字の種類
+     */
+    public void iscp_3() {
+        String title = "①㈱㌢<>&\"'!\"#$%'()~=-^@`'*+;:[{]}\\_/?<>\\.タダイマポチゼンブアソボゾウノファミリ―～∥－￤";
+        
+        GADGET.changeTitle(title);
+        assertEquals(title, GADGET.getTitle());
+    }
 
 }
