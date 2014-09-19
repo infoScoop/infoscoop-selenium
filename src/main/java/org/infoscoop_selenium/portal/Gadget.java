@@ -17,6 +17,7 @@ import org.infoscoop_selenium.portal.gadget.ScheduleGadget;
 import org.infoscoop_selenium.portal.gadget.StickyGadget;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -175,6 +176,26 @@ public abstract class Gadget {
 	
 	public String getId(){
 		return gadgetId;
+	}
+	
+	/**
+	 * ガジェットタイトルを変更する
+	 * @param title
+	 */
+	public void changeTitle(String title) {
+	    openMenu();
+	    
+	    WebElement editMenu = driver.findElement(By.id("hm_" + getId() + "_edit"));
+	    editMenu.click();
+	    
+	    // ガジェット設定パネルの出現を待つ
+	    TestHelper.waitPresent(driver, By.cssSelector("#" + getId() + " .widgetEditHeader"));
+
+	    // ガジェットタイトルのテキストボックスに入力
+	    driver.findElement(By.id("eb_" + getId() + "_widget_title")).sendKeys(Keys.chord(Keys.CONTROL, "a"), title);
+
+	    // click "save"
+	    driver.findElement(By.cssSelector("#" + getId() + " .widgetEditHeader .widgetSave")).click();
 	}
 	
 	/**

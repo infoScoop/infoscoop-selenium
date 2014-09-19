@@ -7,7 +7,7 @@ import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
 import org.infoscoop_selenium.portal.gadget.MessageGadget;
 import org.infoscoop_selenium.portal.gadget.ToDoListGadget;
 
-public class WidgetFramework_HeaderTest extends IS_BaseItTestCase{
+public class WidgetFramework_HeaderTest extends IS_BaseItTestCase {
 
     @Override
     public void doBefore() {
