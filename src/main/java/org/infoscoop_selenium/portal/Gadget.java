@@ -230,6 +230,16 @@ public abstract class Gadget {
         return width;
     }
 	
+    /**
+     * ガジェットのアイコンである要素を返却する
+     * @return
+     */
+    public WebElement getGadgetIconElement() {
+        WebElement icon = driver.findElement(By.cssSelector(
+                "#" + this.getId() + " .widgetHeader table td:nth-of-type(2) img"));
+        return icon;
+    }
+    
 	/**
 	 * ガジェットヘッダの表示アイコンをリストで返す
 	 * @return
