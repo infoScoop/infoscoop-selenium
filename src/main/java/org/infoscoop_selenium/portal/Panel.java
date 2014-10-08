@@ -79,4 +79,17 @@ public class Panel {
 	public WebElement getAdjustBar(int idx) {
 		return this.panelEl.findElements(By.cssSelector(".adjustBarOut")).get(idx);
 	}
+	
+	/**
+	 * 指定したカラム番号と行番号にある要素（ガジェットが配置可能な場所）を返却する
+	 * @param columnX
+	 * @param columnY
+	 * @return
+	 */
+    public WebElement getGadgetSpaceElement(int columnX, int columnY) {
+        WebElement gadgetSpace = this.panelEl.findElement(By.cssSelector(
+                ".column[colnum=\"" + columnX + "\"] div:nth-of-type(" + columnY + ")"));
+        return gadgetSpace;
+    }
+
 }

@@ -5,7 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.infoscoop_selenium.base.IS_BaseItTestCase;
 import org.infoscoop_selenium.portal.Gadget;
 import org.infoscoop_selenium.portal.Gadget.GADGET_TYPE;
+import org.infoscoop_selenium.portal.Panel;
+import org.infoscoop_selenium.portal.Tab;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class WidgetFramework_Header_TitleTest extends IS_BaseItTestCase {
 
@@ -47,6 +51,48 @@ public class WidgetFramework_Header_TitleTest extends IS_BaseItTestCase {
         
         GADGET.changeTitle(title);
         assertEquals(title, GADGET.getTitle());
+    }
+    
+//    @Test
+    /**
+     * タイトルリンクがある
+     */
+    public void iscp_4() {
+        /*
+         * タイトルにリンクが張られる。
+         * クリックするとタイトルリンクに設定されているサイトが表示される
+         */
+    }
+    
+    @Test
+    /**
+     * タイトルリンクが空の場合
+     */
+    public void iscp_5() {
+        // is no-anchor
+        WebElement titleElement = GADGET.getTitleElement();
+        assertEquals(0, titleElement.findElements(By.tagName("a")).size());
+        
+        // drag and drop
+        int columnX = 3;
+        int columnY = 1;
+        GADGET.dragAndDrop(titleElement, columnX, columnY);
+        
+        Panel panel = getPortal().getPanel(new Tab(super.getDriver()).getCurrentTabId());
+        WebElement gadgetElement = panel.getGadgetSpaceElement(columnX, columnY);
+
+        assertEquals(GADGET.getId(), gadgetElement.getAttribute("id"));
+    }
+    
+//    @Test
+    /**
+     * javascript:リンク
+     */
+    public void iscp_6() {
+        /*
+         * 「javascript:」で始まるリンクの場合は、続いて記述されるjavascriptが実行されることを確認
+         * そのとき、ポータル内フレームも新しいウィンドウも開かれないことを確認
+         */
     }
 
 }

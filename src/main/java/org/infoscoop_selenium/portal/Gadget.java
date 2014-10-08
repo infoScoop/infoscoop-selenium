@@ -307,7 +307,7 @@ public abstract class Gadget {
 	 * @return
 	 */
 	public String getTitle(){
-		WebElement titleEl = driver.findElement(By.id(this.gadgetId + "_widgetTitle"));
+		WebElement titleEl = getTitleElement();
 		
 		WebElement titleLinkEl = null;
 		try{
@@ -325,6 +325,32 @@ public abstract class Gadget {
 		return title;
 	}
 	
+	/**
+	 * ガジェットのタイトル要素を返却する
+	 * @return
+	 */
+	public WebElement getTitleElement() {
+	    WebElement titleEl = driver.findElement(By.id(this.gadgetId + "_widgetTitle"));
+	    return titleEl;
+	}
+
+	/**
+	 * ガジェットを指定したカラム位置にドラッグ＆ドロップする。
+	 * @param handle
+	 * @param columnX
+	 * @param columnY
+	 */
+	public void dragAndDrop(WebElement handle, int columnX, int columnY) {
+	    Panel panel = new Panel(driver, new Tab(driver).getCurrentTabId());
+	    WebElement toElement = panel.getGadgetSpaceElement(columnX, columnY);
+	    
+	    Actions actions = new Actions(driver);
+	    actions.clickAndHold(handle);
+	    actions.moveToElement(toElement);
+	    actions.release();
+	    actions.build().perform();
+	}
+
 	/**
 	 * サポートされるヘッダアイコンタイプのリストを返す
 	 * @return
