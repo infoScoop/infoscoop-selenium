@@ -1,5 +1,6 @@
 package org.infoscoop_selenium.portal.gadget;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.infoscoop_selenium.helper.TestHelper;
@@ -10,6 +11,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class ScheduleGadget extends Gadget{
+    private static List<ProperHeaderIcon> properHeaderIconList;
+    
+    static {
+        properHeaderIconList = Arrays.asList(
+                new ProperHeaderIcon("previous", "/gadget/schedule/imgs/resultset_previous.gif", "前の週"),
+                new ProperHeaderIcon("today", "/gadget/schedule/imgs/today.gif", "今日"),
+                new ProperHeaderIcon("next", "/gadget/schedule/imgs/resultset_next.gif", "次の週"));
+    }
+    
 	public ScheduleGadget(WebDriver driver, String gadgetId) {
 		super(driver, gadgetId);
 	}
@@ -55,8 +65,7 @@ public class ScheduleGadget extends Gadget{
 
 	@Override
 	public List<String> getSupportedHeaderIcons() {
-		// TODO Auto-generated method stub
-		return null;
+		return Arrays.asList(Gadget.ICON_TYPE_REFRESH, Gadget.ICON_TYPE_MINIMIZE, Gadget.ICON_TYPE_MAXIMIZE, Gadget.ICON_TYPE_SHOWTOOLS);
 	}
 
 	@Override
@@ -64,4 +73,10 @@ public class ScheduleGadget extends Gadget{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+    @Override
+    public List<ProperHeaderIcon> getProperHeaderIconList() {
+        return properHeaderIconList;
+    }
+
 }

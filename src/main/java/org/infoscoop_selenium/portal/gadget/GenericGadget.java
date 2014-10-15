@@ -20,8 +20,14 @@ public class GenericGadget extends Gadget{
 
 	@Override
 	public List<String> getSupportedMenuItems() {
-		// TODO Auto-generated method stub
+	    // TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<ProperHeaderIcon> getProperHeaderIconList() {
+	    // TODO Auto-generated method stub
+	    return null;
 	}
 
 }
