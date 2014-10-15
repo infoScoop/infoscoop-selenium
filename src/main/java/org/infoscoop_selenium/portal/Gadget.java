@@ -11,6 +11,7 @@ import org.infoscoop_selenium.portal.gadget.ClockGadget;
 import org.infoscoop_selenium.portal.gadget.GadgetPreference;
 import org.infoscoop_selenium.portal.gadget.GenericGadget;
 import org.infoscoop_selenium.portal.gadget.MessageGadget;
+import org.infoscoop_selenium.portal.gadget.ProperHeaderIcon;
 import org.infoscoop_selenium.portal.gadget.RankingGadget;
 import org.infoscoop_selenium.portal.gadget.RssReaderGadget;
 import org.infoscoop_selenium.portal.gadget.ScheduleGadget;
@@ -28,8 +29,10 @@ public abstract class Gadget {
 	protected WebDriver driver;
 	GadgetPreference gadgetPreference;
 	String gadgetId;
-	
+
+	public static final String ICON_TYPE_REFRESH = "refresh";
 	public static final String ICON_TYPE_MINIMIZE = "minimize";
+	public static final String ICON_TYPE_MAXIMIZE = "maximize";
 	public static final String ICON_TYPE_SHOWTOOLS = "showTools";
 
 	public static final String MENU_TYPE_EDIT = "edit";
@@ -260,6 +263,24 @@ public abstract class Gadget {
                 "#" + this.getId() + " .widgetHeader table td:nth-of-type(2) img"));
         return icon;
     }
+
+    /**
+     * ガジェットヘッダの表示アイコン要素をリストで返す
+     * @return
+     */
+    public List<WebElement> getHeaderIconElements() {
+        List<WebElement> list = new ArrayList<WebElement>();
+        
+        List<WebElement> icons = driver.findElements(By.cssSelector("#" + this.getId() + " .widgetHeader .headerIcon"));
+        for (Iterator<WebElement> ite = icons.iterator(); ite.hasNext();) {
+            WebElement icon = ite.next();
+            
+            if (icon.isDisplayed()) {
+                list.add(icon);
+            }
+        }
+        return list;
+    }
     
 	/**
 	 * ガジェットヘッダの表示アイコンをリストで返す
@@ -268,14 +289,11 @@ public abstract class Gadget {
 	public List<String> getHeaderIconTypes(){
 		List<String> list = new ArrayList<String>();
 		
-		List<WebElement> icons = driver.findElements(By.cssSelector("#" + this.getId() + " .widgetHeader .headerIcon"));
+		List<WebElement> icons = getHeaderIconElements();
 		
 		for(Iterator<WebElement> ite=icons.iterator();ite.hasNext();){
 			WebElement icon = ite.next();
-			
-			if(icon.isDisplayed()){
-				list.add(getItemType(icon));
-			}
+			list.add(getItemType(icon));
 		}
 		
 		return list;
@@ -363,6 +381,12 @@ public abstract class Gadget {
 	 */
 	abstract public List<String> getSupportedMenuItems();
 	
+	/**
+	 * ガジェット固有のヘッダアイコンのオブジェクトをリストで返す
+	 * @return
+	 */
+	abstract public List<ProperHeaderIcon> getProperHeaderIconList();
+
 	/**
 	 * ヘッダアイコン、メニューアイテムのタイプを返す
 	 * @param icon

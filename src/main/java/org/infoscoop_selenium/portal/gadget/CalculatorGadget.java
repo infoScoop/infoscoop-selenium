@@ -103,4 +103,11 @@ public class CalculatorGadget extends Gadget{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+    public List<ProperHeaderIcon> getProperHeaderIconList() {
+        return null;
+    }
+
 }

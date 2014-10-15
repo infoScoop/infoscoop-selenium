@@ -65,4 +65,9 @@ public class RankingGadget extends Gadget {
         return Arrays.asList(Gadget.MENU_TYPE_DELETE);
     }
 
+    @Override
+    public List<ProperHeaderIcon> getProperHeaderIconList() {
+        return null;
+    }
+
 }

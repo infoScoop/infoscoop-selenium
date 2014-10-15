@@ -320,5 +320,10 @@ public class ToDoListGadget extends Gadget{
 	public List<String> getSupportedMenuItems() {
 		return Arrays.asList(Gadget.MENU_TYPE_EDIT, Gadget.MENU_TYPE_DELETE);
 	}
-	
+
+    @Override
+    public List<ProperHeaderIcon> getProperHeaderIconList() {
+        return null;
+    }
+
 }
